@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<Button fx:id="NavOption" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#NavigateTo" prefHeight="64.0" text="Button" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.PageComponents.NavBar.NavButtonController">
+   <styleClass>
+      <String fx:value="textButton" />
+      <String fx:value="mediumFont" />
+      <String fx:value="whiteText" />
+   </styleClass>
+</Button>

@@ -1,0 +1,58 @@
+        .baseColor {
+            -fx-background-color: #05392F
+        }
+        
+        .accentColor {
+            -fx-background-color: #FEFCFD;
+        }
+        
+        .backgroundColor {
+            -fx-background-color: #0B090C;
+        }
+        
+        .borderColor {
+            -fx-background-color: #6E7F76;
+        }
+        
+        .svgButton {
+            -fx-background-color: transparent;
+        }
+        
+        .textButton {
+            -fx-background-color: #3B3D3B;
+        }
+        
+        .textButton:hover {
+            -fx-background-color: #6E7F76;
+        }
+        
+        @font-face {
+            font-family: "JetBrains Mono Regular";
+            src: url("../fonts/JetBrains_Mono/static/JetBrainsMono-Regular.ttf");
+        }
+        
+        .whiteText {
+            -fx-text-fill: #FEFCFD;
+            -fx-font-family: "JetBrains Mono Regular";
+        }
+        
+        .darkText {
+            -fx-text-fill: #0B090C;
+            -fx-font-family: "JetBrains Mono Regular";
+        }
+        
+        .HeadingFont {
+            -fx-font-size: 40px;
+        }
+        
+        .largeFont {
+            -fx-font-size: 32px;
+        }
+        
+        .mediumFont {
+            -fx-font-size: 24px;
+        }
+        
+        .smallFont {
+            -fx-font-size: 16px;
+        }

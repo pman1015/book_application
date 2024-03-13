@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="NavBar" maxHeight="-Infinity" prefHeight="927.0" prefWidth="217.0" spacing="12.0" styleClass="baseColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.PageComponents.NavBar.NavBarController">
+   <children>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="64.0" text="Button">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Button>
+   </children>
+   <padding>
+      <Insets top="128.0" />
+   </padding>
+</VBox>

@@ -20,6 +20,36 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
+         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+	    </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>4.11.0</version>
+        </dependency>
+         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.11.0</version>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>net.raumzeitfalle.fx</groupId>
+            <artifactId>scenic-view</artifactId>
+            <version>8.7.0</version>
+        </dependency>
+        
+        
     </dependencies>
     <build>
         <plugins>
