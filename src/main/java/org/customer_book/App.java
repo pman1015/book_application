@@ -8,11 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Pages.PageComponents.PageController;
 import org.customer_book.Pages.PageComponents.PageModel;
 import org.scenicview.ScenicView;
-
 
 /**
  * JavaFX App
@@ -24,8 +23,17 @@ public class App extends Application {
   //Reference to the main page model
   private static PageModel mainPage;
 
+  //Database connection
+  public static DatabaseConnection db;
+
   @Override
   public void start(Stage stage) throws IOException {
+    //Try to initalise the database connection
+    try {
+      db = new DatabaseConnection();
+    } catch (Exception e) {
+      System.out.println("Error connecting to database");
+    }
     //Load the main page from fxml
     FXMLLoader fxmlLoader = getLoader("PageComponents", "BasePage");
     //Set the loaded page as the scene
@@ -47,7 +55,6 @@ public class App extends Application {
     stage.setScene(scene);
     //ScenicView.show(scene);
     stage.show();
-    
   }
 
   /**

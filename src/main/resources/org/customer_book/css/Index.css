@@ -14,6 +14,10 @@
             -fx-background-color: #6E7F76;
         }
         
+        .transparentColor {
+            -fx-background-color: transparent;
+        }
+        
         .svgButton {
             -fx-background-color: transparent;
         }
@@ -33,6 +37,7 @@
         
         .whiteText {
             -fx-text-fill: #FEFCFD;
+            -fx-fill: #FEFCFD;
             -fx-font-family: "JetBrains Mono Regular";
         }
         
@@ -55,4 +60,66 @@
         
         .smallFont {
             -fx-font-size: 16px;
+        }
+        
+        .roundedCorners {
+            -fx-background-radius: 10;
+        }
+        /* styles.css */
+        /* Track - the area the thumb can move in */
+        
+        .scrollPane .viewport {
+            -fx-background-color: transparent;
+        }
+        
+        .scroll-bar:vertical {
+            -fx-background-color: transparent;
+            -fx-translate-x: -10;
+        }
+        
+        .scroll-bar:vertical .track {
+            -fx-background-color: transparent;
+        }
+        
+        .scroll-bar:horizontal .track {
+            -fx-background-color: #E0E0E0;
+        }
+        /* Thumb - the draggable part of the scrollbar */
+        
+        .scroll-bar:vertical .thumb {
+            -fx-background-color: #757575;
+            -fx-background-radius: 10;
+        }
+        
+        .scroll-bar:horizontal .thumb {
+            -fx-background-color: #757575;
+        }
+        /* Buttons - the increment and decrement buttons */
+        
+        .scroll-bar .increment-button,
+        .scroll-bar .decrement-button {
+            -fx-background-color: transparent;
+        }
+        
+        .scroll-bar:horizontal .increment-arrow,
+        .scroll-bar:horizontal .decrement-arrow,
+        .scroll-bar:vertical .increment-arrow,
+        .scroll-bar:vertical .decrement-arrow {
+            -fx-background-color: transparent;
+        }
+        
+        .textField {
+            -fx-background-color: rgba(128, 128, 128, 0.45);
+            -fx-border-color: #757575;
+            -fx-border-radius: 10;
+            -fx-border-color: black;
+            -fx-border-width: 1;
+        }
+        
+        .card {
+            -fx-background-color: #FEFCFD;
+        }
+        
+        .card:hover {
+            -fx-background-color: #97979765;
         }

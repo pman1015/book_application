@@ -1,12 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomersListPage.CustomerListPageController">
    <children>
-      <Button layoutX="351.0" layoutY="197.0" mnemonicParsing="false" text="Button" />
+      <VBox layoutX="29.0" layoutY="8.0" prefHeight="115.0" prefWidth="1182.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="86.0" prefWidth="1182.0" spacing="48.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name" wrappingWidth="258.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" wrappingWidth="234.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Name" wrappingWidth="233.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" wrappingWidth="126.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <AnchorPane prefHeight="43.0" prefWidth="87.0">
+                     <children>
+                        <Button fx:id="NewCustomer" layoutX="7.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#createNewCustomer" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                           <graphic>
+                              <StackPane>
+                                 <children>
+                                    <SVGPath content="M24.2005 44C35.1539 44 44.0334 35.0457 44.0334 24C44.0334 12.9543 35.1539 4 24.2005 4C13.2471 4 4.36761 12.9543 4.36761 24C4.36761 35.0457 13.2471 44 24.2005 44Z" fill="TRANSPARENT" stroke="WHITE" strokeWidth="5.0" />
+                                    <SVGPath content="M30.1504 24H24.2005M24.2005 24H18.2506M24.2005 24V18M24.2005 24V30" fill="TRANSPARENT" fillRule="EVEN_ODD" stroke="WHITE" strokeWidth="5.0" />
+                                 </children>
+                              </StackPane>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="customerSearch" minHeight="-Infinity" prefHeight="48.0" prefWidth="256.0">
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="roundedCorners" />
+                     </styleClass>
+                  </TextField>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="48.0">
+                     <children>
+                        <Button fx:id="customerSearchButton" mnemonicParsing="false" onAction="#searchByName" prefHeight="48.0" prefWidth="48.0" styleClass="svgButton" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <graphic>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <SVGPath content="M33.345 33.2824L42 42M38 22C38 30.8366 30.8366 38 22 38C13.1634 38 6 30.8366 6 22C6 13.1634 13.1634 6 22 6C30.8366 6 38 13.1634 38 22Z" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
+                                 </children>
+                              </StackPane>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding></HBox>
+         </children>
+      </VBox>
+      <ScrollPane layoutX="28.0" layoutY="158.0" prefHeight="757.0" prefWidth="1183.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="scrollPane" />
+         </styleClass>
+         <content>
+            <ListView fx:id="customerList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="1142.0" />
+         </content>
+      </ScrollPane>
    </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
 </AnchorPane>
