@@ -79,6 +79,9 @@ public class App extends Application {
   public static void setPage(String pageName, String fxml) throws IOException {
     mainPage.setCurrent_page_property(loadPage(pageName, fxml));
   }
+  public static void setPage(Parent page){
+    mainPage.setCurrent_page_property(page);
+  }
 
   /**
    *

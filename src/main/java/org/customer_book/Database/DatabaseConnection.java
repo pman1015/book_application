@@ -19,12 +19,14 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerCollection;
+import org.customer_book.Database.JobsCollection.JobCollection;
 
 public class DatabaseConnection {
 
   private final String uri;
   private final MongoDatabase database;
   public static CustomerCollection customerCollection;
+  public static JobCollection jobCollection;
 
   /**
    * Constructor for DatabaseConnection
@@ -49,10 +51,13 @@ public class DatabaseConnection {
       .codecRegistry(codecRegistry)
       .build();
     MongoClient mongoClient = MongoClients.create(clientSettings);
-    database = mongoClient.getDatabase("CustomerBook");
+   
 
     //Initalise collections
+    database = mongoClient.getDatabase("CustomerBook");
+    
     customerCollection = new CustomerCollection(database);
+    jobCollection = new JobCollection(database);
   }
 
   public MongoCollection<?> getCollection(

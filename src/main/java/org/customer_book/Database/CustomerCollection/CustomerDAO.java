@@ -6,6 +6,8 @@ import javafx.beans.property.StringProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 @Getter
@@ -23,11 +25,22 @@ public class CustomerDAO {
   private ArrayList<ObjectId> jobIDs;
   private ArrayList<ObjectId> machineIDs;
 
+  @BsonIgnore
   private StringProperty customerName;
+
+  @BsonIgnore
   private StringProperty customerNickName;
+
+  @BsonIgnore
   private StringProperty customerPhoneNumber;
+
+  @BsonIgnore
   private StringProperty customerRating;
+
+  @BsonIgnore
   private StringProperty customerAddress;
+
+  @BsonIgnore
   private StringProperty customerNotes;
 
   public CustomerDAO() {

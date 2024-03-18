@@ -1,3 +1,6 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "database-client.terminalTheme": "OneDark",
+    "workbench.colorTheme": "Material Theme Ocean"
 }

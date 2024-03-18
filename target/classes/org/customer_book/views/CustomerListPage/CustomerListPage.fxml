@@ -94,7 +94,11 @@
             <String fx:value="scrollPane" />
          </styleClass>
          <content>
-            <ListView fx:id="customerList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="1142.0" />
+            <ListView fx:id="customerList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="740.0" prefWidth="1142.0">
+               <styleClass>
+                  <String fx:value="transparentColor" />
+                  <String fx:value="listView" />
+               </styleClass></ListView>
          </content>
       </ScrollPane>
    </children>

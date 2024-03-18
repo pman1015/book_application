@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerDetailsPage.CustomerDetailsPageController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="62.0" prefHeight="70.0" prefWidth="1215.0" spacing="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <Button mnemonicParsing="false" onAction="#loadCustomerEquipment" text="Equipment">
+               <styleClass>
+                  <String fx:value="textButton" />
+                  <String fx:value="mediumFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+               <graphic>
+                  <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                     <children>
+                        <SVGPath content="M31.3136 16.6683C31.305 15.9734 30.7437 15.3324 30.0574 15.2356L24.9223 14.463V12.8418C24.9223 12.1249 24.3424 11.5408 23.627 11.534L15.6102 10.8489L15.5864 10.8478C14.8652 10.8478 14.2785 11.4345 14.2785 12.1557V12.8616L9.5062 12.1435L8.10929 3.09057C8.00686 2.42689 7.4407 1.79447 6.79228 1.61952L0.878218 0.0242842C0.506664 -0.0761075 0.124391 0.143917 0.0242088 0.515419C-0.0759737 0.88692 0.143895 1.26919 0.515344 1.36943L6.42946 2.96477C6.54684 2.9964 6.71385 3.18301 6.73241 3.30312L8.14161 12.436C7.9483 12.6422 7.83112 12.9231 7.82867 13.2431L7.14313 22.9773L7.14245 22.9969C7.14245 23.7181 7.72916 24.3048 8.45036 24.3048H9.01449L8.93245 23.9614C8.84205 23.5831 8.79624 23.1967 8.79624 22.8127C8.79624 20.0871 11.0136 17.8697 13.7393 17.8697C16.4649 17.8697 18.6823 20.0871 18.6823 22.8127C18.6823 23.1967 18.6365 23.5831 18.5461 23.9614L18.4641 24.3048H22.166L22.1387 24.0012C22.1326 23.9328 22.1284 23.8728 22.1259 23.8168C22.1227 23.7523 22.121 23.689 22.121 23.6285C22.121 21.3527 23.9725 19.5012 26.2483 19.5012C28.524 19.5012 30.3755 21.3526 30.3755 23.6285C30.3755 23.7065 30.3727 23.7887 30.3665 23.8873L30.341 24.2984L30.732 24.1693C31.345 23.967 31.9999 23.5527 31.9999 22.997V22.9819L31.3136 16.6683Z" />
+                        <SVGPath content="M13.7394 19.5653C11.9487 19.5653 10.4919 21.0221 10.4919 22.8127C10.4919 24.6033 11.9488 26.0601 13.7394 26.0601C15.5299 26.0601 16.9868 24.6033 16.9868 22.8127C16.9868 21.0221 15.5299 19.5653 13.7394 19.5653ZM13.7394 24.3883C12.8706 24.3883 12.1638 23.6815 12.1638 22.8128C12.1638 21.9441 12.8707 21.2372 13.7394 21.2372C14.6081 21.2372 15.3149 21.9441 15.3149 22.8128C15.3149 23.6815 14.6081 24.3883 13.7394 24.3883Z" />
+                        <SVGPath content="M26.2481 20.9399C24.7656 20.9399 23.5596 22.1461 23.5596 23.6285C23.5596 25.111 24.7657 26.3171 26.2481 26.3171C27.7306 26.3171 28.9367 25.1109 28.9367 23.6285C28.9367 22.146 27.7306 20.9399 26.2481 20.9399ZM26.2481 24.9238C25.5339 24.9238 24.9528 24.3426 24.9528 23.6285C24.9528 22.9143 25.5339 22.3332 26.2481 22.3332C26.9624 22.3332 27.5434 22.9143 27.5434 23.6285C27.5434 24.3427 26.9624 24.9238 26.2481 24.9238Z" />
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#loadJobHistory" text="Job History">
+               <styleClass>
+                  <String fx:value="textButton" />
+                  <String fx:value="mediumFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+               <graphic>
+                  <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                     <children>
+                        <SVGPath content="M11.9361 10.208H18.9121C19.2641 10.208 19.5521 9.92002 19.5521 9.56802V8.28802C19.5521 7.23202 18.6881 6.40002 17.6641 6.40002H13.2161C12.1601 6.40002 11.3281 7.26402 11.3281 8.28802V9.56802C11.2961 9.92002 11.5841 10.208 11.9361 10.208Z" />
+                        <SVGPath content="M22.4001 7.96802H21.7601C21.5681 7.96802 21.4401 8.09602 21.4401 8.28802V9.56802C21.4401 10.976 20.2881 12.096 18.9121 12.096H11.9361C10.5281 12.096 9.40806 10.944 9.40806 9.56802V8.28802C9.40806 8.09602 9.28006 7.96802 9.08806 7.96802H8.44806C7.39206 7.96802 6.56006 8.83202 6.56006 9.85602V22.848C6.56006 23.904 7.42406 24.736 8.44806 24.736H14.8481C15.7441 24.736 15.8401 24 15.8401 23.744V16.896C15.8401 16.16 16.2561 16 16.4801 16H23.3921C24.1601 16 24.2881 15.328 24.2881 15.104V9.92002C24.3201 8.83202 23.4561 7.96802 22.4001 7.96802Z" />
+                        <SVGPath content="M25.088 19.328H18.112C17.92 19.328 17.76 19.168 17.76 18.976V18.272C17.76 18.08 17.92 17.92 18.112 17.92H25.088C25.28 17.92 25.44 18.08 25.44 18.272V18.976C25.44 19.168 25.28 19.328 25.088 19.328ZM25.088 22.464H18.112C17.92 22.464 17.76 22.304 17.76 22.112V21.408C17.76 21.216 17.92 21.056 18.112 21.056H25.088C25.28 21.056 25.44 21.216 25.44 21.408V22.112C25.44 22.304 25.28 22.464 25.088 22.464ZM25.088 25.6H18.112C17.92 25.6 17.76 25.44 17.76 25.248V24.544C17.76 24.352 17.92 24.192 18.112 24.192H25.088C25.28 24.192 25.44 24.352 25.44 24.544V25.248C25.44 25.44 25.28 25.6 25.088 25.6Z" />
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#loadRecords" text="Records">
+               <styleClass>
+                  <String fx:value="textButton" />
+                  <String fx:value="mediumFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+               <graphic>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
+                     <children>
+                        <SVGPath content="M29 2H3L2 3V9L3 10H4V27L5 28H27L28 27V10H29L30 9V3L29 2ZM27 8H4V4H28V8H27ZM6 26V10H26V26H6ZM22 14H10V16H22V14Z" />
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </HBox>
+      <FlowPane layoutX="14.0" layoutY="133.0" prefHeight="370.0" prefWidth="600.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="82.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Details" wrappingWidth="322.20001220703125">
+               <FlowPane.margin>
+                  <Insets bottom="8.0" left="-8.0" right="8.0" top="8.0" />
+               </FlowPane.margin>
+               <styleClass>
+                  <String fx:value="largeFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <StackPane prefHeight="64.0" prefWidth="229.0">
+               <children>
+                  <AnchorPane fx:id="editOptionsDetails" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#cancelEditDetails" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                 <children>
+                                    <SVGPath content="M13.3736 11.9595C12.9831 11.569 12.3499 11.569 11.9594 11.9595C11.5689 12.35 11.5689 12.9832 11.9594 13.3737L14.5856 16L11.9594 18.6262C11.5689 19.0166 11.5689 19.6498 11.9594 20.0404C12.3499 20.4309 12.9831 20.4309 13.3736 20.0404L15.9999 17.4142L18.626 20.0404C19.0165 20.4309 19.6497 20.4309 20.0403 20.0404C20.4308 19.6498 20.4308 19.0166 20.0403 18.6261L17.414 16L20.0403 13.3737C20.4308 12.9832 20.4308 12.3501 20.0403 11.9596C19.6497 11.569 19.0165 11.569 18.626 11.9596L15.9999 14.5857L13.3736 11.9595Z" fill="WHITE" stroke="#ffffff00" strokeWidth="0.0" />
+                                    <SVGPath content="M15.9998 1.66663C8.08376 1.66663 1.6665 8.08388 1.6665 16C1.6665 23.9161 8.08376 30.3333 15.9998 30.3333C23.916 30.3333 30.3332 23.9161 30.3332 16C30.3332 8.08388 23.916 1.66663 15.9998 1.66663ZM3.6665 16C3.6665 9.18845 9.18833 3.66663 15.9998 3.66663C22.8113 3.66663 28.3332 9.18845 28.3332 16C28.3332 22.8114 22.8113 28.3333 15.9998 28.3333C9.18833 28.3333 3.6665 22.8114 3.6665 16Z" fill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                        <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#saveEditDetails" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                 <children>
+                                    <SVGPath content="M11 6.8572C11 6.01606 11.7168 5.33339 12.6 5.33339C13.4832 5.33339 14.2 6.01606 14.2 6.8572C14.2 7.69834 13.4832 8.38101 12.6 8.38101C11.7168 8.38101 11 7.69834 11 6.8572ZM28.8 26.6667C28.8 27.5079 28.0832 28.1905 27.2 28.1905H25.6V22.0953C25.6 20.4115 24.168 19.0477 22.4 19.0477H9.59998C7.83198 19.0477 6.40002 20.4115 6.40002 22.0953V28.1905H4.79999C3.91679 28.1905 3.20001 27.5079 3.20001 26.6667V11.4957C3.20001 11.293 3.28479 11.0995 3.43359 10.9578L6.40002 8.13264V9.90482C6.40002 11.5886 7.83198 12.9524 9.59998 12.9524H22.4C24.168 12.9524 25.6 11.5886 25.6 9.90482V3.80958H27.2C28.0832 3.80958 28.8 4.49225 28.8 5.33339V26.6667ZM22.4 28.1905H9.59998V23.6191C9.59998 22.778 10.3168 22.0953 11.2 22.0953H20.8C21.6832 22.0953 22.4 22.778 22.4 23.6191V28.1905ZM9.59998 5.08502L10.9392 3.80958H22.4V8.38101C22.4 9.22215 21.6832 9.90482 20.8 9.90482H11.2C10.3168 9.90482 9.59998 9.22215 9.59998 8.38101V5.08502ZM28.8 0.761963H10.2624C9.83842 0.761963 9.43198 0.921962 9.13119 1.20844L0.468797 9.45835C0.167996 9.74482 0 10.1319 0 10.5357V28.1905C0 29.8743 1.43201 31.2382 3.20001 31.2382H28.8C30.568 31.2382 32 29.8743 32 28.1905V3.80958C32 2.12577 30.568 0.761963 28.8 0.761963Z" fill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="editButtonContainerDetails">
+                     <children>
+                        <Button layoutX="167.0" layoutY="12.0" mnemonicParsing="false" onAction="#enableEditDetails" styleClass="svgButton" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                 <children>
+                                    <SVGPath content="M13.3333 0.333374C12.9797 0.333374 12.6406 0.473854 12.3905 0.723894L4.39052 8.72389C4.14048 8.97395 4 9.31308 4 9.66671V25.6667C4 27.8759 5.79087 29.6667 8 29.6667H9.33333C10.0697 29.6667 10.6667 29.0698 10.6667 28.3334C10.6667 27.597 10.0697 27 9.33333 27H8C7.26363 27 6.66667 26.4031 6.66667 25.6667V11H13.3333C14.0697 11 14.6667 10.4031 14.6667 9.66671V3.00004H24C24.7364 3.00004 25.3333 3.597 25.3333 4.33337V8.33337C25.3333 9.06975 25.9303 9.66671 26.6667 9.66671C27.4031 9.66671 28 9.06975 28 8.33337V4.33337C28 2.12424 26.2092 0.333374 24 0.333374H13.3333ZM12 8.33337H8.55228L12 4.88565V8.33337ZM29.4951 13.2762C27.9329 11.7141 25.4004 11.7141 23.8383 13.2762L21.5985 15.5159L15.0572 22.0572C14.8863 22.2282 14.7651 22.4422 14.7065 22.6767L13.3732 28.01C13.2595 28.4643 13.3927 28.945 13.7239 29.2762C14.0551 29.6074 14.5357 29.7404 14.99 29.6268L20.3233 28.2935C20.5579 28.235 20.7719 28.1138 20.9428 27.9428L27.4075 21.4782L29.7239 19.1618C31.286 17.5996 31.286 15.0671 29.7239 13.505L29.4951 13.2762ZM24.4091 16.4766L25.7239 15.1618C26.2445 14.6411 27.0888 14.6411 27.6095 15.1618L27.8383 15.3906C28.3589 15.9112 28.3589 16.7555 27.8383 17.2762L26.4829 18.6315L24.4091 16.4766ZM22.5231 18.3626L24.5969 20.5175L19.3184 25.796L16.4992 26.5008L17.204 23.6816L22.5231 18.3626Z" fill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="58.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="CustomerNameEditField" visible="false">
+                     <children>
+                        <TextField fx:id="CustomerNameField" layoutY="15.0" prefHeight="25.0" prefWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <styleClass>
+                              <String fx:value="textField" />
+                              <String fx:value="smallFont" />
+                           </styleClass></TextField>
+                        <Text fx:id="CustomerNameError" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" wrappingWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="errorFont" />
+                           </styleClass></Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="CustomerNameLabelField">
+                     <children>
+                        <Label fx:id="CustomerName" layoutY="12.0" prefHeight="17.0" prefWidth="475.0" text="Label">
+                           <styleClass>
+                              <String fx:value="mediumFont" />
+                              <String fx:value="whiteText" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="55.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="NickNameEditField" visible="false">
+                     <children>
+                        <TextField fx:id="NickNameField" layoutY="15.0" prefHeight="25.0" prefWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="8.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="textField" />
+                           </styleClass></TextField>
+                        <Text fx:id="NickNameError" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" wrappingWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="errorFont" />
+                           </styleClass></Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="NickNameLabelField">
+                     <children>
+                        <Label fx:id="NickName" layoutY="12.0" prefHeight="17.0" prefWidth="475.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="12.0">
+                           <styleClass>
+                              <String fx:value="mediumFont" />
+                              <String fx:value="whiteText" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="55.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="PhoneNumberEditField" visible="false">
+                     <children>
+                        <TextField fx:id="PhoneNumberField" layoutY="15.0" prefHeight="25.0" prefWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="8.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="textField" />
+                           </styleClass></TextField>
+                        <Text fx:id="PhoneNumberError" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" wrappingWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="errorFont" />
+                           </styleClass></Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="PhoneNumberLabelField">
+                     <children>
+                        <Label fx:id="PhoneNumber" layoutY="12.0" prefHeight="17.0" prefWidth="475.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="12.0">
+                           <styleClass>
+                              <String fx:value="mediumFont" />
+                              <String fx:value="whiteText" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="55.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="AddressEditField" visible="false">
+                     <children>
+                        <TextField fx:id="AddressField" layoutY="15.0" prefHeight="25.0" prefWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="8.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="textField" />
+                           </styleClass></TextField>
+                        <Text fx:id="AddressError" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" wrappingWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="errorFont" />
+                           </styleClass></Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="AddressrLabelField">
+                     <children>
+                        <Label fx:id="Address" layoutY="12.0" prefHeight="17.0" prefWidth="475.0" text="Label">
+                           <styleClass>
+                              <String fx:value="mediumFont" />
+                              <String fx:value="whiteText" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="55.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="CustomerRatingEditField" visible="false">
+                     <children>
+                        <TextField fx:id="CustomerRatingField" layoutY="15.0" prefHeight="25.0" prefWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="8.0">
+                           <styleClass>
+                              <String fx:value="textField" />
+                              <String fx:value="smallFont" />
+                           </styleClass></TextField>
+                        <Text fx:id="CustomerRatingError" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Message" wrappingWidth="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+                           <styleClass>
+                              <String fx:value="smallFont" />
+                              <String fx:value="errorFont" />
+                           </styleClass></Text>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="CustomerRatingLabelField">
+                     <children>
+                        <Label fx:id="CustomerRating" layoutY="12.0" prefHeight="17.0" prefWidth="475.0" text="Label">
+                           <styleClass>
+                              <String fx:value="mediumFont" />
+                              <String fx:value="whiteText" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="16.0" right="8.0" top="8.0" />
+         </padding>
+      </FlowPane>
+      <FlowPane layoutX="48.0" layoutY="545.0" prefHeight="375.0" prefWidth="600.0" vgap="8.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="508.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefWidth="594.0" spacing="8.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name: ">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="JobName" prefHeight="44.0" prefWidth="311.0" text="Some Job Name Here">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Circle fx:id="jobStatusIndicator" fill="WHITE" radius="20.0" stroke="#ffffff00" strokeType="INSIDE" />
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="571.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:  ">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="CurrentJobEquipmentName" prefHeight="32.0" prefWidth="383.0" text="Label">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets left="24.0" />
+               </FlowPane.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current Cost:  ">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="CurrentJobCost" prefHeight="32.0" prefWidth="345.0" text="Label">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets left="24.0" />
+               </FlowPane.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="571.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current Hours: ">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="CurrentJobHours" prefHeight="32.0" prefWidth="342.0" text="Label">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <FlowPane.margin>
+                  <Insets left="24.0" />
+               </FlowPane.margin>
+            </HBox>
+            <AnchorPane prefHeight="152.0" prefWidth="599.0">
+               <children>
+                  <Text layoutX="23.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notes: " AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="6.520000457763672">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <TextArea fx:id="JobNotes" editable="false" layoutX="23.0" layoutY="40.0" prefHeight="128.0" prefWidth="561.0" promptText="some notes" wrapText="true" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="40.0">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="transparentColor" />
+                        <String fx:value="scrollPane" />
+                     </styleClass>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+         </children>
+      </FlowPane>
+      <VBox layoutX="636.0" layoutY="112.0" prefHeight="800.0" prefWidth="286.0" AnchorPane.leftAnchor="622.0" AnchorPane.topAnchor="82.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Notes:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="161.0">
+                     <children>
+                        <AnchorPane fx:id="editButtonContainerNotes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="161.0" visible="false">
+                           <children>
+                              <Button layoutX="167.0" layoutY="12.0" mnemonicParsing="false" onAction="#enableEditNotes" styleClass="svgButton" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                                 <graphic>
+                                    <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                       <children>
+                                          <SVGPath content="M13.3333 0.333374C12.9797 0.333374 12.6406 0.473854 12.3905 0.723894L4.39052 8.72389C4.14048 8.97395 4 9.31308 4 9.66671V25.6667C4 27.8759 5.79087 29.6667 8 29.6667H9.33333C10.0697 29.6667 10.6667 29.0698 10.6667 28.3334C10.6667 27.597 10.0697 27 9.33333 27H8C7.26363 27 6.66667 26.4031 6.66667 25.6667V11H13.3333C14.0697 11 14.6667 10.4031 14.6667 9.66671V3.00004H24C24.7364 3.00004 25.3333 3.597 25.3333 4.33337V8.33337C25.3333 9.06975 25.9303 9.66671 26.6667 9.66671C27.4031 9.66671 28 9.06975 28 8.33337V4.33337C28 2.12424 26.2092 0.333374 24 0.333374H13.3333ZM12 8.33337H8.55228L12 4.88565V8.33337ZM29.4951 13.2762C27.9329 11.7141 25.4004 11.7141 23.8383 13.2762L21.5985 15.5159L15.0572 22.0572C14.8863 22.2282 14.7651 22.4422 14.7065 22.6767L13.3732 28.01C13.2595 28.4643 13.3927 28.945 13.7239 29.2762C14.0551 29.6074 14.5357 29.7404 14.99 29.6268L20.3233 28.2935C20.5579 28.235 20.7719 28.1138 20.9428 27.9428L27.4075 21.4782L29.7239 19.1618C31.286 17.5996 31.286 15.0671 29.7239 13.505L29.4951 13.2762ZM24.4091 16.4766L25.7239 15.1618C26.2445 14.6411 27.0888 14.6411 27.6095 15.1618L27.8383 15.3906C28.3589 15.9112 28.3589 16.7555 27.8383 17.2762L26.4829 18.6315L24.4091 16.4766ZM22.5231 18.3626L24.5969 20.5175L19.3184 25.796L16.4992 26.5008L17.204 23.6816L22.5231 18.3626Z" fill="WHITE" />
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="editOptionsNotes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="161.0">
+                           <children>
+                              <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#cancelEditNotes" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="6.0">
+                                 <graphic>
+                                    <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                       <children>
+                                          <SVGPath content="M13.3736 11.9595C12.9831 11.569 12.3499 11.569 11.9594 11.9595C11.5689 12.35 11.5689 12.9832 11.9594 13.3737L14.5856 16L11.9594 18.6262C11.5689 19.0166 11.5689 19.6498 11.9594 20.0404C12.3499 20.4309 12.9831 20.4309 13.3736 20.0404L15.9999 17.4142L18.626 20.0404C19.0165 20.4309 19.6497 20.4309 20.0403 20.0404C20.4308 19.6498 20.4308 19.0166 20.0403 18.6261L17.414 16L20.0403 13.3737C20.4308 12.9832 20.4308 12.3501 20.0403 11.9596C19.6497 11.569 19.0165 11.569 18.626 11.9596L15.9999 14.5857L13.3736 11.9595Z" fill="WHITE" stroke="#ffffff00" strokeWidth="0.0" />
+                                          <SVGPath content="M15.9998 1.66663C8.08376 1.66663 1.6665 8.08388 1.6665 16C1.6665 23.9161 8.08376 30.3333 15.9998 30.3333C23.916 30.3333 30.3332 23.9161 30.3332 16C30.3332 8.08388 23.916 1.66663 15.9998 1.66663ZM3.6665 16C3.6665 9.18845 9.18833 3.66663 15.9998 3.66663C22.8113 3.66663 28.3332 9.18845 28.3332 16C28.3332 22.8114 22.8113 28.3333 15.9998 28.3333C9.18833 28.3333 3.6665 22.8114 3.6665 16Z" fill="WHITE" />
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                              <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#saveEditNotes" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                                 <graphic>
+                                    <AnchorPane prefHeight="32.0" prefWidth="32.0">
+                                       <children>
+                                          <SVGPath content="M11 6.8572C11 6.01606 11.7168 5.33339 12.6 5.33339C13.4832 5.33339 14.2 6.01606 14.2 6.8572C14.2 7.69834 13.4832 8.38101 12.6 8.38101C11.7168 8.38101 11 7.69834 11 6.8572ZM28.8 26.6667C28.8 27.5079 28.0832 28.1905 27.2 28.1905H25.6V22.0953C25.6 20.4115 24.168 19.0477 22.4 19.0477H9.59998C7.83198 19.0477 6.40002 20.4115 6.40002 22.0953V28.1905H4.79999C3.91679 28.1905 3.20001 27.5079 3.20001 26.6667V11.4957C3.20001 11.293 3.28479 11.0995 3.43359 10.9578L6.40002 8.13264V9.90482C6.40002 11.5886 7.83198 12.9524 9.59998 12.9524H22.4C24.168 12.9524 25.6 11.5886 25.6 9.90482V3.80958H27.2C28.0832 3.80958 28.8 4.49225 28.8 5.33339V26.6667ZM22.4 28.1905H9.59998V23.6191C9.59998 22.778 10.3168 22.0953 11.2 22.0953H20.8C21.6832 22.0953 22.4 22.778 22.4 23.6191V28.1905ZM9.59998 5.08502L10.9392 3.80958H22.4V8.38101C22.4 9.22215 21.6832 9.90482 20.8 9.90482H11.2C10.3168 9.90482 9.59998 9.22215 9.59998 8.38101V5.08502ZM28.8 0.761963H10.2624C9.83842 0.761963 9.43198 0.921962 9.13119 1.20844L0.468797 9.45835C0.167996 9.74482 0 10.1319 0 10.5357V28.1905C0 29.8743 1.43201 31.2382 3.20001 31.2382H28.8C30.568 31.2382 32 29.8743 32 28.1905V3.80958C32 2.12577 30.568 0.761963 28.8 0.761963Z" fill="WHITE" />
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <TextArea fx:id="CustomerNotes" editable="false" prefHeight="752.0" prefWidth="286.0" text="Some customer Notes" wrapText="true">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+                  <String fx:value="scrollPane" />
+                  <String fx:value="transparentColor" />
+               </styleClass>
+            </TextArea>
+         </children>
+      </VBox>
+      <VBox layoutX="937.0" layoutY="124.0" prefHeight="800.0" prefWidth="277.0" AnchorPane.leftAnchor="920.0" AnchorPane.topAnchor="82.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer's Equipment:">
+               <VBox.margin>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <ScrollPane prefHeight="755.0" prefWidth="277.0">
+               <styleClass>
+                  <String fx:value="transparentColor" />
+                  <String fx:value="scrollPane" />
+               </styleClass>
+               <content>
+                  <ListView fx:id="equipmentCards" prefHeight="757.0" prefWidth="246.0">
+                     <styleClass>
+                        <String fx:value="listView" />
+                        <String fx:value="scrollPane" />
+                        <String fx:value="transparentColor" />
+                        <String fx:value="roundedCorners" />
+                     </styleClass>
+                  </ListView>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+   </padding>
+</AnchorPane>

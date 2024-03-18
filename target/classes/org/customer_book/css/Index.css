@@ -62,6 +62,11 @@
             -fx-font-size: 16px;
         }
         
+        .errorFont {
+            -fx-text-fill: red;
+            -fx-fill: red;
+        }
+        
         .roundedCorners {
             -fx-background-radius: 10;
         }
@@ -122,4 +127,16 @@
         
         .card:hover {
             -fx-background-color: #97979765;
+        }
+        
+        .listView .list-cell {
+            -fx-background-color: transparent;
+        }
+        
+        .listView .list-view {
+            -fx-background-color: transparent;
+        }
+        
+        .scrollPane .content {
+            -fx-background-color: transparent;
         }
