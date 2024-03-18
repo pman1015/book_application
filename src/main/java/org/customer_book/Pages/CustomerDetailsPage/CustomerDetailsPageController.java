@@ -147,7 +147,21 @@ public class CustomerDetailsPageController {
   }
 
   @FXML
-  void saveEditDetails(ActionEvent event) {}
+  void saveEditDetails(ActionEvent event) {
+    if (
+      model.validChanges(
+        CustomerNameField.getText(),
+        NickNameField.getText(),
+        PhoneNumberField.getText(),
+        AddressField.getText(),
+        Integer.parseInt(CustomerRatingField.getText())
+      )
+    ) {
+      model.saveChanges();
+      model.setCustomerDetailsEditProperty(false);
+      editButtonContainerDetails.toFront();
+    }
+  }
 
   @FXML
   void enableEditDetails(ActionEvent event) {
@@ -166,6 +180,7 @@ public class CustomerDetailsPageController {
   void saveEditNotes(ActionEvent event) {
     model.setCustomerNotesEditProperty(false);
     customerDAO.setNotes(CustomerNotes.getText());
+    model.saveChanges();
     editButtonContainerNotes.toFront();
   }
 
@@ -173,7 +188,6 @@ public class CustomerDetailsPageController {
   void enableEditNotes(ActionEvent event) {
     model.setCustomerNotesEditProperty(true);
     editButtonContainerNotes.toBack();
-    
   }
 
   private CustomerDAO customerDAO;
@@ -316,7 +330,7 @@ public class CustomerDetailsPageController {
     NickNameError.textProperty().bind(model.getNickNameError());
 
     CustomerRating.textProperty().bind(customerDAO.getCustomerRating());
-    CustomerRatingField.setText(customerDAO.getCustomerRating().getValue());
+    CustomerRatingField.setText(customerDAO.getCustomerRating().getValue().substring(0,1));
     CustomerRatingError.textProperty().bind(model.getCustomerRatingError());
     //--------------------------------------------------------------------------------
     // bind the Notes to the NotesField

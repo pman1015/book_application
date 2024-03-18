@@ -50,4 +50,58 @@ public class CustomerDetailsPageModel {
     }
 
   }
+  public void saveChanges(){
+    DatabaseConnection.customerCollection.updateCustomer(customer);
+  }
+  public boolean validChanges(String customerName, String nickName, String phoneNumber, String address, int rating){
+    boolean valid = true;
+    if(customerName == null || customerName.isEmpty()){
+      customerNameError.setValue("Customer Name is required");
+      valid = false;
+    } else {
+      customerNameError.setValue("");
+      customer.setName(customerName);
+    }
+    if(nickName == null || nickName.isEmpty()){
+      nickNameError.setValue("Nick Name is required");
+      valid = false;
+    } else {
+      nickNameError.setValue("");
+      customer.setAlias(nickName);
+    }
+    if(phoneNumber == null || phoneNumber.isEmpty()){
+      phoneNumberError.setValue("Phone Number is required");
+      valid = false;
+    } else if(!checkPhoneNumber(phoneNumber)){
+      phoneNumberError.setValue("Phone Number is not valid");
+      valid = false;
+    } else {
+      phoneNumberError.setValue("");
+      customer.setPhoneNumber(phoneNumber);
+    }
+    if(address == null || address.isEmpty()){
+      addressError.setValue("Address is required");
+      valid = false;
+    } else {
+      addressError.setValue("");
+      customer.setAddress(address);
+    }
+    if(rating < 0 || rating > 5){
+      customerRatingError.setValue("Rating must be between 0 and 5");
+      valid = false;
+    } else {
+      customerRatingError.setValue("");
+      customer.setRating(rating);
+    }
+    return valid;
+
+    
+  }
+  private boolean checkPhoneNumber(String phoneNumber){
+   
+    String regex = "^\\d{3}-\\d{3}-\\d{4}$";
+
+    return phoneNumber.matches(regex);
+
+  }
 }

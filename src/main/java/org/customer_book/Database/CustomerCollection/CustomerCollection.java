@@ -1,5 +1,6 @@
 package org.customer_book.Database.CustomerCollection;
 
+import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.ArrayList;
@@ -24,5 +25,8 @@ public class CustomerCollection {
             customers.add(c);
         });
         return customers;
+    }
+    public void updateCustomer(CustomerDAO customer){
+        System.out.println(collection.findOneAndReplace(all("_id",customer.getId()), customer));
     }
 }
