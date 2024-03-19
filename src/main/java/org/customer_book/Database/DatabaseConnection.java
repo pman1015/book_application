@@ -10,16 +10,16 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerCollection;
+import org.customer_book.Database.EquipmentCollection.EquipmentCollection;
+import org.customer_book.Database.InventoryCollection.InventoryCollection;
 import org.customer_book.Database.JobsCollection.JobCollection;
+import org.customer_book.Database.MachinesCollection.MachineCollection;
 
 public class DatabaseConnection {
 
@@ -27,6 +27,9 @@ public class DatabaseConnection {
   private final MongoDatabase database;
   public static CustomerCollection customerCollection;
   public static JobCollection jobCollection;
+  public static MachineCollection machineCollection;
+  public static EquipmentCollection equipmentCollection;
+  public static InventoryCollection inventoryCollection;
 
   /**
    * Constructor for DatabaseConnection
@@ -51,13 +54,15 @@ public class DatabaseConnection {
       .codecRegistry(codecRegistry)
       .build();
     MongoClient mongoClient = MongoClients.create(clientSettings);
-   
 
     //Initalise collections
     database = mongoClient.getDatabase("CustomerBook");
-    
+
     customerCollection = new CustomerCollection(database);
     jobCollection = new JobCollection(database);
+    equipmentCollection = new EquipmentCollection(database);
+    machineCollection = new MachineCollection(database);
+    inventoryCollection = new InventoryCollection(database);
   }
 
   public MongoCollection<?> getCollection(
