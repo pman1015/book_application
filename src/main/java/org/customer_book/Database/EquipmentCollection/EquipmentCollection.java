@@ -6,6 +6,8 @@ import static com.mongodb.client.model.Sorts.descending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
 
@@ -25,15 +27,15 @@ public class EquipmentCollection {
       });
   }
 
-  public void getEquipmentList(int size, int skip) {
+  public ArrayList<EquipmentDAO> getEquipmentList(int size, int skip) {
+   ArrayList<EquipmentDAO> equipmentList = new ArrayList<>();
     collection
       .find()
       .sort(descending("modelNumber"))
       .limit(size)
       .skip(skip)
-      .forEach(c -> {
-        System.out.println(c);
-      });
+      .into(equipmentList);
+    return equipmentList;
   }
 
   public EquipmentDAO getEquipment(ObjectId id) {
@@ -42,5 +44,8 @@ public class EquipmentCollection {
 
   public ArrayList<EquipmentDAO> getEquipmentList(ArrayList<ObjectId> ids) {
     return collection.find(in("_id", ids)).into(new ArrayList<>());
+  }
+  public void updateEquipment(EquipmentDAO equipment) {
+    collection.replaceOne(eq("_id", equipment.getId()), equipment);
   }
 }

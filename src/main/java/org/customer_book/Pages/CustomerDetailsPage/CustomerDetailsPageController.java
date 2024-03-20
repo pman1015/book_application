@@ -20,6 +20,9 @@ import org.customer_book.Database.CustomerCollection.CustomerDAO;
 public class CustomerDetailsPageController {
 
   @FXML
+  private AnchorPane Content;
+
+  @FXML
   private Text NickNameError;
 
   @FXML
@@ -330,7 +333,9 @@ public class CustomerDetailsPageController {
     NickNameError.textProperty().bind(model.getNickNameError());
 
     CustomerRating.textProperty().bind(customerDAO.getCustomerRating());
-    CustomerRatingField.setText(customerDAO.getCustomerRating().getValue().substring(0,1));
+    CustomerRatingField.setText(
+      customerDAO.getCustomerRating().getValue().substring(0, 1)
+    );
     CustomerRatingError.textProperty().bind(model.getCustomerRatingError());
     //--------------------------------------------------------------------------------
     // bind the Notes to the NotesField

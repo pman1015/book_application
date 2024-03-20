@@ -7,11 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class CustomerListPageController {
 
   private CustomerListPageModel model;
+
+  @FXML
+  private AnchorPane Content;
 
   @FXML
   private ResourceBundle resources;
@@ -36,7 +40,7 @@ public class CustomerListPageController {
 
   @FXML
   void initialize() {
-   model = new CustomerListPageModel();
+    model = new CustomerListPageModel();
     customerList.setItems(model.getCustomerCards());
   }
 }

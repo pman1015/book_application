@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerDetailsPage.CustomerDetailsPageController">
+<AnchorPane fx:id="Content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerDetailsPage.CustomerDetailsPageController">
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="62.0" prefHeight="70.0" prefWidth="1215.0" spacing="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <styleClass>

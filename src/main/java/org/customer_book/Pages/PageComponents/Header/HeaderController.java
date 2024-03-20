@@ -21,6 +21,7 @@ public class HeaderController {
   @FXML
   void CloseWindow(ActionEvent event) {
     App.closeWindow();
+  
   }
 
   @FXML
