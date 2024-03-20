@@ -75,6 +75,12 @@ public class App extends Application {
   static void setRoot(String pageName, String fxml) throws IOException {
     scene.setRoot(loadPage(pageName, fxml));
   }
+  public static void addPopup(Parent popup) {
+    mainPage.addPopup(popup);
+  }
+  public static void removePopup() {
+    mainPage.removePopup();
+  }
 
   public static void setPage(String pageName, String fxml) throws IOException {
     mainPage.setCurrent_page_property(loadPage(pageName, fxml));

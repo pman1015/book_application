@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import lombok.Getter;
 import lombok.Setter;
 import org.customer_book.App;
@@ -92,5 +96,37 @@ public class EquipmentPageModel {
     System.out.println(Notes);
     selectedModel.setNotes(Notes);
     DatabaseConnection.equipmentCollection.updateEquipment(selectedModel);
+  }
+
+  /**
+   *
+   */
+  public void reloadEquipment() {
+    equipmentCards.clear();
+    loadEquipment();
+  }
+
+  /**
+   *
+   */
+  public void showNewEquipment() {
+    try {
+      Parent createPage = App.loadPage("Popups", "CreateEquipment");
+      createPage
+        .sceneProperty()
+        .addListener(new ChangeListener<Scene>() {
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if(newValue == null) {
+                    reloadEquipment();
+                }
+            }
+            
+        });
+      App.addPopup(createPage);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }

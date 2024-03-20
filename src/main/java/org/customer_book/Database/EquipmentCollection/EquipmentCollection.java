@@ -48,4 +48,11 @@ public class EquipmentCollection {
   public void updateEquipment(EquipmentDAO equipment) {
     collection.replaceOne(eq("_id", equipment.getId()), equipment);
   }
+  public boolean modelNumberExists(String modelNumber) {
+    return collection.countDocuments(eq("modelNumber", modelNumber)) > 0;
+  }
+  public void addEquipment(EquipmentDAO equipment) {
+    collection.insertOne(equipment);
+  }
+  
 }

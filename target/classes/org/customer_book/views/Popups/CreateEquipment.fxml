@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Popups.EquipmentCreate.EquipmentCreateController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Button layoutX="471.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeAdd" styleClass="svgButton" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+         <graphic>
+            <AnchorPane>
+               <children>
+                  <SVGPath content="M13.3736 11.9595C12.9831 11.569 12.3499 11.569 11.9594 11.9595C11.5689 12.35 11.5689 12.9832 11.9594 13.3737L14.5856 16L11.9594 18.6262C11.5689 19.0166 11.5689 19.6498 11.9594 20.0404C12.3499 20.4309 12.9831 20.4309 13.3736 20.0404L15.9999 17.4142L18.626 20.0404C19.0165 20.4309 19.6497 20.4309 20.0403 20.0404C20.4308 19.6498 20.4308 19.0166 20.0403 18.6261L17.414 16L20.0403 13.3737C20.4308 12.9832 20.4308 12.3501 20.0403 11.9596C19.6497 11.569 19.0165 11.569 18.626 11.9596L15.9999 14.5857L13.3736 11.9595Z" fill="WHITE" />
+                  <SVGPath content="M15.9998 1.66663C8.08376 1.66663 1.6665 8.08388 1.6665 16C1.6665 23.9161 8.08376 30.3333 15.9998 30.3333C23.916 30.3333 30.3332 23.9161 30.3332 16C30.3332 8.08388 23.916 1.66663 15.9998 1.66663ZM3.6665 16C3.6665 9.18845 9.18833 3.66663 15.9998 3.66663C22.8113 3.66663 28.3332 9.18845 28.3332 16C28.3332 22.8114 22.8113 28.3333 15.9998 28.3333C9.18833 28.3333 3.6665 22.8114 3.6665 16Z" fill="WHITE" />
+               </children>
+            </AnchorPane>
+         </graphic>
+      </Button>
+      <Text layoutX="63.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add New Equipment" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="32.0">
+         <styleClass>
+            <String fx:value="HeadingFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Text layoutX="14.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Name:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="120.0">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <TextField fx:id="NewEquipmentName" layoutX="230.0" layoutY="117.0" prefHeight="32.0" prefWidth="299.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="117.0">
+         <styleClass>
+            <String fx:value="textField" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </TextField>
+      <Text layoutX="12.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Notes:" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="190.0">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="NewEquipmentNotesError" layoutX="230.0" layoutY="235.0" prefHeight="17.0" prefWidth="292.0" text="Label" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="235.0">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="errorFont" />
+         </styleClass>
+      </Label>
+      <TextField fx:id="NewEquipmentNotes" layoutX="230.0" layoutY="190.0" prefHeight="32.0" prefWidth="292.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="190.0">
+         <styleClass>
+            <String fx:value="textField" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </TextField>
+      <Label fx:id="NewEquipmentNameError" layoutX="230.0" layoutY="158.0" prefHeight="17.0" prefWidth="292.0" text="Label">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="errorFont" />
+         </styleClass>
+      </Label>
+      <Button layoutX="152.0" layoutY="278.0" mnemonicParsing="false" onAction="#addNewEquipment" prefHeight="48.0" prefWidth="230.0" text="Add Button" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="152.0" AnchorPane.topAnchor="278.0">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

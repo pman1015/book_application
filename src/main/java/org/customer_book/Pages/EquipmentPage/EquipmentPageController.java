@@ -32,7 +32,9 @@ public class EquipmentPageController {
   private TextArea selectedEquipmentNotes;
 
   @FXML
-  void AddNewModel(ActionEvent event) {}
+  void AddNewModel(ActionEvent event) {
+    model.showNewEquipment();
+  }
 
   @FXML
   void CloseSelectedModel(ActionEvent event) {}
