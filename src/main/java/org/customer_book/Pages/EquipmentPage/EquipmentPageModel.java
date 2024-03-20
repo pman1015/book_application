@@ -87,6 +87,15 @@ public class EquipmentPageModel {
     modelNumber.bind(selectedModel.getEquipmentModelNumberProperty());
     notes.set(selectedModel.getNotes());
   }
+  /**
+   * closeSelectedModel:
+   * This function sets the visibility of the selected model to false
+   * this hides the details section
+   * @param Notes
+   */
+  public void closeSelectedModel() {
+    selectedModelVisible.set(false);
+  }
 
   /**
    * pushChanges:
@@ -99,7 +108,7 @@ public class EquipmentPageModel {
   }
 
   /**
-   *
+   *reload the equipment list from the database
    */
   public void reloadEquipment() {
     equipmentCards.clear();
@@ -107,25 +116,33 @@ public class EquipmentPageModel {
   }
 
   /**
-   *
+   *This Function opens the create equipment popup
+   *it also adds a listener to the scene property of the popup
+   *so that when the popup is closed it reloads the equipment
    */
   public void showNewEquipment() {
     try {
+      //Load the create equipment popup node
       Parent createPage = App.loadPage("Popups", "CreateEquipment");
+      //Add an event listenr for when the popup is closed
       createPage
         .sceneProperty()
-        .addListener(new ChangeListener<Scene>() {
+        .addListener(
+          new ChangeListener<Scene>() {
             @Override
-            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-                if(newValue == null) {
-                    reloadEquipment();
-                }
+            public void changed(
+              ObservableValue<? extends Scene> observable,
+              Scene oldValue,
+              Scene newValue
+            ) {
+              if (newValue == null) {
+                reloadEquipment();
+              }
             }
-            
-        });
+          }
+        );
       App.addPopup(createPage);
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }

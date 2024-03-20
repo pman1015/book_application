@@ -43,6 +43,8 @@ public class EquipmentDAO {
   }
 
   public EquipmentDAO() {
+    //--------------------FXML Listeners----------------//
+    //These listners update the DAO when the FXML properties are changed
     equipmentModelNumberProperty.addListener(
       new ChangeListener<String>() {
         @Override

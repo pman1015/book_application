@@ -37,7 +37,9 @@ public class EquipmentPageController {
   }
 
   @FXML
-  void CloseSelectedModel(ActionEvent event) {}
+  void CloseSelectedModel(ActionEvent event) {
+    model.closeSelectedModel();
+  }
 
   @FXML
   void addPart(ActionEvent event) {}
@@ -75,13 +77,11 @@ public class EquipmentPageController {
     //-----------------initialise listeners-----------------
     //This listenr pushes changes to the model notes when the text area loses focus
     selectedEquipmentNotes
-    .focusedProperty()
-    .addListener(
-      (obs, oldVal, newVal) -> {
+      .focusedProperty()
+      .addListener((obs, oldVal, newVal) -> {
         if (!newVal) {
           model.pushChanges(selectedEquipmentNotes.getText());
         }
-      }
-    );
+      });
   }
 }

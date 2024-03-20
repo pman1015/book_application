@@ -75,16 +75,35 @@ public class App extends Application {
   static void setRoot(String pageName, String fxml) throws IOException {
     scene.setRoot(loadPage(pageName, fxml));
   }
+  /**
+   * This function takes in a popup parent and adds it to the scene graph
+   * The popup should have an AnchorPane as its root
+   * @param popup
+   */
   public static void addPopup(Parent popup) {
     mainPage.addPopup(popup);
   }
+  /*
+   * This function removes the current popup from the scene graph
+   */
   public static void removePopup() {
     mainPage.removePopup();
   }
 
+  /**
+   * This function takes in a page name and fxml file and sets it as the current page
+   * @param pageName - name of the page folder in the views directory
+   * @param fxml - name of the fxml file
+   * @throws IOException - if the fxml file is not found
+   */
   public static void setPage(String pageName, String fxml) throws IOException {
     mainPage.setCurrent_page_property(loadPage(pageName, fxml));
   }
+  /**
+   * This function takes in a parent node and sets it as the current page
+   * 
+   * @param page
+   */
   public static void setPage(Parent page){
     mainPage.setCurrent_page_property(page);
   }
