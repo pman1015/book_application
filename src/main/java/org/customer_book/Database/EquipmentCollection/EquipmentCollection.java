@@ -59,6 +59,16 @@ public class EquipmentCollection {
   public EquipmentDAO getEquipment(ObjectId id) {
     return collection.find().filter(eq("_id", id)).first();
   }
+  /**
+   * getEquipmentID:
+   * This function returns the ObjectId of an equipment from the database
+   * based on the model number
+   * @param modelNumber - the model number of the equipment
+   * @return
+   */
+  public ObjectId getEquipmentID(String modelNumber) {
+    return collection.find(eq("modelNumber", modelNumber)).first().getId();
+  }
 
   /**
    * getEquipmentList:
@@ -97,5 +107,22 @@ public class EquipmentCollection {
   public void addEquipment(EquipmentDAO equipment) {
     collection.insertOne(equipment);
   }
+
+  /**
+   * getAllEquipmentList:
+   * this function returns a list of all the equipment model numbers in the database as an ArrayList
+   */
+  public ArrayList<String> getAllEquipmentList(){
+    ArrayList<String> equipmentList = new ArrayList<>();
+    collection
+      .find()
+      .forEach(e -> {
+        equipmentList.add(e.getModelNumber());
+      });
+    return equipmentList;
+    
+  }
+
+
 
 }

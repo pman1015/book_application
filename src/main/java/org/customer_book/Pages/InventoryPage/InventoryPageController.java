@@ -159,7 +159,9 @@ public class InventoryPageController {
   }
 
   @FXML
-  void showAddCompatible(ActionEvent event) {}
+  void showAddCompatible(ActionEvent event) {
+    model.addCompatibleEquipment();
+  }
 
   private InventoryPageModel model;
 
@@ -195,6 +197,7 @@ public class InventoryPageController {
       .addListener((observable, oldValue, newValue) -> {
         if (newValue != null) {
           PartDetails.setVisible(true);
+          model.loadCompatibleEquipment();
           //---- bind the values in the part to the fields ----//
           unBindFromOldValue(oldValue);
           bindToNewValue(newValue);
@@ -259,6 +262,7 @@ public class InventoryPageController {
       .unbindBidirectional(oldValue.getPartExpenseCategoryProperty());
     ExpenseCategoryField.setItems(model.getExpenseCategoriesProperty());
     ExpenseCategoryLabel.textProperty().unbind();
+   
   }
 
   public void bindToNewValue(PartDAO newValue) {
@@ -290,5 +294,6 @@ public class InventoryPageController {
     ExpenseCategoryLabel
       .textProperty()
       .bind(newValue.getPartExpenseCategoryProperty());
+    CompatibleEquipmentList.setItems(model.getEquipmentCards());
   }
 }
