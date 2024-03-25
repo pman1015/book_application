@@ -20,6 +20,7 @@ import org.customer_book.Database.EquipmentCollection.EquipmentCollection;
 import org.customer_book.Database.InventoryCollection.InventoryCollection;
 import org.customer_book.Database.JobsCollection.JobCollection;
 import org.customer_book.Database.MachinesCollection.MachineCollection;
+import org.customer_book.Database.ReportsCollection.ReportsCollection;
 
 public class DatabaseConnection {
 
@@ -30,6 +31,7 @@ public class DatabaseConnection {
   public static MachineCollection machineCollection;
   public static EquipmentCollection equipmentCollection;
   public static InventoryCollection inventoryCollection;
+  public static ReportsCollection reportsCollection;
 
   /**
    * Constructor for DatabaseConnection
@@ -63,6 +65,7 @@ public class DatabaseConnection {
     equipmentCollection = new EquipmentCollection(database);
     machineCollection = new MachineCollection(database);
     inventoryCollection = new InventoryCollection(database);
+    reportsCollection = new ReportsCollection(database);
   }
 
   public MongoCollection<?> getCollection(

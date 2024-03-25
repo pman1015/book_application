@@ -27,6 +27,7 @@ public class PartDAO {
   private String partName;
   private String url;
   private ArrayList<ObjectId> compatibleEquipment;
+  private String expenseCategory;
 
   //--------------------FXML Attributes----------------//
   @BsonIgnore
@@ -46,6 +47,9 @@ public class PartDAO {
 
   @BsonIgnore
   private StringProperty partURLProperty = new SimpleStringProperty();
+
+  @BsonIgnore
+  private StringProperty partExpenseCategoryProperty = new SimpleStringProperty();
 
   //--------------------Calculated --------------------//
   @BsonIgnore
@@ -89,4 +93,64 @@ public class PartDAO {
         compatibleEquipment
       );
   }
+  
+  public void setExpenseCategory(String expenseCategory) {
+    this.expenseCategory = expenseCategory;
+    this.partExpenseCategoryProperty.set(expenseCategory);
+  }
+  public void resetChanges(){
+    this.partNameProperty.set(partName);
+    this.partNumberProperty.set(partNumber);
+    this.partCostProperty.set(Double.toString(cost));
+    this.partChargeProperty.set(Double.toString(charge));
+    this.partInStockProperty.set(Integer.toString(inStock));
+    this.partURLProperty.set(url);
+    this.partExpenseCategoryProperty.set(expenseCategory);
+  }
+  public void saveChanges(){
+    this.partName = this.partNameProperty.get();
+    this.partNumber = this.partNumberProperty.get();
+    this.cost = Double.parseDouble(this.partCostProperty.get());
+    this.charge = Double.parseDouble(this.partChargeProperty.get());
+    this.inStock = Integer.parseInt(this.partInStockProperty.get());
+    this.url = this.partURLProperty.get();
+    this.expenseCategory = this.partExpenseCategoryProperty.get();
+  }
+
+  public String validatePartName(){
+    if(DatabaseConnection.inventoryCollection.partNameExists(partNameProperty.get())){
+      return "Part Name already exists";
+    }else{
+      return null;
+    }
+  }
+  public String validatePartNumber(){
+    if(DatabaseConnection.inventoryCollection.partNumberExists(partNumberProperty.get())){
+      return "Part Number already exists";
+    }else{
+      return null;
+    }
+  }
+  public String validateCost(){
+    if (!partCostProperty.get().matches("\\d+(\\.\\d+)?")) {
+      return "Cost must be a number with no characters";
+    } else {
+      return null;
+    }
+  }
+  public String validateCharge(){
+    if (!partChargeProperty.get().matches("\\d+(\\.\\d+)?")) {
+      return "Charge must be a number with no characters";
+    } else {
+      return null;
+    }
+  }
+  public String validateInStock(){
+    if (!partInStockProperty.get().matches("\\d+")) {
+      return "In Stock must be a number with no characters";
+    } else {
+      return null;
+    }
+  }
+  
 }

@@ -22,8 +22,8 @@ public class NavButtonModel {
         //navigate to jobs page
         break;
       case "Inventory":
-        //TODO: implement inventory page
         //navigate to inventory page
+        App.setPage("InventoryPage", "InventoryPage");
         break;
       case "Equipment":
         //navigate to equipment page
