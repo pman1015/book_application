@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 
 public class InventoryPageController {
@@ -296,4 +298,6 @@ public class InventoryPageController {
       .bind(newValue.getPartExpenseCategoryProperty());
     CompatibleEquipmentList.setItems(model.getEquipmentCards());
   }
+
+
 }

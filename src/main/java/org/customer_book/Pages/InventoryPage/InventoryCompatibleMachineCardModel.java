@@ -11,6 +11,7 @@ import lombok.Setter;
 public class InventoryCompatibleMachineCardModel {
     private EquipmentDAO equipment;
     private StringProperty machineNameProperty;
+   private InventoryPageModel inventoryPageModel;
 
     public InventoryCompatibleMachineCardModel() {
        machineNameProperty = new SimpleStringProperty("");
@@ -18,6 +19,12 @@ public class InventoryCompatibleMachineCardModel {
     public void setEquipment(EquipmentDAO equipment) {
         this.equipment = equipment;
         machineNameProperty.set(equipment.getModelNumber());
+    }
+    public void removeMachine() {
+        if(inventoryPageModel != null){
+             inventoryPageModel.removeMachine(equipment);
+        }
+       
     }
     
 }

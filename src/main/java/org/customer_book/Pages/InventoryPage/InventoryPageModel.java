@@ -3,6 +3,8 @@ package org.customer_book.Pages.InventoryPage;
 import static com.mongodb.client.model.Filters.size;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -18,8 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
+import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 import org.customer_book.Database.ReportsCollection.ReportDAO;
 import org.customer_book.Popups.AddCompatibleEquipment.AddCompatibleEquipmentController;
@@ -221,37 +225,82 @@ public class InventoryPageModel {
       expenseCategoriesProperty.addAll(categoryReport.getValues());
     }
   }
-  public void addCompatibleEquipment(){
+
+  public void addCompatibleEquipment() {
     try {
-      FXMLLoader addCompatibleEquipmentLoader = App.getLoader("Popups", "AddCompatibleEquipment");
+      FXMLLoader addCompatibleEquipmentLoader = App.getLoader(
+        "Popups",
+        "AddCompatibleEquipment"
+      );
       Parent addCompatibleEquipment = addCompatibleEquipmentLoader.load();
-      ((AddCompatibleEquipmentController) addCompatibleEquipmentLoader.getController()).setPart(selectedPartProperty);
-      addCompatibleEquipment.sceneProperty().addListener(new ChangeListener<Scene>() {
-        @Override
-        public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-          if(newValue == null){
-            selectedPartProperty.set(DatabaseConnection.inventoryCollection.getPartByID(selectedPartProperty.get().getId()));
-            reloadParts();
-            loadCompatibleEquipment();
+      (
+        (AddCompatibleEquipmentController) addCompatibleEquipmentLoader.getController()
+      ).setPart(selectedPartProperty);
+      addCompatibleEquipment
+        .sceneProperty()
+        .addListener(
+          new ChangeListener<Scene>() {
+            @Override
+            public void changed(
+              ObservableValue<? extends Scene> observable,
+              Scene oldValue,
+              Scene newValue
+            ) {
+              if (newValue == null) {
+                selectedPartProperty.set(
+                  DatabaseConnection.inventoryCollection.getPartByID(
+                    selectedPartProperty.get().getId()
+                  )
+                );
+                reloadParts();
+                loadCompatibleEquipment();
+              }
+            }
           }
-        }
-      });
+        );
       App.addPopup(addCompatibleEquipment);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
-  public void loadCompatibleEquipment(){
+
+  public void loadCompatibleEquipment() {
     equipmentCards.clear();
-    selectedPartProperty.get().getCompatibleEquipmentList().forEach(equipment -> {
-      try {
-        FXMLLoader equipmentCardLoader = App.getLoader("InventoryPage", "CompatibleEquipmentCard");
-        Parent equipmentCard = equipmentCardLoader.load();
-        ((InventoryCompatibleMachineCardController)equipmentCardLoader.getController()).setEquipment(equipment);
-        equipmentCards.add(equipmentCard);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    });
+    selectedPartProperty
+      .get()
+      .getCompatibleEquipmentList()
+      .forEach(equipment -> {
+        try {
+          FXMLLoader equipmentCardLoader = App.getLoader(
+            "InventoryPage",
+            "CompatibleEquipmentCard"
+          );
+          Parent equipmentCard = equipmentCardLoader.load();
+          (
+            (InventoryCompatibleMachineCardController) equipmentCardLoader.getController()
+          ).setEquipment(equipment);
+          (
+            (InventoryCompatibleMachineCardController) equipmentCardLoader.getController()
+          ).setInventoryPageModel(this);
+          equipmentCards.add(equipmentCard);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      });
+  }
+
+  public void removeMachine(EquipmentDAO equipment) {
+    selectedPartProperty
+      .get()
+      .setCompatibleEquipment(
+        (ArrayList<ObjectId>) selectedPartProperty
+          .get()
+          .getCompatibleEquipment()
+          .stream()
+          .filter(e -> !e.equals(equipment.getId()))
+          .collect(Collectors.toList())
+      );
+    DatabaseConnection.inventoryCollection.updatePart(selectedPartProperty.get());
+    loadCompatibleEquipment();
   }
 }

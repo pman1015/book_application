@@ -12,7 +12,9 @@ public class InventoryCompatibleMachineCardController {
   private Label MachineName;
 
   @FXML
-  void removeMachine(ActionEvent event) {}
+  void removeMachine(ActionEvent event) {
+    model.removeMachine();
+  }
 
   private InventoryCompatibleMachineCardModel model;
   @FXML
@@ -25,6 +27,9 @@ public class InventoryCompatibleMachineCardController {
 
 public void setEquipment(EquipmentDAO equipment) {
   model.setEquipment(equipment);
+}
+public void setInventoryPageModel(InventoryPageModel inventoryPageModel) {
+  model.setInventoryPageModel(inventoryPageModel);
 }
 
 }
