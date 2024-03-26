@@ -1,7 +1,5 @@
 package org.customer_book.Pages.InventoryPage;
 
-import static com.mongodb.client.model.Filters.size;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -32,13 +30,17 @@ import org.customer_book.Popups.AddCompatibleEquipment.AddCompatibleEquipmentCon
 @Setter
 public class InventoryPageModel {
 
+  //-------------------Lists to store cards in view -------------------
   private ObservableList<Parent> partsCardsProperty;
   private ObservableList<Parent> equipmentCards;
+  private ObservableList<String> expenseCategoriesProperty = FXCollections.observableArrayList();
+  //number of parts to be loaded at a time
   private final int loadSize;
 
+  //Stores the currently selected part
   private ObjectProperty<PartDAO> selectedPartProperty;
+  //Stores the edit mode for the part details
   private BooleanProperty editModeProperty = new SimpleBooleanProperty(false);
-  private ObservableList<String> expenseCategoriesProperty = FXCollections.observableArrayList();
 
   //--------------------Error Properties--------------------
   private StringProperty PartNameErrorProperty = new SimpleStringProperty("");
@@ -52,6 +54,11 @@ public class InventoryPageModel {
   );
   private StringProperty QuantityErrorProperty = new SimpleStringProperty("");
 
+  /** 
+   * Constructor for the InventoryPageModel
+   * Initializes the ObservableLists and loads the parts
+   * Then loads the avaliable expense categories from reports database
+   */
   public InventoryPageModel() {
     loadSize = 20;
     partsCardsProperty = FXCollections.observableArrayList();
@@ -61,19 +68,33 @@ public class InventoryPageModel {
     loadExpenseCategories();
   }
 
+  /**
+   * Toggles the edit mode for the part details
+   */
   public void toggleEditMode() {
     editModeProperty.set(!editModeProperty.get());
   }
-
+  /**
+   * Resets the values of the selected part to the original values
+   * as it is stored in the database
+   */
   public void resetValues() {
     selectedPartProperty.get().resetChanges();
   }
 
+  /**
+   * Reloads the parts from the inventory collection
+   */
   public void reloadParts() {
     this.partsCardsProperty.clear();
     loadCards();
   }
 
+  /**
+   * Loads the parts from the inventory collection
+   * The function exits early if the number of parts loaded is greater than the total number of parts
+   * otherwise it loads the parts in batches of loadSize
+   */
   public void loadCards() {
     int count = DatabaseConnection.inventoryCollection.getPartsCount();
     if (partsCardsProperty.size() > count) {
@@ -104,7 +125,11 @@ public class InventoryPageModel {
       }
     }
   }
-
+  /**
+   * Shows the add part popup
+   * Loads the CreatePart.fxml file and adds it to the popup stage
+   * Then once the popup is closed it reloads the parts
+   */
   public void showAddPart() {
     try {
       FXMLLoader addPartLoader = App.getLoader("Popups", "CreatePart");
@@ -131,11 +156,19 @@ public class InventoryPageModel {
     }
   }
 
+  /**
+   * Validates the changes made to the selected part
+   * the function validates all of the fields in the selected part 
+   * if all of the fields are valid it returns true
+   * @return
+   */
   public boolean validateChanges() {
     boolean valid = true;
+    //Store the error message for each field
     String priceError = selectedPartProperty.get().validateCost();
     String chargeError = selectedPartProperty.get().validateCharge();
     String quantityError = selectedPartProperty.get().validateInStock();
+    //Run validation checks on the fields and updates the error properties
     if (selectedPartProperty.get().getPartName().equals("")) {
       PartNameErrorProperty.set("Part Name cannot be empty");
       valid = false;
@@ -169,6 +202,10 @@ public class InventoryPageModel {
     return valid;
   }
 
+  /**
+   * Saves the changes made to the selected part
+   * Then reloads the parts list
+   */
   public void saveChanges() {
     selectedPartProperty.get().saveChanges();
     DatabaseConnection.inventoryCollection.updatePart(
@@ -178,6 +215,10 @@ public class InventoryPageModel {
     reloadParts();
   }
 
+  /**
+   * Resets the error properties
+   * When the selected part changes reset all of the errors 
+   */
   public void resetErrors() {
     PartNameErrorProperty.set("");
     PartNumberErrorProperty.set("");
@@ -187,6 +228,11 @@ public class InventoryPageModel {
     QuantityErrorProperty.set("");
   }
 
+  /**
+   * Shows the add expense category popup
+   * Loads the ExpenseCategoryCreate.fxml file and adds it to the popup stage
+   * Then once the popup is closed it reloads the expense categories
+   */
   public void showAddExpenseCategory() {
     try {
       FXMLLoader expenseCategoryCreate = App.getLoader(
@@ -215,7 +261,9 @@ public class InventoryPageModel {
       e.printStackTrace();
     }
   }
-
+/**
+ * Loads the expense categories from the reports database
+ */
   public void loadExpenseCategories() {
     expenseCategoriesProperty.clear();
     ReportDAO categoryReport = DatabaseConnection.reportsCollection.getReport(
@@ -225,7 +273,11 @@ public class InventoryPageModel {
       expenseCategoriesProperty.addAll(categoryReport.getValues());
     }
   }
-
+/**
+ * Shows the popup to add a new compatible equipment
+ * When the popup closes reload the parts and the compatible equipment
+ * for the selected part
+ */
   public void addCompatibleEquipment() {
     try {
       FXMLLoader addCompatibleEquipmentLoader = App.getLoader(
@@ -263,7 +315,13 @@ public class InventoryPageModel {
       e.printStackTrace();
     }
   }
-
+  /**
+   * Loads the compatible equipment for the selected part
+   * Create a card object and set a refrence to this model and
+   * the equipment DAO for the equipment
+   * Then add the card to the equipmentCards list to be displayed
+   * in the view
+   */
   public void loadCompatibleEquipment() {
     equipmentCards.clear();
     selectedPartProperty
@@ -288,7 +346,11 @@ public class InventoryPageModel {
         }
       });
   }
-
+  /**
+   * Removes the selected equipment from the compatible equipment list
+   * Then updates the part in the database and reloads the compatible equipment
+   * @param equipment
+   */
   public void removeMachine(EquipmentDAO equipment) {
     selectedPartProperty
       .get()
@@ -300,7 +362,9 @@ public class InventoryPageModel {
           .filter(e -> !e.equals(equipment.getId()))
           .collect(Collectors.toList())
       );
-    DatabaseConnection.inventoryCollection.updatePart(selectedPartProperty.get());
+    DatabaseConnection.inventoryCollection.updatePart(
+      selectedPartProperty.get()
+    );
     loadCompatibleEquipment();
   }
 }

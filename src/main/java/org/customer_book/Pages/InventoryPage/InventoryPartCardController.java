@@ -33,9 +33,7 @@ public class InventoryPartCardController {
   public void setSelectedPart(ObjectProperty<PartDAO> selectedPart) {
     this.model.setSelectedPart(selectedPart);
   }
-
-
-
+  
   @FXML
   void selectPart() {
     model.setSelfActive();
