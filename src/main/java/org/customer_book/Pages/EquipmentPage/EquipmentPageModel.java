@@ -14,9 +14,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
+import org.customer_book.Database.InventoryCollection.PartDAO;
+import org.customer_book.Popups.AddCompatiblePart.AddCompatiblePartController;
 
 @Getter
 @Setter
@@ -24,6 +27,7 @@ public class EquipmentPageModel {
 
   //List of Equipment Cards loaded from the DB
   private ObservableList<Parent> equipmentCards;
+  private ObservableList<Parent> compatiblePartCards;
   //Currently selected model
   private EquipmentDAO selectedModel;
   //boolean to show the details section
@@ -40,6 +44,7 @@ public class EquipmentPageModel {
    */
   public EquipmentPageModel() {
     equipmentCards = FXCollections.observableArrayList();
+    compatiblePartCards = FXCollections.observableArrayList();
     selectedModelVisible = new SimpleBooleanProperty(false);
     selectedModel = new EquipmentDAO();
     loadEquipment();
@@ -72,6 +77,29 @@ public class EquipmentPageModel {
   }
 
   /**
+   * load the compatible parts for the selected model
+   * @param dao
+   */
+  public void loadCompatibleParts(EquipmentDAO dao) {
+    compatiblePartCards.clear();
+    ArrayList<PartDAO> partsToLoad = DatabaseConnection.inventoryCollection.getSelectParts(
+      dao.getParts()
+    );
+    if (partsToLoad.size() == 0) {
+      return;
+    }
+    for (PartDAO part : partsToLoad) {
+      try {
+        FXMLLoader cardLoader = App.getLoader("EquipmentPage", "PartCard");
+        compatiblePartCards.add(cardLoader.load());
+        ((EquipmentPartCardController) cardLoader.getController()).setDAO(part);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  /**
    * setSelectedModel:
    * -This function sets the selected model to the DAO passed in
    * -It then sets the selectedModelVisible to true
@@ -86,7 +114,10 @@ public class EquipmentPageModel {
     //ReBind the selected model to the FXML attributes
     modelNumber.bind(selectedModel.getEquipmentModelNumberProperty());
     notes.set(selectedModel.getNotes());
+    //load the compatible parts
+    loadCompatibleParts(dao);
   }
+
   /**
    * closeSelectedModel:
    * This function sets the visibility of the selected model to false
@@ -142,6 +173,41 @@ public class EquipmentPageModel {
           }
         );
       App.addPopup(createPage);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void showAddPart() {
+    try {
+      FXMLLoader loader = App.getLoader("Popups", "AddCompatiblePart");
+      Parent root = loader.load();
+      ((AddCompatiblePartController) loader.getController()).setEquipment(
+          selectedModel
+        );
+
+      App.addPopup(root);
+      root
+        .sceneProperty()
+        .addListener(
+          new ChangeListener<Scene>() {
+            @Override
+            public void changed(
+              ObservableValue<? extends Scene> observable,
+              Scene oldValue,
+              Scene newValue
+            ) {
+              if (newValue == null) {
+                reloadEquipment();
+                setSelectedModel(
+                  DatabaseConnection.equipmentCollection.getEquipment(
+                    selectedModel.getId()
+                  )
+                );
+              }
+            }
+          }
+        );
     } catch (IOException e) {
       e.printStackTrace();
     }

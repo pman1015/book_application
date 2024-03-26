@@ -4,6 +4,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+
+import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
@@ -37,6 +41,12 @@ public class EquipmentCreateModel {
    
   public void addEquipment() {
     if (validateEquipment()) {
+      if(newDAO.getNotes() == null) {
+        newDAO.setNotes("");
+      }
+      if(newDAO.getParts()== null){
+        newDAO.setParts(new ArrayList<ObjectId>());
+      }
       DatabaseConnection.equipmentCollection.addEquipment(newDAO);
       //Remove the popup from the scene Graph
       App.removePopup();

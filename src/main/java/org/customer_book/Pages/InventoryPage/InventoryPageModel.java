@@ -54,7 +54,7 @@ public class InventoryPageModel {
   );
   private StringProperty QuantityErrorProperty = new SimpleStringProperty("");
 
-  /** 
+  /**
    * Constructor for the InventoryPageModel
    * Initializes the ObservableLists and loads the parts
    * Then loads the avaliable expense categories from reports database
@@ -74,6 +74,7 @@ public class InventoryPageModel {
   public void toggleEditMode() {
     editModeProperty.set(!editModeProperty.get());
   }
+
   /**
    * Resets the values of the selected part to the original values
    * as it is stored in the database
@@ -125,6 +126,7 @@ public class InventoryPageModel {
       }
     }
   }
+
   /**
    * Shows the add part popup
    * Loads the CreatePart.fxml file and adds it to the popup stage
@@ -158,7 +160,7 @@ public class InventoryPageModel {
 
   /**
    * Validates the changes made to the selected part
-   * the function validates all of the fields in the selected part 
+   * the function validates all of the fields in the selected part
    * if all of the fields are valid it returns true
    * @return
    */
@@ -217,7 +219,7 @@ public class InventoryPageModel {
 
   /**
    * Resets the error properties
-   * When the selected part changes reset all of the errors 
+   * When the selected part changes reset all of the errors
    */
   public void resetErrors() {
     PartNameErrorProperty.set("");
@@ -261,9 +263,10 @@ public class InventoryPageModel {
       e.printStackTrace();
     }
   }
-/**
- * Loads the expense categories from the reports database
- */
+
+  /**
+   * Loads the expense categories from the reports database
+   */
   public void loadExpenseCategories() {
     expenseCategoriesProperty.clear();
     ReportDAO categoryReport = DatabaseConnection.reportsCollection.getReport(
@@ -273,11 +276,12 @@ public class InventoryPageModel {
       expenseCategoriesProperty.addAll(categoryReport.getValues());
     }
   }
-/**
- * Shows the popup to add a new compatible equipment
- * When the popup closes reload the parts and the compatible equipment
- * for the selected part
- */
+
+  /**
+   * Shows the popup to add a new compatible equipment
+   * When the popup closes reload the parts and the compatible equipment
+   * for the selected part
+   */
   public void addCompatibleEquipment() {
     try {
       FXMLLoader addCompatibleEquipmentLoader = App.getLoader(
@@ -315,6 +319,7 @@ public class InventoryPageModel {
       e.printStackTrace();
     }
   }
+
   /**
    * Loads the compatible equipment for the selected part
    * Create a card object and set a refrence to this model and
@@ -346,25 +351,27 @@ public class InventoryPageModel {
         }
       });
   }
+
   /**
    * Removes the selected equipment from the compatible equipment list
    * Then updates the part in the database and reloads the compatible equipment
    * @param equipment
    */
   public void removeMachine(EquipmentDAO equipment) {
-    selectedPartProperty
-      .get()
-      .setCompatibleEquipment(
-        (ArrayList<ObjectId>) selectedPartProperty
-          .get()
-          .getCompatibleEquipment()
-          .stream()
-          .filter(e -> !e.equals(equipment.getId()))
-          .collect(Collectors.toList())
-      );
-    DatabaseConnection.inventoryCollection.updatePart(
-      selectedPartProperty.get()
+    DatabaseConnection.inventoryCollection.removeCompatibleEquipment(
+      selectedPartProperty.get().getId(),
+      equipment.getId()
     );
+    DatabaseConnection.equipmentCollection.removeCompatiblePart(
+      equipment.getId(),
+      selectedPartProperty.get().getId()
+    );
+    selectedPartProperty.set(
+      DatabaseConnection.inventoryCollection.getPartByID(
+        selectedPartProperty.get().getId()
+      )
+    );
+    reloadParts();
     loadCompatibleEquipment();
   }
 }

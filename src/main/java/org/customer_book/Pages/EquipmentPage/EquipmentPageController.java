@@ -17,7 +17,7 @@ public class EquipmentPageController {
   private AnchorPane Content;
 
   @FXML
-  private ListView<?> CompatiblePartCardList;
+  private ListView<Parent> CompatiblePartCardList;
 
   @FXML
   private Label SelectedModelName;
@@ -42,7 +42,9 @@ public class EquipmentPageController {
   }
 
   @FXML
-  void addPart(ActionEvent event) {}
+  void addPart(ActionEvent event) {
+    model.showAddPart();
+  }
 
   @FXML
   void createAndAddPart(ActionEvent event) {}
@@ -68,6 +70,7 @@ public class EquipmentPageController {
 
     //-----------------initialise view-----------------
     EquipmentCardList.setItems(model.getEquipmentCards());
+    CompatiblePartCardList.setItems(model.getCompatiblePartCards());
     SelectedModelDetails
       .visibleProperty()
       .bind(model.getSelectedModelVisible());

@@ -6,9 +6,11 @@ import static com.mongodb.client.model.Sorts.descending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
+import com.mongodb.client.model.Updates;
 
 import java.util.ArrayList;
+import java.util.Collection;
+
 import org.bson.types.ObjectId;
 
 public class EquipmentCollection {
@@ -121,6 +123,23 @@ public class EquipmentCollection {
       });
     return equipmentList;
     
+  }
+
+  /**
+   * addCompatiblePart:
+   * This function adds a compatible part to the equipment DAO
+   * @param equipmentId - of the equipment to be updated
+   * @param id - the object ID of the part to be added
+   */
+  public void addCompatiblePart(ObjectId equipmentId, ObjectId id) {
+    collection.findOneAndUpdate(eq("_id", equipmentId), Updates.push("parts",id));
+  }
+
+  /**
+   * 
+   */
+  public void removeCompatiblePart(ObjectId equipmentId, ObjectId id) {
+    collection.findOneAndUpdate(eq("_id", equipmentId), Updates.pull("parts",id));
   }
 
 

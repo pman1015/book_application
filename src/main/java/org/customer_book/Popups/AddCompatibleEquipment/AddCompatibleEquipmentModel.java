@@ -52,8 +52,14 @@ public class AddCompatibleEquipmentModel {
         selectedProperty.get()
       );
       if (equipmentId != null) {
+        //Update the PartDAO with the new equipment
         part.get().getCompatibleEquipment().add(equipmentId);
         DatabaseConnection.inventoryCollection.updatePart(part.get());
+        //Update the equipment DAO
+        DatabaseConnection.equipmentCollection.addCompatiblePart(
+          equipmentId,
+          part.get().getId()
+        );
         App.removePopup();
       }
     }
