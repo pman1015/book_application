@@ -31,6 +31,10 @@ public class MachineCollection {
       .asObjectId()
       .getValue();
   }
+  public ObjectId getEquipmentIdbyMachineId(ObjectId machineId) {
+    MachineDAO machine = collection.find(eq("_id", machineId)).first();
+    return machine.getEquipmentId();
+  }
 
   public MachineDAO getMachine(String customerName, String equipmentId) {
     return collection

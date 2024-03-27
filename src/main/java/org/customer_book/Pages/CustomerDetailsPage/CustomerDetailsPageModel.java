@@ -13,6 +13,7 @@ import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
 import org.customer_book.Pages.CustomerEquipmentPage.CustomerEquipmentPageController;
+import org.customer_book.Popups.JobCreate.JobCreateController;
 
 @Getter
 @Setter
@@ -115,10 +116,14 @@ public class CustomerDetailsPageModel {
   }
 
   public void showAddNewJob() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException(
-      "Unimplemented method 'showAddNewJob'"
-    );
+    try{
+      FXMLLoader jobCreateLoader = App.getLoader("Popups", "CreateJob");
+      Parent loadedPage = jobCreateLoader.load();
+      ((JobCreateController)jobCreateLoader.getController()).setCustomer(customer);
+      App.addPopup(loadedPage);
+    }catch(Exception e){
+      e.printStackTrace();
+    }
   }
 
 public void showCustomerEquipment() {

@@ -38,4 +38,12 @@ public class JobCollection {
   public ArrayList<JobDAO> getDAOs(ArrayList<ObjectId> jobIds) {
     return collection.find(in("_id", jobIds)).into(new ArrayList<>());
   }
+
+public ObjectId addJob(JobDAO newJob) {
+   return collection
+     .insertOne(newJob)
+     .getInsertedId()
+     .asObjectId()
+     .getValue();
+}
 }
