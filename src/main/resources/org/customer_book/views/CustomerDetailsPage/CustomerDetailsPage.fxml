@@ -61,6 +61,21 @@
                   </AnchorPane>
                </graphic>
             </Button>
+            <Button mnemonicParsing="false" onAction="#showAddNewJob" text="Add New Job">
+               <graphic>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
+                     <children>
+                        <SVGPath content="M19.8329 16H15.8663M15.8663 16H11.8997M15.8663 16V12M15.8663 16V20" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
+                        <SVGPath content="M15.8663 29.3334C23.1686 29.3334 29.0883 23.3638 29.0883 16C29.0883 8.63622 23.1686 2.66669 15.8663 2.66669C8.56405 2.66669 2.64439 8.63622 2.64439 16C2.64439 23.3638 8.56405 29.3334 15.8663 29.3334Z" fill="TRANSPARENT" stroke="BLACK" strokeWidth="2.0" />
+                     </children>
+                  </AnchorPane>
+               </graphic>
+               <styleClass>
+                  <String fx:value="textButton" />
+                  <String fx:value="mediumFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Button>
          </children>
          <padding>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#SetMachineAsSelected" prefHeight="64.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerEquipmentPage.CustomerMachineCardController">
+   <children>
+      <Label fx:id="ModelNumber" layoutX="24.0" layoutY="16.0" prefHeight="17.0" prefWidth="398.0" text="Label" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+   </children>
+   <styleClass>
+      <String fx:value="borderColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+</AnchorPane>

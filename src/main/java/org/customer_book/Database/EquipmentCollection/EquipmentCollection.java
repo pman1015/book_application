@@ -7,10 +7,8 @@ import static com.mongodb.client.model.Sorts.descending;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
-
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.bson.types.ObjectId;
 
 public class EquipmentCollection {
@@ -42,7 +40,7 @@ public class EquipmentCollection {
    * @return - the list of DAOs
    */
   public ArrayList<EquipmentDAO> getEquipmentList(int size, int skip) {
-   ArrayList<EquipmentDAO> equipmentList = new ArrayList<>();
+    ArrayList<EquipmentDAO> equipmentList = new ArrayList<>();
     collection
       .find()
       .sort(descending("modelNumber"))
@@ -61,6 +59,7 @@ public class EquipmentCollection {
   public EquipmentDAO getEquipment(ObjectId id) {
     return collection.find().filter(eq("_id", id)).first();
   }
+
   /**
    * getEquipmentID:
    * This function returns the ObjectId of an equipment from the database
@@ -82,6 +81,7 @@ public class EquipmentCollection {
   public ArrayList<EquipmentDAO> getEquipmentList(ArrayList<ObjectId> ids) {
     return collection.find(in("_id", ids)).into(new ArrayList<>());
   }
+
   /**
    * updateEquipment:
    * This function updates the DAO of an equipment in the database
@@ -91,6 +91,7 @@ public class EquipmentCollection {
   public void updateEquipment(EquipmentDAO equipment) {
     collection.replaceOne(eq("_id", equipment.getId()), equipment);
   }
+
   /**
    * modelNumberExists:
    * This function checks if a model number exists in the database and returns
@@ -101,6 +102,7 @@ public class EquipmentCollection {
   public boolean modelNumberExists(String modelNumber) {
     return collection.countDocuments(eq("modelNumber", modelNumber)) > 0;
   }
+
   /**
    * addEquipment:
    * This function adds a new equipment to the database
@@ -114,7 +116,7 @@ public class EquipmentCollection {
    * getAllEquipmentList:
    * this function returns a list of all the equipment model numbers in the database as an ArrayList
    */
-  public ArrayList<String> getAllEquipmentList(){
+  public ArrayList<String> getAllEquipmentList() {
     ArrayList<String> equipmentList = new ArrayList<>();
     collection
       .find()
@@ -122,7 +124,6 @@ public class EquipmentCollection {
         equipmentList.add(e.getModelNumber());
       });
     return equipmentList;
-    
   }
 
   /**
@@ -132,16 +133,29 @@ public class EquipmentCollection {
    * @param id - the object ID of the part to be added
    */
   public void addCompatiblePart(ObjectId equipmentId, ObjectId id) {
-    collection.findOneAndUpdate(eq("_id", equipmentId), Updates.push("parts",id));
+    collection.findOneAndUpdate(
+      eq("_id", equipmentId),
+      Updates.push("parts", id)
+    );
   }
 
   /**
-   * 
+   *
    */
   public void removeCompatiblePart(ObjectId equipmentId, ObjectId id) {
-    collection.findOneAndUpdate(eq("_id", equipmentId), Updates.pull("parts",id));
+    collection.findOneAndUpdate(
+      eq("_id", equipmentId),
+      Updates.pull("parts", id)
+    );
   }
 
-
-
+  /**
+   * getEquipmentId:
+   * This function returns the ObjectId of an equipment from the database based on the modelNumber of the machine
+   * @param string
+   * @return
+   */
+  public ObjectId getEquipmentId(String string) {
+    return collection.find(eq("modelNumber", string)).first().getId();
+  }
 }

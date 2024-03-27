@@ -123,6 +123,12 @@ public class App extends Application {
     );
     return fxmlLoader.load();
   }
+  public static void setSceneProperty(String key, Object value) {
+    scene.getProperties().put(key, value);
+  }
+  public static Object getSceneProperty(String key) {
+    return scene.getProperties().get(key);
+  }
 
   public static FXMLLoader getLoader(String pageName, String fxml)
     throws IOException {

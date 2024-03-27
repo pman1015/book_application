@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 
 public class CustomerDetailsPageController {
@@ -134,7 +135,9 @@ public class CustomerDetailsPageController {
   private Text CustomerNameError;
 
   @FXML
-  void loadCustomerEquipment(ActionEvent event) {}
+  void loadCustomerEquipment(ActionEvent event) {
+    model.showCustomerEquipment();
+  }
 
   @FXML
   void loadJobHistory(ActionEvent event) {}
@@ -193,6 +196,11 @@ public class CustomerDetailsPageController {
     editButtonContainerNotes.toBack();
   }
 
+  @FXML
+  void showAddNewJob(ActionEvent event) {
+    model.showAddNewJob();
+  }
+
   private CustomerDAO customerDAO;
 
   private CustomerDetailsPageModel model;
@@ -200,6 +208,23 @@ public class CustomerDetailsPageController {
   @FXML
   void initialize() {
     model = new CustomerDetailsPageModel();
+    //----Add an event listener so if page is displayed before the customerDAO is set then
+    //Load the doa from scene properties
+    Content
+      .sceneProperty()
+      .addListener(
+        (ChangeListener) (observable, oldValue, newValue) -> {
+          if (newValue != null) {
+            if (
+              App.getSceneProperty("customerDAO") != null &&
+              model.getCustomer() == null
+            ) {
+              setCustomerDAO((CustomerDAO) App.getSceneProperty("customerDAO"));
+            }
+          }
+        }
+      );
+
     //--------------------------------------------------------------------------------
     //Bind the states of the stackPanes to the boolean values in the model
     //--------------------------------------------------------------------------------
@@ -269,6 +294,7 @@ public class CustomerDetailsPageController {
   public void setCustomerDAO(CustomerDAO customerDAO) {
     this.customerDAO = customerDAO;
     model.setCustomer(customerDAO);
+    App.setSceneProperty("customerDAO", customerDAO);
     ExecutorService executor = Executors.newFixedThreadPool(3);
 
     executor.submit(() -> {

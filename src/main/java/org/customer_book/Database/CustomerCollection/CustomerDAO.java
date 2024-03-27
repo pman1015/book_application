@@ -81,4 +81,8 @@ public class CustomerDAO {
     this.rating = rating;
     this.customerRating.set(String.valueOf(rating) + "/5");
   }
+
+  public void addMachine(ObjectId addedMachineID) {
+    this.machineIDs.add(addedMachineID);
+  }
 }

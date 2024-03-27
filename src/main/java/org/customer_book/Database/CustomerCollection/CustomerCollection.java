@@ -5,6 +5,8 @@ import static com.mongodb.client.model.Sorts.descending;
 
 import java.util.ArrayList;
 
+import org.bson.types.ObjectId;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -28,5 +30,8 @@ public class CustomerCollection {
     }
     public void updateCustomer(CustomerDAO customer){
         System.out.println(collection.findOneAndReplace(all("_id",customer.getId()), customer));
+    }
+    public CustomerDAO findCustomerById(ObjectId id) {
+        return collection.find(all("_id", id)).first();
     }
 }
