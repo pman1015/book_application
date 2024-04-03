@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerJobsPage.CustomerJobsPageController">
+   <children>
+      <VBox layoutX="38.0" layoutY="70.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="120.0">
+         <styleClass>
+            <String fx:value="accentColor" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="roundedOutlinedBorder" />
+         </styleClass>
+         <children>
+            <GridPane alignment="CENTER" prefHeight="75.0" prefWidth="1160.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <styleClass>
+                  <String fx:value="borderColor" />
+                  <String fx:value="topRoundedCorners" />
+               </styleClass>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date" GridPane.columnIndex="1">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date" GridPane.columnIndex="2">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" GridPane.columnIndex="3">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+               </children>
+            </GridPane>
+            <ScrollPane prefHeight="686.0" prefWidth="1155.0">
+               <content>
+                  <ListView fx:id="JobCardList" prefHeight="741.0" prefWidth="1122.0">
+                     <styleClass>
+                        <String fx:value="transparentColor" />
+                        <String fx:value="listView" />
+                     </styleClass>
+                  </ListView>
+               </content>
+               <styleClass>
+                  <String fx:value="scrollPane" />
+                  <String fx:value="transparentColor" />
+               </styleClass>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <Text layoutX="999.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'s Jobs:">
+         <styleClass>
+            <String fx:value="HeadingFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="CustomerNameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="535.0" layoutY="14.0" prefHeight="53.0" prefWidth="464.0" text="Label">
+         <styleClass>
+            <String fx:value="HeadingFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Button layoutX="882.0" layoutY="67.0" mnemonicParsing="false" onAction="#showCreateNewJob" prefHeight="48.0" prefWidth="192.0" text="Create New">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+            <String fx:value="textButton" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </Button>
+      <Button layoutX="1085.0" layoutY="69.0" mnemonicParsing="false" onAction="#showFilterOptions">
+         <graphic>
+            <StackPane prefHeight="32.0" prefWidth="32.0">
+               <children>
+                  <SVGPath content="M4 6.13333C4 5.3866 4 5.01323 4.14532 4.72801C4.27316 4.47713 4.47713 4.27316 4.72801 4.14532C5.01323 4 5.3866 4 6.13333 4H25.8667C26.6135 4 26.9868 4 27.272 4.14532C27.5229 4.27316 27.7268 4.47713 27.8547 4.72801C28 5.01323 28 5.3866 28 6.13333V8.44968C28 8.7758 28 8.93885 27.9632 9.09231C27.9305 9.22836 27.8767 9.35841 27.8035 9.47771C27.7211 9.61227 27.6057 9.72757 27.3752 9.95817L19.2915 18.0419C19.0609 18.2724 18.9456 18.3877 18.8632 18.5223C18.79 18.6416 18.7361 18.7716 18.7035 18.9077C18.6667 19.0612 18.6667 19.2243 18.6667 19.5503V22.6667L13.3333 28V19.5503C13.3333 19.2243 13.3333 19.0612 13.2965 18.9077C13.2638 18.7716 13.21 18.6416 13.1369 18.5223C13.0544 18.3877 12.9391 18.2724 12.7085 18.0419L4.62484 9.95817C4.39424 9.72757 4.27893 9.61227 4.19648 9.47771C4.12337 9.35841 4.06951 9.22836 4.03684 9.09231C4 8.93885 4 8.7758 4 8.44968V6.13333Z" fill="TRANSPARENT" stroke="WHITE" />
+               </children>
+            </StackPane>
+         </graphic>
+         <styleClass>
+            <String fx:value="svgButton" />
+            <String fx:value="roundedOutlinedBorder" />
+         </styleClass>
+      </Button>
+      <Button layoutX="32.0" layoutY="17.0" mnemonicParsing="false" onAction="#navigateBack" prefHeight="48.0" prefWidth="144.0" text="Back">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+            <String fx:value="textButton" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

@@ -140,14 +140,16 @@ public class CustomerDetailsPageController {
   }
 
   @FXML
-  void loadJobHistory(ActionEvent event) {}
+  void loadJobHistory(ActionEvent event) {
+    model.showJobHistory();
+  }
 
   @FXML
   void loadRecords(ActionEvent event) {}
 
   @FXML
   void cancelEditDetails(ActionEvent event) {
-    //TODO: Implement this
+  
     model.setCustomerDetailsEditProperty(false);
     editButtonContainerDetails.toFront();
   }
@@ -307,6 +309,7 @@ public class CustomerDetailsPageController {
         setActiveJob();
       });
     });
+    executor.shutdown();
   }
 
   //--------------------------------------------------------------------------------

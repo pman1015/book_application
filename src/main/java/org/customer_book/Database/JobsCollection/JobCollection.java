@@ -39,11 +39,19 @@ public class JobCollection {
     return collection.find(in("_id", jobIds)).into(new ArrayList<>());
   }
 
-public ObjectId addJob(JobDAO newJob) {
-   return collection
-     .insertOne(newJob)
-     .getInsertedId()
-     .asObjectId()
-     .getValue();
-}
+  public ObjectId addJob(JobDAO newJob) {
+    return collection.insertOne(newJob).getInsertedId().asObjectId().getValue();
+  }
+
+  public JobDAO getDAO(ObjectId jobID) {
+    return collection.find(eq("_id", jobID)).first();
+  }
+
+  public void updateJob(JobDAO job) {
+    collection.findOneAndReplace(eq("_id", job.getId()), job);
+  }
+
+  public void deleteJob(JobDAO job) {
+    collection.deleteOne(eq("_id", job.getId()));
+  }
 }

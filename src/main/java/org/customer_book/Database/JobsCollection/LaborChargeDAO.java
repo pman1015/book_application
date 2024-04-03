@@ -9,9 +9,19 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class LaobrChargeDAO {
+public class LaborChargeDAO {
 
   private double rate;
   private double hours;
   private double cost;
+  private String name;
+
+  public LaborChargeDAO(String name, double rate, double hours) {
+    this.name = name;
+    this.rate = rate;
+    this.hours = hours;
+    this.cost = rate * hours;
+  }
+
+  
 }

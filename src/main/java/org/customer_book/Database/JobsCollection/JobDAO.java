@@ -13,7 +13,7 @@ import lombok.ToString;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.types.ObjectId;
 import org.customer_book.Database.DatabaseConnection;
-import org.customer_book.Database.JobsCollection.LaobrChargeDAO;
+import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 
 @Getter
 @Setter
@@ -62,7 +62,7 @@ public class JobDAO {
       new SimpleStringProperty(String.valueOf(bill.getBillTotal()));
     double hours = 0;
     if (bill.getLaborCharges() != null) {
-      for (LaobrChargeDAO labor : bill.getLaborCharges()) {
+      for (LaborChargeDAO labor : bill.getLaborCharges()) {
         hours += labor.getHours();
       }
     }

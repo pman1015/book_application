@@ -2,6 +2,7 @@ package org.customer_book.Database.CustomerCollection;
 
 import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.in;
 import static com.mongodb.client.model.Sorts.descending;
 
 import com.mongodb.client.MongoCollection;
@@ -9,6 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
+import org.customer_book.Database.JobsCollection.JobDAO;
 
 public class CustomerCollection {
 
@@ -52,4 +54,11 @@ public class CustomerCollection {
   public void addJobToCustomer(ObjectId id, ObjectId jobId) {
     collection.findOneAndUpdate(eq("_id", id), Updates.push("jobIDs", jobId));
   }
+
+public void removeJob(JobDAO job) {
+    collection.updateMany(
+      in("jobIDs", job.getId()),
+      Updates.pull("jobIDs", job.getId())
+    );
+}
 }

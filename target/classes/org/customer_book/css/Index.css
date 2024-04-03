@@ -49,6 +49,10 @@
     -fx-background-color: rgb(224, 13, 13);
 }
 
+.confirmButton {
+    -fx-background-color: green;
+}
+
 .deleteButton:hover {
     -fx-background-color: rgba(255, 0, 0, 0.327);
 }
@@ -59,6 +63,10 @@
 
 .comboBox .text-field {
     -fx-background-color: transparent;
+}
+
+.hoverEffectLighten:hover {
+    -fx-effect: lighten(0.2);
 }
 
 .comboBox .arrow-button {
@@ -105,6 +113,10 @@
 
 .smallFont {
     -fx-font-size: 16px;
+}
+
+.smallTextFieldFont {
+    -fx-font-size: 14px;
 }
 
 .extraSmallFont {
@@ -204,4 +216,11 @@
 
 .scrollPane .content {
     -fx-background-color: transparent;
+}
+
+.progressButton {
+    -fx-background-color: gray;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
 }

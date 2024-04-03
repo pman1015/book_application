@@ -2,6 +2,7 @@ package org.customer_book;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -64,6 +65,7 @@ public class App extends Application {
    */
   public static void closeWindow() {
     ((Stage) scene.getWindow()).close();
+    Platform.exit();
   }
 
   /**
@@ -75,6 +77,7 @@ public class App extends Application {
   static void setRoot(String pageName, String fxml) throws IOException {
     scene.setRoot(loadPage(pageName, fxml));
   }
+
   /**
    * This function takes in a popup parent and adds it to the scene graph
    * The popup should have an AnchorPane as its root
@@ -83,6 +86,7 @@ public class App extends Application {
   public static void addPopup(Parent popup) {
     mainPage.addPopup(popup);
   }
+
   /*
    * This function removes the current popup from the scene graph
    */
@@ -99,12 +103,13 @@ public class App extends Application {
   public static void setPage(String pageName, String fxml) throws IOException {
     mainPage.setCurrent_page_property(loadPage(pageName, fxml));
   }
+
   /**
    * This function takes in a parent node and sets it as the current page
-   * 
+   *
    * @param page
    */
-  public static void setPage(Parent page){
+  public static void setPage(Parent page) {
     mainPage.setCurrent_page_property(page);
   }
 
@@ -123,11 +128,33 @@ public class App extends Application {
     );
     return fxmlLoader.load();
   }
+
   public static void setSceneProperty(String key, Object value) {
     scene.getProperties().put(key, value);
   }
+
   public static Object getSceneProperty(String key) {
     return scene.getProperties().get(key);
+  }
+
+  public static void setBackPointer(String pageName, String fxml) {
+    setSceneProperty("returnDestination", new String[] { pageName, fxml });
+  }
+
+  public static void useBackPointer() {
+    Object backPointer = App.getSceneProperty("returnDestination");
+    if (
+      backPointer != null &&
+      backPointer instanceof String[] &&
+      ((String[]) backPointer).length == 2
+    ) {
+      try {
+        setPage(((String[]) backPointer)[0], ((String[]) backPointer)[1]);
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
   }
 
   public static FXMLLoader getLoader(String pageName, String fxml)

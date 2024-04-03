@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.JobDetailsPage.ChargeCardController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="227.0" layoutY="150.0" onMouseClicked="#updateCard" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="FirstLabel" prefHeight="22.0" prefWidth="146.0" text="Part Number">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+            <Label fx:id="SecondLabel" prefHeight="22.0" prefWidth="182.0" text="2 at 29.50">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+            <Label fx:id="ThirdLabel" prefHeight="22.0" prefWidth="91.0" text="59.00">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </HBox>
+   </children>
+   <styleClass>
+      <String fx:value="borderColor" />
+      <String fx:value="roundedCorners" />
+      <String fx:value="hoverEffectLighten" />
+   </styleClass>
+</AnchorPane>

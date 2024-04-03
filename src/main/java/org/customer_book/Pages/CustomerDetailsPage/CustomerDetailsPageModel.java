@@ -8,8 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import lombok.Getter;
 import lombok.Setter;
-import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.App;
+import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
 import org.customer_book.Pages.CustomerEquipmentPage.CustomerEquipmentPageController;
@@ -116,26 +116,58 @@ public class CustomerDetailsPageModel {
   }
 
   public void showAddNewJob() {
-    try{
+    try {
       FXMLLoader jobCreateLoader = App.getLoader("Popups", "CreateJob");
       Parent loadedPage = jobCreateLoader.load();
-      ((JobCreateController)jobCreateLoader.getController()).setCustomer(customer);
+      ((JobCreateController) jobCreateLoader.getController()).setCustomer(
+          customer
+        );
       App.addPopup(loadedPage);
-    }catch(Exception e){
+      loadedPage.sceneProperty().addListener(
+        (observable, oldValue, newValue) -> {
+          if (newValue == null) {
+            loadJobs();
+          }
+        }
+      );
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-public void showCustomerEquipment() {
-   try{
-    FXMLLoader equipmentPageLoader = App.getLoader("CustomerEquipmentPage", "CustomerEquipmentPage");
-    Parent loadedPage = equipmentPageLoader.load();
-    ((CustomerEquipmentPageController)equipmentPageLoader.getController()).setCustomer(customer);
-    ((CustomerEquipmentPageController)equipmentPageLoader.getController()).setReturnDestination(new String[]{"CustomerDetailsPage", "CustomerDetailsPage"});
-    App.setPage(loadedPage);
-    
-   }catch(Exception e){
-     e.printStackTrace();
-   }
-}
+  public void showCustomerEquipment() {
+    try {
+      FXMLLoader equipmentPageLoader = App.getLoader(
+        "CustomerEquipmentPage",
+        "CustomerEquipmentPage"
+      );
+      Parent loadedPage = equipmentPageLoader.load();
+      (
+        (CustomerEquipmentPageController) equipmentPageLoader.getController()
+      ).setCustomer(customer);
+      (
+        (CustomerEquipmentPageController) equipmentPageLoader.getController()
+      ).setReturnDestination(
+          new String[] { "CustomerDetailsPage", "CustomerDetailsPage" }
+        );
+      App.setPage(loadedPage);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void showJobHistory() {
+    App.setSceneProperty("customerDAP", customer);
+    try {
+      FXMLLoader jobHistoryLoader = App.getLoader(
+        "CustomerJobsPage",
+        "CustomerJobPage"
+      );
+      App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+      Parent loadedPage = jobHistoryLoader.load();
+      App.setPage(loadedPage);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
