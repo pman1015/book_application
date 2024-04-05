@@ -1,7 +1,6 @@
 package org.customer_book.Popups.AddCompatibleEquipment;
 
 import java.util.ArrayList;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,7 +19,7 @@ import org.customer_book.Database.InventoryCollection.PartDAO;
 @ToString
 public class AddCompatibleEquipmentModel {
 
-  private ObjectProperty<PartDAO> part;;
+  private ObjectProperty<PartDAO> part;
   private ObservableList<String> equipmentList;
   private StringProperty selectedProperty;
 

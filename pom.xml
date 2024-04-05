@@ -79,7 +79,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.customer_book.App</mainClass>
+                            <mainClass>org.customer_book.Launcher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -97,7 +97,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>Aorg.customer_book.App</mainClass>
+                            <mainClass>org.customer_book.Launcher</mainClass>
                         </configuration>
                     </execution>
                 </executions>

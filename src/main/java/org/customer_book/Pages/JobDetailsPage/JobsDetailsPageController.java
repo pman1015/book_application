@@ -22,8 +22,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javax.swing.event.ChangeListener;
-import lombok.val;
 import org.customer_book.App;
 import org.customer_book.Database.JobsCollection.JobDAO;
 

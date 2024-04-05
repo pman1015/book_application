@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Pages.PageComponents.PageController;
 import org.customer_book.Pages.PageComponents.PageModel;
-import org.scenicview.ScenicView;
+
 
 /**
  * JavaFX App
@@ -45,9 +45,9 @@ public class App extends Application {
     //Load the fonts for the project
     loadFonts();
     //Add index.css to the scene
+    System.out.println(App.class.getResource("").toString() +"css/index.css");
     scene
-      .getStylesheets()
-      .add(App.class.getResource("css/index.css").toExternalForm());
+      .getStylesheets().add(App.class.getResource("").toString() +"css/Index.css");
 
     //Size and style the stage so it is the appropriate size and has no top bar
     stage.sizeToScene();

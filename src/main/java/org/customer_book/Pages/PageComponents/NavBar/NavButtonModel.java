@@ -30,8 +30,8 @@ public class NavButtonModel {
         App.setPage("EquipmentPage", "EquipmentPage");
         break;
       case "Bills":
-        //TODO: implement bills page
         //navigate to bills page
+        App.setPage("BillsPage", "BillsPage");
         break;
     }
   }

@@ -55,10 +55,20 @@ public class CustomerCollection {
     collection.findOneAndUpdate(eq("_id", id), Updates.push("jobIDs", jobId));
   }
 
-public void removeJob(JobDAO job) {
+  public void removeJob(JobDAO job) {
     collection.updateMany(
       in("jobIDs", job.getId()),
       Updates.pull("jobIDs", job.getId())
     );
-}
+  }
+
+  public ArrayList<String> getAllNames() {
+    ArrayList<String> names = new ArrayList<>();
+    collection
+      .find()
+      .forEach(c -> {
+        names.add(c.getName());
+      });
+    return names;
+  }
 }

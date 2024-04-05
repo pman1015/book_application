@@ -15,6 +15,7 @@ import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.customer_book.App;
+import org.customer_book.Launcher;
 import org.customer_book.Database.CustomerCollection.CustomerCollection;
 import org.customer_book.Database.EquipmentCollection.EquipmentCollection;
 import org.customer_book.Database.InventoryCollection.InventoryCollection;
@@ -39,7 +40,8 @@ public class DatabaseConnection {
    * @throws IOException
    */
   public DatabaseConnection() throws IOException {
-    InputStream is = App.class.getResourceAsStream("Data/ConnectionURI.txt");
+    System.out.println(App.class.getResource("").toString());
+    InputStream is = Launcher.class.getResourceAsStream("Data/ConnectionURI.txt");
     Scanner s = new Scanner(is).useDelimiter("\\A");
     uri = s.hasNext() ? s.next() : "";
     ConnectionString connectionString = new ConnectionString(uri);
