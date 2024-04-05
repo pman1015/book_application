@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.BillJobCardView">
+   <styleClass>
+      <String fx:value="textButton" />
+      <String fx:value="roundedCorners" />
+      <String fx:value="roundedOutlinedBorder" />
+   </styleClass>
+   <children>
+      <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobNameLabel" layoutX="14.0" layoutY="36.0" prefHeight="32.0" prefWidth="292.0" text="\$Job Name Here">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Text layoutX="14.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Name:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="EquipmentNameLabel" layoutX="14.0" layoutY="90.0" prefHeight="32.0" prefWidth="292.0" text="\$Equipment Name">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <ScrollPane layoutX="20.0" layoutY="178.0" prefHeight="108.0" prefWidth="492.0">
+         <content>
+            <ListView fx:id="PartsUsedList" prefHeight="139.0" prefWidth="471.0">
+               <styleClass>
+                  <String fx:value="transparentColor" />
+                  <String fx:value="roundedCorners" />
+               </styleClass>
+            </ListView>
+         </content>
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="scrollPane" />
+         </styleClass>
+      </ScrollPane>
+      <Text layoutX="14.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts Used:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Text layoutX="33.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Part Cost:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="PartsCostTotalLabel" layoutX="129.0" layoutY="292.0" prefHeight="22.0" prefWidth="292.0" text="\$Equipment Name">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Text layoutX="33.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Labor Cost:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="LaborCostTotalLabel" layoutX="139.0" layoutY="314.0" prefHeight="22.0" prefWidth="292.0" text="\$Equipment Name">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Text layoutX="33.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery Fee:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="DeliveryFeeLabel" layoutX="158.0" layoutY="336.0" prefHeight="22.0" prefWidth="292.0" text="\$Equipment Name">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Text layoutX="318.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Cost:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobCostLabel" layoutX="328.0" layoutY="36.0" prefHeight="32.0" prefWidth="280.0" text="\$Job Name Here">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Button layoutX="577.0" layoutY="11.0" mnemonicParsing="false" onAction="#removeJob" styleClass="svgButton">
+         <graphic>
+            <SVGPath content="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" fill="WHITE" />
+         </graphic>
+      </Button>
+      <AnchorPane layoutX="21.0" layoutY="144.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="465.0">
+         <children>
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="22.0" prefWidth="158.0" text="Part Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="5.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+            <Label layoutX="310.0" layoutY="5.0" prefHeight="22.0" prefWidth="74.0" text="Quanity" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="5.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+            <Label layoutX="172.0" layoutY="7.0" prefHeight="22.0" prefWidth="138.0" text="Part Number" AnchorPane.leftAnchor="172.0" AnchorPane.topAnchor="5.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+            <Label layoutX="391.0" layoutY="7.0" prefHeight="22.0" prefWidth="67.0" text="Cost" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Label>
+         </children>
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+</AnchorPane>

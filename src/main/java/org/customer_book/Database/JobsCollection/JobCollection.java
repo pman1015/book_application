@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
+import javafx.scene.Parent;
 import org.bson.types.ObjectId;
 
 public class JobCollection {
@@ -53,5 +54,9 @@ public class JobCollection {
 
   public void deleteJob(JobDAO job) {
     collection.deleteOne(eq("_id", job.getId()));
+  }
+
+  public ArrayList<JobDAO> getCompletedJobs() {
+    return collection.find(ne("endDate", "n/a")).into(new ArrayList<>());
   }
 }

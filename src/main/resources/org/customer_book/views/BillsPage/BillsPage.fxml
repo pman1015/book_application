@@ -38,7 +38,7 @@
                               <String fx:value="whiteText" />
                            </styleClass>
                         </Text>
-                        <ScrollPane layoutX="23.0" layoutY="90.0" prefHeight="693.0" prefWidth="445.0">
+                        <ScrollPane hbarPolicy="NEVER" layoutX="23.0" layoutY="90.0" prefHeight="693.0" prefWidth="445.0">
                            <styleClass>
                               <String fx:value="scrollPane" />
                               <String fx:value="semiTransparent" />
@@ -81,14 +81,14 @@
                         <String fx:value="largeFont" />
                      </styleClass>
                   </Text>
-                  <ScrollPane layoutX="14.0" layoutY="63.0" prefHeight="711.0" prefWidth="675.0">
+                  <ScrollPane layoutX="10.0" layoutY="97.0" prefHeight="613.0" prefWidth="675.0">
                      <styleClass>
                         <String fx:value="scrollPane" />
-                        <String fx:value="transparentColor" />
+                        <String fx:value="semiTransparent" />
                         <String fx:value="roundedCorners" />
                      </styleClass>
                      <content>
-                        <ListView fx:id="AddedJobs" prefHeight="729.0" prefWidth="647.0">
+                        <ListView fx:id="AddedJobs" prefHeight="613.0" prefWidth="647.0">
                            <styleClass>
                               <String fx:value="listView" />
                               <String fx:value="transparentColor" />
@@ -117,11 +117,47 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Button>
+                  <Text layoutX="14.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Total:">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="NewInvoiceTotalLabel" layoutX="216.0" layoutY="724.0" prefHeight="32.0" prefWidth="359.0" text="Label">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Text layoutX="57.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For:">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="CustomerNameLabel" layoutX="115.0" layoutY="57.0" prefHeight="32.0" prefWidth="250.0" text="Label">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Text layoutX="431.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice #:">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="InvoiceNumberLabel" layoutX="440.0" layoutY="58.0" prefHeight="28.0" prefWidth="250.0" text="Label">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane fx:id="jobsFilterPane" layoutX="437.0" layoutY="-57.0" prefHeight="281.0" prefWidth="365.0" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="jobsFilterPane" layoutX="437.0" layoutY="-57.0" prefHeight="281.0" prefWidth="365.0" visible="false" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="100.0">
          <styleClass>
             <String fx:value="baseColor" />
             <String fx:value="roundedCorners" />
@@ -201,6 +237,35 @@
                   <String fx:value="smallFont" />
                   <String fx:value="roundedCorners" />
                   <String fx:value="roundedOutlinedBorder" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AddJobError" layoutX="401.0" layoutY="58.0" prefHeight="200.0" prefWidth="500.0" visible="false" AnchorPane.rightAnchor="322.0" AnchorPane.topAnchor="120.0">
+         <styleClass>
+            <String fx:value="baseColor" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="roundedOutlinedBorder" />
+         </styleClass>
+         <children>
+            <Text layoutX="116.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cannot Add Job">
+               <styleClass>
+                  <String fx:value="largeFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <Text layoutX="60.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The selected job cannot be added to the current bill since it is from a different customer" textAlignment="CENTER" wrappingWidth="392.9993896484375">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <Button layoutX="180.0" layoutY="132.0" mnemonicParsing="false" onAction="#CancelAdd" text="Accept">
+               <styleClass>
+                  <String fx:value="deleteButton" />
+                  <String fx:value="roundedCorners" />
+                  <String fx:value="whiteText" />
+                  <String fx:value="mediumFont" />
                </styleClass>
             </Button>
          </children>

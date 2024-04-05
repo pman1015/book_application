@@ -738,12 +738,21 @@ public class JobsDetailsPageModel {
     hideJobDetailsSettings();
   }
 
+  String[] completedStatus = { "Completed", "Awaiting Payment" };
+
   /**
    * update JobStatus:
    */
   public void updateJobStatus() {
     job.setStatus(jobStatus.get());
-    if (job.getStatus().equals("Completed")) {
+    boolean completed = false;
+    for (int i = 0; (i < completedStatus.length); i++) {
+      if (job.getStatus().equals(completedStatus[i])) {
+        completed = true;
+        break;
+      }
+    }
+    if (completed) {
       job.setEndDate(
         java.time.LocalDate
           .now()

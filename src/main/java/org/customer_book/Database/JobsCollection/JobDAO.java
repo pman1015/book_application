@@ -54,9 +54,12 @@ public class JobDAO {
 
   public void initializeFXProperties() {
     jobNameProperty = new SimpleStringProperty(jobName);
-    equipmentNameProperty = new SimpleStringProperty(
-      DatabaseConnection.equipmentCollection.getEquipment(equipment).getModelNumber()
-    );
+    equipmentNameProperty =
+      new SimpleStringProperty(
+        DatabaseConnection.equipmentCollection
+          .getEquipment(equipment)
+          .getModelNumber()
+      );
     jobNotesProperty = new SimpleStringProperty(details);
     currentCostProperty =
       new SimpleStringProperty(String.valueOf(bill.getBillTotal()));
@@ -77,5 +80,11 @@ public class JobDAO {
       default:
         return Paint.valueOf("#00FF00");
     }
+  }
+
+  public String getEquipmentName() {
+    return DatabaseConnection.equipmentCollection
+      .getEquipment(equipment)
+      .getModelNumber();
   }
 }
