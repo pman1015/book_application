@@ -1,6 +1,7 @@
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\InventoryCollection\InventoryCollection.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\EquipmentPage\EquipmentPartCardModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomerEquipmentPage\CustomerMachineCardController.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\InvoiceCollection\InvoiceEntry.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomersListPage\CustomerListCardModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\App.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\AddEquipmentToUser\AddEquipmentToUserController.java
@@ -27,11 +28,13 @@ c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\EquipmentPage\EquipmentPageController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\PageComponents\NavBar\NavBarController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\JobDetailsPage\ChargeCardController.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\BillJobPartCardModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\ReportsCollection\ReportsCollection.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomerDetailsPage\CustomerDetailsEquipmentController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\MachinesCollection\MachineCollection.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\AddCompatibleEquipment\AddCompatibleEquipmentController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\InventoryCollection\PartDAO.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\BillJobPartCardView.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomerDetailsPage\CustomerDetailsPageController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomerEquipmentPage\MachineDAO.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\EquipmentPage\EquipmentModelCardModel.java
@@ -53,9 +56,12 @@ c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomerEquipmentPage\CustomerEquipmentPageController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\AddEquipmentToUser\AddEquipmentToUserModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\JobsCollection\PartChargeDAO.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\BillJobCardView.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\BillsPageController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\JobCreate\JobCreateController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Database\CustomerCollection\CustomerDAO.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\CompletedJobCardView.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\BillJobCardModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\PageComponents\NavBar\NavButtonModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\PageComponents\NavBar\NavButtonController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\JobDetailsPage\JobsDetailsPageController.java
@@ -71,6 +77,7 @@ c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\EquipmentPage\EquipmentPartCardController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\PageComponents\Header\HeaderModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\PartAdd\CreatePartModel.java
+c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\BillsPage\CompletedJobCardModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Popups\JobCreate\JobCreateModel.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\CustomersListPage\CustomerListPageController.java
 c:\Users\emily\Documents\GitHub\book_application\src\main\java\org\customer_book\Pages\JobDetailsPage\JobsDetailsPageModel.java

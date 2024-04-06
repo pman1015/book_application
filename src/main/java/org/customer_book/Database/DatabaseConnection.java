@@ -19,6 +19,7 @@ import org.customer_book.Launcher;
 import org.customer_book.Database.CustomerCollection.CustomerCollection;
 import org.customer_book.Database.EquipmentCollection.EquipmentCollection;
 import org.customer_book.Database.InventoryCollection.InventoryCollection;
+import org.customer_book.Database.InvoiceCollection.InvoiceCollection;
 import org.customer_book.Database.JobsCollection.JobCollection;
 import org.customer_book.Database.MachinesCollection.MachineCollection;
 import org.customer_book.Database.ReportsCollection.ReportsCollection;
@@ -33,6 +34,7 @@ public class DatabaseConnection {
   public static EquipmentCollection equipmentCollection;
   public static InventoryCollection inventoryCollection;
   public static ReportsCollection reportsCollection;
+  public static InvoiceCollection invoiceCollection;
 
   /**
    * Constructor for DatabaseConnection
@@ -68,6 +70,8 @@ public class DatabaseConnection {
     machineCollection = new MachineCollection(database);
     inventoryCollection = new InventoryCollection(database);
     reportsCollection = new ReportsCollection(database);
+    invoiceCollection = new InvoiceCollection(database);
+    
   }
 
   public MongoCollection<?> getCollection(

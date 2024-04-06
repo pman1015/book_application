@@ -71,4 +71,8 @@ public class CustomerCollection {
       });
     return names;
   }
+
+  public CustomerDAO findByName(String customerName) {
+    return collection.find(eq("name", customerName)).first();
+  }
 }

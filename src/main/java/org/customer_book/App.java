@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
+
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Pages.PageComponents.PageController;
 import org.customer_book.Pages.PageComponents.PageModel;
@@ -179,4 +181,8 @@ public class App extends Application {
     );
     System.out.println(f.getName());
   }
+
+public static Window getStage() {
+    return scene.getWindow();
+}
 }

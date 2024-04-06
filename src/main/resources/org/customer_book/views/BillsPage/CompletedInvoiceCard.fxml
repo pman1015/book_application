@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#selectInvoice" prefHeight="150.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.InvoiceCardView">
+   <styleClass>
+      <String fx:value="textButton" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:" wrappingWidth="146.4000015258789">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="customerNameLabel" layoutX="23.0" layoutY="36.0" prefHeight="32.0" prefWidth="276.0" text="\$Customer Name">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed Date:" wrappingWidth="146.4000015258789">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="completedDateLabel" layoutX="23.0" layoutY="86.0" prefHeight="32.0" prefWidth="235.0" text="\$Completed Date">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Text layoutX="251.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <ListView fx:id="EquipmentList" layoutX="251.0" layoutY="36.0" prefHeight="104.0" prefWidth="157.0">
+         <styleClass>
+            <String fx:value="transparentColor" />
+            <String fx:value="listView" />
+         </styleClass>
+      </ListView>
+   </children>
+</AnchorPane>
