@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents.PartCard;
 
 import org.customer_book.Database.JobsCollection.PartChargeDAO;
 

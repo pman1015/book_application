@@ -14,16 +14,23 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.RadioButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import lombok.Getter;
@@ -32,20 +39,72 @@ import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
+import org.customer_book.Database.InvoiceCollection.InvoiceEntry;
 import org.customer_book.Database.JobsCollection.JobDAO;
 import org.customer_book.Launcher;
+import org.customer_book.Pages.BillsPage.CreateInvoice.JobListComponents.CompletedJobCardController;
+import org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents.BillJobCardController;
+import org.customer_book.Pages.BillsPage.ViewInvoices.InvoiceListCards.InvoiceCardController;
+import org.customer_book.Pages.BillsPage.ViewInvoices.InvoiceListCards.InvoiceCardModel;
+import org.customer_book.Pages.BillsPage.ViewInvoices.InvoicePreview.JobDetails.InvoiceJobDetailsCardController;
+import org.customer_book.Popups.DownloadInvoicePopup.DownloadInvoicController;
+import org.customer_book.Popups.DownloadInvoicePopup.DownloadInvoicController;
+import org.customer_book.Utilities.DownloadDestination;
+import org.customer_book.Utilities.InvoiceCreate;
 
 @Setter
 @Getter
 public class BillsPageModel {
 
+  ///------------- Delete Confirmation Properties ---------------//
+  private BooleanProperty showDeleteConfirmation = new SimpleBooleanProperty(
+    false
+  );
+
+  //------------- Status Update Properties -----------------//
+  private StringProperty statusUpdateValue = new SimpleStringProperty("");
+  private ObservableList<String> statusUpdateOptions = FXCollections.observableArrayList(
+    "UnPaid",
+    "Paid",
+    "Cancelled"
+  );
+  private BooleanProperty showStatusUpdate = new SimpleBooleanProperty(false);
+
   //------------- Settings Properties --------------------//
   private StringProperty downloadLocation = new SimpleStringProperty("");
   private BooleanProperty showSettings = new SimpleBooleanProperty(false);
+  private DownloadDestination downloadDestinationUtility;
 
   //------------- Completed Invoice Properties --------------//
   private ObservableList<Parent> completedInvoiceCards = FXCollections.observableArrayList();
   private ObjectProperty<InvoiceDAO> selectedInvoice = new SimpleObjectProperty<>();
+  private BooleanProperty showCompletedInvoice = new SimpleBooleanProperty(
+    false
+  );
+
+  //------------- Selected Invoice Properties ---------------//
+  private ObservableList<Parent> selectedInvoiceJobDetails = FXCollections.observableArrayList();
+  private StringProperty selectedCustomerName = new SimpleStringProperty("");
+  private StringProperty selectedInvoiceNumber = new SimpleStringProperty("");
+  private StringProperty selectedInvoiceCustomerAddress = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceCustomerPhoneNumber = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceCreatedDate = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceLaborTotal = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceDeliveryTotal = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceChargeTotal = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedInvoiceStatus = new SimpleStringProperty("");
 
   //------------- Create Invoice Properties ---------------//
   private StringProperty InvoiceNumber = new SimpleStringProperty("");
@@ -81,23 +140,18 @@ public class BillsPageModel {
   private ObservableList<String> availableNamesJobsFilterProperty = FXCollections.observableArrayList();
 
   /**
-   * Function to refine the customer name list based on the filter
-   * @param enteredValue
+   * Constructor for the Bills Page Model
+   * - Load the customer names
    */
-  public void updateNames(String enteredValue) {
-    availableNamesJobsFilterProperty.clear();
-    for (String name : customerNames) {
-      if (name.toLowerCase().contains(enteredValue.toLowerCase())) {
-        availableNamesJobsFilterProperty.add(name);
-      }
-    }
-  }
-
   public BillsPageModel() {
+    //Load the customer names and add all the names to the available names filter
     customerNames = DatabaseConnection.customerCollection.getAllNames();
     availableNamesJobsFilterProperty.addAll(customerNames);
+
+    //Load the completed jobs and invoices
     loadCompletedJobs();
     loadCompletedInvoices();
+
     //Add Listner for when toAdd or toRemove is changed
     jobToAdd.addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
@@ -121,52 +175,56 @@ public class BillsPageModel {
         }
       }
     });
-    //Try to load the default download location
-    try {
-      URL resourceURL =
-        App.class.getProtectionDomain().getCodeSource().getLocation();
-      File DataFolder = new File(
-        new File(resourceURL.getPath()).getParent() + "/Data"
-      );
-      if (!DataFolder.exists()) {
-        DataFolder.mkdir();
-      }
-      InputStream is = new FileInputStream(
-        new File(resourceURL.getPath()).getParent() +
-        "/Data/DownloadLocation.txt"
-      );
-      System.out.println(
-        "File Path: " +
-        new File(resourceURL.getPath()).getParent() +
-        "/Data/DownloadLocation.txt"
-      );
 
-      Scanner s = new Scanner(is).useDelimiter("\\A");
-      downloadLocation.set(s.hasNext() ? s.next() : "");
-      System.out.println("Download Location: " + downloadLocation.get());
-    } catch (Exception e) {
-      e.printStackTrace();
+    //Try to load the default download location
+    downloadDestinationUtility = new DownloadDestination(downloadLocation);
+  }
+
+  /**
+   * Function to refine the customer name list based on the filter
+   * @param enteredValue
+   */
+  public void updateNames(String enteredValue) {
+    availableNamesJobsFilterProperty.clear();
+    for (String name : customerNames) {
+      if (name.toLowerCase().contains(enteredValue.toLowerCase())) {
+        availableNamesJobsFilterProperty.add(name);
+      }
     }
   }
 
+  /**
+   * generateRandomNumber
+   *  - This function is used to generate a random number for the invoice number
+   * @return
+   */
   private String generateRandomNumber() {
     Random random = new Random();
     int randomNumber = random.nextInt(900000) + 100000;
     return String.valueOf(randomNumber);
   }
 
+  /**
+   * Load the bill cards
+   *  - This function is used to load the bill cards for the added jobs
+   */
   private void loadBillCards() {
+    //Store the total of the invoice
     double total = 0;
+    //If there is no current invoice Number generate a random one
     if (InvoiceNumber.get().isEmpty()) {
       InvoiceNumber.set("INV" + generateRandomNumber());
     }
+    //Load the job cards for the added jobs
     addedJobCards.clear();
     for (JobDAO job : addedJobs) {
       total += job.getBill().getBillTotal();
       try {
+        //Load the JobCard FXMLLoader
         FXMLLoader cardLoader = App.getLoader("BillsPage", "JobInBillCard");
         Parent card = cardLoader.load();
-        ((BillJobCardView) cardLoader.getController()).setJobDAO(
+        //Set the jobDAO for the card as well as a refrence to the to remove job
+        ((BillJobCardController) cardLoader.getController()).setJobDAO(
             job,
             jobToRemove
           );
@@ -175,31 +233,50 @@ public class BillsPageModel {
         e.printStackTrace();
       }
     }
+    //Set the total of the invoice
     InvoiceTotal.set("$" + total);
+
+    //clear the to remove and add placeholders
     jobToAdd.set(null);
     jobToRemove.set(null);
+
+    //If there are no current jobs clear the customer name and invoice number
     if (addedJobs.isEmpty()) {
       CustomerName.set("");
       InvoiceNumber.set("");
     }
   }
 
+  /**
+   * Hide the jobs filter
+   */
   public void hideJobsFilter() {
     showJobsFilter.set(false);
   }
 
+  /**
+   * Show the jobs filter
+   */
   public void showJobsFilter() {
     showJobsFilter.set(true);
   }
 
+  /**
+   * Load the completed jobs
+   *   - This function is used to load the completed jobs into the completedJobCards list
+   */
   public void loadCompletedJobs() {
     completedJobCards.clear();
+    //Load all completed Jobs from the database
     ArrayList<JobDAO> completedJobs = DatabaseConnection.jobCollection.getCompletedJobs();
+    //Create a Jobcard and add it for each completed Job
     for (JobDAO job : completedJobs) {
       try {
+        //Load the FXMLLoader for the CompletedJobCard
         FXMLLoader cardLoader = App.getLoader("BillsPage", "CompletedJobCard");
         Parent card = cardLoader.load();
-        ((CompletedJobCardView) cardLoader.getController()).setJobDAO(
+        //Add the jobDAO and the refrence to the toAdd and toRemove jobs
+        ((CompletedJobCardController) cardLoader.getController()).setJobDAO(
             job,
             jobToAdd,
             jobToRemove
@@ -211,9 +288,14 @@ public class BillsPageModel {
     }
   }
 
+  //Refrence to most recent invoice for navigating to the invoice
   private ObjectId mostRecentInvoiceId;
 
+  /**
+   * Generate and save the invoice in the database
+   */
   public void saveInvoice() {
+    //If there are no added jobs return
     if (addedJobs.isEmpty()) {
       return;
     }
@@ -224,6 +306,10 @@ public class BillsPageModel {
     showGeneratedInvoicePopup.set(true);
   }
 
+  /**
+   * Hide the generated invoice popup
+   *  also reload the completed Jobs and the bill cards
+   */
   public void hideGeneratedInvoicePopup() {
     showGeneratedInvoicePopup.set(false);
     loadCompletedJobs();
@@ -231,6 +317,9 @@ public class BillsPageModel {
     loadBillCards();
   }
 
+  /**
+   * Show the generated invoice popup
+   */
   public void showGeneratedInvoicePopup() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException(
@@ -238,25 +327,65 @@ public class BillsPageModel {
     );
   }
 
+  /**
+   * Show the generate invoice pane
+   * and reload the completed jobs and the bill cards
+   */
   public void showGenerateInvoicePane() {
     showGenerateInvoicePane.set(true);
+    showCompletedInvoice.set(false);
+    selectedInvoice.set(null);
+    selectedInvoice.removeListener(selectedInvoiceListner);
     loadCompletedJobs();
     addedJobs.clear();
     loadBillCards();
   }
 
+  /**
+   * show the completed invoice pane and hide the generate invoice pane
+   */
   public void showCompletedInvoicePane() {
     showGenerateInvoicePane.set(false);
+    showCompletedInvoice.set(true);
+    if (selectedInvoice.get() == null) {
+      showCompletedInvoice.set(false);
+      selectedInvoice.addListener(selectedInvoiceListner);
+    }
+    loadCompletedInvoices();
   }
 
+  private ChangeListener<InvoiceDAO> selectedInvoiceListner = new ChangeListener<InvoiceDAO>() {
+    @Override
+    public void changed(
+      ObservableValue<? extends InvoiceDAO> observable,
+      InvoiceDAO oldValue,
+      InvoiceDAO newValue
+    ) {
+      if (newValue != null) {
+        showCompletedInvoice.set(true);
+        selectedInvoice.removeListener(this);
+      }
+    }
+  };
+
+  /**
+   * show the settings popup
+   */
   public void showSettings() {
     showSettings.set(true);
   }
 
+  /**
+   * hide the settings popup
+   */
   public void hideSettings() {
     showSettings.set(false);
   }
 
+  /**
+   * Show the download location
+   *  - This function is used to show the download location for the invoices
+   */
   public void showDownloadLocation() {
     DirectoryChooser directoryChooser = new DirectoryChooser();
     directoryChooser.setTitle("Select Download Location");
@@ -270,25 +399,9 @@ public class BillsPageModel {
     downloadLocation.set(selectedFile.getAbsolutePath());
   }
 
-  public void saveSettings() {
-    // URL resourceURL = Launcher.class.getResource("Data/DownloadLocation.txt");
-    URL resourceURL =
-      App.class.getProtectionDomain().getCodeSource().getLocation();
-
-    try {
-      File f = new File(
-        new File(resourceURL.getPath()).getParent() +
-        "/Data/DownloadLocation.txt"
-      );
-      BufferedWriter writer = new BufferedWriter(new FileWriter(f, false));
-      writer.write(downloadLocation.get());
-      writer.close();
-      hideSettings();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
+  /**
+   * Show the invoice filter
+   */
   public void showInvoiceFilter() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException(
@@ -296,8 +409,14 @@ public class BillsPageModel {
     );
   }
 
+  /**
+   * Load all of the completed invoices
+   * - This function is used to load all of the completed invoices into the completedInvoiceCards list
+   */
   public void loadCompletedInvoices() {
+    //clear the current list
     completedInvoiceCards.clear();
+    //get an ArrayList of all completed invoices
     ArrayList<InvoiceDAO> invoices = DatabaseConnection.invoiceCollection.getAllInvoices();
     for (InvoiceDAO invoice : invoices) {
       try {
@@ -306,7 +425,7 @@ public class BillsPageModel {
           "CompletedInvoiceCard"
         );
         Parent card = cardLoader.load();
-        ((InvoiceCardView) cardLoader.getController()).setInvoice(
+        ((InvoiceCardController) cardLoader.getController()).setInvoice(
             invoice,
             selectedInvoice
           );
@@ -314,6 +433,137 @@ public class BillsPageModel {
       } catch (IOException e) {
         e.printStackTrace();
       }
+    }
+    selectedInvoice.addListener((observable, oldValue, newValue) -> {
+      if (newValue != null) {
+        updateSelectedInvoice();
+      }
+    });
+  }
+
+  /**
+   * Update selected Value when the selected invoice changes
+   */
+  public void updateSelectedInvoice() {
+    if (selectedInvoice.get() == null) return;
+    selectedCustomerName.set(selectedInvoice.get().getCustomerName());
+    selectedInvoiceNumber.set(selectedInvoice.get().getInvoiceNumber());
+    selectedInvoiceCustomerAddress.set(
+      selectedInvoice.get().getCustomerAddress()
+    );
+    selectedInvoiceCustomerPhoneNumber.set(
+      selectedInvoice.get().getCustomerPhoneNumber()
+    );
+    selectedInvoiceCreatedDate.set(selectedInvoice.get().getGeneratedDate());
+    selectedInvoiceLaborTotal.set("$" + selectedInvoice.get().getLaborTotal());
+    selectedInvoiceDeliveryTotal.set(
+      "$" + selectedInvoice.get().getDeliveryTotal()
+    );
+    selectedInvoiceChargeTotal.set(
+      "$" + selectedInvoice.get().getChargeTotal()
+    );
+    selectedInvoiceStatus.set(selectedInvoice.get().getStatus());
+    updateJobDetails(selectedInvoice.get());
+    statusUpdateValue.set(selectedInvoice.get().getStatus());
+  }
+
+  /**
+   * Update the Job details list with a card for each bill for a job
+   * within the selected invoice
+   * @param dao - InvoiceDAO
+   */
+  public void updateJobDetails(InvoiceDAO dao) {
+    selectedInvoiceJobDetails.clear();
+    for (InvoiceEntry entry : dao.getBills()) {
+      try {
+        FXMLLoader cardLoader = App.getLoader(
+          "BillsPage",
+          "SelectedInvoiceJobDetails"
+        );
+        Parent card = cardLoader.load();
+        (
+          (InvoiceJobDetailsCardController) cardLoader.getController()
+        ).setJobDetails(entry, selectedInvoice);
+        selectedInvoiceJobDetails.add(card);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  /**
+   * Download the selected invoice
+   */
+  public void downloadSelectedInvoice() {
+    try {
+      FXMLLoader downloadPopup = App.getLoader("Popups", "DownloadingInvoice");
+      Parent downloadPopupParent = downloadPopup.load();
+      ((DownloadInvoicController) downloadPopup.getController()).setProperties(
+          selectedInvoice.get(),
+          downloadLocation
+        );
+      App.addPopup(downloadPopupParent);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Show the delete confirmation on press of delete button
+   */
+  public void deleteSelectedInvoice() {
+    showDeleteConfirmation.set(true);
+  }
+
+  /**
+   * Show the status update
+   */
+  public void showStatusUpdate() {
+    if (selectedInvoice.get() != null) {
+      showStatusUpdate.set(true);
+    }
+  }
+
+  /**
+   * Save the invoice status
+   *   - Update the invoice status of the selected invoice
+   * @param value
+   */
+  public void saveInvoiceStatus(String value) {
+    if (
+      selectedInvoice.get() != null &&
+      !value.equals(selectedInvoice.get().getStatus())
+    ) {
+      selectedInvoice.get().setStatus(value);
+      DatabaseConnection.invoiceCollection.updateInvoice(selectedInvoice.get());
+      updateSelectedInvoice();
+    }
+    showStatusUpdate.set(false);
+  }
+
+  /**
+   * Hide the status update
+   */
+  public void hideStatusUpdate() {
+    showStatusUpdate.set(false);
+  }
+
+  /**
+   * Cancel the invoice delete
+   */
+  public void cancelInvoiceDelete() {
+    showDeleteConfirmation.set(false);
+  }
+
+  /**
+   * Confirm the invoice delete
+   *  remove the selected invoice from the database
+   */
+  public void confirmDeleteInvoice() {
+    if (selectedInvoice.get() != null) {
+      DatabaseConnection.invoiceCollection.deleteInvoice(selectedInvoice.get());
+      loadCompletedInvoices();
+      showDeleteConfirmation.set(false);
     }
   }
 }

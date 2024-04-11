@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.types.ObjectId;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
@@ -18,16 +19,10 @@ public class InvoiceDAO {
   private ObjectId id;
 
   private String invoiceNumber;
-
   private String customerName;
   private ObjectId customerId;
-
   private String status;
-
-  private ArrayList<ObjectId> jobIDs;
-
   private String generatedDate;
-
   private ArrayList<InvoiceEntry> bills;
   private String totalCost;
 
@@ -43,11 +38,10 @@ public class InvoiceDAO {
     );
     this.customerId = customer.getId();
     this.status = "Awaiting Payment";
-    this.jobIDs = new ArrayList<>();
+
     this.bills = new ArrayList<>();
     double total = 0;
     for (JobDAO job : jobs) {
-      this.jobIDs.add(job.getId());
       InvoiceEntry entry = new InvoiceEntry();
       entry.setEquipmentId(job.getEquipment());
       entry.setEquipmentName(
@@ -55,7 +49,10 @@ public class InvoiceDAO {
           .getEquipment(job.getEquipment())
           .getModelNumber()
       );
+      entry.setNotes(job.getDetails());
       entry.setBill(job.getBill());
+      entry.setJobId(job.getId());
+      entry.setShowNotes(false);
       total += job.getBill().getBillTotal();
       this.bills.add(entry);
     }
@@ -63,11 +60,66 @@ public class InvoiceDAO {
     this.generatedDate = java.time.LocalDate.now().toString();
   }
 
-public ArrayList<String> getEquipment() {
+  public ArrayList<String> getEquipment() {
     ArrayList<String> equipment = new ArrayList<>();
     for (InvoiceEntry entry : bills) {
       equipment.add(entry.getEquipmentName());
     }
     return equipment;
-}
+  }
+
+  @BsonIgnore
+  public String getCustomerAddress() {
+    return DatabaseConnection.customerCollection
+      .findCustomerById(customerId)
+      .getAddress();
+  }
+
+  @BsonIgnore
+  public String getChargeTotal() {
+    return totalCost;
+  }
+
+  @BsonIgnore
+  public String getDeliveryTotal() {
+    double deliveryTotal = 0;
+    if (bills != null) {
+      for (InvoiceEntry entry : bills) {
+        deliveryTotal += entry.getBill().getDeliveryCost();
+      }
+    }
+
+    return String.valueOf(deliveryTotal);
+  }
+
+  @BsonIgnore
+  public String getLaborTotal() {
+    double laborTotal = 0;
+    if (bills != null) {
+      for (InvoiceEntry entry : bills) {
+        if (entry.getBill().getLaborCost() != null) {
+          laborTotal += Double.valueOf(entry.getBill().getLaborCost());
+        }
+      }
+    }
+
+    return String.valueOf(laborTotal);
+  }
+
+  @BsonIgnore
+  public String getCustomerPhoneNumber() {
+    return DatabaseConnection.customerCollection
+      .findCustomerById(customerId)
+      .getPhoneNumber();
+  }
+
+  @BsonIgnore
+  public void updateEntry(InvoiceEntry entry) {
+    for (InvoiceEntry e : bills) {
+      if (e.getJobId().equals(entry.getJobId())) {
+        e.setNotes(entry.getNotes());
+        break;
+      }
+    }
+  }
 }

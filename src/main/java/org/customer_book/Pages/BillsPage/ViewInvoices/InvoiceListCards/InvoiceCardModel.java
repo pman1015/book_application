@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.ViewInvoices.InvoiceListCards;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,5 +55,9 @@ public class InvoiceCardModel {
         e.printStackTrace();
       }
     }
+  }
+
+  public void selectInvoice() {
+    selectedInvoice.set(invoiceDAO);
   }
 }

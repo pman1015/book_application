@@ -28,7 +28,9 @@ public class PageModel {
    *  should be an AnchorPane to be properyl centered on the page
    */
   public void addPopup(Parent popup) {
+    popup.setVisible(false);
     page_popup_property.set(popup);
+    page_popup_property.get().setVisible(true);
   }
   /**
    * This function removes the current popup from the scene graph

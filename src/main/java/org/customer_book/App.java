@@ -14,6 +14,7 @@ import javafx.stage.Window;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Pages.PageComponents.PageController;
 import org.customer_book.Pages.PageComponents.PageModel;
+import org.scenicview.ScenicView;
 
 
 /**

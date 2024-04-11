@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.ViewInvoices.InvoicePreview.JobDetails.JobDetailsPartCard.InvoiceJobDetailsPartCardController">
+   <children>
+      <Label fx:id="PartName" prefHeight="17.0" prefWidth="152.0" text="Label">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+         <HBox.margin>
+            <Insets left="6.0" />
+         </HBox.margin>
+      </Label>
+      <Label fx:id="PartNumber" prefHeight="22.0" prefWidth="145.0" text="Label">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+      <Label fx:id="Quanity" prefHeight="22.0" prefWidth="82.0" text="Label">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+      <Label fx:id="Price" prefHeight="22.0" prefWidth="75.0" text="Label">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+      <Label fx:id="Charge" prefHeight="22.0" prefWidth="105.0" text="Label">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+   </children>
+   <styleClass>
+      <String fx:value="borderColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+</HBox>

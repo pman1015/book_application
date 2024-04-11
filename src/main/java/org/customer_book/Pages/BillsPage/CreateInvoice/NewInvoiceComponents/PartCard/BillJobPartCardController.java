@@ -1,10 +1,10 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents.PartCard;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import org.customer_book.Database.JobsCollection.PartChargeDAO;
 
-public class BillJobPartCardView {
+public class BillJobPartCardController {
 
   @FXML
   private Label CostLabel;

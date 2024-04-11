@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents;
 
 import java.io.IOException;
 import javafx.beans.property.ObjectProperty;
@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.customer_book.App;
 import org.customer_book.Database.JobsCollection.JobDAO;
+import org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents.PartCard.BillJobPartCardController;
 
 @Getter
 @Setter
@@ -58,7 +59,7 @@ public class BillJobCardModel {
         try {
           FXMLLoader loader = App.getLoader("BillsPage", "JobInBillPartCard");
           Parent card = loader.load();
-          ((BillJobPartCardView) loader.getController()).setPartChargeDAO(
+          ((BillJobPartCardController) loader.getController()).setPartChargeDAO(
               partChargeDAO
             );
           PartsUsedList.add(card);

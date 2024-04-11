@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 
 import org.customer_book.Database.JobsCollection.JobDAO;
 
-public class BillJobCardView {
+public class BillJobCardController {
 
  
 

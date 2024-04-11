@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.ViewInvoices.InvoiceListCards;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

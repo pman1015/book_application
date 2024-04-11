@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="JobDetailsCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.ViewInvoices.InvoicePreview.JobDetails.InvoiceJobDetailsCardController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+      <String fx:value="roundedOutlinedBorder" />
+   </styleClass>
+   <children>
+      <Text layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobDetailName" layoutX="144.0" layoutY="18.0" prefHeight="39.0" prefWidth="254.0" text="\$Job Name">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Text layoutX="14.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobDetailEquipmentName" layoutX="158.0" layoutY="50.0" prefHeight="39.0" prefWidth="270.0" text="\$Equipment Name">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Text layoutX="14.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Start Date:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobDetailStartDate" layoutX="230.0" layoutY="82.0" text="\$Start Date">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <ListView fx:id="JobDetailPartList" layoutX="13.0" layoutY="178.0" prefHeight="88.0" prefWidth="578.0">
+         <styleClass>
+            <String fx:value="scrollPane" />
+            <String fx:value="listView" />
+            <String fx:value="semiTransparent" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </ListView>
+      <HBox alignment="CENTER_LEFT" layoutX="13.0" layoutY="146.0" prefHeight="32.0" prefWidth="574.0" AnchorPane.topAnchor="140.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Part Name:" wrappingWidth="152.99999237060547">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+               <HBox.margin>
+                  <Insets left="4.0" />
+               </HBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Part Number:" wrappingWidth="145.99999237060547">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quanity:" wrappingWidth="93.99999237060547">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="74.99999237060547">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Charge:" wrappingWidth="105.99999237060547">
+               <styleClass>
+                  <String fx:value="smallFont" />
+                  <String fx:value="whiteText" />
+               </styleClass>
+            </Text>
+         </children>
+      </HBox>
+      <Text layoutX="14.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts used:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Text layoutX="479.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="total:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="JobDetailJobTotal" layoutX="481.0" layoutY="27.0" prefHeight="22.0" prefWidth="112.0" text="\$Job Name">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+      <RadioButton fx:id="AddNotes" layoutX="23.0" layoutY="280.0" mnemonicParsing="false" text="Add Notes">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </RadioButton>
+      <TextArea fx:id="JobNotes" layoutX="22.0" layoutY="305.0" prefHeight="88.0" prefWidth="566.0" text="Some notes about the job" wrapText="true">
+         <styleClass>
+            <String fx:value="semiTransparent" />
+            <String fx:value="textField" />
+            <String fx:value="scrollPane" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </TextArea>
+   </children>
+</AnchorPane>

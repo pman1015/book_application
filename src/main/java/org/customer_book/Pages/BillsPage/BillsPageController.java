@@ -1,9 +1,12 @@
 package org.customer_book.Pages.BillsPage;
 
+import java.io.ObjectInputFilter.Status;
 import java.util.concurrent.CompletableFuture;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -13,9 +16,49 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class BillsPageController {
+
+  @FXML
+  private AnchorPane DeleteConfirmationPopup;
+
+  @FXML
+  private AnchorPane UpdateStatusPopup;
+
+  @FXML
+  private ChoiceBox<String> StatusUpdateChoiceBox;
+
+  @FXML
+  private Button SelectedInvoiceStatus;
+
+  @FXML
+  private Label SelectedInvoiceCustomerName;
+
+  @FXML
+  private Label SelectedInvoiceNumber;
+
+  @FXML
+  private Label SelectedInvoiceCustomerAddress;
+
+  @FXML
+  private Label SelectedInvoiceCustomerPhoneNumber;
+
+  @FXML
+  private Label SelectedInvoiceCreatedDate;
+
+  @FXML
+  private ListView<Parent> SelectedInvoiceJobDetails;
+
+  @FXML
+  private Label SelectedInvoiceLaborTotal;
+
+  @FXML
+  private Label SelectedInvoiceDeliveryTotal;
+
+  @FXML
+  private Label SelectedInvoiceChargeTotal;
+
   @FXML
   private ListView<Parent> CompletedInvoicesList;
-  
+
   @FXML
   private AnchorPane BillsSettings;
 
@@ -68,6 +111,21 @@ public class BillsPageController {
   private ComboBox<String> customerNameJobsFilter;
 
   @FXML
+  void showStatusUpdate(ActionEvent event) {
+    model.showStatusUpdate();
+  }
+
+  @FXML
+  void DeleteSelectedInvoice(ActionEvent event) {
+    model.deleteSelectedInvoice();
+  }
+
+  @FXML
+  void DownloadSelectedInvoice(ActionEvent event) {
+    model.downloadSelectedInvoice();
+  }
+
+  @FXML
   void showInvoiceFilter(ActionEvent event) {
     model.showInvoiceFilter();
   }
@@ -84,7 +142,7 @@ public class BillsPageController {
 
   @FXML
   void saveSettings(ActionEvent event) {
-    model.saveSettings();
+    model.hideSettings();
   }
 
   @FXML
@@ -116,9 +174,6 @@ public class BillsPageController {
   }
 
   @FXML
-  void downloadInvoice(ActionEvent event) {}
-
-  @FXML
   void closeJobsFilter(ActionEvent event) {
     model.hideJobsFilter();
   }
@@ -126,11 +181,33 @@ public class BillsPageController {
   @FXML
   void applyJobsFilter(ActionEvent event) {}
 
+  @FXML
+  void saveInvoiceStatus(ActionEvent event) {
+    model.saveInvoiceStatus(StatusUpdateChoiceBox.getValue());
+  }
+
+  @FXML
+  void closeStatusPopup(ActionEvent event) {
+    model.hideStatusUpdate();
+  }
+
+  @FXML
+  void ConfirmInvoiceDelete(ActionEvent event) {
+    model.confirmDeleteInvoice();
+  }
+
+  @FXML
+  void CancelInvoiceDelete(ActionEvent event) {
+    model.cancelInvoiceDelete();
+  }
+
   private BillsPageModel model;
 
   @FXML
   void initialize() {
+    // Create the model for the Bills Page
     model = new BillsPageModel();
+    //------------------ Asynchronous Initalisation -----------------//
     CompletableFuture<Void> initaliseFilter = CompletableFuture.runAsync(
       this::initaliseFilterProperties
     );
@@ -149,7 +226,10 @@ public class BillsPageController {
     CompletableFuture<Void> initaliseCompletedInvoices = CompletableFuture.runAsync(
       this::initaliseCompletedInvoices
     );
-
+    CompletableFuture<Void> initaliseInvoicePopups = CompletableFuture.runAsync(
+      this::initaliseInvoicePopups
+    );
+    //Run all the initalisation tasks
     CompletableFuture
       .allOf(
         initaliseFilter,
@@ -157,20 +237,76 @@ public class BillsPageController {
         initaliseCreateInvoice,
         initaliseViewCreatedInvoicePane,
         initaliseSettingsPane,
-        initaliseCompletedInvoices
+        initaliseCompletedInvoices,
+        initaliseInvoicePopups
       )
       .join();
   }
-  private void initaliseCompletedInvoices(){
-    CompletedInvoicesList.setItems(model.getCompletedInvoiceCards());
-  }
-  private void initaliseSettingsPane(){
-    //------------------ Bind visiblity for the Settings Pane -----------------//
-    BillsSettings.visibleProperty().bind(model.getShowSettings());
-    DownloadLocationField.textProperty().bindBidirectional(model.getDownloadLocation());
+
+  /**
+   * Initalise the Invoice Popups
+   */
+  private void initaliseInvoicePopups() {
+    //------------------ Status Update Popup -----------------//
+    StatusUpdateChoiceBox.setItems(model.getStatusUpdateOptions());
+    StatusUpdateChoiceBox
+      .valueProperty()
+      .bindBidirectional(model.getStatusUpdateValue());
+    UpdateStatusPopup.visibleProperty().bind(model.getShowStatusUpdate());
+
+    //------------------ Delete Confirmation Popup -----------------//
+    DeleteConfirmationPopup
+      .visibleProperty()
+      .bind(model.getShowDeleteConfirmation());
   }
 
+  /**
+   * Initalise the Completed Invoices Pane
+   */
+  private void initaliseCompletedInvoices() {
+    CompletedInvoicesList.setItems(model.getCompletedInvoiceCards());
+    SelectedInvoiceCustomerName
+      .textProperty()
+      .bind(model.getSelectedCustomerName());
+    SelectedInvoiceNumber.textProperty().bind(model.getSelectedInvoiceNumber());
+    SelectedInvoiceCustomerAddress
+      .textProperty()
+      .bind(model.getSelectedInvoiceCustomerAddress());
+    SelectedInvoiceCustomerPhoneNumber
+      .textProperty()
+      .bind(model.getSelectedInvoiceCustomerPhoneNumber());
+    SelectedInvoiceCreatedDate
+      .textProperty()
+      .bind(model.getSelectedInvoiceCreatedDate());
+    SelectedInvoiceJobDetails.setItems(model.getSelectedInvoiceJobDetails());
+    SelectedInvoiceLaborTotal
+      .textProperty()
+      .bind(model.getSelectedInvoiceLaborTotal());
+    SelectedInvoiceDeliveryTotal
+      .textProperty()
+      .bind(model.getSelectedInvoiceDeliveryTotal());
+    SelectedInvoiceChargeTotal
+      .textProperty()
+      .bind(model.getSelectedInvoiceChargeTotal());
+    SelectedInvoiceStatus.textProperty().bind(model.getSelectedInvoiceStatus());
+  }
+
+  /**
+   * Initalise the Settings Pane
+   */
+  private void initaliseSettingsPane() {
+    //------------------ Bind visiblity for the Settings Pane -----------------//
+    BillsSettings.visibleProperty().bind(model.getShowSettings());
+    DownloadLocationField
+      .textProperty()
+      .bindBidirectional(model.getDownloadLocation());
+  }
+
+  /**
+   * Initalise the View Created Invoice Pane
+   */
   private void initaliseViewCreatedInvoicePane() {
+    //------------------ Add Listner for tab change -----//
     CompletedInvoicesTab
       .selectedProperty()
       .addListener((obs, oldTab, newTab) -> {
@@ -181,9 +317,12 @@ public class BillsPageController {
     //------------------ Bind visiblity for the View Created Invoice Pane -----------------//
     ViewCreatedInvoicePane
       .visibleProperty()
-      .bind(model.getShowGenerateInvoicePane().not());
+      .bind(model.getShowCompletedInvoice());
   }
 
+  /**
+   * Initalise the Create Invoice Pane
+   */
   private void initaliseCreateInvoice() {
     //------------------ Bind visiblity for the add Job error -----------------//
     AddJobError.visibleProperty().bind(model.getShowAddJobError());
@@ -211,10 +350,17 @@ public class BillsPageController {
       });
   }
 
-  private void initaliseCompletedJobs() { //----------------- CompletedJobCard bindings -------------------//
+  /**
+   * Initalise the Completed Jobs Pane
+   */
+  private void initaliseCompletedJobs() {
+    //----------------- CompletedJobCard bindings -------------------//
     CompletedJobsList.setItems(model.getCompletedJobCards());
   }
 
+  /**
+   * Initalise the Filter Properties
+   */
   private void initaliseFilterProperties() {
     //----------------- Filter Properties -----------------//
     jobsFilterPane.visibleProperty().bind(model.getShowJobsFilter());

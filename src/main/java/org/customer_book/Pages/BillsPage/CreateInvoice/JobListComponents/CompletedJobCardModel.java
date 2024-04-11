@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.JobListComponents;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;

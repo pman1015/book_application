@@ -1,4 +1,4 @@
-package org.customer_book.Pages.BillsPage;
+package org.customer_book.Pages.BillsPage.CreateInvoice.JobListComponents;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import org.customer_book.Database.JobsCollection.JobDAO;
 
-public class CompletedJobCardView {
+public class CompletedJobCardController {
 
   @FXML
   private Label CustomerNameLabel;

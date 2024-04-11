@@ -1,6 +1,4 @@
-package org.customer_book.Pages.BillsPage;
-
-import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
+package org.customer_book.Pages.BillsPage.ViewInvoices.InvoiceListCards;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
@@ -8,8 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
 
-public class InvoiceCardView {
+public class InvoiceCardController {
 
   @FXML
   private Label completedDateLabel;
@@ -21,7 +20,9 @@ public class InvoiceCardView {
   private ListView<Parent> EquipmentList;
 
   @FXML
-  void selectInvoice(ActionEvent event) {}
+  void selectInvoice() {
+    model.selectInvoice();
+  }
 
   private InvoiceCardModel model;
 
@@ -32,8 +33,11 @@ public class InvoiceCardView {
     completedDateLabel.textProperty().bind(model.getCompletedDate());
     EquipmentList.setItems(model.getEquipmentList());
   }
-  
-  public void setInvoice(InvoiceDAO dao, ObjectProperty<InvoiceDAO> selectedInvoice) {
+
+  public void setInvoice(
+    InvoiceDAO dao,
+    ObjectProperty<InvoiceDAO> selectedInvoice
+  ) {
     model.setInvoice(dao, selectedInvoice);
   }
 }

@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.BillJobPartCardView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="465.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.CreateInvoice.NewInvoiceComponents.PartCard.BillJobPartCardController">
    <children>
       <Label fx:id="PartNameLabel" layoutX="14.0" layoutY="8.0" prefHeight="22.0" prefWidth="158.0" text="Part Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="5.0">
          <styleClass>

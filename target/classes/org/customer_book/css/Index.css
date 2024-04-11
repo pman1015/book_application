@@ -45,6 +45,10 @@
             -fx-background-color: #6E7F76;
         }
         
+        .darkGray {
+            -fx-background-color: #414341fe;
+        }
+        
         .deleteButton {
             -fx-background-color: rgb(224, 13, 13);
         }
@@ -193,6 +197,10 @@
         
         .card:hover {
             -fx-background-color: #97979765;
+        }
+        
+        .listView {
+            -fx-hbar-policy: NEVER;
         }
         
         .listView .list-cell {

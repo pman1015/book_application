@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="popup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="497.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Popups.DownloadInvoicePopup.DownloadInvoicController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+      <String fx:value="roundedOutlinedBorder" />
+   </styleClass>
+   <children>
+      <Text layoutX="66.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Downloading Invoice" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="64.0">
+         <styleClass>
+            <String fx:value="largeFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <ProgressIndicator fx:id="ProgressMeter" layoutX="150.0" layoutY="119.0" prefHeight="108.0" prefWidth="182.0" progress="0.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="167.0" AnchorPane.topAnchor="117.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </ProgressIndicator>
+      <Label fx:id="StatusLabel" alignment="TOP_CENTER" layoutX="33.0" layoutY="239.0" prefHeight="69.0" prefWidth="431.0" text="Label" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="33.0">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Button fx:id="CloseButton" layoutX="171.0" layoutY="308.0" mnemonicParsing="false" onAction="#ClosePopup" prefHeight="48.0" prefWidth="154.0" text="Confirm">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>
