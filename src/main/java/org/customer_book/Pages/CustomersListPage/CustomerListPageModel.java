@@ -19,6 +19,11 @@ public class CustomerListPageModel {
 
   public CustomerListPageModel() {
     customerCards = FXCollections.observableArrayList();
+    loadCustomers();
+  }
+
+  private void loadCustomers() {
+    customerCards.clear();
     ArrayList<CustomerDAO> customers = DatabaseConnection.customerCollection.getCustomers(
       20,
       0
@@ -43,5 +48,22 @@ public class CustomerListPageModel {
         e.printStackTrace();
       }
     });
+  }
+
+  public void createNewCustomer() {
+    try {
+      FXMLLoader customerLoader = App.getLoader("Popups", "CreateCustomer");
+      Parent popup = customerLoader.load();
+      App.addPopup(popup);
+      popup
+        .sceneProperty()
+        .addListener((observable, oldValue, newValue) -> {
+          if (newValue == null) {
+            loadCustomers();
+          }
+        });
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

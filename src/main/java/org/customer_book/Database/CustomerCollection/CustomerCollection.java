@@ -75,4 +75,8 @@ public class CustomerCollection {
   public CustomerDAO findByName(String customerName) {
     return collection.find(eq("name", customerName)).first();
   }
+
+  public void insertCustomer(CustomerDAO customerDAO) {
+    collection.insertOne(customerDAO);
+  }
 }

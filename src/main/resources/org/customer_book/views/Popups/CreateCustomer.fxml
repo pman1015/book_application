@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Popups.CustomerCreate.CreateCustomerController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+      <String fx:value="roundedOutlinedBorder" />
+   </styleClass>
+   <children>
+      <Text layoutX="73.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create New Customer">
+         <styleClass>
+            <String fx:value="largeFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Text>
+      <Button layoutX="460.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeAddNewCustomer" styleClass="svgButton">
+         <graphic>
+            <SVGPath content="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm0 7.425 2.717-2.718c.146-.146.339-.219.531-.219.404 0 .75.325.75.75 0 .193-.073.384-.219.531l-2.717 2.717 2.727 2.728c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.384-.073-.53-.219l-2.729-2.728-2.728 2.728c-.146.146-.338.219-.53.219-.401 0-.751-.323-.751-.75 0-.192.073-.384.22-.531l2.728-2.728-2.722-2.722c-.146-.147-.219-.338-.219-.531 0-.425.346-.749.75-.749.192 0 .385.073.531.219z" fill="WHITE" />
+         </graphic>
+      </Button>
+      <VBox layoutX="43.0" layoutY="107.0" prefHeight="384.0" prefWidth="439.0">
+         <children>
+            <VBox prefHeight="94.0" prefWidth="439.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="CustomerNameField" prefHeight="25.0" prefWidth="404.0" promptText="Customer Name">
+                     <VBox.margin>
+                        <Insets left="14.0" right="14.0" top="4.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </TextField>
+                  <Label fx:id="CustomerNameError" prefHeight="17.0" prefWidth="392.0" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="4.0" left="32.0" right="14.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="94.0" prefWidth="439.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Name:">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="CustomerNicknameField" prefHeight="25.0" prefWidth="404.0" promptText="Customer Nickname">
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="14.0" right="14.0" top="4.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="CustomerNicknameError" prefHeight="17.0" prefWidth="392.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="4.0" left="32.0" right="14.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="94.0" prefWidth="439.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address:">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="CustomerAddressField" prefHeight="25.0" prefWidth="404.0" promptText="Customer Address">
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="14.0" right="14.0" top="4.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="CustomerAddressError" prefHeight="17.0" prefWidth="392.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="4.0" left="32.0" right="14.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="94.0" prefWidth="439.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="CustomerPhoneNumberField" prefHeight="25.0" prefWidth="404.0" promptText="Customer Phone number">
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="14.0" right="14.0" top="4.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="CustomerPhoneNumberError" prefHeight="17.0" prefWidth="392.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="4.0" left="32.0" right="14.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Button layoutX="167.0" layoutY="502.0" mnemonicParsing="false" onAction="#addNewCustomer" text="Create New">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

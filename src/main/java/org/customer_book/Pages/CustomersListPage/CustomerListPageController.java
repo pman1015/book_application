@@ -33,7 +33,9 @@ public class CustomerListPageController {
   private Button NewCustomer;
 
   @FXML
-  void createNewCustomer(ActionEvent event) {}
+  void createNewCustomer(ActionEvent event) {
+    model.createNewCustomer();
+  }
 
   @FXML
   void searchByName(ActionEvent event) {}

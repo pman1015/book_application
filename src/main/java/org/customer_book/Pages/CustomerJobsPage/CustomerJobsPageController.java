@@ -19,7 +19,9 @@ public class CustomerJobsPageController {
   private ListView<Parent> JobCardList;
 
   @FXML
-  void showCreateNewJob(ActionEvent event) {}
+  void showCreateNewJob(ActionEvent event) {
+    model.showCreateNewJob();
+  }
 
   @FXML
   void showFilterOptions(ActionEvent event) {}

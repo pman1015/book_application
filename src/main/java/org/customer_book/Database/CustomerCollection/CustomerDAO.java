@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.customer_book.Database.DatabaseConnection;
 
 @Getter
 @Setter
@@ -44,12 +45,12 @@ public class CustomerDAO {
   private StringProperty customerNotes;
 
   public CustomerDAO() {
-    this.customerName = new SimpleStringProperty();
-    this.customerNickName = new SimpleStringProperty();
-    this.customerPhoneNumber = new SimpleStringProperty();
-    this.customerRating = new SimpleStringProperty();
-    this.customerAddress = new SimpleStringProperty();
-    this.customerNotes = new SimpleStringProperty();
+    this.customerName = new SimpleStringProperty("");
+    this.customerNickName = new SimpleStringProperty("");
+    this.customerPhoneNumber = new SimpleStringProperty("");
+    this.customerRating = new SimpleStringProperty("");
+    this.customerAddress = new SimpleStringProperty("");
+    this.customerNotes = new SimpleStringProperty("");
   }
 
   public void setName(String name) {
@@ -84,5 +85,51 @@ public class CustomerDAO {
 
   public void addMachine(ObjectId addedMachineID) {
     this.machineIDs.add(addedMachineID);
+  }
+
+  @BsonIgnore
+  public void initaliseDAO() {
+    name = customerName.get();
+    alias = customerNickName.get();
+    notes = customerNotes.get();
+    phoneNumber = customerPhoneNumber.get();
+    address = customerAddress.get();
+    rating = 3;
+    jobIDs = new ArrayList<>();
+    machineIDs = new ArrayList<>();
+  }
+
+  @BsonIgnore
+  public String validateName() {
+    if (customerName.get().isEmpty()) {
+      return "Name cannot be empty";
+    }
+    return (DatabaseConnection.customerCollection.findByName(name) == null)
+      ? ""
+      : "Name already exists";
+  }
+
+  @BsonIgnore
+  public String validateAlias() {
+    if (customerNickName.get().isEmpty()) {
+      return "Alias cannot be empty";
+    }
+    return "";
+  }
+
+  @BsonIgnore
+  public String validatePhoneNumber() {
+    if (customerPhoneNumber.get().isEmpty()) {
+      return "Phone number cannot be empty";
+    }
+    return "";
+  }
+
+  @BsonIgnore
+  public String validateAddress() {
+    if (customerAddress.get().isEmpty()) {
+      return "Address cannot be empty";
+    }
+    return "";
   }
 }
