@@ -1,5 +1,6 @@
 package org.customer_book.Pages.CustomerDetailsPage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -123,13 +124,13 @@ public class CustomerDetailsPageModel {
           customer
         );
       App.addPopup(loadedPage);
-      loadedPage.sceneProperty().addListener(
-        (observable, oldValue, newValue) -> {
+      loadedPage
+        .sceneProperty()
+        .addListener((observable, oldValue, newValue) -> {
           if (newValue == null) {
             loadJobs();
           }
-        }
-      );
+        });
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -157,7 +158,7 @@ public class CustomerDetailsPageModel {
   }
 
   public void showJobHistory() {
-    App.setSceneProperty("customerDAP", customer);
+    App.setSceneProperty("customerDAO", customer);
     try {
       FXMLLoader jobHistoryLoader = App.getLoader(
         "CustomerJobsPage",
@@ -167,6 +168,18 @@ public class CustomerDetailsPageModel {
       Parent loadedPage = jobHistoryLoader.load();
       App.setPage(loadedPage);
     } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void goToMostRecentJob() {
+    if (selectedJob == null || selectedJob.getId() == null) return;
+    App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+    App.setSceneProperty("customerDAO", customer);
+    App.setSceneProperty("jobDAO", selectedJob);
+    try {
+      App.setPage("CustomerJobDetailsPage", "CustomerJobDetailsPage");
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }

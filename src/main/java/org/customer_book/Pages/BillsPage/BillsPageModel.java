@@ -1,5 +1,7 @@
 package org.customer_book.Pages.BillsPage;
 
+import static com.mongodb.client.model.Filters.ne;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,6 +37,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
@@ -138,6 +141,8 @@ public class BillsPageModel {
     ""
   );
   private ObservableList<String> availableNamesJobsFilterProperty = FXCollections.observableArrayList();
+  private ArrayList<JobDAO> completedJobDAOS = new ArrayList<>();
+  private Bson completedJobsFilter = ne("_id", null);
 
   /**
    * Constructor for the Bills Page Model
@@ -149,6 +154,7 @@ public class BillsPageModel {
     availableNamesJobsFilterProperty.addAll(customerNames);
 
     //Load the completed jobs and invoices
+    updateJobDAOs(true);
     loadCompletedJobs();
     loadCompletedInvoices();
 
@@ -262,15 +268,37 @@ public class BillsPageModel {
   }
 
   /**
+   * Update JobDAOS
+   */
+  private void updateJobDAOs(boolean clearExisting){
+    //Load all completed Jobs from the database
+    if(clearExisting){
+      completedJobDAOS =
+      DatabaseConnection.jobCollection.getCompletedJobs(
+        completedJobsFilter,
+        4,
+        0
+      );
+    }else{
+      completedJobDAOS.addAll(
+        DatabaseConnection.jobCollection.getCompletedJobs(
+          completedJobsFilter,
+          2,
+          completedJobDAOS.size()
+        )
+      );
+    }
+   
+  }
+  /**
    * Load the completed jobs
    *   - This function is used to load the completed jobs into the completedJobCards list
    */
   public void loadCompletedJobs() {
     completedJobCards.clear();
-    //Load all completed Jobs from the database
-    ArrayList<JobDAO> completedJobs = DatabaseConnection.jobCollection.getCompletedJobs();
+    
     //Create a Jobcard and add it for each completed Job
-    for (JobDAO job : completedJobs) {
+    for (JobDAO job : completedJobDAOS) {
       try {
         //Load the FXMLLoader for the CompletedJobCard
         FXMLLoader cardLoader = App.getLoader("BillsPage", "CompletedJobCard");
@@ -312,6 +340,7 @@ public class BillsPageModel {
    */
   public void hideGeneratedInvoicePopup() {
     showGeneratedInvoicePopup.set(false);
+    updateJobDAOs(true);
     loadCompletedJobs();
     addedJobs.clear();
     loadBillCards();
@@ -336,6 +365,7 @@ public class BillsPageModel {
     showCompletedInvoice.set(false);
     selectedInvoice.set(null);
     selectedInvoice.removeListener(selectedInvoiceListner);
+    updateJobDAOs(true);
     loadCompletedJobs();
     addedJobs.clear();
     loadBillCards();
@@ -565,5 +595,17 @@ public class BillsPageModel {
       loadCompletedInvoices();
       showDeleteConfirmation.set(false);
     }
+  }
+
+  public void applyJobsFilter() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException(
+      "Unimplemented method 'applyJobsFilter'"
+    );
+  }
+
+  public void loadMoreCompletedJobs() {
+    updateJobDAOs(false);
+    loadCompletedJobs();
   }
 }

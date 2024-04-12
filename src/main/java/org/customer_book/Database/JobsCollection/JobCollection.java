@@ -1,11 +1,13 @@
 package org.customer_book.Database.JobsCollection;
 
 import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Sorts.ascending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import javafx.scene.Parent;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 public class JobCollection {
@@ -56,7 +58,14 @@ public class JobCollection {
     collection.deleteOne(eq("_id", job.getId()));
   }
 
-  public ArrayList<JobDAO> getCompletedJobs() {
-    return collection.find(ne("endDate", "n/a")).into(new ArrayList<>());
+  public ArrayList<JobDAO> getCompletedJobs(Bson filter, int amount, int skip) {
+    ArrayList<JobDAO> jobs = new ArrayList<>();
+    collection
+      .find(and(ne("endDate", "n/a"), filter))
+      .sort(ascending("endDate"))
+      .limit(amount)
+      .skip(skip)
+      .into(jobs);
+    return jobs;
   }
 }

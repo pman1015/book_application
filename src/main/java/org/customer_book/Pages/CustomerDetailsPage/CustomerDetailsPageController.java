@@ -202,6 +202,10 @@ public class CustomerDetailsPageController {
   void showAddNewJob(ActionEvent event) {
     model.showAddNewJob();
   }
+  @FXML
+  void loadMostRecentJob(){
+    model.goToMostRecentJob();
+  }
 
   private CustomerDAO customerDAO;
 

@@ -2,8 +2,11 @@ package org.customer_book.Pages.BillsPage;
 
 import java.io.ObjectInputFilter.Status;
 import java.util.concurrent.CompletableFuture;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -11,8 +14,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollToEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class BillsPageController {
@@ -179,7 +186,9 @@ public class BillsPageController {
   }
 
   @FXML
-  void applyJobsFilter(ActionEvent event) {}
+  void applyJobsFilter(ActionEvent event) {
+    model.applyJobsFilter();
+  }
 
   @FXML
   void saveInvoiceStatus(ActionEvent event) {
@@ -356,6 +365,22 @@ public class BillsPageController {
   private void initaliseCompletedJobs() {
     //----------------- CompletedJobCard bindings -------------------//
     CompletedJobsList.setItems(model.getCompletedJobCards());
+    //----------------- Load more jobs when the scroll bar reaches the bottom -------------------//
+    CompletedJobsList
+      .heightProperty()
+      .addListener((obs, oldHeight, newHeight) -> {
+        Node n = CompletedJobsList.lookup(".scroll-bar:vertical");
+        if (n instanceof ScrollBar) {
+          ScrollBar bar = (ScrollBar) n;
+          bar
+            .valueProperty()
+            .addListener((obs2, oldVal, newVal) -> {
+              if(newVal.doubleValue() == 1.0){
+                model.loadMoreCompletedJobs();
+              }
+            });
+        }
+      });
   }
 
   /**
