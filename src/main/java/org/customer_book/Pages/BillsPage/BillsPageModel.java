@@ -1,6 +1,6 @@
 package org.customer_book.Pages.BillsPage;
 
-import static com.mongodb.client.model.Filters.ne;
+import static com.mongodb.client.model.Filters.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,9 +10,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import javafx.beans.property.BooleanProperty;
@@ -135,14 +138,23 @@ public class BillsPageModel {
 
   //------------- Filter properties --------------- //
   private ArrayList<String> customerNames = new ArrayList<>();
-  private Property<LocalDate> completedDateJobsFilterProperty = new SimpleObjectProperty<LocalDate>();
-  private Property<LocalDate> createdDateJobsFilterProperty = new SimpleObjectProperty<LocalDate>();
+  private BooleanProperty filterByDateCreated = new SimpleBooleanProperty(
+    false
+  );
+  private BooleanProperty filterByDateCompleted = new SimpleBooleanProperty(
+    false
+  );
+  private Property<LocalDate> startDateProperty = new SimpleObjectProperty<LocalDate>();
+  private Property<LocalDate> endDateProperty = new SimpleObjectProperty<LocalDate>();
   private StringProperty customerNameJobsFilterProperty = new SimpleStringProperty(
     ""
   );
   private ObservableList<String> availableNamesJobsFilterProperty = FXCollections.observableArrayList();
   private ArrayList<JobDAO> completedJobDAOS = new ArrayList<>();
+  private ArrayList<InvoiceDAO> completedInvoices = new ArrayList<>();
+
   private Bson completedJobsFilter = ne("_id", null);
+  private StringProperty filterErrorMessage = new SimpleStringProperty("");
 
   /**
    * Constructor for the Bills Page Model
@@ -156,6 +168,7 @@ public class BillsPageModel {
     //Load the completed jobs and invoices
     updateJobDAOs(true);
     loadCompletedJobs();
+    loadCompletedInvoiceDAOs(true);
     loadCompletedInvoices();
 
     //Add Listner for when toAdd or toRemove is changed
@@ -270,16 +283,16 @@ public class BillsPageModel {
   /**
    * Update JobDAOS
    */
-  private void updateJobDAOs(boolean clearExisting){
+  private void updateJobDAOs(boolean clearExisting) {
     //Load all completed Jobs from the database
-    if(clearExisting){
+    if (clearExisting) {
       completedJobDAOS =
-      DatabaseConnection.jobCollection.getCompletedJobs(
-        completedJobsFilter,
-        4,
-        0
-      );
-    }else{
+        DatabaseConnection.jobCollection.getCompletedJobs(
+          completedJobsFilter,
+          4,
+          0
+        );
+    } else {
       completedJobDAOS.addAll(
         DatabaseConnection.jobCollection.getCompletedJobs(
           completedJobsFilter,
@@ -288,15 +301,15 @@ public class BillsPageModel {
         )
       );
     }
-   
   }
+
   /**
    * Load the completed jobs
    *   - This function is used to load the completed jobs into the completedJobCards list
    */
   public void loadCompletedJobs() {
     completedJobCards.clear();
-    
+
     //Create a Jobcard and add it for each completed Job
     for (JobDAO job : completedJobDAOS) {
       try {
@@ -340,8 +353,7 @@ public class BillsPageModel {
    */
   public void hideGeneratedInvoicePopup() {
     showGeneratedInvoicePopup.set(false);
-    updateJobDAOs(true);
-    loadCompletedJobs();
+    clearFilter();
     addedJobs.clear();
     loadBillCards();
   }
@@ -365,8 +377,7 @@ public class BillsPageModel {
     showCompletedInvoice.set(false);
     selectedInvoice.set(null);
     selectedInvoice.removeListener(selectedInvoiceListner);
-    updateJobDAOs(true);
-    loadCompletedJobs();
+    clearFilter();
     addedJobs.clear();
     loadBillCards();
   }
@@ -381,6 +392,7 @@ public class BillsPageModel {
       showCompletedInvoice.set(false);
       selectedInvoice.addListener(selectedInvoiceListner);
     }
+    loadCompletedInvoiceDAOs(true);
     loadCompletedInvoices();
   }
 
@@ -439,6 +451,25 @@ public class BillsPageModel {
     );
   }
 
+  public void loadCompletedInvoiceDAOs(boolean clearExisting) {
+    if (clearExisting) {
+      completedInvoices =
+        DatabaseConnection.invoiceCollection.getCompletedInvoices(
+          completedJobsFilter,
+          4,
+          0
+        );
+    } else {
+      completedInvoices.addAll(
+        DatabaseConnection.invoiceCollection.getCompletedInvoices(
+          completedJobsFilter,
+          2,
+          completedInvoices.size()
+        )
+      );
+    }
+  }
+
   /**
    * Load all of the completed invoices
    * - This function is used to load all of the completed invoices into the completedInvoiceCards list
@@ -447,8 +478,7 @@ public class BillsPageModel {
     //clear the current list
     completedInvoiceCards.clear();
     //get an ArrayList of all completed invoices
-    ArrayList<InvoiceDAO> invoices = DatabaseConnection.invoiceCollection.getAllInvoices();
-    for (InvoiceDAO invoice : invoices) {
+    for (InvoiceDAO invoice : completedInvoices) {
       try {
         FXMLLoader cardLoader = App.getLoader(
           "BillsPage",
@@ -592,20 +622,89 @@ public class BillsPageModel {
   public void confirmDeleteInvoice() {
     if (selectedInvoice.get() != null) {
       DatabaseConnection.invoiceCollection.deleteInvoice(selectedInvoice.get());
+      loadCompletedInvoiceDAOs(true);
       loadCompletedInvoices();
+      showCompletedInvoice.set(false);
       showDeleteConfirmation.set(false);
     }
   }
 
   public void applyJobsFilter() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException(
-      "Unimplemented method 'applyJobsFilter'"
-    );
+    if (!filterByDateCompleted.get() && !filterByDateCreated.get()) {
+      filterErrorMessage.set("Please select a filter");
+      return;
+    } else {
+      filterErrorMessage.set("");
+    }
+
+    completedJobsFilter =
+      and(
+        showGenerateInvoicePane.get()
+          ? and(
+            gt(
+              filterByDateCreated.get() ? "created" : "endDateTime",
+              startDateProperty.getValue() != null
+                ? startDateProperty.getValue().atStartOfDay()
+                : new Date(Long.MIN_VALUE)
+            ),
+            lt(
+              filterByDateCreated.get() ? "created" : "endDateTime",
+              endDateProperty.getValue() != null
+                ? endDateProperty.getValue().atStartOfDay()
+                : new Date(Long.MAX_VALUE)
+            )
+          )
+          : (
+            and(
+              gt(
+                "generatedDateTime",
+                startDateProperty.getValue() != null
+                  ? startDateProperty.getValue().atStartOfDay()
+                  : new Date(Long.MIN_VALUE)
+              ),
+              lt(
+                "generatedDateTime",
+                endDateProperty.getValue() != null
+                  ? endDateProperty.getValue().atStartOfDay()
+                  : new Date(Long.MAX_VALUE)
+              )
+            )
+          ),
+        customerNameJobsFilterProperty.get().isBlank()
+          ? ne("_id", null)
+          : eq("customerName", customerNameJobsFilterProperty.get())
+      );
+    if (showGenerateInvoicePane.get()) {
+      updateJobDAOs(true);
+      loadCompletedJobs();
+    } else {
+      loadCompletedInvoiceDAOs(true);
+      loadCompletedInvoices();
+    }
+    System.out.println(completedJobsFilter);
   }
 
   public void loadMoreCompletedJobs() {
     updateJobDAOs(false);
     loadCompletedJobs();
+  }
+
+  public void clearFilter() {
+    completedJobsFilter = ne("_id", null);
+    startDateProperty.setValue(null);
+    endDateProperty.setValue(null);
+    customerNameJobsFilterProperty.set("");
+    if (showGenerateInvoicePane.get()) {
+      updateJobDAOs(true);
+      loadCompletedJobs();
+    } else {
+      loadCompletedInvoiceDAOs(false);
+      loadCompletedInvoices();
+    }
+  }
+
+  public void loadMoreInvoices() {
+    loadCompletedInvoiceDAOs(false);
+    loadCompletedInvoices();
   }
 }

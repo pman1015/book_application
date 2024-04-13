@@ -1,10 +1,12 @@
 package org.customer_book.Database.InvoiceCollection;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Sorts.ascending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 public class InvoiceCollection {
@@ -56,5 +58,20 @@ public class InvoiceCollection {
   public void updateEntryOnInvoice(InvoiceDAO invoiceDAO, InvoiceEntry entry) {
     invoiceDAO.updateEntry(entry);
     updateInvoice(invoiceDAO);
+  }
+
+  public ArrayList<InvoiceDAO> getCompletedInvoices(
+    Bson filter,
+    int amount,
+    int skip
+  ) {
+    ArrayList<InvoiceDAO> invoices = new ArrayList<>();
+    collection
+      .find(filter)
+      .sort(ascending("_id"))
+      .limit(amount)
+      .skip(skip)
+      .into(invoices);
+    return invoices;
   }
 }

@@ -35,6 +35,7 @@ public class App extends Application {
     //Try to initalise the database connection
     try {
       db = new DatabaseConnection();
+     
     } catch (Exception e) {
       System.out.println("Error connecting to database");
     }

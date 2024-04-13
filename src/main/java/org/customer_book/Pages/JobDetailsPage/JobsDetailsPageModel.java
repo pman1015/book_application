@@ -759,6 +759,7 @@ public class JobsDetailsPageModel {
           .format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
           .toString()
       );
+      job.setEndDateTime(new java.util.Date());
     }
     DatabaseConnection.jobCollection.updateJob(job);
     updateJobDAO();

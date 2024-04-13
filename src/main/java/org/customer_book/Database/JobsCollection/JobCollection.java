@@ -5,7 +5,12 @@ import static com.mongodb.client.model.Sorts.ascending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javafx.scene.Parent;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -67,5 +72,26 @@ public class JobCollection {
       .skip(skip)
       .into(jobs);
     return jobs;
+  }
+
+  public void updateCompletedJob() {
+    ArrayList<JobDAO> jobs = new ArrayList<>();
+    collection.find().into(jobs);
+    for(JobDAO j : jobs) {
+      if(!j.getEndDate().equals("n/a")) {
+        j.setEndDateTime(toDate(j.getEndDate()));
+      }
+      collection.findOneAndReplace(eq("_id", j.getId()), j);
+    }
+  }
+  private Date toDate(String dateAsString) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    Date D = null;
+    try {
+      D = dateFormat.parse(dateAsString);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return D;
   }
 }

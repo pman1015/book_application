@@ -14,11 +14,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollToEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -109,13 +111,30 @@ public class BillsPageController {
   private AnchorPane jobsFilterPane;
 
   @FXML
-  private DatePicker completedDateJobsFilter;
-
-  @FXML
-  private DatePicker createdDateJobsFilter;
-
-  @FXML
   private ComboBox<String> customerNameJobsFilter;
+
+  @FXML
+  private ToggleGroup FilterType;
+
+  @FXML
+  private RadioButton DateCompleted;
+
+  @FXML
+  private RadioButton DateCreated;
+
+  @FXML
+  private DatePicker startDate;
+
+  @FXML
+  private DatePicker endDate;
+
+  @FXML
+  private Label FilterError;
+
+  @FXML
+  void clearFilter(ActionEvent event) {
+    model.clearFilter();
+  }
 
   @FXML
   void showStatusUpdate(ActionEvent event) {
@@ -274,6 +293,20 @@ public class BillsPageController {
    */
   private void initaliseCompletedInvoices() {
     CompletedInvoicesList.setItems(model.getCompletedInvoiceCards());
+    CompletedInvoicesList .heightProperty()
+    .addListener((obs, oldHeight, newHeight) -> {
+      Node n = CompletedJobsList.lookup(".scroll-bar:vertical");
+      if (n instanceof ScrollBar) {
+        ScrollBar bar = (ScrollBar) n;
+        bar
+          .valueProperty()
+          .addListener((obs2, oldVal, newVal) -> {
+            if (newVal.doubleValue() == 1.0) {
+              model.loadMoreInvoices();
+            }
+          });
+      }
+    });
     SelectedInvoiceCustomerName
       .textProperty()
       .bind(model.getSelectedCustomerName());
@@ -375,7 +408,7 @@ public class BillsPageController {
           bar
             .valueProperty()
             .addListener((obs2, oldVal, newVal) -> {
-              if(newVal.doubleValue() == 1.0){
+              if (newVal.doubleValue() == 1.0) {
                 model.loadMoreCompletedJobs();
               }
             });
@@ -389,13 +422,16 @@ public class BillsPageController {
   private void initaliseFilterProperties() {
     //----------------- Filter Properties -----------------//
     jobsFilterPane.visibleProperty().bind(model.getShowJobsFilter());
+    FilterError.textProperty().bind(model.getFilterErrorMessage());
+    DateCreated
+      .selectedProperty()
+      .bindBidirectional(model.getFilterByDateCreated());
+    DateCompleted
+      .selectedProperty()
+      .bindBidirectional(model.getFilterByDateCompleted());
+    startDate.valueProperty().bindBidirectional(model.getStartDateProperty());
+    endDate.valueProperty().bindBidirectional(model.getEndDateProperty());
 
-    completedDateJobsFilter
-      .valueProperty()
-      .bindBidirectional(model.getCompletedDateJobsFilterProperty());
-    createdDateJobsFilter
-      .valueProperty()
-      .bindBidirectional(model.getCreatedDateJobsFilterProperty());
     customerNameJobsFilter
       .valueProperty()
       .bindBidirectional(model.getCustomerNameJobsFilterProperty());

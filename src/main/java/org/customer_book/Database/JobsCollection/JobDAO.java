@@ -1,5 +1,7 @@
 package org.customer_book.Database.JobsCollection;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,6 +26,7 @@ public class JobDAO {
   private ObjectId id;
   private BillDAO bill;
   private Date created;
+  private Date endDateTime;
   private String customerName;
   private String details;
   private String startDate;
@@ -87,4 +90,5 @@ public class JobDAO {
       .getEquipment(equipment)
       .getModelNumber();
   }
+  
 }

@@ -1,6 +1,8 @@
 package org.customer_book.Database.InvoiceCollection;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +25,7 @@ public class InvoiceDAO {
   private ObjectId customerId;
   private String status;
   private String generatedDate;
+  private Date generatedDateTime;
   private ArrayList<InvoiceEntry> bills;
   private String totalCost;
 
@@ -38,7 +41,6 @@ public class InvoiceDAO {
     );
     this.customerId = customer.getId();
     this.status = "Awaiting Payment";
-
     this.bills = new ArrayList<>();
     double total = 0;
     for (JobDAO job : jobs) {
@@ -57,7 +59,12 @@ public class InvoiceDAO {
       this.bills.add(entry);
     }
     this.totalCost = String.valueOf(total);
-    this.generatedDate = java.time.LocalDate.now().toString();
+    this.generatedDate =
+      java.time.LocalDate
+        .now()
+        .format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+        .toString();
+    this.generatedDateTime = new java.util.Date();
   }
 
   public ArrayList<String> getEquipment() {
