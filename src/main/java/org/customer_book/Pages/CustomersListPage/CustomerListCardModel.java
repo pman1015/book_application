@@ -15,6 +15,12 @@ public class CustomerListCardModel {
 
   private CustomerDAO customer;
 
+  //Customer Card Properties
+  private StringProperty customerName = new SimpleStringProperty("");
+  private StringProperty customerNickName = new SimpleStringProperty("");
+  private StringProperty customerPhoneNumber = new SimpleStringProperty("");
+  private StringProperty customerRating = new SimpleStringProperty("");
+
   public CustomerListCardModel() {}
 
   /**
@@ -30,6 +36,17 @@ public class CustomerListCardModel {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * update the string propertes of the card with the customerDAO
+   */
+  public void setCustomer(CustomerDAO customerDAO){
+    this.customer = customerDAO;
+    customerName.set(customer.getCustomerName().get());
+    customerNickName.set(customer.getCustomerNickName().get());
+    customerPhoneNumber.set(customer.getCustomerPhoneNumber().get());
+    customerRating.set(customer.getCustomerRating().get());
   }
 
   

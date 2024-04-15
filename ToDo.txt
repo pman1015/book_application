@@ -1,0 +1,56 @@
+List of features that need implimentation 
+- 1. Search feature for customers
+- 2. load on scroll for customers
+- 3. load on scroll for inventory
+- 4. Customer equipment card load
+- 5. customer records page
+- 6. customer equipment update
+    - 6.1. customer equipment delete/ archive
+    - 6.2 customer machine notes
+    - 6.3 customer machine service history
+    - 6.4 customer equipment compatible parts
+- 7. customer job history filter
+    - 7.1 filter by status
+    - 7.2 filter by date
+    - 7.3 filter by machine
+    - 7.5 search by job name
+- 8. spacing on status button for job details
+- 9. tax calculation
+    - add option to job details to add tax
+    - add tax option to labor charge
+    - add line to invoice
+- 10. Jobs page 
+    - 10.1. add search feature
+    - 10.2. add filter by status
+    - 10.3. add filter by date
+    - 10.4. add filter by machine
+    - 10.5. add filter by customer
+    - 10.6. add filter by job name
+- 11. Inventory page filter
+
+- 12. add combobox for addPart to machine
+    - 12.1 add option to add by part name or part number
+- 13 add stats option to view number of machines that customers have
+    - 13.1 create a stats page to view number of machines number of Jobs
+- 14. check on invoice filters
+    - 14.1 when filtering invoice remove the option to select created date or completed date
+- 15. design home page
+    - 15.1 add stats to home page
+    - 15.2 add most recent jobs to home page
+    - 15.3 add revenu stats to home page
+    - 15.4 make home page have tiles that are modular
+    - 15.5 add setting to home page 
+        -15.5.1 add options to change the home page layout
+        -15.5.2 add option to change the home page stats
+        -15.5.3 add option to change the home page recent jobs
+        -15.5.4 add load options from a filter
+        -15.5.5 add option to update database connection string from home page
+        -15.5.6 add option to add an image to the tile for the home page
+- 16. On invoice download add the option to download as a pdf or as a docx 
+
+
+### Possible Features ###
+- 1. Create a stats tab to view the busisness stats
+- 2. Create a companion mobile app to allow for mobile invoice generation
+- 3. Create a companion mobile app to allow for mobile job creation
+

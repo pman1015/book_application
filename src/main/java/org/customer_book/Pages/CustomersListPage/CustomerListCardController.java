@@ -13,7 +13,7 @@ import org.customer_book.Database.CustomerCollection.CustomerDAO;
 public class CustomerListCardController {
 
   CustomerListCardModel model;
-  CustomerDAO customer;
+  
 
   @FXML
   private ResourceBundle resources;
@@ -48,14 +48,15 @@ public class CustomerListCardController {
 
   public void setModel(CustomerListCardModel model) {
     this.model = model;
+
+    CustomerName.textProperty().bind(model.getCustomerName());
+    CustomerNickName.textProperty().bind(model.getCustomerNickName());
+    CustomerPhoneNumber.textProperty().bind(model.getCustomerPhoneNumber());
+    CustomerRating.textProperty().bind(model.getCustomerRating());
+
   }
 
   public void setCustomer(CustomerDAO customer) {
-    this.customer = customer;
     model.setCustomer(customer);
-    CustomerName.textProperty().bind(customer.getCustomerName());
-    CustomerNickName.textProperty().bind(customer.getCustomerNickName());
-    CustomerPhoneNumber.textProperty().bind(customer.getCustomerPhoneNumber());
-    CustomerRating.textProperty().bind(customer.getCustomerRating());
   }
 }
