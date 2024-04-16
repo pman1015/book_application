@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import lombok.Getter;
@@ -13,6 +16,7 @@ import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
+import org.customer_book.Database.MachinesCollection.MachineDAO;
 import org.customer_book.Pages.CustomerEquipmentPage.CustomerEquipmentPageController;
 import org.customer_book.Popups.JobCreate.JobCreateController;
 
@@ -23,16 +27,21 @@ public class CustomerDetailsPageModel {
   //-----------------Customer Details Page Modes-----------------//
   private SimpleBooleanProperty customerDetailsEditProperty;
   private SimpleBooleanProperty customerNotesEditProperty;
+
   //-----------------Customer Details Error Messages-----------------//
   private StringProperty customerRatingError = new SimpleStringProperty("");
   private StringProperty customerNameError = new SimpleStringProperty("");
   private StringProperty addressError = new SimpleStringProperty("");
   private StringProperty nickNameError = new SimpleStringProperty("");
   private StringProperty phoneNumberError = new SimpleStringProperty("");
+  
   //-----------------Customer Details-----------------//
   private CustomerDAO customer;
   private ArrayList<JobDAO> jobs;
   private JobDAO selectedJob;
+
+  //----------------- Customer Equipment Cards ---------//
+  private ObservableList<Parent> equipmentCards = FXCollections.observableArrayList();
 
   public CustomerDetailsPageModel() {
     customerDetailsEditProperty = new SimpleBooleanProperty(false);
@@ -182,5 +191,20 @@ public class CustomerDetailsPageModel {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void loadEquipmentCards() {
+    equipmentCards.clear();
+    if(customer == null) return;
+    DatabaseConnection.machineCollection.getMachinesbyIDs(customer.getMachineIDs()).forEach(machine -> {
+      try{
+        FXMLLoader equipmentCardLoader = App.getLoader("CustomerDetailsPage","CustomerDetailsEquipmentCard");
+        Parent loadedCard = equipmentCardLoader.load();
+        ((CustomerDetailsEquipmentController) equipmentCardLoader.getController()).setMachine(machine);
+        equipmentCards.add(loadedCard);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
   }
 }

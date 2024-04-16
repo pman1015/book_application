@@ -468,22 +468,14 @@
                   <String fx:value="whiteText" />
                </styleClass>
             </Text>
-            <ScrollPane prefHeight="755.0" prefWidth="277.0">
+            <ListView fx:id="equipmentCards" prefHeight="751.0" prefWidth="277.0">
                <styleClass>
-                  <String fx:value="transparentColor" />
+                  <String fx:value="listView" />
                   <String fx:value="scrollPane" />
+                  <String fx:value="transparentColor" />
+                  <String fx:value="roundedCorners" />
                </styleClass>
-               <content>
-                  <ListView fx:id="equipmentCards" prefHeight="757.0" prefWidth="246.0">
-                     <styleClass>
-                        <String fx:value="listView" />
-                        <String fx:value="scrollPane" />
-                        <String fx:value="transparentColor" />
-                        <String fx:value="roundedCorners" />
-                     </styleClass>
-                  </ListView>
-               </content>
-            </ScrollPane>
+            </ListView>
          </children>
       </VBox>
    </children>

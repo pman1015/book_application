@@ -98,6 +98,14 @@ public class CustomerEquipmentPageController {
     mostRecentJobButton
       .textProperty()
       .bind(model.getSelectedMachineMostRecentJobNameProperty());
+    
+    //------------ Bind the edit properties of the text areas ---------//
+    MachineNotes.focusedProperty().addListener((observable, oldValue, newValue) -> {
+     model.getSelectedMachineNotesEdit().set(newValue);
+    });
+    ModelNotes.focusedProperty().addListener((observable, oldValue, newValue) -> {
+     model.getSelectedMachineModelNotesEdit().set(newValue);
+    });
   }
 
   public void setCustomer(CustomerDAO customer) {

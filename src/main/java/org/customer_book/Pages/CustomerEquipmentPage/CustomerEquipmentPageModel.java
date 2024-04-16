@@ -15,8 +15,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
-import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.DatabaseConnection;
+import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.MachinesCollection.MachineDAO;
 import org.customer_book.Popups.AddEquipmentToUser.AddEquipmentToUserController;
 
@@ -24,55 +24,114 @@ import org.customer_book.Popups.AddEquipmentToUser.AddEquipmentToUserController;
 @Setter
 public class CustomerEquipmentPageModel {
 
-  private ObservableList<Parent> customerEquipmentList;
-  private ObservableList<Parent> compatiblePartList;
-  private ObservableList<Parent> replacedPartList;
-
-  private BooleanProperty hasSelectedMachine;
-
-  private StringProperty customerName;
-
-  private CustomerDAO customer;
-  private ObjectProperty<MachineDAO> selectedMachine;
-
-  private StringProperty selectedMachineModelNumberProperty;
-  private StringProperty selectedMachineLastWorkedOnProperty;
-  private StringProperty selectedMachineMostRecentJobNameProperty;
-  private StringProperty selectedMachineNotesProperty;
-  private StringProperty selectedMachineModelNotesProperty;
+  //--------------- Page Properties ------------------//
+  private BooleanProperty hasSelectedMachine = new SimpleBooleanProperty(false);
+  private StringProperty customerName = new SimpleStringProperty("");
+  private ObjectProperty<MachineDAO> selectedMachine = new SimpleObjectProperty<>();
   private EquipmentDAO selectedMachineEquipment;
+  private CustomerDAO customer;
+
+  //-----------------Equipment List Property ----------------//
+  private ObservableList<Parent> customerEquipmentList = FXCollections.observableArrayList();
+
+  //-----------------Selected Machine Properties----------------//
+  private ObservableList<Parent> compatiblePartList = FXCollections.observableArrayList();
+  private ObservableList<Parent> replacedPartList = FXCollections.observableArrayList();
+
+  private StringProperty selectedMachineModelNumberProperty = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedMachineLastWorkedOnProperty = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedMachineMostRecentJobNameProperty = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedMachineNotesProperty = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty selectedMachineModelNotesProperty = new SimpleStringProperty(
+    ""
+  );
+  private BooleanProperty selectedMachineNotesEdit = new SimpleBooleanProperty(
+    false
+  );
+  private BooleanProperty selectedMachineModelNotesEdit = new SimpleBooleanProperty(
+    false
+  );
 
   //An Array of size 2, the first element is the name of the page to return to, the second element is the name of the page to return to if the user is not an admin
   private String[] returnDestination;
 
   public CustomerEquipmentPageModel() {
-    hasSelectedMachine = new SimpleBooleanProperty(false);
-
-    customerEquipmentList = FXCollections.observableArrayList();
-    compatiblePartList = FXCollections.observableArrayList();
-    replacedPartList = FXCollections.observableArrayList();
-
-    selectedMachineModelNumberProperty = new SimpleStringProperty("");
-    selectedMachineLastWorkedOnProperty = new SimpleStringProperty("");
-    selectedMachineMostRecentJobNameProperty = new SimpleStringProperty("");
-    selectedMachineNotesProperty = new SimpleStringProperty("");
-    selectedMachineModelNotesProperty = new SimpleStringProperty("");
-    
-    customerName = new SimpleStringProperty("");
-    selectedMachine = new SimpleObjectProperty<>();
+    //--------------- Add Change listner for the selected Machine ------------------//
     selectedMachine.addListener((observable, oldValue, newValue) -> {
       hasSelectedMachine.set(newValue != null);
-      if (newValue != null) {
-        //Set the properties of the selected machine
-        selectedMachineLastWorkedOnProperty.set(newValue.getLastWorkedOn());
-        selectedMachineNotesProperty.set(newValue.getNotes());
-        selectedMachineEquipment = DatabaseConnection.equipmentCollection.getEquipment(newValue.getEquipmentId());
-        if(selectedMachineEquipment != null){
-          selectedMachineModelNumberProperty.set(selectedMachineEquipment.getModelNumber());
-          selectedMachineModelNotesProperty.set(selectedMachineEquipment.getNotes());
+      updateSelectedMachineInfo();
+    });
+
+    //--------------- Add Change Listner for the machine notes ------------------//
+    selectedMachineNotesEdit.addListener(
+      (observable, oldValue, newValue) -> {
+        if (selectedMachine.get() != null) {
+          updateMachineNotes();
         }
       }
-    });
+    );
+
+    //--------------- Add Change Listner for the model notes ------------------//
+    selectedMachineModelNotesEdit.addListener(
+      (observable, oldValue, newValue) -> {
+        if (
+          selectedMachineEquipment != null &&
+          !selectedMachineModelNotesProperty
+            .get()
+            .equals(selectedMachineEquipment.getNotes())
+        ) {
+          selectedMachineEquipment.setNotes(
+            selectedMachineModelNotesProperty.get()
+          );
+          DatabaseConnection.equipmentCollection.updateEquipment(
+            selectedMachineEquipment
+          );
+        }
+      }
+    );
+  }
+
+  private void updateMachineNotes() {
+    if (
+      selectedMachineNotesProperty.get() != null &&
+      !selectedMachineNotesProperty
+        .get()
+        .equals(selectedMachine.get().getNotes())
+    ) {
+      selectedMachine.get().setNotes(selectedMachineNotesProperty.get());
+      DatabaseConnection.machineCollection.updateMachineNotes(
+        selectedMachine.get()
+      );
+    }
+  }
+
+  private void updateSelectedMachineInfo() {
+    if (selectedMachine.get() != null) {
+      selectedMachineLastWorkedOnProperty.set(
+        selectedMachine.get().getLastWorkedOn()
+      );
+      selectedMachineNotesProperty.set(selectedMachine.get().getNotes());
+      selectedMachineEquipment =
+        DatabaseConnection.equipmentCollection.getEquipment(
+          selectedMachine.get().getEquipmentId()
+        );
+      if (selectedMachineEquipment != null) {
+        selectedMachineModelNumberProperty.set(
+          selectedMachineEquipment.getModelNumber()
+        );
+        selectedMachineModelNotesProperty.set(
+          selectedMachineEquipment.getNotes()
+        );
+      }
+    }
   }
 
   public void setCustomer(CustomerDAO customer) {
@@ -139,7 +198,7 @@ public class CustomerEquipmentPageModel {
     }
   }
 
-public void closeSelectedMachine() {
+  public void closeSelectedMachine() {
     selectedMachine.set(null);
-}
+  }
 }

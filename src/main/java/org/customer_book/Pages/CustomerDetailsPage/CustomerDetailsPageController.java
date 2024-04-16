@@ -1,5 +1,6 @@
 package org.customer_book.Pages.CustomerDetailsPage;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.application.Platform;
@@ -8,6 +9,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -78,7 +81,7 @@ public class CustomerDetailsPageController {
   private Label CurrentJobCost;
 
   @FXML
-  private ListView<?> equipmentCards;
+  private ListView<Parent> equipmentCards;
 
   @FXML
   private Label CustomerName;
@@ -149,7 +152,6 @@ public class CustomerDetailsPageController {
 
   @FXML
   void cancelEditDetails(ActionEvent event) {
-  
     model.setCustomerDetailsEditProperty(false);
     editButtonContainerDetails.toFront();
   }
@@ -202,13 +204,13 @@ public class CustomerDetailsPageController {
   void showAddNewJob(ActionEvent event) {
     model.showAddNewJob();
   }
+
   @FXML
-  void loadMostRecentJob(){
+  void loadMostRecentJob() {
     model.goToMostRecentJob();
   }
 
   private CustomerDAO customerDAO;
-
   private CustomerDetailsPageModel model;
 
   @FXML
@@ -218,19 +220,28 @@ public class CustomerDetailsPageController {
     //Load the doa from scene properties
     Content
       .sceneProperty()
-      .addListener(
-        (ChangeListener) (observable, oldValue, newValue) -> {
-          if (newValue != null) {
-            if (
-              App.getSceneProperty("customerDAO") != null &&
-              model.getCustomer() == null
-            ) {
-              setCustomerDAO((CustomerDAO) App.getSceneProperty("customerDAO"));
-            }
+      .addListener((observable, oldValue, newValue) -> {
+        if (newValue != null) {
+          if (
+            App.getSceneProperty("customerDAO") != null &&
+            model.getCustomer() == null
+          ) {
+            setCustomerDAO((CustomerDAO) App.getSceneProperty("customerDAO"));
           }
         }
-      );
+      });
+    CompletableFuture<Void> bindEditProperties = CompletableFuture.runAsync(
+      this::bindEditProperties
+    );
+    CompletableFuture<Void> bindCustomerDetails = CompletableFuture.runAsync(
+      this::bindCustomerDetails
+    );
 
+    CompletableFuture.allOf(bindEditProperties, bindCustomerDetails).join();
+  }
+
+  
+  private void bindEditProperties() {
     //--------------------------------------------------------------------------------
     //Bind the states of the stackPanes to the boolean values in the model
     //--------------------------------------------------------------------------------
@@ -254,7 +265,9 @@ public class CustomerDetailsPageController {
     //Bind the Editablitiy of the notes field to the edit Mode
     //--------------------------------------------------------------------------------
     CustomerNotes.editableProperty().bind(model.getCustomerNotesEditProperty());
+  }
 
+  private void bindCustomerDetails() {
     //--------------------------------------------------------------------------------
     //Bind the visibility of fields
     //--------------------------------------------------------------------------------
@@ -313,9 +326,17 @@ public class CustomerDetailsPageController {
         setActiveJob();
       });
     });
+    executor.submit(this::loadEquipmentCards);
     executor.shutdown();
   }
 
+  //--------------------------------------------------------------------------------
+  //Set the EquipmentCards for the customer
+  //--------------------------------------------------------------------------------
+  private void loadEquipmentCards(){
+    model.loadEquipmentCards();
+    equipmentCards.setItems(model.getEquipmentCards());
+  }
   //--------------------------------------------------------------------------------
   //Load the active Jobs in the model and bind the active job info to
   //the fields on the most recent job card
