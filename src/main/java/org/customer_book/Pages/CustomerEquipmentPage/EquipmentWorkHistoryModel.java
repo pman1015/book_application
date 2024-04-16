@@ -3,6 +3,8 @@ package org.customer_book.Pages.CustomerEquipmentPage;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import java.io.IOException;
 
@@ -16,6 +18,8 @@ import javafx.beans.property.SimpleStringProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter@Setter@NoArgsConstructor
 public class EquipmentWorkHistoryModel {
@@ -33,7 +37,12 @@ public class EquipmentWorkHistoryModel {
         this.machineWork = machineWork;
         PartNameProperty.set(machineWork.getPartName());
         PartNumberProperty.set(machineWork.getPartNumber());
-        DateProperty.set(machineWork.getJobDate().toString());
+
+        DateProperty.set(formatUtilDate(machineWork.getJobDate()));
+    }
+    public String formatUtilDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        return formatter.format(date);
     }
 
     public void navigateToJob(){

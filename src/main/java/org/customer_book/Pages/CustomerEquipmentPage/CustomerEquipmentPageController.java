@@ -63,7 +63,9 @@ public class CustomerEquipmentPageController {
   }
 
   @FXML
-  void goToMostRecentJob(ActionEvent event) {}
+  void goToMostRecentJob(ActionEvent event) {
+    model.goToMostRecentJob();
+  }
 
   @FXML
   void DeleteSelectedMachine(ActionEvent event) {}

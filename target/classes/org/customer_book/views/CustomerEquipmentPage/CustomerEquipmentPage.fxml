@@ -185,7 +185,7 @@
                               <String fx:value="scrollPane" />
                               <String fx:value="roundedCorners" />
                               <String fx:value="whiteText" />
-                              <String fx:value="extraSmallFont" />
+                              <String fx:value="smallFont" />
                            </styleClass>
                         </TextArea>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Machine Notes:">
@@ -200,7 +200,7 @@
                               <String fx:value="scrollPane" />
                               <String fx:value="roundedCorners" />
                               <String fx:value="whiteText" />
-                              <String fx:value="extraSmallFont" />
+                              <String fx:value="smallFont" />
                            </styleClass>
                         </TextArea>
                      </children>
@@ -219,6 +219,29 @@
                               <Insets />
                            </VBox.margin>
                         </Text>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="296.0">
+                           <children>
+                              <Label ellipsisString=".." layoutX="7.0" layoutY="1.0" prefHeight="32.0" prefWidth="184.0" text="PartName" AnchorPane.topAnchor="1.0">
+                                 <styleClass>
+                                    <String fx:value="whiteText" />
+                                    <String fx:value="mediumFont" />
+                                 </styleClass>
+                              </Label>
+                              <Label layoutX="191.0" layoutY="1.0" prefHeight="32.0" prefWidth="102.0" text="Quanity" AnchorPane.topAnchor="1.0">
+                                 <styleClass>
+                                    <String fx:value="whiteText" />
+                                    <String fx:value="mediumFont" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="semiTransparent" />
+                              <String fx:value="roundedCorners" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="6.0" />
+                           </VBox.margin>
+                        </AnchorPane>
                         <ListView fx:id="CompatiblePartList" prefHeight="358.0" prefWidth="287.0">
                            <styleClass>
                               <String fx:value="semiTransparent" />
@@ -246,7 +269,42 @@
                   <Insets left="24.0" top="12.0" />
                </VBox.margin>
             </Text>
-            <ListView fx:id="ReplacedPartList" prefHeight="217.0" prefWidth="610.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="645.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="34.0" prefHeight="32.0" prefWidth="223.0" text="Part Name" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="242.0" layoutY="18.0" prefHeight="32.0" prefWidth="170.0" text="Part Number" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="8.0">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <padding>
+                        <Insets left="-8.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="438.0" layoutY="34.0" prefHeight="32.0" prefWidth="157.0" text="Job Date" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="424.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <padding>
+                        <Insets left="6.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="semiTransparent" />
+                  <String fx:value="roundedCorners" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets left="14.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <ListView fx:id="ReplacedPartList" prefHeight="197.0" prefWidth="651.0">
                <styleClass>
                   <String fx:value="semiTransparent" />
                   <String fx:value="roundedCorners" />
