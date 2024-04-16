@@ -152,51 +152,36 @@ public class CustomerDetailsPageController {
 
   @FXML
   void cancelEditDetails(ActionEvent event) {
-    model.setCustomerDetailsEditProperty(false);
+    model.cancelCustomerDetailsEdit();
     editButtonContainerDetails.toFront();
   }
 
   @FXML
   void saveEditDetails(ActionEvent event) {
-    if (
-      model.validChanges(
-        CustomerNameField.getText(),
-        NickNameField.getText(),
-        PhoneNumberField.getText(),
-        AddressField.getText(),
-        Integer.parseInt(CustomerRatingField.getText())
-      )
-    ) {
-      model.saveChanges();
-      model.setCustomerDetailsEditProperty(false);
-      editButtonContainerDetails.toFront();
-    }
+    model.saveCustomerDetailsEdit();
   }
 
   @FXML
   void enableEditDetails(ActionEvent event) {
-    model.setCustomerDetailsEditProperty(true);
+    model.showEditCustomerDetails();
     editButtonContainerDetails.toBack();
   }
 
   @FXML
   void cancelEditNotes(ActionEvent event) {
-    model.setCustomerNotesEditProperty(false);
-    CustomerNotes.setText(customerDAO.getCustomerNotes().getValue());
+    model.cancelCustomerNotesEdit();
     editButtonContainerNotes.toFront();
   }
 
   @FXML
   void saveEditNotes(ActionEvent event) {
-    model.setCustomerNotesEditProperty(false);
-    customerDAO.setNotes(CustomerNotes.getText());
-    model.saveChanges();
+    model.saveCustomerNotesEdit();
     editButtonContainerNotes.toFront();
   }
 
   @FXML
   void enableEditNotes(ActionEvent event) {
-    model.setCustomerNotesEditProperty(true);
+    model.showCustomerNotesEdit();
     editButtonContainerNotes.toBack();
   }
 
@@ -210,41 +195,128 @@ public class CustomerDetailsPageController {
     model.goToMostRecentJob();
   }
 
-  private CustomerDAO customerDAO;
   private CustomerDetailsPageModel model;
 
   @FXML
   void initialize() {
     model = new CustomerDetailsPageModel();
-    //----Add an event listener so if page is displayed before the customerDAO is set then
-    //Load the doa from scene properties
-    Content
-      .sceneProperty()
-      .addListener((observable, oldValue, newValue) -> {
-        if (newValue != null) {
-          if (
-            App.getSceneProperty("customerDAO") != null &&
-            model.getCustomer() == null
-          ) {
-            setCustomerDAO((CustomerDAO) App.getSceneProperty("customerDAO"));
-          }
-        }
-      });
+    CustomerDAO customerDAO = (CustomerDAO) App.getSceneProperty("customerDAO");
+    if (customerDAO != null) {
+      model.setCustomer(customerDAO);
+    }
+    //-----------------Bind the model to the view-----------------//
+
     CompletableFuture<Void> bindEditProperties = CompletableFuture.runAsync(
       this::bindEditProperties
     );
     CompletableFuture<Void> bindCustomerDetails = CompletableFuture.runAsync(
       this::bindCustomerDetails
     );
+    CompletableFuture<Void> bindMostRecentJob = CompletableFuture.runAsync(
+      this::bindMostRecentJob
+    );
+    CompletableFuture<Void> bindFields = CompletableFuture.runAsync(
+      this::bindFields
+    );
+    CompletableFuture<Void> bindValueProperties = CompletableFuture.runAsync(
+      this::bindValueProperties
+    );
+    CompletableFuture<Void> bindErrors = CompletableFuture.runAsync(
+      this::bindErrors
+    );
 
-    CompletableFuture.allOf(bindEditProperties, bindCustomerDetails).join();
+    CompletableFuture
+      .allOf(
+        bindEditProperties,
+        bindCustomerDetails,
+        bindMostRecentJob,
+        bindFields,
+        bindValueProperties,
+        bindErrors
+      )
+      .join();
+
+      //Bind the edit properties to the model to insure the update applies
+      model.getCustomerDetailsEditProperty().addListener((observable, oldValue, newValue) -> {
+       bindEditProperties();
+       bindCustomerDetails();
+      });
+      model.getCustomerNotesEditProperty().addListener((observable, oldValue, newValue) -> {
+       bindEditProperties();
+       bindCustomerDetails();
+      });
   }
 
-  
+  //--------------------------------------------------------------------------------
+  //Bind the most recentJobs
+  //--------------------------------------------------------------------------------
+  private void bindMostRecentJob() {
+    JobName.textProperty().bind(model.getMostRecentJobNameProperty());
+    jobStatusIndicator
+      .fillProperty()
+      .bind(model.getMostRecentJobStatusProperty());
+    CurrentJobEquipmentName
+      .textProperty()
+      .bind(model.getMostRecentJobEquipmentNameProperty());
+    CurrentJobCost
+      .textProperty()
+      .bind(model.getMostRecentJobCurrentCostProperty());
+    CurrentJobHours
+      .textProperty()
+      .bind(model.getMostRecentJobCurrentHourProperty());
+    JobNotes.textProperty().bind(model.getMostRecentJobNotesProperty());
+  }
+
+  //--------------------------------------------------------------------------------
+  //Bind the fields to the model
+  //--------------------------------------------------------------------------------
+  private void bindFields() {
+    CustomerNameField
+      .textProperty()
+      .bindBidirectional(model.getCustomerNameProperty());
+    NickNameField
+      .textProperty()
+      .bindBidirectional(model.getCustomerNickNameProperty());
+    PhoneNumberField
+      .textProperty()
+      .bindBidirectional(model.getCustomerPhoneNumberProperty());
+    AddressField
+      .textProperty()
+      .bindBidirectional(model.getCustomerAddressProperty());
+    CustomerRatingField
+      .textProperty()
+      .bindBidirectional(model.getCustomerRatingProperty());
+  }
+
+  //--------------------------------------------------------------------------------
+  //Bind the values of the fields to the model
+  //--------------------------------------------------------------------------------
+  private void bindValueProperties() {
+    CustomerName
+      .textProperty()
+      .bindBidirectional(model.getCustomerNameProperty());
+    NickName
+      .textProperty()
+      .bindBidirectional(model.getCustomerNickNameProperty());
+    PhoneNumber
+      .textProperty()
+      .bindBidirectional(model.getCustomerPhoneNumberProperty());
+    Address
+      .textProperty()
+      .bindBidirectional(model.getCustomerAddressProperty());
+    CustomerRating
+      .textProperty()
+      .bindBidirectional(model.getCustomerRatingProperty());
+    CustomerNotes
+      .textProperty()
+      .bindBidirectional(model.getCustomerNotesProperty());
+    equipmentCards.setItems(model.getEquipmentCards());
+  }
+
+  //--------------------------------------------------------------------------------
+  //Bind the states of the stackPanes to the boolean values in the model
+  //--------------------------------------------------------------------------------
   private void bindEditProperties() {
-    //--------------------------------------------------------------------------------
-    //Bind the states of the stackPanes to the boolean values in the model
-    //--------------------------------------------------------------------------------
     editOptionsDetails
       .visibleProperty()
       .bind(model.getCustomerDetailsEditProperty());
@@ -267,10 +339,10 @@ public class CustomerDetailsPageController {
     CustomerNotes.editableProperty().bind(model.getCustomerNotesEditProperty());
   }
 
+  //--------------------------------------------------------------------------------
+  //Bind the visibility of fields
+  //--------------------------------------------------------------------------------
   private void bindCustomerDetails() {
-    //--------------------------------------------------------------------------------
-    //Bind the visibility of fields
-    //--------------------------------------------------------------------------------
     CustomerNameEditField
       .visibleProperty()
       .bind(model.getCustomerDetailsEditProperty());
@@ -308,92 +380,21 @@ public class CustomerDetailsPageController {
   }
 
   //--------------------------------------------------------------------------------
+  //bind Errors
+  //--------------------------------------------------------------------------------
+  private void bindErrors() {
+    CustomerNameError.textProperty().bind(model.getCustomerNameError());
+    NickNameError.textProperty().bind(model.getNickNameError());
+    PhoneNumberError.textProperty().bind(model.getPhoneNumberError());
+    AddressError.textProperty().bind(model.getAddressError());
+    CustomerRatingError.textProperty().bind(model.getCustomerRatingError());
+  }
+
+  //--------------------------------------------------------------------------------
   // Set the customerDAO and preforme actions to update the fields for the page
   //--------------------------------------------------------------------------------
   public void setCustomerDAO(CustomerDAO customerDAO) {
-    this.customerDAO = customerDAO;
     model.setCustomer(customerDAO);
     App.setSceneProperty("customerDAO", customerDAO);
-    ExecutorService executor = Executors.newFixedThreadPool(3);
-
-    executor.submit(() -> {
-      Platform.runLater(() -> {
-        updateFields(customerDAO);
-      });
-    });
-    executor.submit(() -> {
-      Platform.runLater(() -> {
-        setActiveJob();
-      });
-    });
-    executor.submit(this::loadEquipmentCards);
-    executor.shutdown();
-  }
-
-  //--------------------------------------------------------------------------------
-  //Set the EquipmentCards for the customer
-  //--------------------------------------------------------------------------------
-  private void loadEquipmentCards(){
-    model.loadEquipmentCards();
-    equipmentCards.setItems(model.getEquipmentCards());
-  }
-  //--------------------------------------------------------------------------------
-  //Load the active Jobs in the model and bind the active job info to
-  //the fields on the most recent job card
-  //--------------------------------------------------------------------------------
-  private void setActiveJob() {
-    model.loadJobs();
-    System.out.println("Active Job: " + model.getSelectedJob());
-    if (model.getSelectedJob() == null) {
-      return;
-    }
-    JobName.textProperty().bind(model.getSelectedJob().getJobNameProperty());
-    CurrentJobEquipmentName
-      .textProperty()
-      .bind(model.getSelectedJob().getEquipmentNameProperty());
-    CurrentJobCost
-      .textProperty()
-      .bind(model.getSelectedJob().getCurrentCostProperty());
-    CurrentJobHours
-      .textProperty()
-      .bind(model.getSelectedJob().getCurrentHoursProperty());
-    JobNotes.textProperty().bind(model.getSelectedJob().getJobNotesProperty());
-    jobStatusIndicator
-      .fillProperty()
-      .bind(model.getSelectedJob().getJobStatusProperty());
-  }
-
-  //--------------------------------------------------------------------------------
-  //Update the customer detail fields of the page to that of the DAO
-  //--------------------------------------------------------------------------------
-  public void updateFields(CustomerDAO dao) {
-    //--------------------------------------------------------------------------------
-    // Bind the customer details to the fields
-    //--------------------------------------------------------------------------------
-    CustomerName.textProperty().bind(customerDAO.getCustomerName());
-    CustomerNameField.setText(customerDAO.getCustomerName().getValue());
-    CustomerNameError.textProperty().bind(this.model.getCustomerNameError());
-
-    Address.textProperty().bind(customerDAO.getCustomerAddress());
-    AddressField.setText(customerDAO.getCustomerAddress().getValue());
-    AddressError.textProperty().bind(model.getAddressError());
-
-    PhoneNumber.textProperty().bind(customerDAO.getCustomerPhoneNumber());
-    PhoneNumberField.setText(customerDAO.getCustomerPhoneNumber().getValue());
-    PhoneNumberError.textProperty().bind(model.getPhoneNumberError());
-
-    NickName.textProperty().bind(customerDAO.getCustomerNickName());
-    NickNameField.setText(customerDAO.getCustomerNickName().getValue());
-    NickNameError.textProperty().bind(model.getNickNameError());
-
-    CustomerRating.textProperty().bind(customerDAO.getCustomerRating());
-    CustomerRatingField.setText(
-      customerDAO.getCustomerRating().getValue().substring(0, 1)
-    );
-    CustomerRatingError.textProperty().bind(model.getCustomerRatingError());
-    //--------------------------------------------------------------------------------
-    // bind the Notes to the NotesField
-    //--------------------------------------------------------------------------------
-    CustomerNotes.setText(customerDAO.getCustomerNotes().getValue());
   }
 }

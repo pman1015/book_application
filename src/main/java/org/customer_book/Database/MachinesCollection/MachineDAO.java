@@ -9,6 +9,7 @@ import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentCollection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
+import org.customer_book.Database.JobsCollection.JobDAO;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -28,6 +29,7 @@ public class MachineDAO {
     private ObjectId equipmentId;
     private String lastWorkedOn;
     private String notes;
+    private ArrayList<MachineWorkDAO> workHistory;
 
     //--------------------FXML Attributes----------------//
     @BsonIgnore
@@ -64,6 +66,22 @@ public class MachineDAO {
         this.machineNotesProperty.set(notes);
     }
 
+    @BsonIgnore
+    public void updateWork(JobDAO job){
+        //Initialise the work history if it is null
+        if(this.workHistory == null){
+            this.workHistory = new ArrayList<MachineWorkDAO>();
+        }
+        job.getBill().getPartCharges().forEach(charge -> {
+            MachineWorkDAO work = new MachineWorkDAO();
+            work.setJobDate(job.getEndDateTime());
+            work.setJobId(job.getId());
+            work.setPartName(charge.getPartName());
+            work.setPartNumber(charge.getPartNumber());
+            this.workHistory.add(work);
+        });
+       this.lastWorkedOn = job.getEndDate();
+    }
 
 
 }

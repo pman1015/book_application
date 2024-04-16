@@ -219,21 +219,17 @@
                               <Insets />
                            </VBox.margin>
                         </Text>
-                        <ScrollPane prefHeight="357.0" prefWidth="315.0">
-                           <content>
-                              <ListView fx:id="CompatiblePartList" prefHeight="358.0" prefWidth="287.0">
-                                 <styleClass>
-                                    <String fx:value="transparentColor" />
-                                    <String fx:value="listView" />
-                                 </styleClass>
-                              </ListView>
-                           </content>
+                        <ListView fx:id="CompatiblePartList" prefHeight="358.0" prefWidth="287.0">
                            <styleClass>
                               <String fx:value="semiTransparent" />
-                              <String fx:value="scrollPane" />
                               <String fx:value="roundedCorners" />
+                              <String fx:value="listView" />
+                              <String fx:value="scrollPane" />
                            </styleClass>
-                        </ScrollPane>
+                           <VBox.margin>
+                              <Insets left="4.0" right="4.0" top="4.0" />
+                           </VBox.margin>
+                        </ListView>
                      </children>
                   </VBox>
                </children>
@@ -250,24 +246,17 @@
                   <Insets left="24.0" top="12.0" />
                </VBox.margin>
             </Text>
-            <ScrollPane prefHeight="193.0" prefWidth="654.0">
-               <VBox.margin>
-                  <Insets bottom="12.0" left="24.0" right="12.0" top="12.0" />
-               </VBox.margin>
+            <ListView fx:id="ReplacedPartList" prefHeight="217.0" prefWidth="610.0">
                <styleClass>
                   <String fx:value="semiTransparent" />
-                  <String fx:value="scrollPane" />
                   <String fx:value="roundedCorners" />
+                  <String fx:value="listView" />
+                  <String fx:value="scrollPane" />
                </styleClass>
-               <content>
-                  <ListView fx:id="ReplacedPartList" prefHeight="217.0" prefWidth="610.0">
-                     <styleClass>
-                        <String fx:value="transparentColor" />
-                        <String fx:value="listView" />
-                     </styleClass>
-                  </ListView>
-               </content>
-            </ScrollPane>
+               <VBox.margin>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="4.0" />
+               </VBox.margin>
+            </ListView>
          </children>
       </VBox>
       <Button fx:id="DeleteMachineButton" layoutX="964.0" layoutY="14.0" mnemonicParsing="false" onAction="#DeleteSelectedMachine" prefHeight="48.0" prefWidth="245.0" text="Delete Machine">

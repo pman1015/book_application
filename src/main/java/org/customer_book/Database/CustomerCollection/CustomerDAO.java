@@ -10,6 +10,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 import org.customer_book.Database.DatabaseConnection;
+import org.customer_book.Database.JobsCollection.JobDAO;
 
 @Getter
 @Setter
@@ -85,6 +86,14 @@ public class CustomerDAO {
 
   public void addMachine(ObjectId addedMachineID) {
     this.machineIDs.add(addedMachineID);
+  }
+  @BsonIgnore
+  public JobDAO getMostRecentJob(){
+    if(jobIDs.isEmpty()){
+      return null;
+    }
+    return DatabaseConnection.jobCollection.getDAO(jobIDs.get(jobIDs.size()-1));
+    
   }
 
   @BsonIgnore

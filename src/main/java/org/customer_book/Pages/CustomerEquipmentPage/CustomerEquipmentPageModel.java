@@ -18,6 +18,7 @@ import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.MachinesCollection.MachineDAO;
+import org.customer_book.Database.MachinesCollection.MachineWorkDAO;
 import org.customer_book.Popups.AddEquipmentToUser.AddEquipmentToUserController;
 
 @Getter
@@ -113,8 +114,29 @@ public class CustomerEquipmentPageModel {
     }
   }
 
+  private void updateMachineHistory(){  
+    replacedPartList.clear();
+    if(selectedMachine.get() ==null) return;
+  
+    if(selectedMachine.get().getWorkHistory()!= null){
+      for(MachineWorkDAO job: selectedMachine.get().getWorkHistory()){
+        try{
+          FXMLLoader workCardLoader = App.getLoader("CustomerEquipmentPage", "WorkHistoryCard");
+          Parent workCard = workCardLoader.load();
+          ((EquipmentWorkHistoryController)workCardLoader.getController()).setMachineWork(job);
+          replacedPartList.add(workCard);
+        }catch(IOException e){
+          e.printStackTrace();
+
+        }
+      }
+    }
+
+  }
+
   private void updateSelectedMachineInfo() {
     if (selectedMachine.get() != null) {
+      updateMachineHistory();
       selectedMachineLastWorkedOnProperty.set(
         selectedMachine.get().getLastWorkedOn()
       );

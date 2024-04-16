@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+
+import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 
 public class CustomerEquipmentPageController {
@@ -47,7 +49,7 @@ public class CustomerEquipmentPageController {
 
   @FXML
   void NavigateBack(ActionEvent event) {
-    model.goBack();
+    App.useBackPointer();
   }
 
   @FXML
@@ -106,6 +108,12 @@ public class CustomerEquipmentPageController {
     ModelNotes.focusedProperty().addListener((observable, oldValue, newValue) -> {
      model.getSelectedMachineModelNotesEdit().set(newValue);
     });
+
+    // ------------------ Default load the customer from the scene property ----//
+    if(model.getCustomer() == null){
+      model.setCustomer((CustomerDAO) App.getSceneProperty("customerDAO"));
+      App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+    }
   }
 
   public void setCustomer(CustomerDAO customer) {

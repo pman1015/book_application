@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 
 @Getter
@@ -93,5 +94,16 @@ public class BillDAO {
     updateBill();
   }
 
-
+  @BsonIgnore
+  public String getTotalHours() {
+    if (laborCharges == null) {
+      return "0";
+    } else {
+      double hours = 0;
+      for (LaborChargeDAO labor : laborCharges) {
+        hours += labor.getHours();
+      }
+      return String.valueOf(hours);
+    }
+  }
 }

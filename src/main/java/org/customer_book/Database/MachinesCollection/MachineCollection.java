@@ -58,10 +58,20 @@ public class MachineCollection {
     return machines;
   }
 
+  public MachineDAO getMachineDAObyId(ObjectId machineId) {
+    return collection.find(eq("_id", machineId)).first();
+  }
   public void updateMachineNotes(MachineDAO machineDAO) {
     collection.updateOne(
       eq("_id", machineDAO.getId()),
       new Document("$set", new Document("notes", machineDAO.getNotes()))
+    );
+  }
+
+  public void updateMachine(MachineDAO machine) {
+    collection.updateOne(
+      eq("_id", machine.getId()),
+      new Document("$set", machine)
     );
   }
 }

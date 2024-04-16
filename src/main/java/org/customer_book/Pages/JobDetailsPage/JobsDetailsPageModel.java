@@ -23,6 +23,7 @@ import org.customer_book.Database.InventoryCollection.PartDAO;
 import org.customer_book.Database.JobsCollection.JobDAO;
 import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 import org.customer_book.Database.JobsCollection.PartChargeDAO;
+import org.customer_book.Database.MachinesCollection.MachineDAO;
 import org.customer_book.Database.ReportsCollection.ReportDAO;
 
 @Getter
@@ -746,26 +747,48 @@ public class JobsDetailsPageModel {
   public void updateJobStatus() {
     job.setStatus(jobStatus.get());
     boolean completed = false;
+    //Check if the job status is in the list of completed statuses
     for (int i = 0; (i < completedStatus.length); i++) {
       if (job.getStatus().equals(completedStatus[i])) {
         completed = true;
         break;
       }
     }
+    //if complete complete the job
     if (completed) {
-      job.setEndDate(
-        java.time.LocalDate
-          .now()
-          .format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
-          .toString()
-      );
-      job.setEndDateTime(new java.util.Date());
+      CompleteJob();
     }
     DatabaseConnection.jobCollection.updateJob(job);
     updateJobDAO();
     setProperties();
     hideStatusUpdatePopup();
   }
+
+  /**
+   * CompleteJob:
+   * - This function completes the current job
+   * and sets the end date and time to the current date and time
+   * and updates the jobDAO
+   * and updates the machineDAO for the job
+   */
+  private void CompleteJob() {
+    //Update the job end date and time
+    job.setEndDate(
+        java.time.LocalDate
+          .now()
+          .format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
+          .toString()
+      );
+      job.setEndDateTime(new java.util.Date());
+
+      //Update the machine DAO
+      MachineDAO machine = DatabaseConnection.machineCollection.getMachineDAObyId(
+        job.getMachineID()
+      );
+      machine.updateWork(job);
+      DatabaseConnection.machineCollection.updateMachine(machine);
+  }
+
 
   /**
    * delete the currentJob:
