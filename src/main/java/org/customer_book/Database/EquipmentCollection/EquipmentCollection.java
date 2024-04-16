@@ -9,6 +9,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import org.bson.types.ObjectId;
 
 public class EquipmentCollection {
@@ -157,5 +158,20 @@ public class EquipmentCollection {
    */
   public ObjectId getEquipmentId(String string) {
     return collection.find(eq("modelNumber", string)).first().getId();
+  }
+
+  /**
+   * getNameObjectMap:
+   * This function returns a hashmap with the equipment model numbers as keys and the objectIds as values
+   * @return
+   */
+  public HashMap<String, ObjectId> getNameObjectMap() {
+    HashMap<String, ObjectId> nameObjectMap = new HashMap<>();
+    collection
+      .find()
+      .forEach(equipment -> {
+        nameObjectMap.put(equipment.getModelNumber(), equipment.getId());
+      });
+    return nameObjectMap;
   }
 }

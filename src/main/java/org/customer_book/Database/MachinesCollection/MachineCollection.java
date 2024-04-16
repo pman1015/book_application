@@ -3,6 +3,7 @@ package org.customer_book.Database.MachinesCollection;
 import static com.mongodb.client.model.Filters.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -50,4 +51,6 @@ public class MachineCollection {
     });
     return machines;
   }
+
+  
 }

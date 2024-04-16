@@ -2,12 +2,15 @@ package org.customer_book.Database.InventoryCollection;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.in;
+import static com.mongodb.client.model.Sorts.ascending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
+
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 public class InventoryCollection {
@@ -36,6 +39,19 @@ public class InventoryCollection {
     ArrayList<PartDAO> parts = new ArrayList<>();
     collection.find(in("_id", partIDs)).into(parts);
     return parts;
+  }
+  public Object[] getAllNamesAndNumber(){
+    ArrayList<String>PartNames = new ArrayList<>();
+    ArrayList<String>PartNumbers = new ArrayList<>();
+    collection.find().forEach(part -> {
+      if(part.getPartName() != null && !part.getPartName().equals("")){
+         PartNames.add(part.getPartName());
+      }
+      if(part.getPartNumber() != null && !part.getPartNumber().equals("")){
+         PartNumbers.add(part.getPartNumber());
+      }
+    });
+    return new Object[]{PartNames, PartNumbers};
   }
 
   public int getPartsCount() {
@@ -82,4 +98,10 @@ public class InventoryCollection {
     collection.find(Filters.nin("_id", existingIDs)).into(parts);
     return parts;
   }
+
+public ArrayList<PartDAO> getFilteredParts(Bson bson, int size, int skip) {
+   ArrayList<PartDAO> parts = new ArrayList<>();
+   collection.find(bson).sort(ascending("_id")).limit(size).skip(skip).into(parts);
+   return parts;
+}
 }

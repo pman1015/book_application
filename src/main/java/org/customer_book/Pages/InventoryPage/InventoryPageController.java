@@ -2,22 +2,24 @@ package org.customer_book.Pages.InventoryPage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 
@@ -31,9 +33,6 @@ public class InventoryPageController {
 
   @FXML
   private Label PartNameError;
-
-  @FXML
-  private ScrollPane PartsScrollPane;
 
   @FXML
   private Label PartNumberError;
@@ -129,7 +128,9 @@ public class InventoryPageController {
   private HBox ExpenseCategoryEdit;
 
   @FXML
-  void showFilterOptions(ActionEvent event) {}
+  void showFilterOptions(ActionEvent event) {
+    model.showFilterOptions();
+  }
 
   @FXML
   void showAddPart(ActionEvent event) {
@@ -171,28 +172,31 @@ public class InventoryPageController {
   void initialize() {
     //---- initalise model ---------
     model = new InventoryPageModel();
-    //----- EventListners -----------
-    PartsScrollPane
-      .vvalueProperty()
-      .addListener((observable, oldValue, newValue) -> {
-        if (newValue.doubleValue() == 1.0) {
-          model.loadCards();
-        }
-      });
-    //-- Bindings -------------------
-    PartList.setItems(model.getPartsCardsProperty());
-    bindVisibility();
+    CompletableFuture<Void> initializeSelectedPart = CompletableFuture.runAsync(() -> {
+        initializeSelectedPart();
+      }
+    );
+    CompletableFuture<Void> initilisePartList = CompletableFuture.runAsync(() -> {
+        initilisePartList();
+      }
+    );
+    CompletableFuture<Void> bindErrorLabels = CompletableFuture.runAsync(() -> {
+      bindErrorLabels();
+    });
+    CompletableFuture<Void> bindVisibility = CompletableFuture.runAsync(() -> {
+      bindVisibility();
+    });
+    CompletableFuture
+      .allOf(
+        initializeSelectedPart,
+        initilisePartList,
+        bindErrorLabels,
+        bindVisibility
+      )
+      .join();
+  }
 
-    //---- Error Labels Binding ----//
-    PartNameError.textProperty().bind(model.getPartNameErrorProperty());
-    PartNumberError.textProperty().bind(model.getPartNumberErrorProperty());
-    URLError.textProperty().bind(model.getURLErrorProperty());
-    PurchasePriceError
-      .textProperty()
-      .bind(model.getCurrentPurchasePriceErrorProperty());
-    ChargeError.textProperty().bind(model.getChargePriceErrorProperty());
-    StockError.textProperty().bind(model.getQuantityErrorProperty());
-
+  public void initializeSelectedPart() {
     //----- event listners ------//
     model
       .getSelectedPartProperty()
@@ -209,6 +213,38 @@ public class InventoryPageController {
           PartDetails.setVisible(false);
         }
       });
+  }
+
+  public void initilisePartList() {
+    //-- Bindings -------------------
+    PartList.setItems(model.getPartsCardsProperty());
+    PartList
+      .heightProperty()
+      .addListener((observable, oldValue, newValue) -> {
+        Node n = PartList.lookup(".scroll-bar:vertical");
+        if (n instanceof ScrollBar) {
+          ScrollBar bar = (ScrollBar) n;
+          bar
+            .valueProperty()
+            .addListener((obs, old, newVal) -> {
+              if (newVal.doubleValue() == 1.0) {
+                model.loadMoreParts();
+              }
+            });
+        }
+      });
+  }
+
+  public void bindErrorLabels() {
+    //---- Error Labels Binding ----//
+    PartNameError.textProperty().bind(model.getPartNameErrorProperty());
+    PartNumberError.textProperty().bind(model.getPartNumberErrorProperty());
+    URLError.textProperty().bind(model.getURLErrorProperty());
+    PurchasePriceError
+      .textProperty()
+      .bind(model.getCurrentPurchasePriceErrorProperty());
+    ChargeError.textProperty().bind(model.getChargePriceErrorProperty());
+    StockError.textProperty().bind(model.getQuantityErrorProperty());
   }
 
   public void bindVisibility() {
@@ -264,7 +300,6 @@ public class InventoryPageController {
       .unbindBidirectional(oldValue.getPartExpenseCategoryProperty());
     ExpenseCategoryField.setItems(model.getExpenseCategoriesProperty());
     ExpenseCategoryLabel.textProperty().unbind();
-   
   }
 
   public void bindToNewValue(PartDAO newValue) {
@@ -298,6 +333,4 @@ public class InventoryPageController {
       .bind(newValue.getPartExpenseCategoryProperty());
     CompatibleEquipmentList.setItems(model.getEquipmentCards());
   }
-
-
 }

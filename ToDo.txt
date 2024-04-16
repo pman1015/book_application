@@ -1,7 +1,7 @@
 List of features that need implimentation 
-- 1. Search feature for customers
-- 2. load on scroll for customers
-- 3. load on scroll for inventory
+- 1. Search feature for customers //DONE
+- 2. load on scroll for customers //DONE
+- 3. load on scroll for inventory //DONE
 - 4. Customer equipment card load
 - 5. customer records page
 - 6. customer equipment update
@@ -26,7 +26,7 @@ List of features that need implimentation
     - 10.4. add filter by machine
     - 10.5. add filter by customer
     - 10.6. add filter by job name
-- 11. Inventory page filter
+- 11. Inventory page filter //DONE
 
 - 12. add combobox for addPart to machine
     - 12.1 add option to add by part name or part number

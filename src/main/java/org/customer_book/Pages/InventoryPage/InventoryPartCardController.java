@@ -15,27 +15,23 @@ public class InventoryPartCardController {
   private Label PartNumber;
 
   @FXML
-  void initialize() {
-    assert PartName !=
-    null : "fx:id=\"PartName\" was not injected: check your FXML file 'InventoryPartCard.fxml'.";
-    assert PartNumber !=
-    null : "fx:id=\"PartNumber\" was not injected: check your FXML file 'InventoryPartCard.fxml'.";
-  }
-
-  private InventoryPartCardModel model;
-
-  public void setModel(InventoryPartCardModel model) {
-    this.model = model;
-    PartName.setText(model.getPart().getPartName());
-    PartNumber.setText(model.getPart().getPartNumber());
-  }
-
-  public void setSelectedPart(ObjectProperty<PartDAO> selectedPart) {
-    this.model.setSelectedPart(selectedPart);
-  }
-  
-  @FXML
   void selectPart() {
     model.setSelfActive();
   }
+ 
+  private InventoryPartCardModel model;
+  @FXML
+  void initialize() {
+    model = new InventoryPartCardModel();
+
+    PartName.textProperty().bind(model.getPartName());
+    PartNumber.textProperty().bind(model.getPartNumber());
+  }
+
+ 
+ public void setPart(PartDAO part, ObjectProperty<PartDAO> selectedPart){
+    model.setPart(part, selectedPart);
+  }
+  
+ 
 }

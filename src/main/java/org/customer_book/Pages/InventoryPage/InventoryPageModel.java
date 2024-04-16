@@ -1,5 +1,7 @@
 package org.customer_book.Pages.InventoryPage;
 
+import static com.mongodb.client.model.Filters.ne;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -18,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
@@ -25,6 +28,7 @@ import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 import org.customer_book.Database.ReportsCollection.ReportDAO;
 import org.customer_book.Popups.AddCompatibleEquipment.AddCompatibleEquipmentController;
+import org.customer_book.Popups.InventoryFilter.InventoryFilterController;
 
 @Getter
 @Setter
@@ -34,8 +38,9 @@ public class InventoryPageModel {
   private ObservableList<Parent> partsCardsProperty;
   private ObservableList<Parent> equipmentCards;
   private ObservableList<String> expenseCategoriesProperty = FXCollections.observableArrayList();
-  //number of parts to be loaded at a time
-  private final int loadSize;
+  private ArrayList<PartDAO> partDAOs = new ArrayList<>();
+
+  private ObjectProperty<Bson> partFilters = new SimpleObjectProperty<>();
 
   //Stores the currently selected part
   private ObjectProperty<PartDAO> selectedPartProperty;
@@ -60,11 +65,11 @@ public class InventoryPageModel {
    * Then loads the avaliable expense categories from reports database
    */
   public InventoryPageModel() {
-    loadSize = 20;
+    partFilters.set(ne("_id", "null"));
     partsCardsProperty = FXCollections.observableArrayList();
     equipmentCards = FXCollections.observableArrayList();
     selectedPartProperty = new SimpleObjectProperty<PartDAO>(new PartDAO());
-    loadCards();
+    loadPartDAOs(true);
     loadExpenseCategories();
   }
 
@@ -88,43 +93,54 @@ public class InventoryPageModel {
    */
   public void reloadParts() {
     this.partsCardsProperty.clear();
+    loadPartDAOs(true);
+  }
+
+  /**
+   * Load the daos based on the selected filters if clearExisting is true then clear all of
+   * the existing daos and load the first 24 parts else add the new parts to the exiting list
+   */
+  public void loadPartDAOs(boolean clearExisting) {
+    if (clearExisting) {
+      partDAOs =
+        DatabaseConnection.inventoryCollection.getFilteredParts(
+          partFilters.get(),
+          24,
+          0
+        );
+    } else {
+      partDAOs.addAll(
+        DatabaseConnection.inventoryCollection.getFilteredParts(
+          partFilters.get(),
+          24,
+          partDAOs.size()
+        )
+      );
+    }
     loadCards();
   }
 
   /**
-   * Loads the parts from the inventory collection
-   * The function exits early if the number of parts loaded is greater than the total number of parts
-   * otherwise it loads the parts in batches of loadSize
+   * Loads a partCard for each loaded DAO
    */
   public void loadCards() {
-    int count = DatabaseConnection.inventoryCollection.getPartsCount();
-    if (partsCardsProperty.size() > count) {
-      return;
-    }
-    for (PartDAO part : DatabaseConnection.inventoryCollection.getParts(
-      loadSize,
-      partsCardsProperty.size()
-    )) {
-      //Generate the model and set the DAO to part
-      InventoryPartCardModel partCardModel = new InventoryPartCardModel();
-      partCardModel.setPart(part);
-      partCardModel.setSelectedPart(selectedPartProperty);
-      //Load the part card
+    partsCardsProperty.clear();
+    partDAOs.forEach(part -> {
       try {
-        FXMLLoader cardLoader = App.getLoader(
+        FXMLLoader partCardLoader = App.getLoader(
           "InventoryPage",
           "InventoryPartCard"
         );
-        Parent card = cardLoader.load();
-        ((InventoryPartCardController) cardLoader.getController()).setModel(
-            partCardModel
+        Parent partCard = partCardLoader.load();
+        ((InventoryPartCardController) partCardLoader.getController()).setPart(
+            part,
+            selectedPartProperty
           );
-
-        partsCardsProperty.add(card);
+        partsCardsProperty.add(partCard);
       } catch (IOException e) {
         e.printStackTrace();
       }
-    }
+    });
   }
 
   /**
@@ -147,7 +163,7 @@ public class InventoryPageModel {
               Scene newValue
             ) {
               if (newValue == null) {
-                loadCards();
+                loadPartDAOs(true);
               }
             }
           }
@@ -373,5 +389,38 @@ public class InventoryPageModel {
     );
     reloadParts();
     loadCompatibleEquipment();
+  }
+
+  public void loadMoreParts() {
+    loadPartDAOs(false);
+  }
+
+  public void showFilterOptions() {
+    try {
+      FXMLLoader popupLoader = App.getLoader("Popups", "InventoryFilter");
+      Parent popup = popupLoader.load();
+      ((InventoryFilterController) popupLoader.getController()).setFilter(
+          partFilters
+        );
+      popup
+        .sceneProperty()
+        .addListener(
+          new ChangeListener<Scene>() {
+            @Override
+            public void changed(
+              ObservableValue<? extends Scene> observable,
+              Scene oldValue,
+              Scene newValue
+            ) {
+              if (newValue == null) {
+                loadPartDAOs(true);
+              }
+            }
+          }
+        );
+      App.addPopup(popup);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
