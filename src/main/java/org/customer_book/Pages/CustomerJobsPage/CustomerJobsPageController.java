@@ -1,8 +1,5 @@
 package org.customer_book.Pages.CustomerJobsPage;
 
-import static com.mongodb.client.model.Filters.in;
-
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -24,7 +21,9 @@ public class CustomerJobsPageController {
   }
 
   @FXML
-  void showFilterOptions(ActionEvent event) {}
+  void showFilterOptions(ActionEvent event) {
+    model.showFilterOptions();
+  }
 
   @FXML
   void navigateBack(ActionEvent event) {

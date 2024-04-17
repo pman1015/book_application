@@ -3,16 +3,16 @@ package org.customer_book.Database.CustomerCollection;
 import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.in;
-import static com.mongodb.client.model.Sorts.descending;
 import static com.mongodb.client.model.Sorts.ascending;
+import static com.mongodb.client.model.Sorts.descending;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Updates;
 import java.util.ArrayList;
-
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
 
 public class CustomerCollection {
@@ -44,9 +44,18 @@ public class CustomerCollection {
     return customers;
   }
 
-  public ArrayList<CustomerDAO> getFilteredCustomers(Bson filter, int size, int skip){
+  public ArrayList<CustomerDAO> getFilteredCustomers(
+    Bson filter,
+    int size,
+    int skip
+  ) {
     ArrayList<CustomerDAO> customers = new ArrayList<>();
-    collection.find(filter).sort(ascending("_id")).limit(size).skip(skip).into(customers);
+    collection
+      .find(filter)
+      .sort(ascending("_id"))
+      .limit(size)
+      .skip(skip)
+      .into(customers);
     return customers;
   }
 
@@ -88,23 +97,39 @@ public class CustomerCollection {
   public void insertCustomer(CustomerDAO customerDAO) {
     collection.insertOne(customerDAO);
   }
+
   /**
    * get a list of the names and nickNames of all customers
    * @return An array of two arraylists, the first containing the names of the customers and the second containing the nicknames of the customers
    */
-  public Object[] getNamesandNickNames(){
+  public Object[] getNamesandNickNames() {
     ArrayList<String> customerNames = new ArrayList<>();
     ArrayList<String> customerNickNames = new ArrayList<>();
-    collection.find().forEach(c -> {
-      String name = c.getName();
-      String nickString = c.getAlias();
-      if(name != null && !name.equals("")){
-        customerNames.add(name);
-      }
-      if(nickString != null && !nickString.equals("")){
-        customerNickNames.add(nickString);
-      }
-    });
-    return new Object[]{customerNames, customerNickNames};
+    collection
+      .find()
+      .forEach(c -> {
+        String name = c.getName();
+        String nickString = c.getAlias();
+        if (name != null && !name.equals("")) {
+          customerNames.add(name);
+        }
+        if (nickString != null && !nickString.equals("")) {
+          customerNickNames.add(nickString);
+        }
+      });
+    return new Object[] { customerNames, customerNickNames };
+  }
+
+  public ArrayList<String> getCustomerEquipment(CustomerDAO customer) {
+    ArrayList<String> equipmentNames = new ArrayList<>();
+    ArrayList<ObjectId> equipmentIDs = DatabaseConnection.machineCollection.getEquipmentByMachines(
+      customer.getMachineIDs()
+    );
+    DatabaseConnection.equipmentCollection
+      .getEquipmentList(equipmentIDs)
+      .forEach(e -> {
+        equipmentNames.add(e.getModelNumber());
+      });
+    return equipmentNames;
   }
 }

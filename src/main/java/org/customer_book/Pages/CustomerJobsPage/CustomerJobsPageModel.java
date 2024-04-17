@@ -1,6 +1,11 @@
 package org.customer_book.Pages.CustomerJobsPage;
 
+import static com.mongodb.client.model.Filters.*;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -9,9 +14,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
+import org.customer_book.Database.JobsCollection.JobDAO;
 
 @Getter
 @Setter
@@ -19,7 +26,12 @@ public class CustomerJobsPageModel {
 
   private StringProperty customerName;
   private CustomerDAO customer;
-  private ObservableList<Parent> jobCards;
+
+  //------------- Job Cards ----------------//
+  private ObservableList<Parent> jobCards = FXCollections.observableArrayList();
+  private ArrayList<JobDAO> jobList = new ArrayList<>();
+  private Bson filter;
+  private ObjectProperty<Bson> filterProperty = new SimpleObjectProperty<>();
 
   public CustomerJobsPageModel() {
     customer = (CustomerDAO) App.getSceneProperty("customerDAO");
@@ -27,30 +39,51 @@ public class CustomerJobsPageModel {
     customer =
       DatabaseConnection.customerCollection.findCustomerById(customer.getId());
     customerName = customer.getCustomerName();
-    jobCards = FXCollections.observableArrayList();
-    loadJobs();
+    filter = eq("customerName", customerName.get());
+    System.out.println("Filter: " + filter.toString());
+    filterProperty.set(filter);
+    filterProperty.addListener((observable, oldValue, newValue) -> {
+      filter = newValue;
+      System.out.println("New Filter:" + newValue.toString());
+      loadJobs(true);
+    });
+    loadJobs(true);
   }
 
-  private void loadJobs() {
+  private void loadJobs(boolean clear) {
+    if (clear) {
+      jobList =
+        DatabaseConnection.jobCollection.getCompletedJobs(filter, 12, 0);
+    } else {
+      jobList.addAll(
+        DatabaseConnection.jobCollection.getCompletedJobs(
+          filter,
+          12,
+          jobList.size()
+        )
+      );
+    }
+    loadCards();
+  }
+
+  private void loadCards() {
     jobCards.clear();
-    customer
-      .getJobIDs()
-      .forEach(jobID -> {
-        Parent jobCard;
-        try {
-          FXMLLoader jobCardLoader = App.getLoader(
-            "CustomerJobsPage",
-            "CustomerJobCard"
-          );
-          jobCard = jobCardLoader.load();
-          (
-            (CustomerJobsPageCardController) jobCardLoader.getController()
-          ).setJobID(jobID);
-          jobCards.add(jobCard);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      });
+    jobList.forEach(job -> {
+      Parent jobCard;
+      try {
+        FXMLLoader jobCardLoader = App.getLoader(
+          "CustomerJobsPage",
+          "CustomerJobCard"
+        );
+        jobCard = jobCardLoader.load();
+        (
+          (CustomerJobsPageCardController) jobCardLoader.getController()
+        ).setJobID(job.getId());
+        jobCards.add(jobCard);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   private void goBack() {
@@ -73,9 +106,22 @@ public class CustomerJobsPageModel {
               DatabaseConnection.customerCollection.findCustomerById(
                 customer.getId()
               );
-            loadJobs();
+            loadJobs(true);
           }
         });
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void showFilterOptions() {
+    try {
+      FXMLLoader filterLoader = App.getLoader("Popups", "CustomerJobsFilter");
+      Parent filter = filterLoader.load();
+      (
+        (org.customer_book.Popups.CustomerJobsFilter.CustomerJobsFilterController) filterLoader.getController()
+      ).setCustomer(filterProperty, customer);
+      App.addPopup(filter);
     } catch (Exception e) {
       e.printStackTrace();
     }

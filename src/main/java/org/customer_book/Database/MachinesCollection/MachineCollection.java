@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 
 public class MachineCollection {
 
@@ -66,6 +67,14 @@ public class MachineCollection {
       eq("_id", machineDAO.getId()),
       new Document("$set", new Document("notes", machineDAO.getNotes()))
     );
+  }
+  public ArrayList<ObjectId> getEquipmentByMachines(ArrayList<ObjectId> machineIds){
+    ArrayList<ObjectId> equipment = new ArrayList<>();
+
+    collection.find(in("_id", machineIds)).forEach(m -> {
+      equipment.add(m.getEquipmentId());
+    });
+    return equipment;
   }
 
   public void updateMachine(MachineDAO machine) {
