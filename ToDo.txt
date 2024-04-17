@@ -4,11 +4,11 @@ List of features that need implimentation
 - 3. load on scroll for inventory //DONE
 - 4. Customer equipment card load //DONE
 - 5. customer records page
-- 6. customer equipment update
-    - 6.1. customer equipment delete/ archive
+- 6. customer equipment update //DONE
+    - 6.1. customer equipment delete/ archive //DONE
     - 6.2 customer machine notes //DONE
     - 6.3 customer machine service history //DONE
-    - 6.4 customer equipment compatible parts
+    - 6.4 customer equipment compatible parts //DONE
 - 7. customer job history filter
     - 7.1 filter by status
     - 7.2 filter by date

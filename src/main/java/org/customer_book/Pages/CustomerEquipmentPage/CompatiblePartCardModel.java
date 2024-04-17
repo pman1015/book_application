@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.chart.PieChart.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

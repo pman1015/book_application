@@ -7,13 +7,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 
 public class CustomerEquipmentPageController {
-
+  @FXML
+  private AnchorPane ArchiveWarning;
+  @FXML
+  private Text ArchiveMessageHeding;
+  @FXML
+  private Text ArchiveMessageText;
+  
   @FXML
   private TextArea ModelNotes;
 
@@ -42,10 +50,23 @@ public class CustomerEquipmentPageController {
   private Button mostRecentJobButton;
 
   @FXML
-  private Button DeleteMachineButton;
+  private Button ArchiveMachineButton;
 
   @FXML
   private VBox MachineDetails;
+
+  @FXML
+  void showArchiveWarning(){
+    model.showArchiveWarning();
+  }
+  @FXML
+  void hideArchive(){
+    model.hideArchiveWaring();
+  }
+  @FXML
+  void archiveSelectedMachine(){
+    model.archiveSelectedMachine();
+  }
 
   @FXML
   void NavigateBack(ActionEvent event) {
@@ -67,8 +88,7 @@ public class CustomerEquipmentPageController {
     model.goToMostRecentJob();
   }
 
-  @FXML
-  void DeleteSelectedMachine(ActionEvent event) {}
+ 
 
   private CustomerEquipmentPageModel model;
 
@@ -82,9 +102,15 @@ public class CustomerEquipmentPageController {
     CompatiblePartList.setItems(model.getCompatiblePartList());
     ReplacedPartList.setItems(model.getReplacedPartList());
 
-    //--- Bind the visibility of details and delete button to the model
+    //--- Bind the visibility of details and archive button to the model
     MachineDetails.visibleProperty().bind(model.getHasSelectedMachine());
-    DeleteMachineButton.visibleProperty().bind(model.getHasSelectedMachine());
+    ArchiveMachineButton.visibleProperty().bind(model.getHasSelectedMachine());
+
+    //---Bind visibility of the archive warning to the model
+    ArchiveWarning.visibleProperty().bind(model.getShowArchiveWarning());
+    ArchiveMessageHeding.textProperty().bind(model.getArchivePopupHeading());
+    ArchiveMessageText.textProperty().bind(model.getArchivePopupMessage());
+    ArchiveMachineButton.textProperty().bind(model.getArchiveButtonMessageProperty());
 
     //--- Bind the selected machine details to the model
     SelectedModelNameLabel

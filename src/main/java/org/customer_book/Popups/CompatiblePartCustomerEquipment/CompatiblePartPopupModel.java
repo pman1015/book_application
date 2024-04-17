@@ -2,13 +2,15 @@ package org.customer_book.Popups.CompatiblePartCustomerEquipment;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.InventoryCollection.PartDAO;
+import org.customer_book.Database.ReportsCollection.ReportDAO;
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class CompatiblePartPopupModel {
   private StringProperty CostProperty = new SimpleStringProperty("");
   private StringProperty ChargeProperty = new SimpleStringProperty("");
   private StringProperty ExpenseCategoryProperty = new SimpleStringProperty("");
+  private ObservableList<String> expenseCategoriesProperty = FXCollections.observableArrayList();
   //Error Messages
   private StringProperty PartNameError = new SimpleStringProperty("");
   private StringProperty PartNumberError = new SimpleStringProperty("");
@@ -49,9 +52,11 @@ public class CompatiblePartPopupModel {
     CostProperty.set(String.valueOf(part.getCost()));
     ChargeProperty.set(String.valueOf(part.getCharge()));
     ExpenseCategoryProperty.set(part.getExpenseCategory());
+
+    loadExpenseCategories();
   }
 
-  public void updateDAO(){
+  public void updateDAO() {
     part.setPartName(PartNameProperty.get());
     part.setPartNumber(PartNumberProperty.get());
     part.setInStock(Integer.valueOf(InStockProperty.get()));
@@ -59,6 +64,7 @@ public class CompatiblePartPopupModel {
     part.setCharge(Double.valueOf(ChargeProperty.get()));
     part.setExpenseCategory(ExpenseCategoryProperty.get());
   }
+
   /**
    * SavePartChanges:
    * This method validates the fields and updates the error properties
@@ -101,9 +107,22 @@ public class CompatiblePartPopupModel {
     } else {
       InStockError.set("");
     }
-    if(valid){
-        DatabaseConnection.inventoryCollection.updatePart(part);
-        App.removePopup();
+    if (valid) {
+      DatabaseConnection.inventoryCollection.updatePart(part);
+      App.removePopup();
+    }
+  }
+
+  /**
+   * Loads the expense categories from the reports database
+   */
+  public void loadExpenseCategories() {
+    expenseCategoriesProperty.clear();
+    ReportDAO categoryReport = DatabaseConnection.reportsCollection.getReport(
+      "ExpenseCategories"
+    );
+    if (categoryReport != null) {
+      expenseCategoriesProperty.addAll(categoryReport.getValues());
     }
   }
 

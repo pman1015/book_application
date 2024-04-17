@@ -11,6 +11,7 @@ import org.customer_book.App;
 import org.customer_book.Database.InventoryCollection.PartDAO;
 
 public class CompatiblePartPopupController {
+  
 
   @FXML
   private TextField PartNameField;
@@ -107,6 +108,7 @@ public class CompatiblePartPopupController {
     ExpenseCategoryComboBox
       .valueProperty()
       .bindBidirectional(model.getExpenseCategoryProperty());
+    ExpenseCategoryComboBox.setItems(model.getExpenseCategoriesProperty());
   }
 
   public void setPartDAO(PartDAO part) {

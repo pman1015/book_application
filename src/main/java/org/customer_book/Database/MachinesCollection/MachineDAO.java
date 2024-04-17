@@ -30,6 +30,7 @@ public class MachineDAO {
     private String lastWorkedOn;
     private String notes;
     private ArrayList<MachineWorkDAO> workHistory;
+    private boolean isArchived;
 
     //--------------------FXML Attributes----------------//
     @BsonIgnore

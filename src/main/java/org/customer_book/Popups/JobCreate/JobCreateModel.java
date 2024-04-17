@@ -14,12 +14,13 @@ import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
-import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.App;
+import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.JobsCollection.BillDAO;
 import org.customer_book.Database.JobsCollection.JobDAO;
+import org.customer_book.Database.MachinesCollection.MachineDAO;
 
 @Getter
 @Setter
@@ -53,17 +54,20 @@ public class JobCreateModel {
   public void setCustomer(CustomerDAO customer) {
     this.customer = customer;
     for (ObjectId machine : customer.getMachineIDs()) {
-      ObjectId equipmentID = DatabaseConnection.machineCollection.getEquipmentIdbyMachineId(
+      MachineDAO machineDAO = DatabaseConnection.machineCollection.getMachineDAObyId(
         machine
       );
-      EquipmentDAO equipment = DatabaseConnection.equipmentCollection.getEquipment(
-        equipmentID
-      );
-      machineNames.add(equipment.getModelNumber());
-      machineMap.put(
-        equipment.getModelNumber(),
-        new ObjectId[] { machine, equipmentID }
-      );
+      if (!machineDAO.isArchived()) {
+        ObjectId equipmentID = machineDAO.getEquipmentId();
+        EquipmentDAO equipment = DatabaseConnection.equipmentCollection.getEquipment(
+          equipmentID
+        );
+        machineNames.add(equipment.getModelNumber());
+        machineMap.put(
+          equipment.getModelNumber(),
+          new ObjectId[] { machine, equipmentID }
+        );
+      }
     }
   }
 

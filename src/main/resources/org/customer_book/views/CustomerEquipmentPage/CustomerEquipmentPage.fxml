@@ -317,7 +317,7 @@
             </ListView>
          </children>
       </VBox>
-      <Button fx:id="DeleteMachineButton" layoutX="964.0" layoutY="14.0" mnemonicParsing="false" onAction="#DeleteSelectedMachine" prefHeight="48.0" prefWidth="245.0" text="Delete Machine">
+      <Button fx:id="ArchiveMachineButton" layoutX="933.0" layoutY="14.0" mnemonicParsing="false" onAction="#showArchiveWarning" prefHeight="48.0" prefWidth="276.0" text="Archive Machine">
          <styleClass>
             <String fx:value="deleteButton" />
             <String fx:value="roundedCorners" />
@@ -325,5 +325,51 @@
             <String fx:value="mediumFont" />
          </styleClass>
       </Button>
+      <AnchorPane fx:id="ArchiveWarning" layoutX="428.0" layoutY="163.0" prefHeight="216.0" prefWidth="471.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <Button layoutX="405.0" layoutY="7.0" mnemonicParsing="false" onAction="#hideArchive" styleClass="svgButton">
+               <graphic>
+                  <StackPane>
+                     <children>
+                        <SVGPath content="M24 2.5C12.1259 2.5 2.5 12.1259 2.5 24C2.5 35.8742 12.1259 45.5 24 45.5C35.8742 45.5 45.5 35.8742 45.5 24C45.5 12.1259 35.8742 2.5 24 2.5ZM5.5 24C5.5 13.7827 13.7827 5.5 24 5.5C34.2172 5.5 42.5 13.7827 42.5 24C42.5 34.2172 34.2172 42.5 24 42.5C13.7827 42.5 5.5 34.2172 5.5 24Z" fill="WHITE" scaleX="0.75" scaleY="0.75" />
+                        <SVGPath content="M20.0607 17.9393C19.4749 17.3536 18.5251 17.3536 17.9393 17.9393C17.3536 18.5251 17.3536 19.4749 17.9393 20.0606L21.8787 24L17.9394 27.9394C17.3536 28.525 17.3536 29.4748 17.9394 30.0606C18.5252 30.6464 19.4749 30.6464 20.0607 30.0606L24.0001 26.1214L27.9393 30.0606C28.5251 30.6464 29.4749 30.6464 30.0607 30.0606C30.6465 29.4748 30.6465 28.525 30.0607 27.9392L26.1213 24L30.0607 20.0606C30.6465 19.4749 30.6465 18.5252 30.0607 17.9394C29.4749 17.3536 28.5251 17.3536 27.9393 17.9394L24.0001 21.8786L20.0607 17.9393Z" fill="WHITE" />
+                     </children>
+                  </StackPane>
+               </graphic>
+            </Button>
+            <Text fx:id="ArchiveMessageHeding" layoutX="92.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Archive Machine">
+               <styleClass>
+                  <String fx:value="darkText" />
+                  <String fx:value="largeFont" />
+               </styleClass>
+            </Text>
+            <Text fx:id="ArchiveMessageText" layoutX="53.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Archiving a machine will not remove it but will make you unable to add the machine to new jobs until it is activated again" textAlignment="JUSTIFY" wrappingWidth="365.0">
+               <styleClass>
+                  <String fx:value="darkText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Text>
+            <Button layoutX="127.0" layoutY="162.0" mnemonicParsing="false" onAction="#archiveSelectedMachine" text="Confirm" AnchorPane.leftAnchor="127.0">
+               <styleClass>
+                  <String fx:value="confirmButton" />
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+                  <String fx:value="roundedCorners" />
+               </styleClass>
+            </Button>
+            <Button layoutX="252.0" layoutY="162.0" mnemonicParsing="false" onAction="#hideArchive" text="Cancel" AnchorPane.rightAnchor="139.0">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+                  <String fx:value="textButton" />
+                  <String fx:value="roundedCorners" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

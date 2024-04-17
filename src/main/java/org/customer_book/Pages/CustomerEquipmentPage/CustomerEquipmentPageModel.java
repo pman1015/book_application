@@ -64,6 +64,14 @@ public class CustomerEquipmentPageModel {
     false
   );
 
+  //--------------------- Archive Machine Properties---------------------//
+  private StringProperty archiveButtonMessageProperty = new SimpleStringProperty(
+    ""
+  );
+  private StringProperty archivePopupMessage = new SimpleStringProperty("");
+  private StringProperty archivePopupHeading = new SimpleStringProperty("");
+  private BooleanProperty showArchiveWarning = new SimpleBooleanProperty(false);
+
   //An Array of size 2, the first element is the name of the page to return to, the second element is the name of the page to return to if the user is not an admin
   private String[] returnDestination;
 
@@ -142,6 +150,9 @@ public class CustomerEquipmentPageModel {
     if (selectedMachine.get() != null) {
       updateMachineHistory();
       setMostRecentJob();
+      archiveButtonMessageProperty.set(
+        selectedMachine.get().isArchived() ? "Unarchive" : "Archive"
+      );
       selectedMachineLastWorkedOnProperty.set(
         selectedMachine.get().getLastWorkedOn()
       );
@@ -269,15 +280,14 @@ public class CustomerEquipmentPageModel {
         return;
       }
       selectedMachineMostRecentJobNameProperty.set(mostRecentJob.getJobName());
-    }else{
+    } else {
       mostRecentJob = null;
       selectedMachineMostRecentJobNameProperty.set("No Jobs Found");
-
     }
   }
 
   public void goToMostRecentJob() {
-    if(mostRecentJob == null)return;
+    if (mostRecentJob == null) return;
     try {
       App.setSceneProperty("jobDAO", mostRecentJob);
       App.setBackPointer("CustomerEquipmentPage", "CustomerEquipmentPage");
@@ -286,4 +296,36 @@ public class CustomerEquipmentPageModel {
       e.printStackTrace();
     }
   }
+
+  public void showArchiveWarning() {
+    archivePopupMessage.set(
+      selectedMachine.get().isArchived() ? toUnArchiveMessage : toArchiveMessage
+    );
+    archivePopupHeading.set(
+      selectedMachine.get().isArchived()
+        ? "Unarchive Machine"
+        : "Archive Machine"
+    );
+    showArchiveWarning.set(true);
+  }
+
+  public void hideArchiveWaring() {
+    showArchiveWarning.set(false);
+  }
+
+  public void archiveSelectedMachine() {
+    if (selectedMachine.get() != null) {
+      selectedMachine.get().setArchived(!selectedMachine.get().isArchived());
+      DatabaseConnection.machineCollection.updateMachine(selectedMachine.get());
+      reloadCustomer();
+      loadCustomerEquipment();
+      selectedMachine.set(null);
+      showArchiveWarning.set(false);
+    }
+  }
+
+  private final String toArchiveMessage =
+    "Archiving a machine will not remove it but will make you unable to add the machine to new jobs until it is activated again";
+  private final String toUnArchiveMessage =
+    "Unarchiving a machine will allow you to add the machine to new jobs again";
 }
