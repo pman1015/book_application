@@ -670,7 +670,7 @@ public class BillsPageModel {
               )
             )
           ),
-        customerNameJobsFilterProperty.get().isBlank()
+        customerNameJobsFilterProperty.get().equals("")
           ? ne("_id", null)
           : eq("customerName", customerNameJobsFilterProperty.get())
       );
