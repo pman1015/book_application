@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.BsonArray;
 import org.bson.BsonDocument;
+import org.bson.BsonValue;
 import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
@@ -50,6 +51,8 @@ public class CustomerJobsFilterModel {
   private ObjectProperty<LocalDate> startDateProperty = new SimpleObjectProperty<LocalDate>();
   private ObjectProperty<LocalDate> completedDateProperty = new SimpleObjectProperty<LocalDate>();
 
+  private StringProperty jobNameProperty = new SimpleStringProperty("");
+
   //------------- Model Properties ----------------//
   private ObjectProperty<Bson> filter;
   private ArrayList<String> equipment;
@@ -70,6 +73,7 @@ public class CustomerJobsFilterModel {
     selectedStatusProperty.set("");
     startDateProperty.set(null);
     completedDateProperty.set(null);
+    jobNameProperty.set("");
   }
 
   public void ApplyFilter() {
@@ -87,7 +91,10 @@ public class CustomerJobsFilterModel {
           : gte("created", startDateProperty.get()),
         completedDateProperty.get() == null
           ? new BsonDocument()
-          : gte("endDateTime", completedDateProperty.get())
+          : gte("endDateTime", completedDateProperty.get()),
+        jobNameProperty.get().equals("")
+          ? new BsonDocument()
+          : regex("jobName", jobNameProperty.get())
       )
     );
     App.removePopup();
@@ -122,10 +129,27 @@ public class CustomerJobsFilterModel {
           selectedStatusProperty.set(bson.getString("status").getValue());
         }
         if (bson.containsKey("created")) {
-          startDateProperty.set(getLocalDateFromFilter(bson));
+          BsonValue innerValue = getInnerValue(bson);
+          if (innerValue.isDateTime()) {
+            startDateProperty.set(
+              convertLongToLocalDate(innerValue.asDateTime().getValue())
+            );
+          }
         }
         if (bson.containsKey("endDateTime")) {
-          completedDateProperty.set(getLocalDateFromFilter(bson));
+          BsonValue innerValue = getInnerValue(bson);
+          if (innerValue.isDateTime()) {
+            completedDateProperty.set(
+              convertLongToLocalDate(innerValue.asDateTime().getValue())
+            );
+          }
+        }
+        if(bson.containsKey("jobName")) {
+          BsonValue innerValue = getInnerValue(bson);
+          System.out.println(innerValue);
+          if (innerValue.isRegularExpression()) {
+            jobNameProperty.set(innerValue.asRegularExpression().getPattern());
+          }
         }
       } catch (Exception e) {
         e.printStackTrace();
@@ -133,25 +157,16 @@ public class CustomerJobsFilterModel {
     });
   }
 
-  private LocalDate getLocalDateFromFilter(BsonDocument doc) {
-    long dateTime = 0;
-    while (dateTime == 0) {
+  private BsonValue getInnerValue(BsonDocument doc) {
+    BsonValue value = null;
+    while (value == null) {
       try {
         doc = doc.get(doc.getFirstKey()).asDocument();
-       
       } catch (Exception e) {
-        if (doc.get(doc.getFirstKey()).isDateTime()) {
-          dateTime = doc.get(doc.getFirstKey()).asDateTime().getValue();
-        } else {
-          dateTime = 1;
-        }
+        value = doc.get(doc.getFirstKey());
       }
     }
-    if (dateTime == 1) {
-      return null;
-    } else {
-      return convertLongToLocalDate(dateTime);
-    }
+    return value;
   }
 
   public LocalDate convertLongToLocalDate(long milliseconds) {

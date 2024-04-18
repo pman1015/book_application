@@ -9,11 +9,13 @@ List of features that need implimentation
     - 6.2 customer machine notes //DONE
     - 6.3 customer machine service history //DONE
     - 6.4 customer equipment compatible parts //DONE
-- 7. customer job history filter
-    - 7.1 filter by status
-    - 7.2 filter by date
-    - 7.3 filter by machine
-    - 7.5 search by job name
+- 7. customer job history filter //DONE
+    - 7.1 filter by status //DONE
+    - 7.2 filter by date //DONE
+    - 7.3 filter by machine //DONE
+    - 7.5 search by job name 
+
+    
 - 8. spacing on status button for job details
 - 9. tax calculation
     - add option to job details to add tax

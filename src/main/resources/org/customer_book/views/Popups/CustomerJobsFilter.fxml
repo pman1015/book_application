@@ -7,8 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Popups.CustomerJobsFilter.CustomerJobsFilterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Popups.CustomerJobsFilter.CustomerJobsFilterController">
    <styleClass>
       <String fx:value="baseColor" />
       <String fx:value="roundedCorners" />
@@ -30,7 +29,7 @@
             <String fx:value="largeFont" />
          </styleClass>
       </Text>
-      <VBox layoutX="29.0" layoutY="55.0" prefHeight="265.0" prefWidth="419.0">
+      <VBox layoutX="29.0" layoutY="55.0" prefHeight="352.0" prefWidth="419.0">
          <children>
             <VBox prefHeight="75.0" prefWidth="538.0">
                <children>
@@ -118,9 +117,30 @@
                   </ComboBox>
                </children>
             </VBox>
+            <VBox prefHeight="67.0" prefWidth="404.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="JobNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="349.0">
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="textField" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="roundedCorners" />
+                     </styleClass>
+                  </TextField>
+               </children>
+            </VBox>
          </children>
       </VBox>
-      <Button layoutX="51.0" layoutY="338.0" mnemonicParsing="false" onAction="#ApplyFilter" prefHeight="48.0" prefWidth="123.0" text="Apply">
+      <Button layoutX="51.0" layoutY="410.0" mnemonicParsing="false" onAction="#ApplyFilter" prefHeight="48.0" prefWidth="123.0" text="Apply">
          <styleClass>
             <String fx:value="mediumFont" />
             <String fx:value="whiteText" />
@@ -128,7 +148,7 @@
             <String fx:value="roundedCorners" />
          </styleClass>
       </Button>
-      <Button layoutX="183.0" layoutY="338.0" mnemonicParsing="false" onAction="#ClearFilter" prefHeight="48.0" prefWidth="123.0" text="Clear">
+      <Button layoutX="183.0" layoutY="410.0" mnemonicParsing="false" onAction="#ClearFilter" prefHeight="48.0" prefWidth="123.0" text="Clear">
          <styleClass>
             <String fx:value="mediumFont" />
             <String fx:value="whiteText" />
