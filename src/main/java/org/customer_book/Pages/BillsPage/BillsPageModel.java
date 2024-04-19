@@ -287,15 +287,15 @@ public class BillsPageModel {
     //Load all completed Jobs from the database
     if (clearExisting) {
       completedJobDAOS =
-        DatabaseConnection.jobCollection.getCompletedJobs(
-          completedJobsFilter,
+        DatabaseConnection.jobCollection.getJobs(
+          and(completedJobsFilter, ne("endDateTime", null)),
           4,
           0
         );
     } else {
       completedJobDAOS.addAll(
-        DatabaseConnection.jobCollection.getCompletedJobs(
-          completedJobsFilter,
+        DatabaseConnection.jobCollection.getJobs(
+          and(completedJobsFilter, ne("endDateTime", null)),
           2,
           completedJobDAOS.size()
         )

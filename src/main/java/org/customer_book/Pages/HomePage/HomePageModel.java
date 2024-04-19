@@ -56,8 +56,9 @@ public class HomePageModel {
       System.out.println("Loading content: " + selection);
       if (selection != null) {
         try {
-          FXMLLoader contentLoader = App.getLoader("HomePage/PaneContent", selection);
+          FXMLLoader contentLoader = App.getLoader("HomePage/PaneContent/"+selection, selection);
           Parent content = contentLoader.load();
+
           homePageContent.add(
             (Parent) currentLayout.applyOffset(content, i)
           );

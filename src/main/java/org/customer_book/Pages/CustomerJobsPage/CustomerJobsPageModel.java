@@ -53,10 +53,10 @@ public class CustomerJobsPageModel {
   private void loadJobs(boolean clear) {
     if (clear) {
       jobList =
-        DatabaseConnection.jobCollection.getCompletedJobs(filter, 12, 0);
+        DatabaseConnection.jobCollection.getJobs(filter, 12, 0);
     } else {
       jobList.addAll(
-        DatabaseConnection.jobCollection.getCompletedJobs(
+        DatabaseConnection.jobCollection.getJobs(
           filter,
           12,
           jobList.size()

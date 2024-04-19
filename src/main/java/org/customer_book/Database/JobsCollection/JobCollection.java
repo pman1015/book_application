@@ -63,11 +63,21 @@ public class JobCollection {
     collection.deleteOne(eq("_id", job.getId()));
   }
 
-  public ArrayList<JobDAO> getCompletedJobs(Bson filter, int amount, int skip) {
+  public ArrayList<JobDAO> getJobs(Bson filter, int amount, int skip) {
     ArrayList<JobDAO> jobs = new ArrayList<>();
     collection
-      .find(and(ne("endDate", "n/a"), filter))
+      .find(filter)
       .sort(ascending("endDate"))
+      .limit(amount)
+      .skip(skip)
+      .into(jobs);
+    return jobs;
+  }
+  public ArrayList<JobDAO> getMostRecentJobs(Bson filter, int amount, int skip) {
+    ArrayList<JobDAO> jobs = new ArrayList<>();
+    collection
+      .find(filter)
+      .sort(ascending("created"))
       .limit(amount)
       .skip(skip)
       .into(jobs);
