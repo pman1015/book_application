@@ -14,6 +14,8 @@ import javafx.stage.Window;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Pages.PageComponents.PageController;
 import org.customer_book.Pages.PageComponents.PageModel;
+import org.customer_book.Utilities.HomePageConfig.HomePageConfig;
+import org.customer_book.Utilities.HomePageConfig.HomePageConfigPermenant;
 import org.scenicview.ScenicView;
 
 
@@ -30,8 +32,16 @@ public class App extends Application {
   //Database connection
   public static DatabaseConnection db;
 
+  //Homepage Layout
+  public static HomePageConfig homePageConfigUtil;
+
   @Override
   public void start(Stage stage) throws IOException {
+    //Initialise the homepage config
+    homePageConfigUtil = new HomePageConfig();
+    System.out.println("\n");
+    System.out.println(homePageConfigUtil.getHomePageConfig().toString());
+   
     //Try to initalise the database connection
     try {
       db = new DatabaseConnection();
@@ -46,6 +56,8 @@ public class App extends Application {
     //Store a static refrence to the page model for navigation
     mainPage =
       (PageModel) ((PageController) fxmlLoader.getController()).getModel();
+    //Set the Homepage as the current page
+    setPage("HomePage", "HomePageBaseLayout");
     //Load the fonts for the project
     loadFonts();
     //Add index.css to the scene

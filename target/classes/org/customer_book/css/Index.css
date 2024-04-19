@@ -1,271 +1,287 @@
-        .baseColor {
-            -fx-background-color: #05392F
-        }
-        
-        .accentColor {
-            -fx-background-color: #FEFCFD;
-        }
-        
-        .backgroundColor {
-            -fx-background-color: #0B090C;
-        }
-        
-        .borderColor {
-            -fx-background-color: #6E7F76;
-        }
-        
-        .roundedOutlinedBorder {
-            -fx-border-color: #FEFCFD;
-            -fx-border-radius: 10;
-            -fx-border-width: 2;
-            -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, .2), 10, 0, 0, 0);
-        }
-        
-        .borderColorAccent {
-            -fx-background-color: #7d9588cd;
-        }
-        
-        .semiTransparent {
-            -fx-background-color: #d9d9d954;
-        }
-        
-        .transparentColor {
-            -fx-background-color: transparent;
-        }
-        
-        .svgButton {
-            -fx-background-color: transparent;
-        }
-        
-        .textButton {
-            -fx-background-color: #3B3D3B;
-        }
-        
-        .textButton:hover {
-            -fx-background-color: #6E7F76;
-        }
-        
-        .darkGray {
-            -fx-background-color: #414341fe;
-        }
-        
-        .deleteButton {
-            -fx-background-color: rgb(224, 13, 13);
-        }
-        
-        .confirmButton {
-            -fx-background-color: green;
-        }
-        
-        .deleteButton:hover {
-            -fx-background-color: rgba(255, 0, 0, 0.327);
-        }
-        
-        .comboBox {
-            -fx-background-color: #d9d9d954 !important;
-        }
-        
-        .comboBox .text-field {
-            -fx-background-color: transparent;
-        }
-        
-        .hoverEffectLighten:hover {
-            -fx-effect: lighten(0.2);
-        }
-        
-        .comboBox .arrow-button {
-            -fx-background-color: transparent;
-            -fx-border-color: rgba(0, 0, 0, 0.139);
-            -fx-border-radius: 0 10 10 0;
-            -fx-border-width: 2;
-            -fx-border-insets: -2;
-            -fx-background-insets: 0;
-        }
-        
-        @font-face {
-            font-family: "JetBrains Mono Regular";
-            src: url("../fonts/JetBrains_Mono/static/JetBrainsMono-Regular.ttf");
-        }
-        
-        .whiteText {
-            -fx-text-fill: #FEFCFD;
-            -fx-fill: #FEFCFD;
-            -fx-font-family: "JetBrains Mono Regular";
-        }
-        
-        .darkText {
-            -fx-text-fill: #0B090C;
-            -fx-font-family: "JetBrains Mono Regular";
-        }
-        
-        .blueText {
-            -fx-text-fill: #1277fc;
-            -fx-fill: #1277fc;
-            -fx-font-family: "JetBrains Mono Regular";
-        }
-        
-        .HeadingFont {
-            -fx-font-size: 40px;
-        }
-        
-        .largeFont {
-            -fx-font-size: 32px;
-        }
-        
-        .mediumFont {
-            -fx-font-size: 24px;
-        }
-        
-        .smallFont {
-            -fx-font-size: 16px;
-        }
-        
-        .smallTextFieldFont {
-            -fx-font-size: 14px;
-        }
-        
-        .extraSmallFont {
-            -fx-font-size: 8px;
-        }
-        
-        .errorFont {
-            -fx-text-fill: red;
-            -fx-fill: red;
-        }
-        
-        .roundedCorners {
-            -fx-background-radius: 10;
-        }
-        
-        .topRoundedCorners {
-            -fx-background-radius: 10 10 0 0;
-        }
-        /* styles.css */
-        /* Track - the area the thumb can move in */
-        
-        .scrollPane .viewport {
-            -fx-background-color: transparent;
-        }
-        
-        .scroll-bar:vertical {
-            -fx-background-color: transparent;
-            -fx-translate-x: -10;
-        }
-        
-        .scroll-bar:vertical .track {
-            -fx-background-color: transparent;
-        }
-        
-        .scroll-bar:horizontal .track {
-            -fx-background-color: #E0E0E0;
-        }
-        /* Thumb - the draggable part of the scrollbar */
-        
-        .scroll-bar:vertical .thumb {
-            -fx-background-color: #757575;
-            -fx-background-radius: 10;
-        }
-        
-        .scroll-bar:horizontal .thumb {
-            -fx-background-color: #757575;
-        }
-        /* Buttons - the increment and decrement buttons */
-        
-        .scroll-bar .increment-button,
-        .scroll-bar .decrement-button {
-            -fx-background-color: transparent;
-        }
-        
-        .scroll-bar:horizontal .increment-arrow,
-        .scroll-bar:horizontal .decrement-arrow,
-        .scroll-bar:vertical .increment-arrow,
-        .scroll-bar:vertical .decrement-arrow {
-            -fx-background-color: transparent;
-        }
-        
-        .textField {
-            -fx-background-color: rgba(128, 128, 128, 0.45);
-            -fx-border-color: #757575;
-            -fx-border-radius: 10;
-            -fx-border-color: black;
-            -fx-border-width: 1;
-        }
-        
-        .card {
-            -fx-background-color: #FEFCFD;
-        }
-        
-        .card:hover {
-            -fx-background-color: #97979765;
-        }
-        
-        .listView {
-            -fx-hbar-policy: NEVER;
-        }
-        
-        .listView .list-cell {
-            -fx-background-color: transparent;
-        }
-        
-        .listView .list-view {
-            -fx-background-color: transparent;
-        }
-        
-        .scrollPane .content {
-            -fx-background-color: transparent;
-        }
-        
-        .scrollPane .content {
-            -fx-background-color: transparent;
-        }
-        
-        .progressButton {
-            -fx-background-color: gray;
-            -fx-font-size: 16px;
-            -fx-text-fill: white;
-            -fx-background-radius: 18;
-        }
-        
-        .tabPane {
-            -fx-background-color: #6E7F76;
-            -fx-border-radius: 12;
-            -fx-background-radius: 12;
-        }
-        
-        .tabPane .tab-header-background {
-            -fx-background-color: transparent;
-        }
-        
-        .tabPane .tab {
-            -fx-background-color: #515b55;
-            -fx-font-family: "JetBrains Mono Regular";
-            -fx-font-size: 18px;
-            -fx-text-fill: white;
-            -fx-fill: white;
-        }
-        
-        .tabPane .tab {
-            -fx-min-width: 250px;
-            -fx-pref-width: 220px;
-            -fx-max-width: 350px;
-            -fx-pref-height: 50px;
-            -fx-min-height: 50px;
-            -fx-max-height: 50px;
-            -fx-alignment: center;
-            -fx-text-alignment: center;
-            -fx-content-display: center;
-        }
-        
-        .tabPane .tab-label {
-            -fx-content-display: center;
-            -fx-text-alignment: center;
-            -fx-pref-width: 200px;
-        }
-        
-        .tabPane .text {
-            -fx-text-alignment: center;
-            -fx-font-family: "JetBrains Mono Regular";
-            -fx-font-size: 18px;
-            -fx-text-fill: white;
-            -fx-fill: white;
-        }
+.split-pane:horizontal>.split-pane-divider {
+    -fx-background-color: transparent;
+}
+
+.split-pane:horizontal {
+    -fx-background-color: transparent;
+}
+
+.baseColor {
+    -fx-background-color: #05392F
+}
+
+.accentColor {
+    -fx-background-color: #FEFCFD;
+}
+
+.backgroundColor {
+    -fx-background-color: #0B090C;
+}
+
+.borderColor {
+    -fx-background-color: #6E7F76;
+}
+
+.roundedOutlinedBorder {
+    -fx-border-color: #FEFCFD;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, .2), 10, 0, 0, 0);
+}
+
+.borderColorAccent {
+    -fx-background-color: #7d9588cd;
+}
+
+.semiTransparent {
+    -fx-background-color: #d9d9d954;
+}
+
+.transparentColor {
+    -fx-background-color: transparent;
+}
+
+.svgButton {
+    -fx-background-color: transparent;
+}
+
+.textButton {
+    -fx-background-color: #3B3D3B;
+}
+
+.textButton:hover {
+    -fx-background-color: #6E7F76;
+}
+
+.darkGray {
+    -fx-background-color: #414341fe;
+}
+
+.deleteButton {
+    -fx-background-color: rgb(224, 13, 13);
+}
+
+.confirmButton {
+    -fx-background-color: green;
+}
+
+.deleteButton:hover {
+    -fx-background-color: rgba(255, 0, 0, 0.327);
+}
+
+.comboBox {
+    -fx-background-color: #d9d9d954 !important;
+}
+
+.comboBox .text-field {
+    -fx-background-color: transparent;
+}
+
+.hoverEffectLighten:hover {
+    -fx-effect: lighten(0.2);
+}
+
+.comboBox .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(0, 0, 0, 0.139);
+    -fx-border-radius: 0 10 10 0;
+    -fx-border-width: 2;
+    -fx-border-insets: -2;
+    -fx-background-insets: 0;
+}
+
+@font-face {
+    font-family: "JetBrains Mono Regular";
+    src: url("../fonts/JetBrains_Mono/static/JetBrainsMono-Regular.ttf");
+}
+
+.whiteText {
+    -fx-text-fill: #FEFCFD;
+    -fx-fill: #FEFCFD;
+    -fx-font-family: "JetBrains Mono Regular";
+}
+
+.darkText {
+    -fx-text-fill: #0B090C;
+    -fx-font-family: "JetBrains Mono Regular";
+}
+
+.blueText {
+    -fx-text-fill: #1277fc;
+    -fx-fill: #1277fc;
+    -fx-font-family: "JetBrains Mono Regular";
+}
+
+.HeadingFont {
+    -fx-font-size: 40px;
+}
+
+.largeFont {
+    -fx-font-size: 32px;
+}
+
+.mediumFont {
+    -fx-font-size: 24px;
+}
+
+.smallFont {
+    -fx-font-size: 16px;
+}
+
+.smallTextFieldFont {
+    -fx-font-size: 14px;
+}
+
+.extraSmallFont {
+    -fx-font-size: 8px;
+}
+
+.errorFont {
+    -fx-text-fill: red;
+    -fx-fill: red;
+}
+
+.roundedCorners {
+    -fx-background-radius: 10;
+}
+
+.topRoundedCorners {
+    -fx-background-radius: 10 10 0 0;
+}
+
+
+/* styles.css */
+
+
+/* Track - the area the thumb can move in */
+
+.scrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-translate-x: -10;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: #E0E0E0;
+}
+
+
+/* Thumb - the draggable part of the scrollbar */
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #757575;
+    -fx-background-radius: 10;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #757575;
+}
+
+
+/* Buttons - the increment and decrement buttons */
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .increment-arrow,
+.scroll-bar:horizontal .decrement-arrow,
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+}
+
+.textField {
+    -fx-background-color: rgba(128, 128, 128, 0.45);
+    -fx-border-color: #757575;
+    -fx-border-radius: 10;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}
+
+.card {
+    -fx-background-color: #FEFCFD;
+}
+
+.card:hover {
+    -fx-background-color: #97979765;
+}
+
+.listView {
+    -fx-hbar-policy: NEVER;
+}
+
+.listView .list-cell {
+    -fx-background-color: transparent;
+}
+
+.listView .list-view {
+    -fx-background-color: transparent;
+}
+
+.scrollPane .content {
+    -fx-background-color: transparent;
+}
+
+.scrollPane .content {
+    -fx-background-color: transparent;
+}
+
+.progressButton {
+    -fx-background-color: gray;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-radius: 18;
+}
+
+.tabPane {
+    -fx-background-color: #6E7F76;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.tabPane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tabPane .tab {
+    -fx-background-color: #515b55;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}
+
+.tabPane .tab {
+    -fx-min-width: 250px;
+    -fx-pref-width: 220px;
+    -fx-max-width: 350px;
+    -fx-pref-height: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-content-display: center;
+}
+
+.tabPane .tab-label {
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+    -fx-pref-width: 200px;
+}
+
+.tabPane .text {
+    -fx-text-alignment: center;
+    -fx-font-family: "JetBrains Mono Regular";
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-fill: white;
+}

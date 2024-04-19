@@ -17,19 +17,6 @@
             "request": "launch",
             "mainClass": "org.customer_book.Launcher",
             "projectName": "book_application"
-        },
-        {
-            "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "org.customer_book/org.customer_book.App",
-            "projectName": "book_application"
-        },
-        {
-            "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
         }
     ]
 }
