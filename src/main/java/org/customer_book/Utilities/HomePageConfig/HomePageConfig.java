@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 import org.customer_book.App;
+import org.customer_book.Database.DatabaseConnection;
 
 @Getter
 @Setter
@@ -69,6 +70,15 @@ public class HomePageConfig {
   public void setHomePageConfig(HomePageConfigPermenant homePageConfig) {
     this.homePageConfig = homePageConfig;
     saveHomePageConfig(homePageConfig);
+    //If the database connection failed reload the database with the new string
+    if(App.db == null || !App.db.isConnected()) {
+      try{
+        App.db = new DatabaseConnection();
+      }catch(Exception e){
+        e.printStackTrace();
+      }
+     
+    }
   }
 
   /**

@@ -39,16 +39,7 @@ public class App extends Application {
   public void start(Stage stage) throws IOException {
     //Initialise the homepage config
     homePageConfigUtil = new HomePageConfig();
-    System.out.println("\n");
-    System.out.println(homePageConfigUtil.getHomePageConfig().toString());
    
-    //Try to initalise the database connection
-    try {
-      db = new DatabaseConnection();
-     
-    } catch (Exception e) {
-      System.out.println("Error connecting to database");
-    }
     //Load the main page from fxml
     FXMLLoader fxmlLoader = getLoader("PageComponents", "BasePage");
     //Set the loaded page as the scene
@@ -70,8 +61,16 @@ public class App extends Application {
     stage.setResizable(false);
     stage.initStyle(StageStyle.UNDECORATED);
     stage.setScene(scene);
-    //ScenicView.show(scene);
+   // ScenicView.show(scene);
     stage.show();
+
+     //Try to initalise the database connection
+     try {
+      db = new DatabaseConnection();
+     
+    } catch (Exception e) {
+      System.out.println("Error connecting to database");
+    }
   }
 
   /**
@@ -102,6 +101,7 @@ public class App extends Application {
   public static void addPopup(Parent popup) {
     mainPage.addPopup(popup);
   }
+
 
   /*
    * This function removes the current popup from the scene graph
@@ -148,8 +148,12 @@ public class App extends Application {
   public static void setSceneProperty(String key, Object value) {
     scene.getProperties().put(key, value);
   }
+  public static void removeSceneProperty(String key) {
+    scene.getProperties().remove(key);
+  }
 
   public static Object getSceneProperty(String key) {
+    
     return scene.getProperties().get(key);
   }
 

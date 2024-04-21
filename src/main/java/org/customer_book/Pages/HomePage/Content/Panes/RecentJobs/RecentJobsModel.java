@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
+
 
 @Getter
 @Setter
@@ -53,7 +55,8 @@ public class RecentJobsModel {
           "RecentJobCard"
         );
         Parent card = cardLoader.load();
-        ((AnchorPane) card).setMaxWidth(jobCardWidth.get() - 32);
+        ((HBox)card).prefWidthProperty().bind(jobCardWidth);
+       
         RecentJobsList.add(card);
       } catch (Exception e) {
         e.printStackTrace();
@@ -62,6 +65,7 @@ public class RecentJobsModel {
   }
 
   public void setJobCardWidth(double width) {
-    jobCardWidth.set(width);
+    jobCardWidth.set(width - 32);
   }
+ 
 }

@@ -6,13 +6,13 @@
             "leftAnchor": 6.0,
             "rightAnchor": 589.0
         }, {
-            "topAnchor": 6.0,
+            "topAnchor": 44.0,
             "bottomAnchor": 458.0,
             "leftAnchor": 612.0,
             "rightAnchor": 6.0
         },
         {
-            "topAnchor": 452.0,
+            "topAnchor": 490.0,
             "bottomAnchor": 6.0,
             "leftAnchor": 612.0,
             "rightAnchor": 6.0
@@ -32,7 +32,7 @@
             "rightAnchor": 589.0
         },
         {
-            "topAnchor": 6.0,
+            "topAnchor": 44.0,
             "bottomAnchor": 6.0,
             "leftAnchor": 612.0,
             "rightAnchor": 6.0
@@ -46,7 +46,7 @@
             "leftAnchor": 6.0,
             "rightAnchor": 592.0
         }, {
-            "topAnchor": 6.0,
+            "topAnchor": 44.0,
             "bottomAnchor": 452.0,
             "leftAnchor": 609.0,
             "rightAnchor": 6.0
@@ -58,7 +58,7 @@
             "rightAnchor": 592.0
         },
         {
-            "topAnchor": 452.0,
+            "topAnchor": 490.0,
             "bottomAnchor": 6.0,
             "leftAnchor": 609.0,
             "rightAnchor": 6.0

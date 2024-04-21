@@ -100,7 +100,7 @@ public class HomePageConfigPermenant implements Serializable {
     this.layout.setLayoutName("LargeLeft");
     this.updatePaneConetent(0, "RecentJobs");
     databaseConnectionString = "";
-    username = "";
+    username = "Unknown User";
     initaliseLayouts();
   }
 

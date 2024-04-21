@@ -13,7 +13,7 @@
             <String fx:value="HeadingFont" />
          </styleClass>
       </Label>
-      <Label layoutX="442.0" layoutY="25.0" text="Mike">
+      <Label fx:id="UserLabel" layoutX="442.0" layoutY="25.0" prefHeight="17.0" prefWidth="209.0" text="Mike">
          <styleClass>
             <String fx:value="whiteText" />
             <String fx:value="HeadingFont" />
@@ -29,5 +29,11 @@
             </AnchorPane>
          </graphic>
       </Button>
+      <Label fx:id="ErrorMessage" layoutX="257.0" layoutY="70.0" prefHeight="17.0" prefWidth="430.0" text="Label" AnchorPane.leftAnchor="257.0" AnchorPane.topAnchor="70.0">
+         <styleClass>
+            <String fx:value="errorFont" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
    </children>
 </AnchorPane>
