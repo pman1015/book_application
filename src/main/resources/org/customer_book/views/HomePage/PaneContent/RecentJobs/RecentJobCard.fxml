@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox prefWidth="1000.0" spacing="8.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" onMouseClicked="#goToJob" prefWidth="1000.0" spacing="8.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.HomePage.Content.Panes.RecentJobs.RecentJobCardController">
    <children>
-      <Label layoutX="14.0" layoutY="12.0" prefHeight="32.0" prefWidth="326.0" text="Label">
+      <Label fx:id="JobName" layoutX="14.0" layoutY="12.0" prefHeight="32.0" prefWidth="326.0" text="Job Name">
          <styleClass>
             <String fx:value="whiteText" />
             <String fx:value="mediumFont" />
          </styleClass>
       </Label>
-      <Label layoutX="256.0" layoutY="12.0" prefHeight="32.0" prefWidth="326.0" text="Label">
+      <Label fx:id="CustomerName" layoutX="256.0" layoutY="12.0" prefHeight="32.0" prefWidth="326.0" text="CustomerName">
          <styleClass>
             <String fx:value="whiteText" />
             <String fx:value="mediumFont" />
          </styleClass>
       </Label>
-      <Label layoutX="755.0" layoutY="12.0" prefHeight="32.0" prefWidth="240.0" text="Label">
+      <Label fx:id="CreatedDate" layoutX="755.0" layoutY="12.0" prefHeight="32.0" prefWidth="240.0" text="Label">
          <styleClass>
             <String fx:value="whiteText" />
             <String fx:value="mediumFont" />
          </styleClass>
       </Label>
+      <Button mnemonicParsing="false" styleClass="svgButton">
+         <graphic>
+            <Circle fx:id="StatusIndicator" fill="DODGERBLUE" radius="16.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+         </graphic>
+         <tooltip>
+            <Tooltip fx:id="StatusName" autoHide="true" text="Status">
+               <styleClass>
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+            </Tooltip>
+         </tooltip>
+      </Button>
    </children>
    <styleClass>
       <String fx:value="baseColor" />

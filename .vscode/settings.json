@@ -1,6 +1,7 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "workbench.iconTheme": "eq-material-theme-icons-ocean",
-    "database-client.terminalTheme": "OneDark",
-    "workbench.colorTheme": "Obsidian Dark"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "workbench.iconTheme": "eq-material-theme-icons-ocean",
+  "database-client.terminalTheme": "OneDark",
+  "workbench.colorTheme": "Obsidian Dark",
+  "java.format.settings.url": ".vscode/java-formatter.xml"
 }

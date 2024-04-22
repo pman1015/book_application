@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.HomePage.Content.Panes.RecentJobs.RecentJobsController">
    <styleClass>
       <String fx:value="baseColor" />
@@ -47,7 +46,7 @@
             </Button>
          </children>
       </HBox>
-      <ListView fx:id="RecentJobsList" layoutX="14.0" layoutY="46.0" prefHeight="536.0" prefWidth="403.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0">
+      <ListView fx:id="RecentJobsList" prefHeight="524.0" prefWidth="403.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0">
          <styleClass>
             <String fx:value="listView" />
             <String fx:value="semiTransparent" />
