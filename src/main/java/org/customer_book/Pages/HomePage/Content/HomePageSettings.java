@@ -21,7 +21,6 @@ import org.customer_book.Utilities.HomePageConfig.HomePageConfigPermenant;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class HomePageSettings {
 
   //------------------------------------------------------------------//
@@ -58,7 +57,29 @@ public class HomePageSettings {
   private HomePageConfigPermenant homePageConfig;
 
   //TODO: add the images for the layouts
+  //------------------------------------------------------------------//
+  //-------------------------- Constructor ---------------------------//
+  //------------------------------------------------------------------//
+  public HomePageSettings() {
+    layoutName.addListener((observable, oldValue, newValue) -> {
+      if(newValue != null){
+        System.out.println("Layout changed to: " + newValue);
+        loadImage(newValue);
+      }
+    });
+  }
+  /**
+   * 
+   */
+  public void loadImage(String layout){
+    try{
+      layoutImage.set(new Image(App.class.getResourceAsStream("layoutImages/"+layout+".jpg")));
 
+    }catch(Exception e){
+      System.out.println("Error loading image: "+layout);
+      layoutImage.set(null);
+    }
+  }
   /**
    * loadSettings:
    *  - Load the settings from the HomePageConfig from the static HomePageConfigUtil

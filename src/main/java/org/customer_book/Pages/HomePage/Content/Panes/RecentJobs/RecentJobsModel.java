@@ -3,11 +3,10 @@ package org.customer_book.Pages.HomePage.Content.Panes.RecentJobs;
 import static com.mongodb.client.model.Filters.*;
 
 import java.util.ArrayList;
-
-import javax.sound.midi.Soundbank;
-
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javax.sound.midi.Soundbank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,8 +23,6 @@ import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
 @Getter
 @Setter
@@ -47,17 +45,18 @@ public class RecentJobsModel {
   public void loadJobs(boolean clear) {
     Platform.runLater(() -> {
       if (clear) {
-        long jobloadStart = System.currentTimeMillis();
-        System.out.println("Loading Jobs...");
+        //long jobloadStart = System.currentTimeMillis();
+        //System.out.println("Loading Jobs...");
         jobs = DatabaseConnection.jobCollection.getJobs(filter, 12, 0);
-        System.out.println(
-            "Jobs Loaded in: " + (System.currentTimeMillis() - jobloadStart) + "ms");
+        //System.out.println(
+        //  "Jobs Loaded in: " + (System.currentTimeMillis() - jobloadStart) + "ms");
       } else {
-        jobs.addAll(DatabaseConnection.jobCollection.getJobs(filter, 12, jobs.size()));
+        jobs.addAll(
+          DatabaseConnection.jobCollection.getJobs(filter, 12, jobs.size())
+        );
       }
       loadJobCards();
     });
-
   }
 
   public void loadJobCards() {
@@ -66,18 +65,22 @@ public class RecentJobsModel {
     for (JobDAO job : jobs) {
       Platform.runLater(() -> {
         try {
-          FXMLLoader cardLoader = App.getLoader("HomePage/PaneContent/RecentJobs",
-              "RecentJobCard");
+          FXMLLoader cardLoader = App.getLoader(
+            "HomePage/PaneContent/RecentJobs",
+            "RecentJobCard"
+          );
           Parent card = cardLoader.load();
           ((HBox) card).prefWidthProperty().bind(jobCardWidth);
           ((RecentJobCardController) cardLoader.getController()).setJob(job);
           RecentJobsList.add(card);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
           e.printStackTrace();
         }
-        System.out.println("Job Card Loaded in: "
-            + (System.currentTimeMillis() - jobcardLoadStart) + "ms");
+        System.out.println(
+          "Job Card Loaded in: " +
+          (System.currentTimeMillis() - jobcardLoadStart) +
+          "ms"
+        );
       });
     }
   }
@@ -85,5 +88,4 @@ public class RecentJobsModel {
   public void setJobCardWidth(double width) {
     jobCardWidth.set(width - 32);
   }
-
 }

@@ -36,14 +36,14 @@ List of features that need implimentation
     - 13.1 create a stats page to view number of machines number of Jobs
 - 14. check on invoice filters
     - 14.1 when filtering invoice remove the option to select created date or completed date
-- 15. design home page
+- 15. design home page //DONE
     - 15.1 add stats to home page
-    - 15.2 add most recent jobs to home page
+    - 15.2 add most recent jobs to home page //DONE
     - 15.3 add revenu stats to home page
-    - 15.4 make home page have tiles that are modular
-    - 15.5 add setting to home page 
-        -15.5.1 add options to change the home page layout
-        -15.5.2 add option to change the home page stats
+    - 15.4 make home page have tiles that are modular //DONE
+    - 15.5 add setting to home page //DONE
+        -15.5.1 add options to change the home page layout //DONE
+        -15.5.2 add option to change the home page stats //DONE
         -15.5.3 add option to change the home page recent jobs
         -15.5.4 add load options from a filter
         -15.5.5 add option to update database connection string from home page
