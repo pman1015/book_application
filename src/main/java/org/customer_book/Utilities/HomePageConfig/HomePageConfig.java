@@ -102,7 +102,7 @@ public class HomePageConfig {
   /**
    * Save the PaneConfig to the file
    */
-  private void savePaneConfig(PaneConfig paneConfig, int paneNumber) {
+  public void savePaneConfig(PaneConfig paneConfig, int paneNumber) {
     File paneConfigFile = paneConfigFiles.get(paneNumber);
     try (
       ObjectOutputStream oos = new ObjectOutputStream(
@@ -110,6 +110,7 @@ public class HomePageConfig {
       )
     ) {
       oos.writeObject(paneConfig);
+      paneConfigs.set(paneNumber, paneConfig);
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -52,4 +52,9 @@ public class RecentJobCardModel {
         statusColorProperty.set(job.resolveColor(job.getStatus()));
     }
 
+    public void setPaneNumber(int paneNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPaneNumber'");
+    }
+
 }

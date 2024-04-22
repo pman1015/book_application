@@ -23,10 +23,11 @@ import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.JobDAO;
+import org.customer_book.Pages.HomePage.Content.Panes.PaneModel;
 
 @Getter
 @Setter
-public class RecentJobsModel {
+public class RecentJobsModel extends PaneModel{
 
   // ---------------------- View Properties ----------------------//
   private ObservableList<Parent> RecentJobsList = FXCollections.observableArrayList();
@@ -88,4 +89,6 @@ public class RecentJobsModel {
   public void setJobCardWidth(double width) {
     jobCardWidth.set(width - 32);
   }
+
+
 }

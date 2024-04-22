@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 
 import org.customer_book.Database.JobsCollection.JobDAO;
+import org.customer_book.Pages.HomePage.Content.Panes.PaneController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -54,5 +55,7 @@ public class RecentJobCardController {
     public void setJob(JobDAO job) {
         model.setJob(job);
     }
+
+   
 
 }

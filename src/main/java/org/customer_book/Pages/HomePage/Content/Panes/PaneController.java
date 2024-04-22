@@ -1,5 +1,6 @@
 package org.customer_book.Pages.HomePage.Content.Panes;
 
-public interface PaneController {
-    void setPaneNumber(int paneNumber);
-}
+public abstract class PaneController {
+   public abstract void setPaneNumber(int paneNumber);
+    
+} 

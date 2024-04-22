@@ -1,5 +1,6 @@
 package org.customer_book.Pages.HomePage.Content;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.beans.property.BooleanProperty;
@@ -13,11 +14,14 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.customer_book.App;
+import org.customer_book.Pages.HomePage.Content.Panes.Image.ImageModel;
 import org.customer_book.Utilities.HomePageConfig.HomePageConfigPermenant;
+import org.customer_book.Utilities.HomePageConfig.PaneConfig;
 
 @Getter
 @Setter
@@ -69,7 +73,8 @@ public class HomePageSettings {
     });
   }
   /**
-   * 
+   * loads a preview image of the layout
+   * or clears the image if no image is found
    */
   public void loadImage(String layout){
     try{
@@ -133,6 +138,14 @@ public class HomePageSettings {
   //Show the selectImage dialog
   public void showSelectImage() {
     //TODO: Show the select image dialog
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Select Image");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    File selectedFile = fileChooser.showOpenDialog(App.getStage());
+    if(selectedFile != null){
+      System.out.println("Selected File: "+selectedFile.getAbsolutePath());
+      updateSelectedPaneConfig(selectedFile);
+    }
   }
 
   public void selectPanel(Toggle selection) {
@@ -154,5 +167,11 @@ public class HomePageSettings {
   }
   public String getSelectedLayout(){
     return homePageConfig.getSelectedLayout();
+  }
+  private void updateSelectedPaneConfig(File image){
+   PaneConfig paneToUpdate = App.homePageConfigUtil.getPaneConfigs().get(selectedPane);
+    paneToUpdate.setImageFile(image);
+    paneToUpdate.setPaneClassName(new ImageModel().getClass().toString());
+    App.homePageConfigUtil.savePaneConfig(paneToUpdate, selectedPane);
   }
 }

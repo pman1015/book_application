@@ -1,12 +1,14 @@
 package org.customer_book.Pages.HomePage.Content.Panes.RecentJobs;
 
+import org.customer_book.Pages.HomePage.Content.Panes.PaneController;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
 
-public class RecentJobsController {
+public class RecentJobsController extends PaneController{
 
   @FXML
   private ListView<Parent> RecentJobsList;
@@ -32,4 +34,9 @@ public class RecentJobsController {
       model.loadJobs(true);
     });
   }
+  
+  public void setPaneNumber(int paneNumber) {
+    model.setPaneInfo(paneNumber);
+  }
+  
 }

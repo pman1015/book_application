@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import org.customer_book.App;
 import org.customer_book.Pages.HomePage.Content.HomePageSettings;
+import org.customer_book.Pages.HomePage.Content.Panes.PaneController;
+import org.customer_book.Pages.HomePage.Content.Panes.PaneModel;
 import org.customer_book.Utilities.HomePageConfig.HomePageConfigPermenant;
 import org.customer_book.Utilities.HomePageConfig.HomePageConfigPermenant.layoutConfig;
 
@@ -58,12 +60,13 @@ public class HomePageModel {
         try {
           FXMLLoader contentLoader = App.getLoader("HomePage/PaneContent/"+selection, selection);
           Parent content = contentLoader.load();
-
+          ((PaneController)contentLoader.getController()).setPaneNumber(i);
           homePageContent.add(
             (Parent) currentLayout.applyOffset(content, i)
           );
         } catch (Exception e) {
           System.out.println("Error loading content: " + selection);
+          e.printStackTrace();
         }
       }
     }
