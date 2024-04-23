@@ -41,6 +41,7 @@ public class JobsDetailsPageModel {
   private StringProperty jobLaborCost = new SimpleStringProperty("");
   private StringProperty jobPartsCost = new SimpleStringProperty("");
   private StringProperty jobTotalCost = new SimpleStringProperty("");
+  private StringProperty machineName = new SimpleStringProperty("");
 
   private StringProperty jobNameEdit = new SimpleStringProperty("");
   private StringProperty deliveryCostEdit = new SimpleStringProperty("");
@@ -164,6 +165,7 @@ public class JobsDetailsPageModel {
   public void setProperties() {
     jobName.set(job.getJobName());
     jobStartDate.set(job.getStartDate());
+    machineName.set(job.getEquipmentName());
     jobEndDate.set(job.getEndDate());
     jobStatus.set(job.getStatus());
     jobDetails.set(job.getDetails());

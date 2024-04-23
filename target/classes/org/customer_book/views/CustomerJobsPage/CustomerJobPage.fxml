@@ -17,10 +17,11 @@
          <children>
             <GridPane alignment="CENTER" prefHeight="75.0" prefWidth="1160.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="293.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="259.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="207.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="180.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,19 +37,25 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date" GridPane.columnIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date" GridPane.columnIndex="2">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date" GridPane.columnIndex="2">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date" GridPane.columnIndex="3">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" GridPane.columnIndex="3">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status" GridPane.columnIndex="4">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Machine Name" GridPane.columnIndex="1">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />

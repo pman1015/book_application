@@ -20,12 +20,14 @@ public class CustomerJobsPageCardModel {
   private StringProperty jobStartDateProperty;
   private StringProperty jobEndDateProperty;
   private StringProperty jobStatusProperty;
+  private StringProperty jobMachineNameProperty;
 
   public CustomerJobsPageCardModel() {
     jobNameProperty = new SimpleStringProperty("");
     jobStartDateProperty = new SimpleStringProperty("");
     jobEndDateProperty = new SimpleStringProperty("");
     jobStatusProperty = new SimpleStringProperty("");
+    jobMachineNameProperty = new SimpleStringProperty("");
   }
 
   public void setJob(ObjectId jobID) {
@@ -35,6 +37,7 @@ public class CustomerJobsPageCardModel {
     jobStartDateProperty.setValue(job.getStartDate());
     jobEndDateProperty.setValue(job.getEndDate());
     jobStatusProperty.setValue(job.getStatus());
+    jobMachineNameProperty.setValue(job.getEquipmentName());
   }
 
   public void loadJobDetails() {

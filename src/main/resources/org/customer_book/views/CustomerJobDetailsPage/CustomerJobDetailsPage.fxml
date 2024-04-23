@@ -36,6 +36,7 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints fillHeight="false" maxHeight="50.0" minHeight="47.0" prefHeight="50.0" vgrow="ALWAYS" />
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="55.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="24.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -48,43 +49,43 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:" GridPane.rowIndex="2">
                      <styleClass>
                         <String fx:value="darkText" />
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label fx:id="StartDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="StartDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <styleClass>
                         <String fx:value="mediumFont" />
                         <String fx:value="darkText" />
                      </styleClass>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" GridPane.rowIndex="2">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" GridPane.rowIndex="3">
                      <styleClass>
                         <String fx:value="darkText" />
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label fx:id="EndDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="EndDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <styleClass>
                         <String fx:value="mediumFont" />
                         <String fx:value="darkText" />
                      </styleClass>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Created:" GridPane.rowIndex="3">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Created:" GridPane.rowIndex="4">
                      <styleClass>
                         <String fx:value="darkText" />
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label fx:id="CreatedDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="CreatedDateLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <styleClass>
                         <String fx:value="mediumFont" />
                         <String fx:value="darkText" />
                      </styleClass>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Details:" GridPane.rowIndex="4">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Details:" GridPane.rowIndex="5">
                      <styleClass>
                         <String fx:value="darkText" />
                         <String fx:value="mediumFont" />
@@ -93,7 +94,7 @@
                         <Insets top="12.0" />
                      </GridPane.margin>
                   </Text>
-                  <TextArea fx:id="JobDetailsLabel" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextArea fx:id="JobDetailsLabel" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <styleClass>
                         <String fx:value="smallFont" />
                         <String fx:value="darkText" />
@@ -135,6 +136,18 @@
                         </HBox>
                      </children>
                   </StackPane>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Machine Name:" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="darkText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Label fx:id="MachineNameLabel" prefHeight="17.0" prefWidth="337.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="darkText" />
+                     </styleClass>
+                  </Label>
                </children>
             </GridPane>
          </children>
@@ -155,13 +168,17 @@
                   <String fx:value="largeFont" />
                </styleClass>
             </Text>
-            <Button fx:id="JobStatus" layoutX="484.0" layoutY="16.0" mnemonicParsing="false" onAction="#showStatusUpdate" styleClass="progressButton" text="In Progress" />
-            <Text layoutX="383.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
-               <styleClass>
-                  <String fx:value="mediumFont" />
-                  <String fx:value="whiteText" />
-               </styleClass>
-            </Text>
+            <HBox alignment="CENTER_LEFT" layoutX="383.0" layoutY="18.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="18.0">
+               <children>
+                  <Text layoutX="383.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Button fx:id="JobStatus" layoutX="484.0" layoutY="16.0" mnemonicParsing="false" onAction="#showStatusUpdate" styleClass="progressButton" text="In Progress" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="16.0" />
+               </children>
+            </HBox>
             <Text layoutX="42.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Charges:">
                <styleClass>
                   <String fx:value="mediumFont" />
@@ -657,7 +674,7 @@
             </Button>
         </items>
       </ToolBar>
-      <AnchorPane fx:id="DeleteWarning" layoutX="424.0" layoutY="32.0" prefHeight="243.0" prefWidth="597.0" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="32.0">
+      <AnchorPane fx:id="DeleteWarning" layoutX="424.0" layoutY="32.0" prefHeight="243.0" prefWidth="597.0" visible="false" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="32.0">
          <styleClass>
             <String fx:value="baseColor" />
             <String fx:value="roundedCorners" />

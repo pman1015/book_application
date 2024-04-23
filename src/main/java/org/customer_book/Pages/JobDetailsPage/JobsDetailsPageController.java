@@ -35,6 +35,9 @@ public class JobsDetailsPageController {
 
   @FXML
   private Label CreatedDateLabel;
+  
+  @FXML
+  private Label MachineNameLabel;
 
   @FXML
   private Label JobNameLabel;
@@ -435,6 +438,7 @@ public class JobsDetailsPageController {
     //--------------------Job Details Labels-------------------//
     JobNameLabel.textProperty().bindBidirectional(model.getJobName());
     JobNameField.textProperty().bindBidirectional(model.getJobNameEdit());
+    MachineNameLabel.textProperty().bindBidirectional(model.getMachineName());
     JobDetailsLabel.textProperty().bindBidirectional(model.getJobDetails());
     JobDetailsLabel
       .focusedProperty()

@@ -11,6 +11,9 @@ public class CustomerJobsPageCardController {
   private Label JobNameLabel;
 
   @FXML
+  private Label JobMachineNameLabel;
+
+  @FXML
   private Label JobEndDateLabel;
 
   @FXML
@@ -34,6 +37,7 @@ public class CustomerJobsPageCardController {
     JobStartDateLabel.textProperty().bind(model.getJobStartDateProperty());
     JobEndDateLabel.textProperty().bind(model.getJobEndDateProperty());
     JobStatusLabel.textProperty().bind(model.getJobStatusProperty());
+    JobMachineNameLabel.textProperty().bind(model.getJobMachineNameProperty());
   }
 
   public void setJobID(ObjectId jobID) {

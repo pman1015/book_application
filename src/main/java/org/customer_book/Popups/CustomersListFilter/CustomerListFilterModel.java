@@ -1,7 +1,8 @@
 package org.customer_book.Popups.CustomersListFilter;
 
 import static com.mongodb.client.model.Filters.*;
-
+import java.util.regex.Pattern;
+import org.bson.codecs.PatternCodec;
 import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -23,21 +24,17 @@ import org.customer_book.Database.DatabaseConnection;
 @Setter
 public class CustomerListFilterModel {
 
-  //-----------------------------Properties---------------------------------//
+  // -----------------------------Properties---------------------------------//
   private ObservableList<String> customerNames = FXCollections.observableArrayList();
   private StringProperty selectedCustomerName = new SimpleStringProperty("");
 
   private StringProperty customerPhoneNumber = new SimpleStringProperty("");
 
   private ObservableList<String> customerNickNames = FXCollections.observableArrayList();
-  private StringProperty selectedCustomerNickName = new SimpleStringProperty(
-    ""
-  );
+  private StringProperty selectedCustomerNickName = new SimpleStringProperty("");
 
   private ObservableList<Integer> customerRatings = FXCollections.observableArrayList();
-  private Property<Integer> selectedCustomerRating = new SimpleObjectProperty<>(
-    0
-  );
+  private Property<Integer> selectedCustomerRating = new SimpleObjectProperty<>(0);
 
   private ObjectProperty<Bson> filter;
 
@@ -61,46 +58,36 @@ public class CustomerListFilterModel {
     boolean valid = true;
     Bson customerFilter = null;
     if (!selectedCustomerName.get().equals("")) {
-      customerFilter = regex("name", selectedCustomerName.get());
+      customerFilter = regex("name", Pattern.compile(selectedCustomerName.get(), Pattern.CASE_INSENSITIVE));
     }
     if (!selectedCustomerNickName.get().equals("")) {
       if (customerFilter != null) {
-        customerFilter =
-          and(customerFilter, regex("alias", selectedCustomerNickName.get()));
+        customerFilter = and(customerFilter,
+            regex("alias", Pattern.compile(selectedCustomerNickName.get(), Pattern.CASE_INSENSITIVE)));
       } else {
-        customerFilter = regex("alias", selectedCustomerNickName.get());
+        customerFilter = regex("alias",
+            Pattern.compile(selectedCustomerNickName.get(), Pattern.CASE_INSENSITIVE));
       }
     }
     if (((ObjectPropertyBase<Integer>) selectedCustomerRating).get() != 0) {
       if (customerFilter != null) {
-        customerFilter =
-          and(
-            customerFilter,
-            eq(
-              "rating",
-              ((ObjectPropertyBase<Integer>) selectedCustomerRating).get()
-            )
-          );
+        customerFilter = and(customerFilter,
+            eq("rating", ((ObjectPropertyBase<Integer>) selectedCustomerRating).get()));
       } else {
-        customerFilter =
-          eq(
-            "rating",
-            ((ObjectPropertyBase<Integer>) selectedCustomerRating).get()
-          );
+        customerFilter = eq("rating", ((ObjectPropertyBase<Integer>) selectedCustomerRating).get());
       }
     }
     if (!customerPhoneNumber.get().equals("")) {
       formatAsPhoneNumber();
       if (customerFilter != null) {
-        customerFilter =
-          and(customerFilter, eq("phoneNumber", customerPhoneNumber.get()));
+        customerFilter = and(customerFilter, eq("phoneNumber", customerPhoneNumber.get()));
       } else {
         customerFilter = eq("phoneNumber", customerPhoneNumber.get());
       }
     }
     if (customerFilter != null) {
       filter.set(customerFilter);
-    }else{
+    } else {
       filter.set(ne("_id", "null"));
     }
 
@@ -110,13 +97,7 @@ public class CustomerListFilterModel {
   private void formatAsPhoneNumber() {
     String number = customerPhoneNumber.get();
     if (number.length() == 10) {
-      number =
-        "(" +
-        number.substring(0, 3) +
-        ") " +
-        number.substring(3, 6) +
-        "-" +
-        number.substring(6);
+      number = "(" + number.substring(0, 3) + ") " + number.substring(3, 6) + "-" + number.substring(6);
     }
     customerPhoneNumber.set(number);
   }
