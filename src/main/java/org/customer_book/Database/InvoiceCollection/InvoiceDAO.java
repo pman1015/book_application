@@ -129,4 +129,15 @@ public class InvoiceDAO {
       }
     }
   }
+
+  @BsonIgnore
+  public String getPartsTotal(){
+    double partsTotal = 0;
+    if(bills != null){
+      for(InvoiceEntry entry : bills){
+        partsTotal += Double.valueOf(entry.getBill().getPartsCost());
+      }
+    }
+    return "$"+partsTotal;
+  }
 }

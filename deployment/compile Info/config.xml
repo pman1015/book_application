@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\emily\Documents\GitHub\book_application\target\book_application-1.0-BETA-jar-with-dependencies.jar</jar>
-  <outfile>C:\Users\emily\Documents\GitHub\book_application\deployment\CustomerBook_beta_1.1.exe</outfile>
+  <outfile>C:\Users\emily\Documents\GitHub\book_application\deployment\CustomerBook_beta_1.2.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\emily\Documents\GitHub\book_application\deployment\icons8-book-50.ico</icon>
+  <icon>C:\Users\emily\Documents\GitHub\book_application\deployment\compile Info\icons8-book-50.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>

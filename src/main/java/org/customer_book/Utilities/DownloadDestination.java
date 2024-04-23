@@ -33,60 +33,57 @@ public class DownloadDestination {
   }
 
   private void loadDownloadDestination() {
+    URL resourceURL;
     try {
-      //Get the resource URL
-      URL resourceURL =
-        App.class.getProtectionDomain().getCodeSource().getLocation();
-      //Get the path of the resourceFile
-      File DataFolder = new File(
-        new File(resourceURL.getPath()).getParent() + "/Data"
-      );
-      //Create the data folder if it does not exist
+      resourceURL = new URL(
+          App.class.getProtectionDomain().getCodeSource().getLocation().toString().replace("%20", " "));
+      // Get the path of the resourceFile
+      File DataFolder = new File(new File(resourceURL.getPath()).getParent() + "/Data");
+      // Create the data folder if it does not exist
       if (!DataFolder.exists()) {
         DataFolder.mkdir();
       }
-      //Load the DownloadLoaction file
-      //If the file does not exist create it
+      // Load the DownloadLoaction file
+      // If the file does not exist create it
       File downloadLocation = new File(DataFolder + "/DownloadLocation.txt");
       if (!downloadLocation.exists()) {
         downloadLocation.createNewFile();
       }
-      //Load the Download location from the file
+      // Load the Download location from the file
       InputStream inputStream = new FileInputStream(downloadLocation);
       Scanner scanner = new Scanner(inputStream).useDelimiter("\\A");
       downloadDestinationString = scanner.hasNext() ? scanner.next() : "";
       downloadDestination.set(downloadDestinationString);
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   private void saveNewDownloadDestination(String newDownloadDestination) {
     try {
-      //Get the resource URL
-      URL resourceURL =
-        App.class.getProtectionDomain().getCodeSource().getLocation();
-      //Get the path of the resourceFile
-      File DataFolder = new File(
-        new File(resourceURL.getPath()).getParent() + "/Data"
-      );
-      //Create the data folder if it does not exist
+      // Get the resource URL
+      URL resourceURL = App.class.getProtectionDomain().getCodeSource().getLocation();
+      // Get the path of the resourceFile
+      File DataFolder = new File(new File(resourceURL.getPath()).getParent() + "/Data");
+      // Create the data folder if it does not exist
       if (!DataFolder.exists()) {
         DataFolder.mkdir();
       }
-      //Load the DownloadLoaction file
-      //If the file does not exist create it
+      // Load the DownloadLoaction file
+      // If the file does not exist create it
       File downloadLocation = new File(DataFolder + "/DownloadLocation.txt");
       if (!downloadLocation.exists()) {
         downloadLocation.createNewFile();
       }
-      //Save the new download location to the file
+      // Save the new download location to the file
       downloadDestinationString = newDownloadDestination;
       downloadDestination.set(downloadDestinationString);
       java.io.FileWriter fileWriter = new java.io.FileWriter(downloadLocation);
       fileWriter.write(downloadDestinationString);
       fileWriter.close();
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
   }

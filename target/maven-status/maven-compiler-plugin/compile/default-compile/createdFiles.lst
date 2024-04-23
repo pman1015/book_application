@@ -18,7 +18,6 @@ org\customer_book\Pages\CustomerEquipmentPage\CustomerMachineCardController.clas
 org\customer_book\Popups\ExpenseCategoryCreate\ExpenseCategoryCreateController.class
 org\customer_book\Database\InvoiceCollection\InvoiceEntry.class
 org\customer_book\Database\JobsCollection\JobCollection.class
-org\customer_book\Pages\HomePage\Content\LayoutModel.class
 org\customer_book\Popups\DownloadInvoicePopup\DownloadInvoicController$1.class
 org\customer_book\Popups\CustomerJobsFilter\CustomerJobsFilterModel$1.class
 org\customer_book\Pages\CustomerJobsPage\CustomerJobsPageCardController.class
@@ -112,7 +111,6 @@ org\customer_book\Popups\CompatiblePartCustomerEquipment\CompatiblePartPopupMode
 org\customer_book\Pages\JobDetailsPage\JobsDetailsPageController.class
 org\customer_book\Popups\CustomersListFilter\CustomerListFilterModel.class
 org\customer_book\Popups\DownloadInvoicePopup\DownloadInvoicController.class
-org\customer_book\Pages\HomePage\Content\Panes\RecentJobsPane.class
 org\customer_book\Popups\AddCompatibleEquipment\AddCompatibleEquipmentModel.class
 org\customer_book\Pages\HomePage\HomePageController.class
 org\customer_book\Database\EquipmentCollection\EquipmentDAO$2.class
@@ -127,7 +125,6 @@ org\customer_book\Database\MachinesCollection\MachineCollection.class
 org\customer_book\Utilities\DatabaseLocation.class
 org\customer_book\Database\InventoryCollection\PartDAO.class
 org\customer_book\Pages\CustomerEquipmentPage\CustomerEquipmentPageController.class
-org\customer_book\Pages\HomePage\Content\LayoutController.class
 org\customer_book\Popups\EquipmentCreate\EquipmentCreateController.class
 org\customer_book\Pages\HomePage\HomePageModel.class
 org\customer_book\Utilities\HomePageConfig\HomePageConfigPermenant$layoutConfig.class

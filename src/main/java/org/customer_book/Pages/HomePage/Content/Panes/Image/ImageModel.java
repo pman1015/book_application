@@ -27,6 +27,7 @@ public class ImageModel extends PaneModel {
         System.out.println("ImageModel: PaneInfo Changed");
         if (newPane != null && newPane.getImageFile() != null) {
           if (newPane.getImageFile().exists()) {
+            System.out.println("Image Path: " + newPane.getImageFile().toPath().toUri().toString());
             imageProperty.set(
               new Image(
                 newPane.getImageFile().toPath().toUri().toString(),

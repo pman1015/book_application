@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0">
+               <children>
+                  <Text layoutX="31.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="largeFont" />
+                     </styleClass>
+                  </Text>
+                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="351.0" text="\$Job Name">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="largeFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="-14.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="46.0">
+               <children>
+                  <Text layoutX="31.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Machine Worked on:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Machine Name">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="78.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date Started:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Start Date">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="110.0">
+               <children>
+                  <Text layoutX="31.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours Billed:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Hour count">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="14.0" />
+         </padding>
+      </VBox>
+      <Text layoutX="14.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts used:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Text>
+      <VBox layoutX="38.0" layoutY="212.0" AnchorPane.bottomAnchor="14.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="534.0">
+               <styleClass>
+                  <String fx:value="semiTransparent" />
+                  <String fx:value="topRoundedCorners" />
+               </styleClass>
+               <children>
+                  <Label prefHeight="22.0" prefWidth="169.0" text="Part Name">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="22.0" prefWidth="169.0" text="Part Number">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="22.0" prefWidth="169.0" text="Quanity">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </padding>
+            </HBox>
+            <ListView layoutX="38.0" layoutY="212.0" prefHeight="144.0" prefWidth="534.0">
+               <styleClass>
+                  <String fx:value="semiTransparent" />
+                  <String fx:value="bottomRoundedCorners" />
+               </styleClass>
+            </ListView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

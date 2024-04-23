@@ -148,7 +148,9 @@ public class CustomerDetailsPageController {
   }
 
   @FXML
-  void loadRecords(ActionEvent event) {}
+  void loadRecords(ActionEvent event) {
+    model.loadRecords();
+  }
 
   @FXML
   void cancelEditDetails(ActionEvent event) {

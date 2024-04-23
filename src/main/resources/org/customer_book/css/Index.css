@@ -149,6 +149,10 @@
     -fx-background-radius: 10 10 0 0;
 }
 
+.bottomRoundedCorners {
+    -fx-background-radius: 0 0 10 10;
+}
+
 
 /* styles.css */
 

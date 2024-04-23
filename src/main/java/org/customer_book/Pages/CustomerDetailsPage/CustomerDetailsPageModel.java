@@ -28,69 +28,51 @@ import org.customer_book.Popups.JobCreate.JobCreateController;
 @Setter
 public class CustomerDetailsPageModel {
 
-  //-----------------Customer Details Page Modes-----------------//
-  private SimpleBooleanProperty customerDetailsEditProperty = new SimpleBooleanProperty(
-    false
-  );
-  private SimpleBooleanProperty customerNotesEditProperty = new SimpleBooleanProperty(
-    false
-  );
+  // -----------------Customer Details Page Modes-----------------//
+  private SimpleBooleanProperty customerDetailsEditProperty = new SimpleBooleanProperty(false);
+  private SimpleBooleanProperty customerNotesEditProperty = new SimpleBooleanProperty(false);
 
-  //----------------- Customer Details values -----------------//
+  // ----------------- Customer Details values -----------------//
   private StringProperty customerNameProperty = new SimpleStringProperty("");
-  private StringProperty customerNickNameProperty = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty customerPhoneNumberProperty = new SimpleStringProperty(
-    ""
-  );
+  private StringProperty customerNickNameProperty = new SimpleStringProperty("");
+  private StringProperty customerPhoneNumberProperty = new SimpleStringProperty("");
   private StringProperty customerAddressProperty = new SimpleStringProperty("");
   private StringProperty customerRatingProperty = new SimpleStringProperty("");
   private StringProperty customerNotesProperty = new SimpleStringProperty("");
 
-  //-----------------Customer Details Error Messages-----------------//
+  // -----------------Customer Details Error Messages-----------------//
   private StringProperty customerRatingError = new SimpleStringProperty("");
   private StringProperty customerNameError = new SimpleStringProperty("");
   private StringProperty addressError = new SimpleStringProperty("");
   private StringProperty nickNameError = new SimpleStringProperty("");
   private StringProperty phoneNumberError = new SimpleStringProperty("");
 
-  //-----------------Most Recent Job Details-----------------//
-  private StringProperty mostRecentJobNameProperty = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty mostRecentJobEquipmentNameProperty = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty mostRecentJobCurrentCostProperty = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty mostRecentJobCurrentHourProperty = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty mostRecentJobNotesProperty = new SimpleStringProperty(
-    ""
-  );
+  // -----------------Most Recent Job Details-----------------//
+  private StringProperty mostRecentJobNameProperty = new SimpleStringProperty("");
+  private StringProperty mostRecentJobEquipmentNameProperty = new SimpleStringProperty("");
+  private StringProperty mostRecentJobCurrentCostProperty = new SimpleStringProperty("");
+  private StringProperty mostRecentJobCurrentHourProperty = new SimpleStringProperty("");
+  private StringProperty mostRecentJobNotesProperty = new SimpleStringProperty("");
   private ObjectProperty<Paint> mostRecentJobStatusProperty = new SimpleObjectProperty<>(
-    Paint.valueOf("#00FF00")
-  );
+      Paint.valueOf("#00FF00"));
 
-  //-----------------Customer Details-----------------//
+  // -----------------Customer Details-----------------//
   private CustomerDAO customer;
   private ArrayList<JobDAO> jobs;
   private JobDAO selectedJob;
 
-  //----------------- Customer Equipment Cards ---------//
+  // ----------------- Customer Equipment Cards ---------//
   private ObservableList<Parent> equipmentCards = FXCollections.observableArrayList();
 
-  //Constructor
+  // Constructor
   public CustomerDetailsPageModel() {
-    //Listners for notes edit
+    // Listners for notes edit
   }
 
-  public void showCustomerNotesEdit(){
+  public void showCustomerNotesEdit() {
     customerNotesEditProperty.set(true);
   }
+
   public void cancelCustomerNotesEdit() {
     customerNotesEditProperty.set(false);
     customerNotesProperty.set(customer.getNotes());
@@ -120,7 +102,8 @@ public class CustomerDetailsPageModel {
 
   public void setCustomer(CustomerDAO customer) {
     this.customer = customer;
-    if(customer == null) return;
+    if (customer == null)
+      return;
 
     updateCustomerDetails();
     loadEquipmentCards();
@@ -129,15 +112,13 @@ public class CustomerDetailsPageModel {
 
   private void updateMostRecentJobDetails() {
     this.selectedJob = customer.getMostRecentJob();
-    if (selectedJob == null || selectedJob.getId() == null) return;
+    if (selectedJob == null || selectedJob.getId() == null)
+      return;
     mostRecentJobNameProperty.set(selectedJob.getJobName());
-    mostRecentJobEquipmentNameProperty.set(selectedJob.getEquipmentName()
-    );
-    mostRecentJobCurrentCostProperty.set(
-     "$" + selectedJob.getBill().getBillTotal()
-    );
+    mostRecentJobEquipmentNameProperty.set(selectedJob.getEquipmentName());
+    mostRecentJobCurrentCostProperty.set("$" + selectedJob.getBill().getBillTotal());
     mostRecentJobCurrentHourProperty.set(selectedJob.getBill().getTotalHours() + " Hours");
-    
+
     mostRecentJobNotesProperty.set(selectedJob.getDetails());
     mostRecentJobStatusProperty.set(selectedJob.resolveColor(selectedJob.getStatus()));
   }
@@ -157,30 +138,21 @@ public class CustomerDetailsPageModel {
 
   public boolean validChanges() {
     boolean valid = true;
-    if (
-      customerNameProperty.get() == null ||
-      customerNameProperty.get().equals("")
-    ) {
+    if (customerNameProperty.get() == null || customerNameProperty.get().equals("")) {
       customerNameError.setValue("Customer Name is required");
       valid = false;
     } else {
       customerNameError.setValue("");
       customer.setName(customerNameProperty.get());
     }
-    if (
-      customerNickNameProperty.get() == null ||
-      customerNickNameProperty.get().equals("")
-    ) {
+    if (customerNickNameProperty.get() == null || customerNickNameProperty.get().equals("")) {
       nickNameError.setValue("Nick Name is required");
       valid = false;
     } else {
       nickNameError.setValue("");
       customer.setAlias(customerNickNameProperty.get());
     }
-    if (
-      customerPhoneNumberProperty.get() == null ||
-      customerPhoneNumberProperty.get().equals("")
-    ) {
+    if (customerPhoneNumberProperty.get() == null || customerPhoneNumberProperty.get().equals("")) {
       phoneNumberError.setValue("Phone Number is required");
       valid = false;
     } else if (!checkPhoneNumber(customerPhoneNumberProperty.get())) {
@@ -190,20 +162,15 @@ public class CustomerDetailsPageModel {
       phoneNumberError.setValue("");
       customer.setPhoneNumber(customerPhoneNumberProperty.get());
     }
-    if (
-      customerAddressProperty.get() == null ||
-      customerAddressProperty.get().equals("")
-    ) {
+    if (customerAddressProperty.get() == null || customerAddressProperty.get().equals("")) {
       addressError.setValue("Address is required");
       valid = false;
     } else {
       addressError.setValue("");
       customer.setAddress(customerAddressProperty.get());
     }
-    if (
-      Integer.valueOf(customerRatingProperty.get()) < 0 ||
-      Integer.valueOf(customerRatingProperty.get()) > 5
-    ) {
+    if (Integer.valueOf(customerRatingProperty.get()) < 0
+        || Integer.valueOf(customerRatingProperty.get()) > 5) {
       customerRatingError.setValue("Rating must be between 0 and 5");
       valid = false;
     } else {
@@ -223,39 +190,29 @@ public class CustomerDetailsPageModel {
     try {
       FXMLLoader jobCreateLoader = App.getLoader("Popups", "CreateJob");
       Parent loadedPage = jobCreateLoader.load();
-      ((JobCreateController) jobCreateLoader.getController()).setCustomer(
-          customer
-        );
+      ((JobCreateController) jobCreateLoader.getController()).setCustomer(customer);
       App.addPopup(loadedPage);
-      loadedPage
-        .sceneProperty()
-        .addListener((observable, oldValue, newValue) -> {
-          if (newValue == null) {
-            updateMostRecentJobDetails();
-          }
-        });
-    } catch (Exception e) {
+      loadedPage.sceneProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue == null) {
+          updateMostRecentJobDetails();
+        }
+      });
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   public void showCustomerEquipment() {
     try {
-      FXMLLoader equipmentPageLoader = App.getLoader(
-        "CustomerEquipmentPage",
-        "CustomerEquipmentPage"
-      );
+      FXMLLoader equipmentPageLoader = App.getLoader("CustomerEquipmentPage", "CustomerEquipmentPage");
       Parent loadedPage = equipmentPageLoader.load();
-      (
-        (CustomerEquipmentPageController) equipmentPageLoader.getController()
-      ).setCustomer(customer);
-      (
-        (CustomerEquipmentPageController) equipmentPageLoader.getController()
-      ).setReturnDestination(
-          new String[] { "CustomerDetailsPage", "CustomerDetailsPage" }
-        );
+      ((CustomerEquipmentPageController) equipmentPageLoader.getController()).setCustomer(customer);
+      ((CustomerEquipmentPageController) equipmentPageLoader.getController())
+          .setReturnDestination(new String[] { "CustomerDetailsPage", "CustomerDetailsPage" });
       App.setPage(loadedPage);
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -263,49 +220,57 @@ public class CustomerDetailsPageModel {
   public void showJobHistory() {
     App.setSceneProperty("customerDAO", customer);
     try {
-      FXMLLoader jobHistoryLoader = App.getLoader(
-        "CustomerJobsPage",
-        "CustomerJobPage"
-      );
+      FXMLLoader jobHistoryLoader = App.getLoader("CustomerJobsPage", "CustomerJobPage");
       App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
       Parent loadedPage = jobHistoryLoader.load();
       App.setPage(loadedPage);
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       e.printStackTrace();
     }
   }
 
   public void goToMostRecentJob() {
-    if (selectedJob == null || selectedJob.getId() == null) return;
+    if (selectedJob == null || selectedJob.getId() == null)
+      return;
     App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
     App.setSceneProperty("customerDAO", customer);
     App.setSceneProperty("jobDAO", selectedJob);
     try {
       App.setPage("CustomerJobDetailsPage", "CustomerJobDetailsPage");
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
       e.printStackTrace();
     }
   }
 
   public void loadEquipmentCards() {
     equipmentCards.clear();
-    if (customer == null) return;
-    DatabaseConnection.machineCollection
-      .getMachinesbyIDs(customer.getMachineIDs())
-      .forEach(machine -> {
-        try {
-          FXMLLoader equipmentCardLoader = App.getLoader(
-            "CustomerDetailsPage",
-            "CustomerDetailsEquipmentCard"
-          );
-          Parent loadedCard = equipmentCardLoader.load();
-          (
-            (CustomerDetailsEquipmentController) equipmentCardLoader.getController()
-          ).setMachine(machine);
-          equipmentCards.add(loadedCard);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      });
+    if (customer == null)
+      return;
+    DatabaseConnection.machineCollection.getMachinesbyIDs(customer.getMachineIDs()).forEach(machine -> {
+      try {
+        FXMLLoader equipmentCardLoader = App.getLoader("CustomerDetailsPage", "CustomerDetailsEquipmentCard");
+        Parent loadedCard = equipmentCardLoader.load();
+        ((CustomerDetailsEquipmentController) equipmentCardLoader.getController()).setMachine(machine);
+        equipmentCards.add(loadedCard);
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+      }
+    });
+  }
+
+  public void loadRecords() {
+    App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+    App.setSceneProperty("customerDAO", customer);
+    try {
+      FXMLLoader customerRecordsLoader = App.getLoader("CustomerRecordsPage", "CustomerRecordsPage");
+      Parent loadedPage = customerRecordsLoader.load();
+      App.setPage(loadedPage);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
