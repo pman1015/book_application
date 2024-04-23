@@ -6,8 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="Card" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToJob" prefHeight="553.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerReportsPage.InvoiceDetails.InvoiceJobCardController">
    <styleClass>
       <String fx:value="baseColor" />
       <String fx:value="roundedCorners" />
@@ -23,7 +22,7 @@
                         <String fx:value="largeFont" />
                      </styleClass>
                   </Text>
-                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="351.0" text="\$Job Name">
+                  <Label fx:id="JobNameLabel" layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="351.0" text="\$Job Name">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="largeFont" />
@@ -42,7 +41,7 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Machine Name">
+                  <Label fx:id="MachineNameLabel" layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Machine Name">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />
@@ -58,7 +57,7 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Start Date">
+                  <Label fx:id="StartDateLabel" layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Start Date">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />
@@ -74,7 +73,7 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <Label layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Hour count">
+                  <Label fx:id="HourCountLabel" layoutX="144.0" layoutY="20.0" prefHeight="32.0" prefWidth="289.0" text="\$Hour count">
                      <styleClass>
                         <String fx:value="whiteText" />
                         <String fx:value="mediumFont" />
@@ -93,7 +92,7 @@
             <String fx:value="mediumFont" />
          </styleClass>
       </Text>
-      <VBox layoutX="38.0" layoutY="212.0" AnchorPane.bottomAnchor="14.0">
+      <VBox layoutX="38.0" layoutY="212.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="208.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="534.0">
                <styleClass>
@@ -124,13 +123,32 @@
                   <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                </padding>
             </HBox>
-            <ListView layoutX="38.0" layoutY="212.0" prefHeight="144.0" prefWidth="534.0">
+            <ListView fx:id="PartCardsList" layoutX="38.0" layoutY="212.0" prefHeight="144.0" prefWidth="534.0">
                <styleClass>
                   <String fx:value="semiTransparent" />
                   <String fx:value="bottomRoundedCorners" />
                </styleClass>
             </ListView>
          </children>
+         <styleClass>
+            <String fx:value="semiTransparent" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
       </VBox>
+      <RadioButton fx:id="ShowJobNotes" layoutX="38.0" layoutY="406.0" mnemonicParsing="false" text="Show Notes">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </RadioButton>
+      <TextArea fx:id="JobNotes" layoutX="38.0" layoutY="437.0" minHeight="-Infinity" prefHeight="100.0" prefWidth="534.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="437.0">
+         <styleClass>
+            <String fx:value="textField" />
+            <String fx:value="scrollPane" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </TextArea>
    </children>
 </AnchorPane>

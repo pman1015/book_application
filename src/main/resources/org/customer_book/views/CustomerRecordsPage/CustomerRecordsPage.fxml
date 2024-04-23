@@ -9,7 +9,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerReportsPage.Page.CustomerRecordsPageController">
    <children>
       <VBox layoutX="14.0" layoutY="14.0">
@@ -193,7 +192,7 @@
                         <String fx:value="mediumFont" />
                      </styleClass>
                   </Text>
-                  <ListView fx:id="InvoiceJobsList" layoutX="14.0" layoutY="46.0" prefHeight="200.0" prefWidth="589.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="46.0">
+                  <ListView fx:id="InvoiceJobsList" layoutX="14.0" layoutY="46.0" prefHeight="458.0" prefWidth="610.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="50.0">
                      <styleClass>
                         <String fx:value="semiTransparent" />
                         <String fx:value="listView" />

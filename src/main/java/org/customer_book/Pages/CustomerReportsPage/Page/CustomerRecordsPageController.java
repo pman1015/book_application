@@ -1,5 +1,6 @@
 package org.customer_book.Pages.CustomerReportsPage.Page;
 
+import org.customer_book.App;
 import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 import java.util.concurrent.CompletableFuture;
 
@@ -85,7 +86,10 @@ public class CustomerRecordsPageController {
 
     @FXML
     void initialize() {
+
         model = new CustomerRecordsPageModel();
+        App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+        
         CompletableFuture<Void> loadCustomer = CompletableFuture.runAsync(() -> model.loadCustomer());
         // Run the following code after the view has been initialized
         CompletableFuture<Void> initalizeCustomerName = CompletableFuture

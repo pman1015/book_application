@@ -4,6 +4,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.types.ObjectId;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.JobsCollection.BillDAO;
+import org.customer_book.Database.JobsCollection.JobDAO;
 
 import javafx.scene.chart.PieChart.Data;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class InvoiceEntry {
     @BsonIgnore
     public String getStartDate() {
       return DatabaseConnection.jobCollection.getDAO(JobId).getStartDate();
+    }
+    @BsonIgnore
+    public JobDAO getJob() {
+      return DatabaseConnection.jobCollection.getDAO(JobId);
     }
     
 }

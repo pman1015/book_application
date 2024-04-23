@@ -19,11 +19,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.customer_book.Pages.CustomerReportsPage.Cards.InvoiceCardController;
+import org.customer_book.Pages.CustomerReportsPage.InvoiceDetails.InvoiceJobCardController;
 import org.bson.conversions.Bson;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
+import org.customer_book.Database.InvoiceCollection.InvoiceEntry;
 
 @Getter
 @Setter
@@ -138,7 +140,19 @@ public class CustomerRecordsPageModel {
   }
 
   private void loadInvoiceJobs() {
-    // TODO Auto-generated method stub
+    if(selectedInvoice.get() != null){
+      InvoiceJobsList.clear();
+      for (InvoiceEntry entry : selectedInvoice.get().getBills()) {
+        try {
+          FXMLLoader loader = App.getLoader("CustomerRecordsPage", "InvoiceJobCard");
+          Parent card = loader.load();
+          ((InvoiceJobCardController) loader.getController()).setInvoiceEntry(entry);
+          InvoiceJobsList.add(card);
+        } catch (Exception e) {
+          System.out.println("Error loading invoice job: " + e.getMessage());
+        }
+      }
+    }
   }
 
 
