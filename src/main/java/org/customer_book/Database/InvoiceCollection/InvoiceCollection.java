@@ -62,4 +62,8 @@ public class InvoiceCollection {
     collection.find(filter).sort(ascending("_id")).limit(loadSize).skip(size).into(invoices);
     return invoices;
   }
+
+  public InvoiceDAO getInvoice(ObjectId id) {
+    return collection.find(eq("_id", id)).first();
+  }
 }

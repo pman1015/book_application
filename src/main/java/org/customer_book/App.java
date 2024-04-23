@@ -159,19 +159,23 @@ public class App extends Application {
   public static void setBackPointer(String pageName, String fxml) {
     setSceneProperty("returnDestination", new String[] { pageName, fxml });
   }
+  public static boolean hasBackPointer() {
+    return getSceneProperty("returnDestination") != null;
+  }
 
   public static void useBackPointer() {
     Object backPointer = App.getSceneProperty("returnDestination");
     if (backPointer != null && backPointer instanceof String[]
         && ((String[]) backPointer).length == 2) {
       try {
+        removeSceneProperty("returnDestination");
         setPage(((String[]) backPointer)[0], ((String[]) backPointer)[1]);
       }
       catch (IOException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
+
   }
 
   public static FXMLLoader getLoader(String pageName, String fxml) throws IOException {

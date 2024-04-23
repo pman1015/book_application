@@ -1,6 +1,7 @@
 package org.customer_book.Pages.CustomerReportsPage.Page;
 
 import org.customer_book.App;
+import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
 import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 import java.util.concurrent.CompletableFuture;
 
@@ -35,7 +36,6 @@ public class CustomerRecordsPageController {
     @FXML
     private Label DeliveryFeeTotalLabel;
 
-  
     @FXML
     private ListView<Parent> InvoiceList;
 
@@ -88,8 +88,15 @@ public class CustomerRecordsPageController {
     void initialize() {
 
         model = new CustomerRecordsPageModel();
-        App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
-        
+
+        if (!App.hasBackPointer()) {
+            App.setBackPointer("CustomerDetailsPage", "CustomerDetailsPage");
+        }
+        if (App.getSceneProperty("selectedInvoice") != null) {
+            model.setInvoice((InvoiceDAO) App.getSceneProperty("selectedInvoice"));
+            App.removeSceneProperty("selectedInvoice");
+        }
+
         CompletableFuture<Void> loadCustomer = CompletableFuture.runAsync(() -> model.loadCustomer());
         // Run the following code after the view has been initialized
         CompletableFuture<Void> initalizeCustomerName = CompletableFuture

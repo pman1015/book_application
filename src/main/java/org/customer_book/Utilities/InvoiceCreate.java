@@ -7,6 +7,7 @@ import com.spire.doc.Table;
 import java.util.ArrayList;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.StringProperty;
+import java.io.File;
 import lombok.Getter;
 import org.customer_book.App;
 import org.customer_book.Database.CustomerCollection.CustomerDAO;
@@ -111,9 +112,20 @@ public class InvoiceCreate {
 
   public void saveInvoice() {
     //Save the invoice to the download path
+    //Make a folder for the invoice
+    File invoiceFolder = new File(downloadPath + "//" + dao.getInvoiceNumber());
+    if(!invoiceFolder.exists()) {
+      invoiceFolder.mkdir();
+    }
+    //Save the invoice as a pdf
     invoice.saveToFile(
-      downloadPath + "//" + dao.getInvoiceNumber() + ".pdf",
+      invoiceFolder.getAbsolutePath() + "//" + dao.getInvoiceNumber() + ".pdf",
       FileFormat.PDF
+    );
+    //Save the invoice as a docx
+    invoice.saveToFile(
+      invoiceFolder.getAbsolutePath() + "//" + dao.getInvoiceNumber() + ".docx",
+      FileFormat.Docx
     );
     state =
       new Object[] {

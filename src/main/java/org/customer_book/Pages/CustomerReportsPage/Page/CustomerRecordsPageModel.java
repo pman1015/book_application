@@ -66,7 +66,7 @@ public class CustomerRecordsPageModel {
   private Bson filter;
   private int loadSize = 10;
 
-  //-------------------- Constructor --------------------//
+  // -------------------- Constructor --------------------//
   public CustomerRecordsPageModel() {
     // Set the initial status update options
     StatusUpdateOptions.addAll("Awaiting Payment", "Paid", "In Progress", "Completed");
@@ -77,13 +77,12 @@ public class CustomerRecordsPageModel {
       @Override
       public void changed(ObservableValue<? extends InvoiceDAO> observable, InvoiceDAO oldValue,
           InvoiceDAO newValue) {
-       if(newValue != null){
-         updateSelectedInvoiceDetails();
-       }
+        if (newValue != null) {
+          updateSelectedInvoiceDetails();
+        }
       }
     });
   }
-  
 
   // -------------------- View Methods --------------------//
   // Navigate back using the backPointer
@@ -118,29 +117,29 @@ public class CustomerRecordsPageModel {
 
   // ------------------------ Model Methods --------------------//
   private void updateSelectedInvoiceDetails() {
-    if(selectedInvoice.get() != null){
-      //Update Header Info
+    if (selectedInvoice.get() != null) {
+      // Update Header Info
       InvoiceNumberProperty.set(selectedInvoice.get().getInvoiceNumber());
       InvoiceCreatedProperty.set(selectedInvoice.get().getGeneratedDate());
       StatusProperty.set(selectedInvoice.get().getStatus());
-      
-      //Update Totals
+
+      // Update Totals
       LaborTotalProperty.set(selectedInvoice.get().getLaborTotal());
       DeliveryFeeTotalProperty.set(selectedInvoice.get().getDeliveryTotal());
       PartsTotalProperty.set(selectedInvoice.get().getPartsTotal());
       BillTotalProperty.set(selectedInvoice.get().getChargeTotal());
 
-      //Load Job Cards for the invoice
+      // Load Job Cards for the invoice
       loadInvoiceJobs();
-       //Update the visibility
+      // Update the visibility
       InvoiceDetailsVisible.set(true);
-    }else{
+    } else {
       InvoiceDetailsVisible.set(false);
     }
   }
 
   private void loadInvoiceJobs() {
-    if(selectedInvoice.get() != null){
+    if (selectedInvoice.get() != null) {
       InvoiceJobsList.clear();
       for (InvoiceEntry entry : selectedInvoice.get().getBills()) {
         try {
@@ -148,13 +147,13 @@ public class CustomerRecordsPageModel {
           Parent card = loader.load();
           ((InvoiceJobCardController) loader.getController()).setInvoiceEntry(entry);
           InvoiceJobsList.add(card);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
           System.out.println("Error loading invoice job: " + e.getMessage());
         }
       }
     }
   }
-
 
   public void loadCustomer() {
     try {
@@ -193,6 +192,10 @@ public class CustomerRecordsPageModel {
         System.out.println("Error loading invoice: " + e.getMessage());
       }
     }
+  }
+
+  public void setInvoice(InvoiceDAO sceneProperty) {
+    selectedInvoice.set(sceneProperty);
   }
 
 }

@@ -31,6 +31,9 @@ public class JobsDetailsPageController {
   private Label RateErrorLabel;
 
   @FXML
+  private Button GoToInvoiceButton;
+
+  @FXML
   private ChoiceBox<String> JobStatusSelect;
 
   @FXML
@@ -182,6 +185,10 @@ public class JobsDetailsPageController {
 
   @FXML
   private Label DefaultLaborRateNameError;
+  @FXML
+  void goToInvoice(){
+    model.goToInvoice();
+  }
 
   @FXML
   void updateLaborCharge(ActionEvent event) {
@@ -461,6 +468,8 @@ public class JobsDetailsPageController {
     LaborChargeList.setItems(model.getLaborCharges());
 
     JobStatus.textProperty().bindBidirectional(model.getJobStatus());
+
+    GoToInvoiceButton.visibleProperty().bind(model.getHasInvoice());
   }
 
   private void initalizeVisiblities() {

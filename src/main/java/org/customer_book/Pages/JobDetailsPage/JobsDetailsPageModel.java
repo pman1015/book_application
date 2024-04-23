@@ -18,8 +18,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.customer_book.App;
 import org.customer_book.Database.DatabaseConnection;
+import org.customer_book.Database.CustomerCollection.CustomerDAO;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 import org.customer_book.Database.InventoryCollection.PartDAO;
+import org.customer_book.Database.InvoiceCollection.InvoiceDAO;
 import org.customer_book.Database.JobsCollection.JobDAO;
 import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 import org.customer_book.Database.JobsCollection.PartChargeDAO;
@@ -30,7 +32,8 @@ import org.customer_book.Database.ReportsCollection.ReportDAO;
 @Setter
 public class JobsDetailsPageModel {
 
-  //-----------------Job Details Page Properties-----------------//
+  // -----------------Job Details Page Properties-----------------//
+  private BooleanProperty hasInvoice = new SimpleBooleanProperty(false);
   private StringProperty jobName = new SimpleStringProperty("");
   private StringProperty jobStartDate = new SimpleStringProperty("");
   private StringProperty jobEndDate = new SimpleStringProperty("");
@@ -46,28 +49,20 @@ public class JobsDetailsPageModel {
   private StringProperty jobNameEdit = new SimpleStringProperty("");
   private StringProperty deliveryCostEdit = new SimpleStringProperty("");
   private StringProperty deliveryCostEditError = new SimpleStringProperty("");
-  //-----------------Job Details Page Modes-----------------//
-  private BooleanProperty jobDetailsEditProperty = new SimpleBooleanProperty(
-    false
-  );
+  // -----------------Job Details Page Modes-----------------//
+  private BooleanProperty jobDetailsEditProperty = new SimpleBooleanProperty(false);
   private BooleanProperty jobDeleteWarning = new SimpleBooleanProperty(false);
   private BooleanProperty jobDetailsSettings = new SimpleBooleanProperty(false);
   private BooleanProperty showPartCharge = new SimpleBooleanProperty(false);
   private BooleanProperty showLaborCharge = new SimpleBooleanProperty(false);
   private BooleanProperty showStatusUpdate = new SimpleBooleanProperty(false);
-  private BooleanProperty showPartChargeUpdate = new SimpleBooleanProperty(
-    false
-  );
-  private BooleanProperty showLaborChargeUpdate = new SimpleBooleanProperty(
-    false
-  );
-  private BooleanProperty showDeliveryCostEdit = new SimpleBooleanProperty(
-    false
-  );
+  private BooleanProperty showPartChargeUpdate = new SimpleBooleanProperty(false);
+  private BooleanProperty showLaborChargeUpdate = new SimpleBooleanProperty(false);
+  private BooleanProperty showDeliveryCostEdit = new SimpleBooleanProperty(false);
 
   private JobDAO job;
 
-  //----------------- Job LaborCharge Edit fields -----------------//
+  // ----------------- Job LaborCharge Edit fields -----------------//
   private StringProperty laborChargeName = new SimpleStringProperty("");
   private StringProperty laborChargeHours = new SimpleStringProperty("");
   private StringProperty laborChargeRate = new SimpleStringProperty("");
@@ -76,55 +71,43 @@ public class JobsDetailsPageModel {
   private StringProperty laborChargeHoursError = new SimpleStringProperty("");
   private StringProperty laborChargeRateError = new SimpleStringProperty("");
 
-  //----------------- Job PartCharge Edit fields -----------------//
+  // ----------------- Job PartCharge Edit fields -----------------//
   private ObservableList<String> partNames = FXCollections.observableArrayList();
   private ObservableList<String> partNumbers = FXCollections.observableArrayList();
 
   private StringProperty partQuanity = new SimpleStringProperty("");
   private StringProperty partQuanityError = new SimpleStringProperty("");
 
-  //----------------- Job Bill Charge Lists ---------------------//
+  // ----------------- Job Bill Charge Lists ---------------------//
   private ObservableList<Parent> laborCharges = FXCollections.observableArrayList();
   private ObservableList<Parent> partCharges = FXCollections.observableArrayList();
 
   private ObjectProperty<LaborChargeDAO> selectedLaborCharge = new SimpleObjectProperty<>();
   private ObjectProperty<PartChargeDAO> selectedPartCharge = new SimpleObjectProperty<>();
 
-  //----------------- Part Charge Update Fields -----------------//
+  // ----------------- Part Charge Update Fields -----------------//
   private StringProperty partChargeUpdateQuanity = new SimpleStringProperty("");
-  private StringProperty partChargeUpdateQuanityError = new SimpleStringProperty(
-    ""
-  );
+  private StringProperty partChargeUpdateQuanityError = new SimpleStringProperty("");
 
-  //----------------- Labor Charge Update Fields -----------------//
+  // ----------------- Labor Charge Update Fields -----------------//
   private StringProperty laborChargeUpdateName = new SimpleStringProperty("");
   private StringProperty laborChargeUpdateHours = new SimpleStringProperty("");
   private StringProperty laborChargeUpdateRate = new SimpleStringProperty("");
-  private StringProperty laborChargeUpdateNameError = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty laborChargeUpdateHoursError = new SimpleStringProperty(
-    ""
-  );
-  private StringProperty laborChargeUpdateRateError = new SimpleStringProperty(
-    ""
-  );
+  private StringProperty laborChargeUpdateNameError = new SimpleStringProperty("");
+  private StringProperty laborChargeUpdateHoursError = new SimpleStringProperty("");
+  private StringProperty laborChargeUpdateRateError = new SimpleStringProperty("");
 
-  //------------------------ JobDetails Settings Properties ------------------------//
+  // ------------------------ JobDetails Settings Properties
+  // ------------------------//
   private StringProperty DefaultLaborChargeName = new SimpleStringProperty("");
   private StringProperty DefaultLaborChargeRate = new SimpleStringProperty("");
   private StringProperty DefaultLaborNameError = new SimpleStringProperty("");
   private StringProperty DefaultLaborRateError = new SimpleStringProperty("");
   private ReportDAO settingsReport;
-  //------------------------ JobStatus Update Properties ------------------------//
-  private ObservableList<String> jobStatuses = FXCollections.observableArrayList(
-    "Pending",
-    "In Progress",
-    "Awaiting Parts",
-    "Awaiting Delivery",
-    "Awaiting Payment",
-    "Completed"
-  );
+  // ------------------------ JobStatus Update Properties
+  // ------------------------//
+  private ObservableList<String> jobStatuses = FXCollections.observableArrayList("Pending", "In Progress",
+      "Awaiting Parts", "Awaiting Delivery", "Awaiting Payment", "Completed");
 
   public JobsDetailsPageModel(JobDAO job) {
     this.job = job;
@@ -139,8 +122,7 @@ public class JobsDetailsPageModel {
    * Load Default JobDetails settings
    */
   public void loadDefaultJobDetailsSettings() {
-    settingsReport =
-      DatabaseConnection.reportsCollection.getReport("JobSettings");
+    settingsReport = DatabaseConnection.reportsCollection.getReport("JobSettings");
     if (settingsReport == null) {
       settingsReport = new ReportDAO();
       settingsReport.setReportName("JobSettings");
@@ -148,21 +130,17 @@ public class JobsDetailsPageModel {
       settingsReport.addNewValue("DefaultLaborChargeRate", "");
       DatabaseConnection.reportsCollection.addNewReport(settingsReport);
     } else {
-      DefaultLaborChargeName.set(
-        settingsReport.getReportData().get("DefaultLaborChargeName")
-      );
-      DefaultLaborChargeRate.set(
-        settingsReport.getReportData().get("DefaultLaborChargeRate")
-      );
+      DefaultLaborChargeName.set(settingsReport.getReportData().get("DefaultLaborChargeName"));
+      DefaultLaborChargeRate.set(settingsReport.getReportData().get("DefaultLaborChargeRate"));
     }
   }
 
   /**
-   * Set all the JobProperties
-   * this function loads the string properties for the job details page
-   * from the selected jobDAO
+   * Set all the JobProperties this function loads the string properties for the
+   * job details page from the selected jobDAO
    */
   public void setProperties() {
+    hasInvoice.set(job.isHasInvoice());
     jobName.set(job.getJobName());
     jobStartDate.set(job.getStartDate());
     machineName.set(job.getEquipmentName());
@@ -174,82 +152,65 @@ public class JobsDetailsPageModel {
     jobLaborCost.set(job.getBill().getLaborCost());
     jobPartsCost.set(job.getBill().getPartsCost());
     jobTotalCost.set(String.format("%.2f", job.getBill().getBillTotal()));
-    deliveryCostEdit.set(
-      String.format("%.2f", job.getBill().getDeliveryCost())
-    );
+    deliveryCostEdit.set(String.format("%.2f", job.getBill().getDeliveryCost()));
   }
 
   /**
-   * Load all labor charges for the job
-   * - This Fuction takes the current job and loads all of the laborChargeDAOs from the
-   *   selected Job's bill and creates a new ChargeCard for each laborChargeDAO and
-   *  adds it to the laborCharges ObservableList
+   * Load all labor charges for the job - This Fuction takes the current job and
+   * loads all of the laborChargeDAOs from the selected Job's bill and creates a
+   * new ChargeCard for each laborChargeDAO and adds it to the laborCharges
+   * ObservableList
    */
   public void loadLaborCharges() {
     laborCharges.clear();
-    if (
-      job.getBill() == null || job.getBill().getLaborCharges() == null
-    ) return;
-    job
-      .getBill()
-      .getLaborCharges()
-      .forEach(laborCharge -> {
-        LaborChargeDAO laborChargeDAO = laborCharge;
-        try {
-          FXMLLoader cardLoader = App.getLoader(
-            "CustomerJobDetailsPage",
-            "ChargeCard"
-          );
-          Parent card = cardLoader.load();
-          ((ChargeCardController) cardLoader.getController()).setLaborCharge(
-              laborChargeDAO,
-              selectedLaborCharge
-            );
-          laborCharges.add(card);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      });
+    if (job.getBill() == null || job.getBill().getLaborCharges() == null)
+      return;
+    job.getBill().getLaborCharges().forEach(laborCharge -> {
+      LaborChargeDAO laborChargeDAO = laborCharge;
+      try {
+        FXMLLoader cardLoader = App.getLoader("CustomerJobDetailsPage", "ChargeCard");
+        Parent card = cardLoader.load();
+        ((ChargeCardController) cardLoader.getController()).setLaborCharge(laborChargeDAO,
+            selectedLaborCharge);
+        laborCharges.add(card);
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   /**
-   * Load all part charges for the job
-   * - This Fuction takes the current job and loads all of the partChargeDAOs from the
-   *   selected Job's bill and creates a new ChargeCard for each partChargeDAO and
-   *   adds it to the partCharges ObservableList
+   * Load all part charges for the job - This Fuction takes the current job and
+   * loads all of the partChargeDAOs from the selected Job's bill and creates a
+   * new ChargeCard for each partChargeDAO and adds it to the partCharges
+   * ObservableList
    */
   public void loadPartCharges() {
     partCharges.clear();
-    if (job.getBill() == null || job.getBill().getPartCharges() == null) return;
-    job
-      .getBill()
-      .getPartCharges()
-      .forEach(partCharge -> {
-        PartChargeDAO partChargeDAO = partCharge;
-        try {
-          FXMLLoader cardLoader = App.getLoader(
-            "CustomerJobDetailsPage",
-            "ChargeCard"
-          );
-          Parent card = cardLoader.load();
-          ((ChargeCardController) cardLoader.getController()).setPartCharge(
-              partChargeDAO,
-              selectedPartCharge
-            );
-          partCharges.add(card);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      });
+    if (job.getBill() == null || job.getBill().getPartCharges() == null)
+      return;
+    job.getBill().getPartCharges().forEach(partCharge -> {
+      PartChargeDAO partChargeDAO = partCharge;
+      try {
+        FXMLLoader cardLoader = App.getLoader("CustomerJobDetailsPage", "ChargeCard");
+        Parent card = cardLoader.load();
+        ((ChargeCardController) cardLoader.getController()).setPartCharge(partChargeDAO, selectedPartCharge);
+        partCharges.add(card);
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   /**
-   * Initalise all the fields
-   * - This function sets all the fields to their default values
-   *  and sets the listeners for the selectedPartCharge and selectedLaborCharge
-   *  so that when then selected Object changes from the ChargeCard the update
-   *  fields are updated with the selected ChargeCard's values
-   *  and the showPartChargeUpdate and showLaborChargeUpdate are set to true respectively
+   * Initalise all the fields - This function sets all the fields to their default
+   * values and sets the listeners for the selectedPartCharge and
+   * selectedLaborCharge so that when then selected Object changes from the
+   * ChargeCard the update fields are updated with the selected ChargeCard's
+   * values and the showPartChargeUpdate and showLaborChargeUpdate are set to true
+   * respectively
    */
   public void initaliseFields() {
     laborChargeHours.setValue("");
@@ -260,14 +221,14 @@ public class JobsDetailsPageModel {
 
     laborChargeRate.setValue("");
     laborChargeRateError.setValue("");
-    //Listner for the selected Part charge changing
+    // Listner for the selected Part charge changing
     selectedPartCharge.addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
         showPartChargeUpdate.setValue(true);
         partChargeUpdateQuanity.set(String.valueOf(newValue.getQuantity()));
       }
     });
-    //Listner for the selected Labor charge changing
+    // Listner for the selected Labor charge changing
     selectedLaborCharge.addListener((obs, oldVal, newVal) -> {
       if (newVal != null) {
         showLaborChargeUpdate.setValue(true);
@@ -281,22 +242,17 @@ public class JobsDetailsPageModel {
   private ArrayList<PartDAO> selectedJobParts = new ArrayList<>();
 
   /**
-   * shows the add new part charge popup
-   * - This function sets the showPartCharge to true
-   *  and gets the selected equipment from the job and gets all the parts
+   * shows the add new part charge popup - This function sets the showPartCharge
+   * to true and gets the selected equipment from the job and gets all the parts
    * from the selected equipment and adds the part names and part numbers to the
    */
   public void showNewPart() {
     hideNewLaborCharge();
     showPartCharge.setValue(true);
-    EquipmentDAO selectedEquipment = DatabaseConnection.equipmentCollection.getEquipment(
-      job.getEquipment()
-    );
-    if (selectedEquipment == null) return;
-    selectedJobParts =
-      DatabaseConnection.inventoryCollection.getSelectParts(
-        selectedEquipment.getParts()
-      );
+    EquipmentDAO selectedEquipment = DatabaseConnection.equipmentCollection.getEquipment(job.getEquipment());
+    if (selectedEquipment == null)
+      return;
+    selectedJobParts = DatabaseConnection.inventoryCollection.getSelectParts(selectedEquipment.getParts());
     for (PartDAO part : selectedJobParts) {
       partNames.add(part.getPartName());
       partNumbers.add(part.getPartNumber());
@@ -328,8 +284,9 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Toggles the job name edit
-   * if the jobDetailsEditProperty is true then the jobNameEdit is set to the current jobName
+   * Toggles the job name edit if the jobDetailsEditProperty is true then the
+   * jobNameEdit is set to the current jobName
+   * 
    * @return
    */
   public boolean toggleJobNameEdit() {
@@ -341,8 +298,7 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Save the job name
-   * - This function sets the jobName to the jobNameEdit value
+   * Save the job name - This function sets the jobName to the jobNameEdit value
    */
   public void saveJobName() {
     jobName.setValue(jobNameEdit.getValue());
@@ -376,12 +332,8 @@ public class JobsDetailsPageModel {
    * Hide the JobDetails settings
    */
   public void hideJobDetailsSettings() {
-    DefaultLaborChargeName.set(
-      settingsReport.getReportData().get("DefaultLaborChargeName")
-    );
-    DefaultLaborChargeRate.set(
-      settingsReport.getReportData().get("DefaultLaborChargeRate")
-    );
+    DefaultLaborChargeName.set(settingsReport.getReportData().get("DefaultLaborChargeName"));
+    DefaultLaborChargeRate.set(settingsReport.getReportData().get("DefaultLaborChargeRate"));
     jobDetailsSettings.setValue(false);
   }
 
@@ -400,11 +352,10 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Validates a new LaborCharge
-   * - This function validates the laborChargeName, laborChargeHours and laborChargeRate
-   *   and if they are valid then it adds a new LaborCharge to the job's bill
-   *   and updates the jobDAO
-   *   if Invalid then it sets the error messages for the invalid fields
+   * Validates a new LaborCharge - This function validates the laborChargeName,
+   * laborChargeHours and laborChargeRate and if they are valid then it adds a new
+   * LaborCharge to the job's bill and updates the jobDAO if Invalid then it sets
+   * the error messages for the invalid fields
    */
   public void validateLaborCharge() {
     boolean valid = true;
@@ -416,9 +367,7 @@ public class JobsDetailsPageModel {
     }
     if (Double.parseDouble(laborChargeHours.get()) <= 0) {
       valid = false;
-      laborChargeHoursError.setValue(
-        "Labor Charge Hours must be greater than 0"
-      );
+      laborChargeHoursError.setValue("Labor Charge Hours must be greater than 0");
     } else {
       laborChargeHoursError.setValue("");
     }
@@ -428,14 +377,10 @@ public class JobsDetailsPageModel {
     } else {
       laborChargeRateError.setValue("");
     }
-    if (!valid) return;
-    job
-      .getBill()
-      .addNewLaborCharge(
-        laborChargeName.get(),
-        Double.parseDouble(laborChargeRate.get()),
-        Double.parseDouble(laborChargeHours.get())
-      );
+    if (!valid)
+      return;
+    job.getBill().addNewLaborCharge(laborChargeName.get(), Double.parseDouble(laborChargeRate.get()),
+        Double.parseDouble(laborChargeHours.get()));
     DatabaseConnection.jobCollection.updateJob(job);
     updateJobDAO();
     setProperties();
@@ -444,12 +389,12 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Validates a new PartCharge
-   * - This function validates the partQuanity and if it is valid then it adds a new PartCharge to the job's bill
-   *  and updates the jobDAO
-   *  if Invalid then it sets the error message for the invalid field
-   *  it Checks if the part is in stock and if there is enough in stock
-   * @param partName -PartName of the part to be added
+   * Validates a new PartCharge - This function validates the partQuanity and if
+   * it is valid then it adds a new PartCharge to the job's bill and updates the
+   * jobDAO if Invalid then it sets the error message for the invalid field it
+   * Checks if the part is in stock and if there is enough in stock
+   * 
+   * @param partName   -PartName of the part to be added
    * @param partNumber -PartNumber of the part to be added
    */
   public void validatePartCharge(String partName, String partNumber) {
@@ -497,18 +442,18 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Update the job DAO
-   * - This function updates the jobDAO with the current jobDAO from the database
+   * Update the job DAO - This function updates the jobDAO with the current jobDAO
+   * from the database
    */
   private void updateJobDAO() {
     job = DatabaseConnection.jobCollection.getDAO(job.getId());
   }
 
   /**
-   * Validates the part charge update
-   * - This function validates the partChargeUpdateQuanity and if it is valid then it updates the selectedPartCharge
-   *   with the new quantity and updates the jobDAO and partDAO
-   *  if Invalid then it sets the error message for the invalid field
+   * Validates the part charge update - This function validates the
+   * partChargeUpdateQuanity and if it is valid then it updates the
+   * selectedPartCharge with the new quantity and updates the jobDAO and partDAO
+   * if Invalid then it sets the error message for the invalid field
    */
   public void validatePartChargeUpdate() {
     if (partChargeUpdateQuanity.get().isEmpty()) {
@@ -516,41 +461,26 @@ public class JobsDetailsPageModel {
       return;
     } else {
       if (Double.parseDouble(partChargeUpdateQuanity.get()) <= 0) {
-        partChargeUpdateQuanityError.setValue(
-          "Part Quantity must be greater than 0"
-        );
+        partChargeUpdateQuanityError.setValue("Part Quantity must be greater than 0");
         return;
       } else {
-        PartDAO part = DatabaseConnection.inventoryCollection.getPartByID(
-          selectedPartCharge.get().getPartId()
-        );
+        PartDAO part = DatabaseConnection.inventoryCollection
+            .getPartByID(selectedPartCharge.get().getPartId());
         int newQuanity = Integer.parseInt(partChargeUpdateQuanity.get());
         if (selectedPartCharge.get().getQuantity() > newQuanity) {
-          part.setInStock(
-            part.getInStock() +
-            (
-              selectedPartCharge.get().getQuantity() -
-              Integer.parseInt(partChargeUpdateQuanity.get())
-            )
-          );
+          part.setInStock(part.getInStock()
+              + (selectedPartCharge.get().getQuantity() - Integer.parseInt(partChargeUpdateQuanity.get())));
         } else {
           if (newQuanity > part.getInStock()) {
             partChargeUpdateQuanityError.setValue("Not enough parts in stock");
             return;
           } else {
-            part.setInStock(
-              part.getInStock() -
-              (selectedPartCharge.get().getQuantity() - newQuanity)
-            );
+            part.setInStock(part.getInStock() - (selectedPartCharge.get().getQuantity() - newQuanity));
           }
         }
         DatabaseConnection.inventoryCollection.updatePart(part);
-        job
-          .getBill()
-          .updatePartCharge(
-            selectedPartCharge.get(),
-            Integer.parseInt(partChargeUpdateQuanity.get())
-          );
+        job.getBill().updatePartCharge(selectedPartCharge.get(),
+            Integer.parseInt(partChargeUpdateQuanity.get()));
         DatabaseConnection.jobCollection.updateJob(job);
         updateJobDAO();
         setProperties();
@@ -562,14 +492,11 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Deletes the selected part charge
-   * - This function deletes the selected part charge from the job's bill
-   *   and updates the jobDAO and the partDAO
+   * Deletes the selected part charge - This function deletes the selected part
+   * charge from the job's bill and updates the jobDAO and the partDAO
    */
   public void deletePartCharge() {
-    PartDAO part = DatabaseConnection.inventoryCollection.getPartByID(
-      selectedPartCharge.get().getPartId()
-    );
+    PartDAO part = DatabaseConnection.inventoryCollection.getPartByID(selectedPartCharge.get().getPartId());
     part.setInStock(part.getInStock() + selectedPartCharge.get().getQuantity());
     DatabaseConnection.inventoryCollection.updatePart(part);
     job.getBill().removePartCharge(selectedPartCharge.get());
@@ -595,11 +522,11 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Validates the labor charge update
-   *  - This function validates the laborChargeUpdateName, laborChargeUpdateHours and laborChargeUpdateRate
-   *   and if they are valid then it updates the selectedLaborCharge with the new values
-   *   and updates the jobDAO
-   *   if Invalid then it sets the error messages for the invalid fields
+   * Validates the labor charge update - This function validates the
+   * laborChargeUpdateName, laborChargeUpdateHours and laborChargeUpdateRate and
+   * if they are valid then it updates the selectedLaborCharge with the new values
+   * and updates the jobDAO if Invalid then it sets the error messages for the
+   * invalid fields
    */
   public void updateLaborCharge() {
     boolean valid = true;
@@ -609,37 +536,23 @@ public class JobsDetailsPageModel {
     } else {
       laborChargeUpdateNameError.setValue("");
     }
-    if (
-      laborChargeUpdateHours.get().isEmpty() ||
-      Double.parseDouble(laborChargeUpdateHours.get()) <= 0
-    ) {
-      laborChargeUpdateHoursError.setValue(
-        "Labor Charge Hours must be greater than 0"
-      );
+    if (laborChargeUpdateHours.get().isEmpty() || Double.parseDouble(laborChargeUpdateHours.get()) <= 0) {
+      laborChargeUpdateHoursError.setValue("Labor Charge Hours must be greater than 0");
       valid = false;
     } else {
       laborChargeUpdateHoursError.setValue("");
     }
-    if (
-      laborChargeUpdateRate.get().isEmpty() ||
-      Double.parseDouble(laborChargeUpdateRate.get()) <= 0
-    ) {
-      laborChargeUpdateRateError.setValue(
-        "Labor Charge Rate must be greater than 0"
-      );
+    if (laborChargeUpdateRate.get().isEmpty() || Double.parseDouble(laborChargeUpdateRate.get()) <= 0) {
+      laborChargeUpdateRateError.setValue("Labor Charge Rate must be greater than 0");
       valid = false;
     } else {
       laborChargeUpdateRateError.setValue("");
     }
-    if (!valid) return;
+    if (!valid)
+      return;
     job.getBill().removeLaborCharge(selectedLaborCharge.get());
-    job
-      .getBill()
-      .addNewLaborCharge(
-        laborChargeUpdateName.get(),
-        Double.parseDouble(laborChargeUpdateRate.get()),
-        Double.parseDouble(laborChargeUpdateHours.get())
-      );
+    job.getBill().addNewLaborCharge(laborChargeUpdateName.get(),
+        Double.parseDouble(laborChargeUpdateRate.get()), Double.parseDouble(laborChargeUpdateHours.get()));
     DatabaseConnection.jobCollection.updateJob(job);
     updateJobDAO();
     setProperties();
@@ -648,9 +561,8 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * Deletes the selected labor charge
-   * - This function deletes the selected labor charge from the job's bill
-   *   and updates the jobDAO
+   * Deletes the selected labor charge - This function deletes the selected labor
+   * charge from the job's bill and updates the jobDAO
    */
   public void deleteLaborCharge() {
     job.getBill().removeLaborCharge(selectedLaborCharge.get());
@@ -662,10 +574,9 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * saveDeliveryCost:
-   * - This function validates the deliveryCostEdit and if it is valid then it updates the job's bill with the new delivery cost
-   *   and updates the jobDAO
-   *   if Invalid then it sets the error message for the invalid field
+   * saveDeliveryCost: - This function validates the deliveryCostEdit and if it is
+   * valid then it updates the job's bill with the new delivery cost and updates
+   * the jobDAO if Invalid then it sets the error message for the invalid field
    */
   public void saveDeliveryCost() {
     if (deliveryCostEdit.getValue().isEmpty()) {
@@ -674,9 +585,7 @@ public class JobsDetailsPageModel {
     } else {
       if (deliveryCostEdit.getValue().matches("^\\d+(\\.\\d{1,2})?$")) {
         deliveryCostEditError.setValue("");
-        job
-          .getBill()
-          .updateDeliveryCost(Double.parseDouble(deliveryCostEdit.getValue()));
+        job.getBill().updateDeliveryCost(Double.parseDouble(deliveryCostEdit.getValue()));
         DatabaseConnection.jobCollection.updateJob(job);
         job = DatabaseConnection.jobCollection.getDAO(job.getId());
         setProperties();
@@ -688,27 +597,22 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * cancelDeliveryEdit:
-   * - This function hides the delivery cost edit popup
+   * cancelDeliveryEdit: - This function hides the delivery cost edit popup
    */
   public void cancelDeliveryEdit() {
     showDeliveryCostEdit.setValue(false);
   }
 
   /**
-   * toggleDeliveryEdit:
-   * - This function toggles the delivery cost edit popup
+   * toggleDeliveryEdit: - This function toggles the delivery cost edit popup
    */
   public void toggleDeliveryEdit() {
     showDeliveryCostEdit.setValue(!showDeliveryCostEdit.get());
-    deliveryCostEdit.setValue(
-      String.format("%.2f", job.getBill().getDeliveryCost())
-    );
+    deliveryCostEdit.setValue(String.format("%.2f", job.getBill().getDeliveryCost()));
   }
 
   /**
    * updateJobDefaults:
-   *
    */
   public void updateJobSettings() {
     boolean valid = true;
@@ -718,25 +622,18 @@ public class JobsDetailsPageModel {
     } else {
       DefaultLaborNameError.set("");
     }
-    if (
-      DefaultLaborChargeRate.get().isEmpty() ||
-      !DefaultLaborChargeRate.get().matches("^\\d+(\\.\\d{1,2})?$")
-    ) {
+    if (DefaultLaborChargeRate.get().isEmpty()
+        || !DefaultLaborChargeRate.get().matches("^\\d+(\\.\\d{1,2})?$")) {
       DefaultLaborRateError.set("Labor Charge Rate must be a number");
       valid = false;
     } else {
       DefaultLaborRateError.set("");
     }
-    if (!valid) return;
+    if (!valid)
+      return;
 
-    settingsReport.addNewValue(
-      "DefaultLaborChargeName",
-      DefaultLaborChargeName.get()
-    );
-    settingsReport.addNewValue(
-      "DefaultLaborChargeRate",
-      DefaultLaborChargeRate.get()
-    );
+    settingsReport.addNewValue("DefaultLaborChargeName", DefaultLaborChargeName.get());
+    settingsReport.addNewValue("DefaultLaborChargeRate", DefaultLaborChargeRate.get());
     DatabaseConnection.reportsCollection.updateReport(settingsReport);
     hideJobDetailsSettings();
   }
@@ -749,14 +646,14 @@ public class JobsDetailsPageModel {
   public void updateJobStatus() {
     job.setStatus(jobStatus.get());
     boolean completed = false;
-    //Check if the job status is in the list of completed statuses
+    // Check if the job status is in the list of completed statuses
     for (int i = 0; (i < completedStatus.length); i++) {
       if (job.getStatus().equals(completedStatus[i])) {
         completed = true;
         break;
       }
     }
-    //if complete complete the job
+    // if complete complete the job
     if (completed) {
       CompleteJob();
     }
@@ -767,34 +664,24 @@ public class JobsDetailsPageModel {
   }
 
   /**
-   * CompleteJob:
-   * - This function completes the current job
-   * and sets the end date and time to the current date and time
-   * and updates the jobDAO
-   * and updates the machineDAO for the job
+   * CompleteJob: - This function completes the current job and sets the end date
+   * and time to the current date and time and updates the jobDAO and updates the
+   * machineDAO for the job
    */
   private void CompleteJob() {
-    //Update the job end date and time
-    job.setEndDate(
-        java.time.LocalDate
-          .now()
-          .format(DateTimeFormatter.ofPattern("MM/dd/yyyy"))
-          .toString()
-      );
-      job.setEndDateTime(new java.util.Date());
+    // Update the job end date and time
+    job.setEndDate(java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString());
+    job.setEndDateTime(new java.util.Date());
 
-      //Update the machine DAO
-      MachineDAO machine = DatabaseConnection.machineCollection.getMachineDAObyId(
-        job.getMachineID()
-      );
-      machine.updateWork(job);
-      DatabaseConnection.machineCollection.updateMachine(machine);
+    // Update the machine DAO
+    MachineDAO machine = DatabaseConnection.machineCollection.getMachineDAObyId(job.getMachineID());
+    machine.updateWork(job);
+    DatabaseConnection.machineCollection.updateMachine(machine);
   }
 
-
   /**
-   * delete the currentJob:
-   * - This function deletes the current job from the database
+   * delete the currentJob: - This function deletes the current job from the
+   * database
    */
   public void deleteJob() {
     DatabaseConnection.jobCollection.deleteJob(job);
@@ -805,12 +692,37 @@ public class JobsDetailsPageModel {
    * update Job Notes
    */
   public void updateJobNotes() {
-    if (
-      jobDetails.get().isEmpty() || jobDetails.get().equals(job.getDetails())
-    ) return;
+    if (jobDetails.get().isEmpty() || jobDetails.get().equals(job.getDetails()))
+      return;
     job.setDetails(jobDetails.get());
     DatabaseConnection.jobCollection.updateJob(job);
     updateJobDAO();
     setProperties();
+  }
+
+  public void goToInvoice() {
+    if(job.getInvoiceID() == null) {
+      System.err.println("Invoice not found");
+      return;
+    }
+    CustomerDAO customer = DatabaseConnection.customerCollection.findByName(job.getCustomerName());
+    if (customer == null) {
+      System.err.println("Customer not found");
+      return;
+    }
+    App.setBackPointer("CustomerJobDetailsPage", "CustomerJobDetailsPage");
+    App.setSceneProperty("customerDAO", customer);
+    InvoiceDAO selected = DatabaseConnection.invoiceCollection.getInvoice(job.getInvoiceID());
+    if (selected == null) {
+      System.err.println("Invoice not found");
+      return;
+    }
+    App.setSceneProperty("selectedInvoice", selected);
+    try {
+      App.setPage("CustomerRecordsPage", "CustomerRecordsPage");
+    }
+    catch (IOException e) {
+     System.err.println("Error loading page: " + e.getMessage());
+    }
   }
 }

@@ -321,6 +321,17 @@
                   <String fx:value="whiteText" />
                </styleClass>
             </Label>
+            <Button fx:id="GoToInvoiceButton" layoutX="21.0" layoutY="57.0" mnemonicParsing="false" onAction="#goToInvoice" prefHeight="21.0" prefWidth="147.0" text="Go To Invoice" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0">
+               <styleClass>
+                  <String fx:value="textButton" />
+                  <String fx:value="roundedCorners" />
+                  <String fx:value="whiteText" />
+                  <String fx:value="smallFont" />
+               </styleClass>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PopupContentField" layoutX="14.0" layoutY="571.0" prefHeight="338.0" prefWidth="557.0">

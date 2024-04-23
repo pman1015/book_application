@@ -22,7 +22,7 @@ import org.customer_book.Database.JobsCollection.LaborChargeDAO;
 @ToString
 public class JobDAO {
 
-  //-----------------Job DAO Serilizable Values-----------------//
+  // -----------------Job DAO Serilizable Values-----------------//
   private ObjectId id;
   private BillDAO bill;
   private Date created;
@@ -35,8 +35,10 @@ public class JobDAO {
   private ObjectId machineID;
   private ObjectId equipment;
   private String jobName;
+  private boolean hasInvoice;
+  private ObjectId invoiceID;
 
-  //-----------------Job DAO JavaFX Properties-----------------//
+  // -----------------Job DAO JavaFX Properties-----------------//
   @BsonIgnore
   private StringProperty jobNameProperty;
 
@@ -57,15 +59,10 @@ public class JobDAO {
 
   public void initializeFXProperties() {
     jobNameProperty = new SimpleStringProperty(jobName);
-    equipmentNameProperty =
-      new SimpleStringProperty(
-        DatabaseConnection.equipmentCollection
-          .getEquipment(equipment)
-          .getModelNumber()
-      );
+    equipmentNameProperty = new SimpleStringProperty(
+        DatabaseConnection.equipmentCollection.getEquipment(equipment).getModelNumber());
     jobNotesProperty = new SimpleStringProperty(details);
-    currentCostProperty =
-      new SimpleStringProperty(String.valueOf(bill.getBillTotal()));
+    currentCostProperty = new SimpleStringProperty(String.valueOf(bill.getBillTotal()));
     double hours = 0;
     if (bill.getLaborCharges() != null) {
       for (LaborChargeDAO labor : bill.getLaborCharges()) {
@@ -78,17 +75,15 @@ public class JobDAO {
 
   public Paint resolveColor(String status) {
     switch (status) {
-      case "InProgress":
-        return Paint.valueOf("#FFD700");
-      default:
-        return Paint.valueOf("#00FF00");
+    case "InProgress":
+      return Paint.valueOf("#FFD700");
+    default:
+      return Paint.valueOf("#00FF00");
     }
   }
 
   public String getEquipmentName() {
-    return DatabaseConnection.equipmentCollection
-      .getEquipment(equipment)
-      .getModelNumber();
+    return DatabaseConnection.equipmentCollection.getEquipment(equipment).getModelNumber();
   }
-  
+
 }

@@ -1,14 +1,21 @@
 List of features that need implimentation 
+
 - 1. Search feature for customers //DONE
+
 - 2. load on scroll for customers //DONE
+
 - 3. load on scroll for inventory //DONE
+
 - 4. Customer equipment card load //DONE
+
 - 5. customer records page //DONE
+
 - 6. customer equipment update //DONE
     - 6.1. customer equipment delete/ archive //DONE
     - 6.2 customer machine notes //DONE
     - 6.3 customer machine service history //DONE
     - 6.4 customer equipment compatible parts //DONE
+
 - 7. customer job history filter //DONE
     - 7.1 filter by status //DONE
     - 7.2 filter by date //DONE
@@ -16,7 +23,7 @@ List of features that need implimentation
     - 7.5 search by job name //DONE
 
     
-- 8. spacing on status button for job details //DON
+- 8. spacing on status button for job details //DONE
 
 - 9. tax calculation
     - add option to job details to add tax
@@ -55,12 +62,12 @@ List of features that need implimentation
         -15.5.5 add option to update database connection string from home page //DONE
         -15.5.6 add option to add an image to the tile for the home page //DONE
 
-- 16. On invoice download add the option to download as a pdf or as a docx 
+- 16. On invoice download add the option to download as a pdf or as a docx //DONE
 
 - 17. Add a loader to the customer details page that displays before the customer is set //CANCELED
 
-- 18. Add indicator that a job is in an invoice
-    - 18.1 add a link to a job card to the customer records page with the selected invoice loaded
+- 18. Add indicator that a job is in an invoice //DONE
+    - 18.1 add a link to a job card to the customer records page with the selected invoice loaded //DONE
 
 - 19. Add handeling for space in user name by changin %20 to a space //DONE
 
@@ -71,6 +78,12 @@ List of features that need implimentation
 - 22. filter for part history on customer equipment
 
 - 23. Add a field for job machine name to the customer jobs list //DONE
+
+- 24. Add a page for user to create their own queries about data
+
+- 25. Add a popup to warn the user if they are adding a job to an invoice that already has one
+
+- 26. Remove the Invoice number and has invoice from a job when it is deleted
 
 
 ### Possible Features ###
