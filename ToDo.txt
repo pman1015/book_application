@@ -85,9 +85,15 @@ List of features that need implimentation
 
 - 26. Remove the Invoice number and has invoice from a job when it is deleted
 
+- 27. Create an installer to initalize the database
+
+- 28. Name the program BUNNY and the installer GRUMPY
+
+- 29. Add independent threading to download 
+
+- 30. Restructure program to have a program directory and installer directory 
 
 ### Possible Features ###
-- 1. Create a stats tab to view the busisness stats
 - 2. Create a companion mobile app to allow for mobile invoice generation
 - 3. Create a companion mobile app to allow for mobile job creation
 

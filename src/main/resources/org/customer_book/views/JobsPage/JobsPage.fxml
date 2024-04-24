@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.JobsListPage.Page.JobListController">
+   <children>
+      <VBox layoutX="512.0" layoutY="1.0" prefHeight="912.0" prefWidth="1195.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="1195.0">
+               <styleClass>
+                  <String fx:value="topRoundedCorners" />
+                  <String fx:value="baseColor" />
+               </styleClass>
+               <children>
+                  <Label prefHeight="32.0" prefWidth="266.0" text="Customer Name">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="32.0" prefWidth="242.0" text="Job Name">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="32.0" prefWidth="244.0" text="Equipment">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="32.0" prefWidth="203.0" text="Start Date">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+                  <Label prefHeight="32.0" prefWidth="175.0" text="Status">
+                     <styleClass>
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+               </padding>
+            </HBox>
+            <ListView fx:id="JobCardList" prefHeight="821.0" prefWidth="1187.0">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="semiTransparent" />
+                  <String fx:value="roundedCorners" />
+                  <String fx:value="scrollPane" />
+                  <String fx:value="listView" />
+               </styleClass>
+            </ListView>
+         </children>
+      </VBox>
+      <ToolBar layoutX="1001.0" layoutY="14.0" prefHeight="56.0" prefWidth="108.0" styleClass="transparentColor" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="24.0">
+        <items>
+          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showFilter" prefHeight="46.0" prefWidth="46.0" styleClass="svgButton">
+               <graphic>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="46.0">
+                     <children>
+                        <SVGPath content="M4 6.13333C4 5.3866 4 5.01323 4.14532 4.72801C4.27316 4.47713 4.47713 4.27316 4.72801 4.14532C5.01323 4 5.3866 4 6.13333 4H25.8667C26.6135 4 26.9868 4 27.272 4.14532C27.5229 4.27316 27.7268 4.47713 27.8547 4.72801C28 5.01323 28 5.3866 28 6.13333V8.44968C28 8.7758 28 8.93885 27.9632 9.09231C27.9305 9.22836 27.8767 9.35841 27.8035 9.47771C27.7211 9.61227 27.6057 9.72757 27.3752 9.95817L19.2915 18.0419C19.0609 18.2724 18.9456 18.3877 18.8632 18.5223C18.79 18.6416 18.7361 18.7716 18.7035 18.9077C18.6667 19.0612 18.6667 19.2243 18.6667 19.5503V22.6667L13.3333 28V19.5503C13.3333 19.2243 13.3333 19.0612 13.2965 18.9077C13.2638 18.7716 13.21 18.6416 13.1369 18.5223C13.0544 18.3877 12.9391 18.2724 12.7085 18.0419L4.62484 9.95817C4.39424 9.72757 4.27893 9.61227 4.19648 9.47771C4.12337 9.35841 4.06951 9.22836 4.03684 9.09231C4 8.93885 4 8.7758 4 8.44968V6.13333Z" fill="TRANSPARENT" scaleX="1.5" scaleY="1.5" stroke="WHITE" strokeLineCap="BUTT" strokeWidth="2.5" translateY="2.0" />
+                     </children></StackPane>
+               </graphic>
+            </Button>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showAddJob" prefHeight="46.0" prefWidth="46.0" styleClass="svgButton">
+               <graphic>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="46.0">
+                     <children>
+                        <SVGPath content="M24.2005 44C35.1539 44 44.0334 35.0457 44.0334 24C44.0334 12.9543 35.1539 4 24.2005 4C13.2471 4 4.36761 12.9543 4.36761 24C4.36761 35.0457 13.2471 44 24.2005 44Z" fill="TRANSPARENT" stroke="WHITE" strokeWidth="5.0" />
+                        <SVGPath content="M30.1504 24H24.2005M24.2005 24H18.2506M24.2005 24V18M24.2005 24V30" fill="TRANSPARENT" fillRule="EVEN_ODD" stroke="WHITE" strokeWidth="5.0" />
+                     </children></StackPane>
+               </graphic>
+            </Button>
+        </items>
+      </ToolBar>
+   </children>
+</AnchorPane>

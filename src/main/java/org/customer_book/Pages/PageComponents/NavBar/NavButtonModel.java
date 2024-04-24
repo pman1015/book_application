@@ -11,16 +11,16 @@ public class NavButtonModel {
   public void navigate(String pageName) throws IOException {
     switch (pageName) {
     case "Home":
-      App.setPage("HomePage", "HomePageBaseLayout");
       // navigate to home page
+      App.setPage("HomePage", "HomePageBaseLayout");
       break;
     case "Customers":
       // navigate to customers page
       App.setPage("CustomerListPage", "CustomerListPage");
       break;
     case "Jobs":
-      // TODO: implement jobs page
       // navigate to jobs page
+      App.setPage("JobsPage", "JobsPage");
       break;
     case "Inventory":
       // navigate to inventory page
