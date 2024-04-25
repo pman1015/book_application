@@ -25,7 +25,6 @@ import org.customer_book.Pages.JobsListPage.Card.JobCardController;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class JobListModel {
 
     // ----------------- View Properties ----------------------//
@@ -36,6 +35,22 @@ public class JobListModel {
     private ArrayList<JobDAO> jobsList = new ArrayList<>();
     private Bson filter = ne("_id", null);
     private int loadSize = 25;
+
+    // -------------------- Constructor -------------------------//
+    public JobListModel() {
+        selectedJobDAO.addListener((obs, oldJob, newJob) -> {
+            if (newJob != null) {
+                try {
+                    App.setBackPointer("JobsPage", "JobsPage");
+                    App.setSceneProperty("jobDAO", newJob);
+                    App.setPage("CustomerJobDetailsPage", "CustomerJobDetailsPage");
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     // ------------------- View Functions ----------------------//
     public void showFilter() {
@@ -49,15 +64,17 @@ public class JobListModel {
     // ------------------- Model Functions ----------------------//
     /**
      * Load the jobDAOs from the database
+     * 
      * @param clear - if true, clear the current list of jobs
      */
     public void loadJobDAOs(boolean clear) {
+
+        if (clear) {
+            jobsList = DatabaseConnection.jobCollection.getJobs(filter, loadSize, 0);
+        } else {
+            jobsList.addAll(DatabaseConnection.jobCollection.getJobs(filter, loadSize, jobsList.size()));
+        }
         Platform.runLater(() -> {
-            if (clear) {
-                jobsList = DatabaseConnection.jobCollection.getJobs(filter, loadSize, 0);
-            } else {
-                jobsList.addAll(DatabaseConnection.jobCollection.getJobs(filter, loadSize, jobsList.size()));
-            }
             loadJobCards();
         });
     }
@@ -66,7 +83,7 @@ public class JobListModel {
      * Load a card and add it to the list for each job in the jobsList
      */
     private void loadJobCards() {
-       JobCardList.clear();
+        JobCardList.clear();
         for (JobDAO jobDAO : jobsList) {
             try {
                 FXMLLoader cardLoader = App.getLoader("JobsPage", "JobCard");

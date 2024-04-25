@@ -29,13 +29,13 @@ public class JobCardModel {
     public void setJobDAO(JobDAO jobDAO, ObjectProperty<JobDAO> selectedJobDAO) {
         this.jobDAO = jobDAO;
         this.selectedJobDAO = selectedJobDAO;
-        Platform.runLater(() -> {
+       
             this.StartDate.set(jobDAO.getStartDate());
             this.Status.set(jobDAO.getStatus());
             this.JobName.set(jobDAO.getJobName());
             this.CustomerName.set(jobDAO.getCustomerName());
             this.EquipmentName.set(jobDAO.getEquipmentName());
-        });
+    
     }
     public void loadJob(){
         selectedJobDAO.set(jobDAO);
