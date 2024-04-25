@@ -59,6 +59,17 @@ public class JobListModel {
 
     public void showAddJob() {
         // TODO implement here
+        Platform.runLater(()->{
+            try {
+                FXMLLoader loader = App.getLoader("JobsPage", "JobCreatePopup");
+                Parent root = loader.load();
+                App.addPopup(root);
+            }
+            catch (Exception e) {
+                System.out.println("Error loading job create popup: " + e.getMessage());
+            }
+        
+        });
     }
 
     // ------------------- Model Functions ----------------------//

@@ -27,7 +27,7 @@ import org.customer_book.Pages.HomePage.Content.Panes.PaneModel;
 
 @Getter
 @Setter
-public class RecentJobsModel extends PaneModel{
+public class RecentJobsModel extends PaneModel {
 
   // ---------------------- View Properties ----------------------//
   private ObservableList<Parent> RecentJobsList = FXCollections.observableArrayList();
@@ -44,51 +44,39 @@ public class RecentJobsModel extends PaneModel{
   }
 
   public void loadJobs(boolean clear) {
+    if (clear) {
+      jobs = DatabaseConnection.jobCollection.getJobs(filter, 12, 0);
+    } else {
+      jobs.addAll(DatabaseConnection.jobCollection.getJobs(filter, 12, jobs.size()));
+    }
+
     Platform.runLater(() -> {
-      if (clear) {
-        //long jobloadStart = System.currentTimeMillis();
-        //System.out.println("Loading Jobs...");
-        jobs = DatabaseConnection.jobCollection.getJobs(filter, 12, 0);
-        //System.out.println(
-        //  "Jobs Loaded in: " + (System.currentTimeMillis() - jobloadStart) + "ms");
-      } else {
-        jobs.addAll(
-          DatabaseConnection.jobCollection.getJobs(filter, 12, jobs.size())
-        );
-      }
       loadJobCards();
     });
+
   }
 
   public void loadJobCards() {
     RecentJobsList.clear();
-    long jobcardLoadStart = System.currentTimeMillis();
+
     for (JobDAO job : jobs) {
-      Platform.runLater(() -> {
-        try {
-          FXMLLoader cardLoader = App.getLoader(
-            "HomePage/PaneContent/RecentJobs",
-            "RecentJobCard"
-          );
-          Parent card = cardLoader.load();
-          ((HBox) card).prefWidthProperty().bind(jobCardWidth);
-          ((RecentJobCardController) cardLoader.getController()).setJob(job);
-          RecentJobsList.add(card);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        System.out.println(
-          "Job Card Loaded in: " +
-          (System.currentTimeMillis() - jobcardLoadStart) +
-          "ms"
-        );
-      });
+
+      try {
+        FXMLLoader cardLoader = App.getLoader("HomePage/PaneContent/RecentJobs", "RecentJobCard");
+        Parent card = cardLoader.load();
+        ((HBox) card).prefWidthProperty().bind(jobCardWidth);
+        ((RecentJobCardController) cardLoader.getController()).setJob(job);
+        RecentJobsList.add(card);
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+      }
+
     }
   }
 
   public void setJobCardWidth(double width) {
     jobCardWidth.set(width - 32);
   }
-
 
 }

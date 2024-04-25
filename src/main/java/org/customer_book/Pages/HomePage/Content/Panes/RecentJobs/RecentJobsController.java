@@ -7,8 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressIndicator;
 
-public class RecentJobsController extends PaneController{
+public class RecentJobsController extends PaneController {
+  @FXML
+  private ProgressIndicator LoadingIndicator;
 
   @FXML
   private ListView<Parent> RecentJobsList;
@@ -30,13 +33,28 @@ public class RecentJobsController extends PaneController{
     RecentJobsList.widthProperty().addListener((obs, oldVal, newVal) -> {
       model.setJobCardWidth(newVal.doubleValue());
     });
-    Platform.runLater(() -> {
+    Thread updateJobs = new Thread(() -> {
+      long minimum_load_time = 1000;
+      long start_time = System.currentTimeMillis();
+
       model.loadJobs(true);
+      if (minimum_load_time > System.currentTimeMillis() - start_time) {
+        try {
+          Thread.sleep(minimum_load_time - (System.currentTimeMillis() - start_time));
+        }
+        catch (InterruptedException e) {
+        }
+      }
+      Platform.runLater(() -> {
+        LoadingIndicator.setVisible(false);
+      });
     });
+    updateJobs.start();
+
   }
-  
+
   public void setPaneNumber(int paneNumber) {
     model.setPaneInfo(paneNumber);
   }
-  
+
 }

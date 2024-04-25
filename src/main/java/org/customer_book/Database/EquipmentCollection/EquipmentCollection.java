@@ -174,4 +174,8 @@ public class EquipmentCollection {
       });
     return nameObjectMap;
   }
+
+public EquipmentDAO findByName(String equipmentName) {
+    return collection.find(eq("modelNumber", equipmentName)).first();
+}
 }

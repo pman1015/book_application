@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.customer_book.Database.DatabaseConnection;
 import org.customer_book.Database.EquipmentCollection.EquipmentDAO;
 
 public class MachineCollection {
@@ -45,6 +46,11 @@ public class MachineCollection {
       .filter(eq("customerName", customerName))
       .filter(eq("equipmentId", equipmentId))
       .first();
+  }
+  public MachineDAO getCustomerMachine(String customerName, String equipmentName){
+    EquipmentDAO eq = DatabaseConnection.equipmentCollection.findByName(equipmentName);
+    if(eq == null) return null;
+    return collection.find(and(eq("customerName", customerName), eq("equipmentId", eq.getId()))).first();
   }
 
   public ArrayList<MachineDAO> getMachinesbyIDs(

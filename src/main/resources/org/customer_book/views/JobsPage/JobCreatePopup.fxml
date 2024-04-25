@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="477.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.JobsListPage.Create.JobCreateController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Text layoutX="86.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creat New Job:" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="24.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="largeFont" />
+         </styleClass>
+      </Text>
+      <Button layoutX="484.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeCreateJob" styleClass="svgButton" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <graphic>
+            <StackPane scaleX="1.7" scaleY="1.7">
+               <children>
+                  <SVGPath content="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" fill="TRANSPARENT" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.5" />
+                  <SVGPath content="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" fill="TRANSPARENT" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="1.5" translateX="-0.5" translateY="-0.5" />
+               </children>
+            </StackPane>
+         </graphic>
+      </Button>
+      <VBox layoutX="24.0" layoutY="92.0" prefHeight="489.0" prefWidth="429.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="74.0">
+         <children>
+            <VBox fx:id="CustomerNameInput" prefHeight="88.0" prefWidth="552.0" spacing="4.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <ComboBox fx:id="CustomerNameComboBox" editable="true" prefHeight="25.0" prefWidth="365.0" promptText="Customer Name">
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="semiTransparent" />
+                        <String fx:value="comboBox" />
+                        <String fx:value="roundedCorners" />
+                     </styleClass>
+                  </ComboBox>
+                  <Label fx:id="CustomerNameError" prefHeight="17.0" prefWidth="470.0" text="Label">
+                     <VBox.margin>
+                        <Insets left="48.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="errorFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="14.0" right="14.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="EquipmentInput" prefHeight="88.0" prefWidth="552.0" spacing="4.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EquipmentName:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <ComboBox fx:id="EquipmentNameComboBox" editable="true" prefHeight="25.0" prefWidth="365.0" promptText="Equipment Name">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="whiteText" />
+                        <String fx:value="semiTransparent" />
+                        <String fx:value="comboBox" />
+                        <String fx:value="roundedCorners" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Label fx:id="EquipmentNameError" prefHeight="17.0" prefWidth="470.0" text="Label">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="errorFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="48.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="14.0" right="14.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="JobNameInput" prefHeight="88.0" prefWidth="552.0" spacing="4.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Job name:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="JobNameTextField" maxWidth="-Infinity" prefHeight="25.0" prefWidth="365.0" promptText="Job Name">
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="smallFont" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="semiTransparent" />
+                     </styleClass>
+                  </TextField>
+                  <Label fx:id="JobNameError" prefHeight="17.0" prefWidth="470.0" text="Label">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="errorFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="48.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="14.0" right="14.0" top="4.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="JobDescriptionInput" prefHeight="165.0" prefWidth="429.0" spacing="4.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <TextArea fx:id="JobDescriptionArea" maxWidth="-Infinity" prefHeight="86.0" prefWidth="369.0" promptText="Job Description" wrapText="true">
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="scrollPane" />
+                        <String fx:value="semiTransparent" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </TextArea>
+                  <Label fx:id="DescriptionError" prefHeight="17.0" prefWidth="470.0" text="Label">
+                     <styleClass>
+                        <String fx:value="smallFont" />
+                        <String fx:value="errorFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="48.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="4.0" left="14.0" right="14.0" top="4.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+      <Button layoutX="66.0" layoutY="571.0" mnemonicParsing="false" onAction="#createJob" prefHeight="48.0" prefWidth="353.0" text="Save">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>

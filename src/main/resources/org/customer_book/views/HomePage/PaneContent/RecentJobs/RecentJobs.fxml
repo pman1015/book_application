@@ -46,13 +46,18 @@
             </Button>
          </children>
       </HBox>
-      <ListView fx:id="RecentJobsList" prefHeight="524.0" prefWidth="403.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0">
-         <styleClass>
-            <String fx:value="listView" />
-            <String fx:value="semiTransparent" />
-            <String fx:value="roundedCorners" />
-            <String fx:value="scrollPane" />
-         </styleClass>
-      </ListView>
+      <StackPane layoutX="14.0" layoutY="64.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0">
+         <children>
+            <ListView fx:id="RecentJobsList" prefHeight="524.0" prefWidth="403.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="64.0">
+               <styleClass>
+                  <String fx:value="listView" />
+                  <String fx:value="semiTransparent" />
+                  <String fx:value="roundedCorners" />
+                  <String fx:value="scrollPane" />
+               </styleClass>
+            </ListView>
+            <ProgressIndicator fx:id="LoadingIndicator" maxHeight="-Infinity" maxWidth="-Infinity" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

@@ -31,28 +31,29 @@ public class JobListController {
 
     @FXML
     void initialize() {
+        System.out.println("JobLustController Initialized: " + Thread.currentThread().getName() );
         model = new JobListModel();
         LoadingIndicator.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
         // Show the spinner until there are items in the list
-        Task<Void> updateJobs = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-            
-                model.loadJobDAOs(true);
-                return null;
+        Thread updateJobs = new Thread(() -> {
+           
+            try {
+                Thread.sleep(1000);
             }
-        };
-        updateJobs.setOnSucceeded(e -> {
-            LoadingIndicator.setVisible(false);
-        });
-        new Thread(updateJobs).start();
+            catch (InterruptedException e) {
 
-        
-       
+            }
+            System.out.println("Loading Jobs on: " + Thread.currentThread().getName());
+           
+            model.loadJobDAOs(true);
+
+            Platform.runLater(() -> {
+                LoadingIndicator.setVisible(false);
+            });
+        });
+        updateJobs.start();
 
         JobCardList.setItems(model.getJobCardList());
-      
-      
 
         // ScrollListner
         JobCardList.heightProperty().addListener((obs, oldHeight, newHeight) -> {
@@ -66,6 +67,8 @@ public class JobListController {
                 });
             }
         });
+
+        
 
     }
 }
