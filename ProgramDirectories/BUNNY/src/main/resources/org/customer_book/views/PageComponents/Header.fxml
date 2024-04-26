@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="100.0" prefWidth="1440.0" styleClass="baseColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.PageComponents.Header.HeaderController">
+   <children>
+      <Label layoutX="257.0" layoutY="25.0" text="Welcome">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="HeadingFont" />
+         </styleClass>
+      </Label>
+      <Label fx:id="UserLabel" layoutX="442.0" layoutY="25.0" prefHeight="17.0" prefWidth="209.0" text="Mike">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="HeadingFont" />
+         </styleClass>
+      </Label>
+      <Button fx:id="ExitButton" layoutX="1372.0" layoutY="7.0" mnemonicParsing="false" onAction="#CloseWindow" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+         <graphic>
+            <AnchorPane prefHeight="32.0" prefWidth="32.0">
+               <children>
+                  <SVGPath content="M20.0607 17.9393C19.4749 17.3536 18.5251 17.3536 17.9393 17.9393C17.3536 18.5251 17.3536 19.4749 17.9393 20.0606L21.8787 24L17.9394 27.9394C17.3536 28.525 17.3536 29.4748 17.9394 30.0606C18.5252 30.6464 19.4749 30.6464 20.0607 30.0606L24.0001 26.1214L27.9393 30.0606C28.5251 30.6464 29.4749 30.6464 30.0607 30.0606C30.6465 29.4748 30.6465 28.525 30.0607 27.9392L26.1213 24L30.0607 20.0606C30.6465 19.4749 30.6465 18.5252 30.0607 17.9394C29.4749 17.3536 28.5251 17.3536 27.9393 17.9394L24.0001 21.8786L20.0607 17.9393Z" fill="WHITE" AnchorPane.leftAnchor="17.5" AnchorPane.topAnchor="17.5" />
+                  <SVGPath content="M24 2.5C12.1259 2.5 2.5 12.1259 2.5 24C2.5 35.8742 12.1259 45.5 24 45.5C35.8742 45.5 45.5 35.8742 45.5 24C45.5 12.1259 35.8742 2.5 24 2.5ZM5.5 24C5.5 13.7827 13.7827 5.5 24 5.5C34.2172 5.5 42.5 13.7827 42.5 24C42.5 34.2172 34.2172 42.5 24 42.5C13.7827 42.5 5.5 34.2172 5.5 24Z" fill="WHITE" AnchorPane.leftAnchor="2.5" AnchorPane.topAnchor="2.5" />
+               </children>
+            </AnchorPane>
+         </graphic>
+      </Button>
+      <Label fx:id="ErrorMessage" layoutX="257.0" layoutY="70.0" prefHeight="17.0" prefWidth="430.0" text="Label" AnchorPane.leftAnchor="257.0" AnchorPane.topAnchor="70.0">
+         <styleClass>
+            <String fx:value="errorFont" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+   </children>
+</AnchorPane>

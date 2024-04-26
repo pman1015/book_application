@@ -1,0 +1,126 @@
+    .baseColor {
+        -fx-background-color: #05392F;
+        -fx-font-size: 24px;
+        -fx-text-fill: #FEFCFD;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .accentColor {
+        -fx-background-color: #FEFCFD;
+        -fx-font-size: 24px;
+        -fx-text-fill: #FEFCFD;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .secondaryColor {
+        -fx-background-color: #6E7F76;
+        -fx-font-size: 24px;
+        -fx-text-fill: #FEFCFD;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .darkGray {
+        -fx-background-color: #00000093;
+    }
+    
+    .transparent {
+        -fx-background-color: transparent;
+    }
+    
+    .transparentTextField {
+        -fx-background-color: #9db3a962;
+        -fx-background-radius: 25;
+        -fx-font-family: "JetBrains Mono Regular";
+        -fx-font-size: 14px;
+        -fx-text-fill: white;
+    }
+    
+    .semiTransparent {
+        -fx-background-color: #9ba4a06e;
+    }
+    
+    .roundedCorner {
+        -fx-background-radius: 10;
+    }
+    
+    .viewPort {
+        -fx-background-color: transparent;
+    }
+    
+    .topRoundedCorner {
+        -fx-background-radius: 10 10 0 0;
+    }
+    
+    .svgButton {
+        -fx-background-color: transparent;
+        -fx-background-radius: 0;
+    }
+    
+    .lightFill * {
+        -fx-fill: #FEFCFD;
+    }
+    
+    .lightFill:hover * {
+        -fx-fill: #6E7F76;
+    }
+    
+    .lightStroke * {
+        -fx-stroke: #FEFCFD;
+        -fx-fill: transparent;
+    }
+    
+    .lightStroke:hover * {
+        -fx-stroke: #6E7F76;
+        -fx-fill: transparent;
+    }
+    
+    .textButton {
+        -fx-background-color: #6b6e6bfe;
+    }
+    
+    .textButton:hover {
+        -fx-background-color: rgb(140, 145, 140);
+    }
+    
+    .darkText {
+        -fx-text-fill: #0B090C;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .HeadingFont {
+        -fx-font-size: 40px;
+    }
+    
+    .largeFont {
+        -fx-font-size: 32px;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .mediumFont {
+        -fx-font-size: 24px;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .smallFont {
+        -fx-font-size: 16px;
+        -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .smallTextFieldFont {
+        -fx-font-size: 14px;
+    }
+    
+    .extraSmallFont {
+        -fx-font-size: 8px;
+    }
+    
+    .errorFont {
+        -fx-text-fill: red;
+        -fx-fill: red;
+    }
+    
+    .whiteFont {
+        -fx-fill: #FEFCFD;
+        -fx-text-fill: #FEFCFD;
+        -fx-font-family: "JetBrains Mono Regular";
+    }

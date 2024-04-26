@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="466.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.book.Pages.BuildDatabase.MenuPages.ConnectionPane.ConnectionStringPaneController">
+   <children>
+      <Text layoutX="184.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Connect?" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="4.0">
+         <styleClass>
+            <String fx:value="whiteFont" />
+            <String fx:value="largeFont" />
+         </styleClass>
+      </Text>
+      <HBox alignment="CENTER" layoutX="58.0" layoutY="57.0" prefHeight="25.0" prefWidth="529.0" spacing="12.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="48.0">
+         <children>
+            <RadioButton layoutX="124.0" layoutY="112.0" mnemonicParsing="false" selected="true" styleClass="smallFont" text="Connection String" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ConnectionType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="296.0" layoutY="112.0" mnemonicParsing="false" styleClass="smallFont" text="URL and Credentials" textFill="WHITE" toggleGroup="$ConnectionType" />
+         </children>
+      </HBox>
+      <StackPane layoutX="28.0" layoutY="73.0" prefHeight="370.0" prefWidth="560.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="73.0">
+         <children>
+            <VBox fx:id="ConnectionStringPane" prefHeight="179.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connection String:">
+                     <styleClass>
+                        <String fx:value="whiteFont" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <TextField fx:id="ConnectionStringField" prefHeight="42.0" prefWidth="476.0" style="-fx-background-color: #9ba4a06e;" styleClass="roundedCorner">
+                     <StackPane.margin>
+                        <Insets left="64.0" right="32.0" />
+                     </StackPane.margin>
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label fx:id="ConnectionStringError" prefHeight="35.0" prefWidth="463.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="32.0" top="12.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <StackPane.margin>
+                  <Insets left="24.0" right="24.0" top="96.0" />
+               </StackPane.margin>
+            </VBox>
+            <VBox fx:id="BuildStringPane" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="110.0" prefWidth="548.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Host:">
+                           <styleClass>
+                              <String fx:value="whiteFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass></Text>
+                        <TextField fx:id="HostField" text="test text">
+                           <VBox.margin>
+                              <Insets left="32.0" right="24.0" />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="transparentTextField" />
+                              <String fx:value="smallFont" />
+                           </styleClass>
+                        </TextField>
+                        <Label fx:id="HostError" prefHeight="35.0" prefWidth="459.0" text="Label">
+                           <styleClass>
+                              <String fx:value="errorFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="48.0" />
+                           </VBox.margin>
+                        </Label>
+                        <VBox prefHeight="110.0" prefWidth="548.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Port:">
+                                 <styleClass>
+                                    <String fx:value="whiteFont" />
+                                    <String fx:value="smallFont" />
+                                 </styleClass>
+                              </Text>
+                              <TextField fx:id="PortField" styleClass="transparentTextField" text="test text">
+                                 <VBox.margin>
+                                    <Insets left="32.0" right="24.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label fx:id="PortError" prefHeight="35.0" prefWidth="459.0" text="Label">
+                                 <styleClass>
+                                    <String fx:value="errorFont" />
+                                    <String fx:value="smallFont" />
+                                 </styleClass>
+                                 <VBox.margin>
+                                    <Insets left="48.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="110.0" prefWidth="548.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:">
+                           <styleClass>
+                              <String fx:value="whiteFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass></Text>
+                        <TextField fx:id="UserNameField" prefHeight="37.0" prefWidth="456.0" styleClass="transparentTextField" text="test text">
+                           <VBox.margin>
+                              <Insets left="32.0" right="24.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label fx:id="UserNameError" prefHeight="35.0" prefWidth="459.0" text="Label">
+                           <styleClass>
+                              <String fx:value="errorFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="48.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="110.0" prefWidth="548.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+                           <styleClass>
+                              <String fx:value="whiteFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass></Text>
+                        <PasswordField fx:id="PasswordField" styleClass="transparentTextField">
+                           <VBox.margin>
+                              <Insets left="32.0" right="24.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Label fx:id="PasswordError" prefHeight="35.0" prefWidth="459.0" text="Label">
+                           <styleClass>
+                              <String fx:value="errorFont" />
+                              <String fx:value="smallFont" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="48.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorner" />
+   </styleClass>
+</AnchorPane>

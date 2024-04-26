@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\emily\Documents\GitHub\book_application\target\book_application-1.0-BETA-jar-with-dependencies.jar</jar>
-  <outfile>C:\Users\emily\Documents\GitHub\book_application\deployment\CustomerBook_beta_1.2.exe</outfile>
+  <outfile>C:\Users\emily\Documents\GitHub\book_application\deployment\CustomerBook_beta_1.3.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>

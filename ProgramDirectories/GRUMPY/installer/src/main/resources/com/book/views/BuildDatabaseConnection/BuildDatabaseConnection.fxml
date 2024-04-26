@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="736.0" style="-fx-background-radius: 0 0 10 0;" styleClass="secondaryColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.book.Pages.BuildDatabase.Base.BuildDatabaseConnectionController">
+   <children>
+      <StackPane fx:id="CurrentPane" layoutX="61.0" layoutY="97.0" prefHeight="466.0" prefWidth="616.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="97.0" />
+      <Button fx:id="PreviousPaneButton" layoutX="32.0" layoutY="268.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#PerviousPane" prefHeight="32.0" prefWidth="12.0" scaleX="4.0" scaleY="4.0" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="268.0">
+         <graphic>
+            <SVGPath content="M15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L9.41421 12L15.7071 18.2929C16.0976 18.6834 16.0976 19.3166 15.7071 19.7071C15.3166 20.0976 14.6834 20.0976 14.2929 19.7071L7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12C7 11.7348 7.10536 11.4804 7.29289 11.2929L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289Z" />
+         </graphic>
+         <styleClass>
+            <String fx:value="svgButton" />
+            <String fx:value="lightFill" />
+         </styleClass>
+      </Button>
+      <Button fx:id="NextPaneButton" layoutX="716.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#NextPane" prefHeight="32.0" prefWidth="12.0" scaleX="4.0" scaleY="4.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="268.0">
+         <graphic>
+            <SVGPath content="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237 9.70711 4.29289L16.7071 11.2929C17.0976 11.6834 17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658 20.0976 8.68342 20.0976 8.29289 19.7071C7.90237 19.3166 7.90237 18.6834 8.29289 18.2929L14.5858 12L8.29289 5.70711C7.90237 5.31658 7.90237 4.68342 8.29289 4.29289Z" />
+         </graphic>
+         <styleClass>
+            <String fx:value="svgButton" />
+            <String fx:value="lightFill" />
+         </styleClass>
+      </Button>
+      <Text layoutX="165.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Build a Database Connection" textAlignment="CENTER" wrappingWidth="736.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+         <styleClass>
+            <String fx:value="whiteFont" />
+            <String fx:value="largeFont" />
+         </styleClass>
+      </Text>
+   </children>
+</AnchorPane>

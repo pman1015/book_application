@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="MainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="898.0" prefWidth="1195.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.HomePage.Content.LayoutController">
+   <children>
+      <AnchorPane fx:id="Pane1" layoutX="8.0" layoutY="14.0" prefHeight="724.0" prefWidth="600.0" styleClass="accentColor" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="6.0" />
+      <AnchorPane fx:id="Pane2" layoutX="625.0" layoutY="14.0" prefHeight="450.0" prefWidth="570.0" styleClass="baseColor" AnchorPane.leftAnchor="612.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+      <AnchorPane fx:id="Pane3" layoutX="712.0" layoutY="622.0" prefHeight="200.0" prefWidth="200.0" styleClass="borderColor" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="612.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="462.0" />
+   </children>
+</AnchorPane>

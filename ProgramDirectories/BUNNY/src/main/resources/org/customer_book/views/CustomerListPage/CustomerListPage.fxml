@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="Content" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="927.0" prefWidth="1223.0" styleClass="backgroundColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomersListPage.CustomerListPageController">
+   <children>
+      <VBox layoutX="45.0" layoutY="8.0" prefHeight="99.0" prefWidth="1177.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="9.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="86.0" prefWidth="1146.0" spacing="48.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name" wrappingWidth="258.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" wrappingWidth="234.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nick Name" wrappingWidth="233.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" wrappingWidth="126.173828125">
+                     <styleClass>
+                        <String fx:value="largeFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </Text>
+                  <Button mnemonicParsing="false" onAction="#showCustomerFilter" styleClass="svgButton">
+                     <graphic>
+                        <SVGPath content="M4 6.13333C4 5.3866 4 5.01323 4.14532 4.72801C4.27316 4.47713 4.47713 4.27316 4.72801 4.14532C5.01323 4 5.3866 4 6.13333 4H25.8667C26.6135 4 26.9868 4 27.272 4.14532C27.5229 4.27316 27.7268 4.47713 27.8547 4.72801C28 5.01323 28 5.3866 28 6.13333V8.44968C28 8.7758 28 8.93885 27.9632 9.09231C27.9305 9.22836 27.8767 9.35841 27.8035 9.47771C27.7211 9.61227 27.6057 9.72757 27.3752 9.95817L19.2915 18.0419C19.0609 18.2724 18.9456 18.3877 18.8632 18.5223C18.79 18.6416 18.7361 18.7716 18.7035 18.9077C18.6667 19.0612 18.6667 19.2243 18.6667 19.5503V22.6667L13.3333 28V19.5503C13.3333 19.2243 13.3333 19.0612 13.2965 18.9077C13.2638 18.7716 13.21 18.6416 13.1369 18.5223C13.0544 18.3877 12.9391 18.2724 12.7085 18.0419L4.62484 9.95817C4.39424 9.72757 4.27893 9.61227 4.19648 9.47771C4.12337 9.35841 4.06951 9.22836 4.03684 9.09231C4 8.93885 4 8.7758 4 8.44968V6.13333Z" fill="TRANSPARENT" scaleX="1.4" scaleY="1.4" stroke="WHITE" strokeLineCap="BUTT" strokeWidth="2.5" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="-16.0" top="8.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="NewCustomer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#createNewCustomer" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton">
+                     <graphic>
+                        <StackPane>
+                           <children>
+                              <SVGPath content="M24.2005 44C35.1539 44 44.0334 35.0457 44.0334 24C44.0334 12.9543 35.1539 4 24.2005 4C13.2471 4 4.36761 12.9543 4.36761 24C4.36761 35.0457 13.2471 44 24.2005 44Z" fill="TRANSPARENT" stroke="WHITE" strokeWidth="5.0">
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </SVGPath>
+                              <SVGPath content="M30.1504 24H24.2005M24.2005 24H18.2506M24.2005 24V18M24.2005 24V30" fill="TRANSPARENT" fillRule="EVEN_ODD" stroke="WHITE" strokeWidth="5.0" />
+                           </children>
+                        </StackPane>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="-32.0" top="4.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <ListView fx:id="customerList" layoutX="37.0" layoutY="121.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="789.0" prefWidth="1165.0">
+         <styleClass>
+            <String fx:value="borderColor" />
+            <String fx:value="roundedCorners" />
+            <String fx:value="listView" />
+         </styleClass>
+      </ListView>
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</AnchorPane>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.InventoryPage.InventoryCompatibleMachineCardController">
+   <styleClass>
+      <String fx:value="textButton" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Label fx:id="MachineName" layoutX="8.0" layoutY="16.0" prefHeight="24.0" prefWidth="417.0" text="Label" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="12.0">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteText" />
+         </styleClass>
+      </Label>
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeMachine" styleClass="svgButton" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="421.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="4.0">
+         <graphic>
+            <AnchorPane>
+               <children>
+                  <SVGPath content="M20 17C20.5523 17 21 16.5523 21 16C21 15.4477 20.5523 15 20 15H12C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17H20Z" fill="WHITE" />
+                  <SVGPath content="M16.0001 1.66663C8.084 1.66663 1.66675 8.08388 1.66675 16C1.66675 23.9161 8.084 30.3333 16.0001 30.3333C23.9162 30.3333 30.3334 23.9161 30.3334 16C30.3334 8.08388 23.9162 1.66663 16.0001 1.66663ZM3.66675 16C3.66675 9.18845 9.18857 3.66663 16.0001 3.66663C22.8115 3.66663 28.3334 9.18845 28.3334 16C28.3334 22.8114 22.8115 28.3333 16.0001 28.3333C9.18857 28.3333 3.66675 22.8114 3.66675 16Z" fill="WHITE" />
+               </children>
+            </AnchorPane>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

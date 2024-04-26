@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowSelectedInvoice" prefHeight="44.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerReportsPage.Cards.InvoiceCardController">
+   <styleClass>
+      <String fx:value="borderColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Label fx:id="CreatedDateLabel" prefWidth="342.0" text="Created Date">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+      <Label fx:id="StatusLabel" prefHeight="22.0" prefWidth="186.0" text="Status">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+   </padding>
+</HBox>

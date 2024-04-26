@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="CompletedJobCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toggleJobStatus" prefHeight="177.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.BillsPage.CreateInvoice.JobListComponents.CompletedJobCardController">
+   <styleClass>
+      <String fx:value="textButton" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Label fx:id="JobNameLabel" layoutX="14.0" layoutY="28.0" prefHeight="32.0" prefWidth="272.0" text="Job name here" AnchorPane.leftAnchor="28.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Job Name:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Text layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="CustomerNameLabel" layoutX="14.0" layoutY="81.0" prefHeight="32.0" prefWidth="272.0" text="Customer name here" AnchorPane.leftAnchor="28.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+      <Circle fx:id="SelectedCircle" fill="#ffffff00" layoutX="358.0" layoutY="44.0" radius="36.0" stroke="BLACK" strokeType="INSIDE" styleClass="notSelected">
+         <effect>
+            <DropShadow color="#ffffff46" height="9.14" offsetX="4.0" radius="3.2675" spread="0.05" width="5.93" />
+         </effect>
+      </Circle>
+      <Text layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed Date:">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="smallFont" />
+         </styleClass>
+      </Text>
+      <Label fx:id="CompletedDateLabel" layoutX="14.0" layoutY="135.0" prefHeight="32.0" prefWidth="272.0" text="Customer name here" AnchorPane.leftAnchor="28.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="mediumFont" />
+         </styleClass>
+      </Label>
+   </children>
+</AnchorPane>

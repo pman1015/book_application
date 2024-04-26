@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.customer_book.Pages.CustomerDetailsPage.CustomerDetailsEquipmentController">
+   <styleClass>
+      <String fx:value="roundedCorners" />
+      <String fx:value="accentColor" />
+   </styleClass>
+   <children>
+      <Label fx:id="EquipmentName" prefHeight="17.0" prefWidth="225.0" text="Label">
+         <styleClass>
+            <String fx:value="mediumFont" />
+            <String fx:value="darkText" />
+         </styleClass>
+      </Label>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Machine Notes:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="darkText" />
+         </styleClass>
+      </Text>
+      <TextArea fx:id="MachineNotes" editable="false" prefHeight="85.0" prefWidth="229.0" text="Some notes abour the machine here" wrapText="true">
+         <styleClass>
+            <String fx:value="transparentColor" />
+            <String fx:value="scrollPane" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </TextArea>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment Notes:">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="darkText" />
+         </styleClass>
+      </Text>
+      <TextArea fx:id="EquipmentNotes" editable="false" prefHeight="85.0" prefWidth="229.0" text="Some notes abour the equipment type here" wrapText="true">
+         <styleClass>
+            <String fx:value="transparentColor" />
+            <String fx:value="scrollPane" />
+            <String fx:value="roundedCorners" />
+         </styleClass>
+      </TextArea>
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</VBox>
