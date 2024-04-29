@@ -87,7 +87,11 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
             return e.getMessage();
         }
-        return "Connected";
+        return "Connection Successful";
+    }
+    public MongoDatabase lookupDatabase(String databaseName) {
+        database = client.getDatabase(databaseName);
+        return database;
     }
 
 }

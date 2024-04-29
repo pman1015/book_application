@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.book.Pages.BuildDatabase.MenuPages.LoadConnection.LoadConnectionController">
    <styleClass>
@@ -18,8 +18,13 @@
             <String fx:value="largeFont" />
          </styleClass>
       </Text>
-      <ProgressIndicator fx:id="LoadingIndicator" layoutX="159.0" layoutY="102.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="301.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="102.0" />
-      <Label fx:id="ResultMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="375.0" prefHeight="35.0" prefWidth="246.0" text="Results" textAlignment="CENTER">
+      <StackPane layoutX="159.0" layoutY="102.0">
+         <children>
+            <ProgressIndicator fx:id="LoadingIndicator" layoutX="159.0" layoutY="102.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="301.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="102.0" />
+            <SVGPath fx:id="ErrorIndicator" content="M 12 16 H 12.01 M 12 8 V 12 M 12 21 C 16.9706 21 21 16.9706 21 12 C 21 7.02944 16.9706 3 12 3 C 7.02944 3 3 7.02944 3 12 C 3 16.9706 7.02944 21 12 21 Z" fill="#ffffff00" scaleX="12.0" scaleY="12.0" stroke="RED" strokeWidth="2.0" />
+         </children>
+      </StackPane>
+      <Label fx:id="ResultMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="375.0" prefHeight="35.0" prefWidth="545.0" text="Results" textAlignment="CENTER">
          <styleClass>
             <String fx:value="mediumFont" />
             <String fx:value="whiteFont" />

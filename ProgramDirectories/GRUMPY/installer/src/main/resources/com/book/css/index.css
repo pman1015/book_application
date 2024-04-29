@@ -43,10 +43,6 @@
         -fx-background-radius: 10;
     }
     
-    .viewPort {
-        -fx-background-color: transparent;
-    }
-    
     .topRoundedCorner {
         -fx-background-radius: 10 10 0 0;
     }
@@ -123,4 +119,68 @@
         -fx-fill: #FEFCFD;
         -fx-text-fill: #FEFCFD;
         -fx-font-family: "JetBrains Mono Regular";
+    }
+    
+    .scrollPane .viewport {
+        -fx-background-color: transparent;
+    }
+    
+    .scroll-bar:vertical {
+        -fx-background-color: transparent;
+        -fx-translate-x: -10;
+    }
+    
+    .scroll-bar:vertical .track {
+        -fx-background-color: transparent;
+    }
+    
+    .scroll-bar:horizontal .track {
+        -fx-background-color: #E0E0E0;
+    }
+    /* Thumb - the draggable part of the scrollbar */
+    
+    .scroll-bar:vertical .thumb {
+        -fx-background-color: #757575;
+        -fx-background-radius: 10;
+    }
+    
+    .scroll-bar:horizontal .thumb {
+        -fx-background-color: #757575;
+    }
+    /* Buttons - the increment and decrement buttons */
+    
+    .scroll-bar .increment-button,
+    .scroll-bar .decrement-button {
+        -fx-background-color: transparent;
+    }
+    
+    .scroll-bar:horizontal .increment-arrow,
+    .scroll-bar:horizontal .decrement-arrow,
+    .scroll-bar:vertical .increment-arrow,
+    .scroll-bar:vertical .decrement-arrow {
+        -fx-background-color: transparent;
+    }
+    
+    .scrollPane .content {
+        -fx-background-color: transparent;
+    }
+    
+    .scrollPane .content {
+        -fx-background-color: transparent;
+    }
+    
+    .scrollPane {
+        -fx-background-color: transparent;
+    }
+    
+    .listView {
+        -fx-hbar-policy: NEVER;
+    }
+    
+    .listView .list-cell {
+        -fx-background-color: transparent;
+    }
+    
+    .listView .list-view {
+        -fx-background-color: transparent;
     }

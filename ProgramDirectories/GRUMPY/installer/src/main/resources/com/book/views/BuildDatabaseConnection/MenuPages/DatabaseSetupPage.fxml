@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.book.Pages.BuildDatabase.MenuPages.DatabaseSetupPage.DatabaseSetupController">
+   <styleClass>
+      <String fx:value="baseColor" />
+      <String fx:value="roundedCorner" />
+   </styleClass>
+   <children>
+      <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteFont" text="Setup Database:" />
+      <Text layoutX="39.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Setup the database by ensuring there is the proper Database and collections" wrappingWidth="513.0">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="whiteFont" />
+         </styleClass>
+      </Text>
+      <ListView fx:id="DatabaseCards" layoutX="24.0" layoutY="90.0" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="565.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="90.0">
+         <styleClass>
+            <String fx:value="scrollPane" />
+            <String fx:value="transparent" />
+            <String fx:value="listView" />
+         </styleClass>
+      </ListView>
+      <Label fx:id="ErrorMessage" alignment="TOP_LEFT" layoutX="39.0" layoutY="325.0" prefHeight="79.0" prefWidth="513.0" styleClass="whiteFont" text="You need to create a customer book database click the button below to create this database." wrapText="true" />
+      <Text layoutX="24.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="whiteFont" text="Message:" />
+      <Button fx:id="FixErrorButton" layoutX="39.0" layoutY="404.0" mnemonicParsing="false" onAction="#FixError" prefHeight="51.0" prefWidth="138.0" text="Create">
+         <styleClass>
+            <String fx:value="textButton" />
+            <String fx:value="roundedCorner" />
+            <String fx:value="whiteFont" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>
