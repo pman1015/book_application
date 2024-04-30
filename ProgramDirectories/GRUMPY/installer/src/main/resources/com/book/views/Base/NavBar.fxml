@@ -5,11 +5,20 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="170.0" style="-fx-background-radius: 0 0 0 10;" styleClass="baseColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.book.Pages.Base.NavBar.NavBarController">
    <children>
       <Separator orientation="VERTICAL" prefHeight="93.0" prefWidth="100.0" styleClass="transparent" visible="false" />
       <Button mnemonicParsing="false" onAction="#goToBuild" prefHeight="34.0" prefWidth="317.0" text="Build Database" textAlignment="CENTER" wrapText="true">
+         <styleClass>
+            <String fx:value="smallFont" />
+            <String fx:value="textButton" />
+            <String fx:value="lightFill" />
+         </styleClass>
+         <VBox.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </VBox.margin>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#goToAtlasGuide" prefHeight="34.0" prefWidth="220.0" text="Atlas Guide" textAlignment="CENTER" wrapText="true">
          <styleClass>
             <String fx:value="smallFont" />
             <String fx:value="textButton" />

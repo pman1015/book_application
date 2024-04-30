@@ -7,7 +7,10 @@ public class NavBarController {
 
     @FXML
     void goToBuild(ActionEvent event) {
-
+        model.goToBuild();
+    }
+    @FXML void goToAtlasGuide(ActionEvent event) {
+        model.goToAtlasGuide();
     }
 
     private NavBarModel model;
