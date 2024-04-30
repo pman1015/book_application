@@ -161,6 +161,10 @@
         -fx-background-color: transparent;
     }
     
+    .scrollPane .viewport {
+        -fx-background-color: transparent;
+    }
+    
     .scrollPane .content {
         -fx-background-color: transparent;
     }

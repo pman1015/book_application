@@ -28,7 +28,7 @@ public class BuildDatabaseConnectionModel {
     private IntegerProperty page = new SimpleIntegerProperty(-1);
 
     Parent[] pages;
-    String[] pageNames = { "ConnectionStringPage" , "LoadingConnection","DatabaseSetupPage" };
+    String[] pageNames = { "ConnectionStringPage" , "LoadingConnection","DatabaseSetupPage","SuscessPage" };
     String menuPagesFolder = "BuildDatabaseConnection/MenuPages";
 
     // ------------------ Model Methods --------------- //

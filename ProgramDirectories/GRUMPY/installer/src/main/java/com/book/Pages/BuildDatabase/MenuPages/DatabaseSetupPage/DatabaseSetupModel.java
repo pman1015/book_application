@@ -35,6 +35,7 @@ public class DatabaseSetupModel extends PageModelAbstract {
   private final int position = 2;
   private boolean hasCustomerBook = false;
   private String[] collections = { "Customers", "Equipment", "Inventory", "Invoices", "Jobs", "Machines", "Reports" };
+  private boolean hasErrors = false;
 
   @Override
   public void onPageChange() {
@@ -59,7 +60,7 @@ public class DatabaseSetupModel extends PageModelAbstract {
 
     currentConnection.getClient().listDatabases().forEach(database -> {
       Platform.runLater(() -> {
-        
+
         FXMLLoader loader = App.getLoader("BuildDatabaseConnection/MenuPages", "DatabaseCard");
         try {
           Parent card = loader.load();
@@ -71,7 +72,8 @@ public class DatabaseSetupModel extends PageModelAbstract {
         }
       });
     });
-    hasCustomerBook = currentConnection.getClient().listDatabaseNames().into(new ArrayList<String>()).contains("CustomerBook");
+    hasCustomerBook = currentConnection.getClient().listDatabaseNames().into(new ArrayList<String>())
+        .contains("CustomerBook");
     if (!hasCustomerBook) {
       Platform.runLater(() -> {
         errorMessage.set("CustomerBook database not found. Please create a new database.");
@@ -81,7 +83,7 @@ public class DatabaseSetupModel extends PageModelAbstract {
       ArrayList<String> missingCollections = new ArrayList<String>();
       ArrayList<String> currentCollections = book.listCollectionNames().into(new ArrayList<String>());
       for (int i = 0; i < collections.length; i++) {
-        if(!currentCollections.contains(collections[i])) {
+        if (!currentCollections.contains(collections[i])) {
           missingCollections.add(collections[i]);
         }
       }
@@ -90,9 +92,11 @@ public class DatabaseSetupModel extends PageModelAbstract {
           errorMessage.set("The following collections are missing: " + missingCollections.toString());
         });
         collections = missingCollections.toArray(new String[missingCollections.size()]);
-      }else{
+      } else {
         Platform.runLater(() -> {
           errorMessage.set("Database Configured Correctly.");
+          App.setSceneProperty("ValidConnection", true);
+
         });
       }
     }

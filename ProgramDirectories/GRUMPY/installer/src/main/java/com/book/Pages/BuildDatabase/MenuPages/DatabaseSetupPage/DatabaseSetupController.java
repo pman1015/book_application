@@ -32,5 +32,6 @@ public class DatabaseSetupController extends PageControllerAbstract {
         model = new DatabaseSetupModel();
         ErrorMessage.textProperty().bind(((DatabaseSetupModel) model).getErrorMessage());
         DatabaseCards.setItems(((DatabaseSetupModel) model).getDatabaseCards());
+        FixErrorButton.visibleProperty().bind(((DatabaseSetupModel) model).getErrorMessage().isNotEmpty());
     }
 }
