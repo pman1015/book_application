@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 
@@ -14,10 +15,14 @@ public class RecentJobsController extends PaneController {
   private ProgressIndicator LoadingIndicator;
 
   @FXML
+  private Button RecentJobsFilter;
+
+  @FXML
   private ListView<Parent> RecentJobsList;
 
   @FXML
   void showAddNewJob(ActionEvent event) {
+    model.showAddNewJob();
   }
 
   @FXML
@@ -28,6 +33,10 @@ public class RecentJobsController extends PaneController {
 
   @FXML
   void initialize() {
+    //TODO: add JobsFilter
+    RecentJobsFilter.visibleProperty().set(false);
+
+    
     model = new RecentJobsModel();
     RecentJobsList.setItems(model.getRecentJobsList());
     RecentJobsList.widthProperty().addListener((obs, oldVal, newVal) -> {

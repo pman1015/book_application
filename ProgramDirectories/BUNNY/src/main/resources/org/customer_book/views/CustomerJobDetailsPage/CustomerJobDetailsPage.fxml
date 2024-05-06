@@ -196,34 +196,13 @@
                   <SVGPath content="m20 20h-15.25c-.414 0-.75.336-.75.75s.336.75.75.75h15.75c.53 0 1-.47 1-1v-15.75c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm-1-17c0-.478-.379-1-1-1h-15c-.62 0-1 .519-1 1v15c0 .621.52 1 1 1h15c.478 0 1-.379 1-1zm-15.5.5h14v14h-14zm6.25 6.25h-3c-.414 0-.75.336-.75.75s.336.75.75.75h3v3c0 .414.336.75.75.75s.75-.336.75-.75v-3h3c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3v-3c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill="WHITE" />
                </graphic>
             </Button>
-            <ScrollPane layoutX="71.0" layoutY="144.0" prefHeight="192.0" prefWidth="514.0">
+            <ListView fx:id="PartChargeList" layoutX="71.0" layoutY="143.0" prefHeight="215.0" prefWidth="514.0">
                <styleClass>
-                  <String fx:value="scrollPane" />
                   <String fx:value="transparentColor" />
-               </styleClass>
-               <content>
-                  <ListView fx:id="PartChargeList" prefHeight="270.0" prefWidth="489.0">
-                     <styleClass>
-                        <String fx:value="transparentColor" />
-                        <String fx:value="listView" />
-                     </styleClass>
-                  </ListView>
-               </content>
-            </ScrollPane>
-            <ScrollPane layoutX="71.0" layoutY="398.0" prefHeight="222.0" prefWidth="514.0">
-               <content>
-                  <ListView fx:id="LaborChargeList" prefHeight="259.0" prefWidth="489.0">
-                     <styleClass>
-                        <String fx:value="transparentColor" />
-                        <String fx:value="listView" />
-                     </styleClass>
-                  </ListView>
-               </content>
-               <styleClass>
+                  <String fx:value="listView" />
                   <String fx:value="scrollPane" />
-                  <String fx:value="transparentColor" />
                </styleClass>
-            </ScrollPane>
+            </ListView>
             <Button layoutX="255.0" layoutY="370.0" mnemonicParsing="false" onAction="#addNewLaborCharge" styleClass="svgButton">
                <graphic>
                   <SVGPath content="m20 20h-15.25c-.414 0-.75.336-.75.75s.336.75.75.75h15.75c.53 0 1-.47 1-1v-15.75c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm-1-17c0-.478-.379-1-1-1h-15c-.62 0-1 .519-1 1v15c0 .621.52 1 1 1h15c.478 0 1-.379 1-1zm-15.5.5h14v14h-14zm6.25 6.25h-3c-.414 0-.75.336-.75.75s.336.75.75.75h3v3c0 .414.336.75.75.75s.75-.336.75-.75v-3h3c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3v-3c0-.414-.336-.75-.75-.75s-.75.336-.75.75z" fill="WHITE" />
@@ -332,6 +311,13 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
             </Button>
+            <ListView fx:id="LaborChargeList" layoutX="75.0" layoutY="399.0" prefHeight="233.0" prefWidth="514.0">
+               <styleClass>
+                  <String fx:value="transparentColor" />
+                  <String fx:value="listView" />
+                  <String fx:value="scrollPane" />
+               </styleClass>
+            </ListView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="PopupContentField" layoutX="14.0" layoutY="571.0" prefHeight="338.0" prefWidth="557.0">

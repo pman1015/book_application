@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <styleClass>
+      <String fx:value="borderColor" />
+      <String fx:value="roundedCorners" />
+   </styleClass>
+   <children>
+      <Text layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Recent Jobs:" wrappingWidth="394.8000030517578" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="14.0">
+         <styleClass>
+            <String fx:value="whiteText" />
+            <String fx:value="largeFont" />
+         </styleClass>
+      </Text>
+      <Button layoutX="547.0" layoutY="14.0" mnemonicParsing="false" styleClass="svgButton" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <graphic>
+            <StackPane scaleX="1.9" scaleY="1.9">
+               <children>
+                  <SVGPath content="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" fill="TRANSPARENT" stroke="WHITE" strokeWidth="2.0" />
+                  <SVGPath content="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" fill="TRANSPARENT" stroke="WHITE" strokeWidth="2.0" />
+               </children>
+            </StackPane>
+         </graphic>
+      </Button>
+      <VBox layoutX="28.0" layoutY="66.0" prefHeight="633.0" prefWidth="536.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="66.0">
+         <children>
+            <VBox prefHeight="120.0" prefWidth="536.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <ComboBox editable="true" prefHeight="61.0" prefWidth="488.0">
+                     <VBox.margin>
+                        <Insets left="24.0" right="24.0" top="6.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="comboBox" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                  </ComboBox>
+                  <Label prefHeight="35.0" prefWidth="485.0" text="Label">
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="536.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <ComboBox editable="true" prefHeight="61.0" prefWidth="488.0">
+                     <styleClass>
+                        <String fx:value="comboBox" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="24.0" right="24.0" top="6.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Label prefHeight="35.0" prefWidth="485.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="120.0" prefWidth="536.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:">
+                     <styleClass>
+                        <String fx:value="whiteText" />
+                        <String fx:value="mediumFont" />
+                     </styleClass>
+                  </Text>
+                  <ComboBox editable="true" prefHeight="61.0" prefWidth="488.0">
+                     <styleClass>
+                        <String fx:value="comboBox" />
+                        <String fx:value="roundedCorners" />
+                        <String fx:value="mediumFont" />
+                        <String fx:value="whiteText" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="24.0" right="24.0" top="6.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Label prefHeight="35.0" prefWidth="485.0" text="Label">
+                     <styleClass>
+                        <String fx:value="errorFont" />
+                        <String fx:value="smallFont" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets left="24.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

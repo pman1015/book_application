@@ -113,7 +113,10 @@ public class InvoiceCreate {
   public void saveInvoice() {
     //Save the invoice to the download path
     //Make a folder for the invoice
-    File invoiceFolder = new File(downloadPath + "//" + dao.getInvoiceNumber());
+    if(new File(downloadPath).exists() == false) {
+      new File(downloadPath).mkdir();
+    }
+    File invoiceFolder = new File(downloadPath + "/" + dao.getInvoiceNumber());
     if(!invoiceFolder.exists()) {
       invoiceFolder.mkdir();
     }

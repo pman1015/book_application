@@ -35,7 +35,7 @@
                   </StackPane>
                </graphic>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showJobsFilter" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showJobsFilter" prefHeight="32.0" prefWidth="32.0" styleClass="svgButton" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" fx:id="RecentJobsFilter">
                <graphic>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
                      <children>

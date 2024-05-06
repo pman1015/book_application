@@ -58,7 +58,7 @@ public class JobListModel {
     }
 
     public void showAddJob() {
-        // TODO implement here
+       
         Platform.runLater(()->{
             try {
                 FXMLLoader loader = App.getLoader("JobsPage", "JobCreatePopup");

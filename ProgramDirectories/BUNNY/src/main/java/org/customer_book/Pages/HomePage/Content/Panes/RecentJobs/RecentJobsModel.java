@@ -67,8 +67,7 @@ public class RecentJobsModel extends PaneModel {
         ((HBox) card).prefWidthProperty().bind(jobCardWidth);
         ((RecentJobCardController) cardLoader.getController()).setJob(job);
         RecentJobsList.add(card);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         e.printStackTrace();
       }
 
@@ -77,6 +76,19 @@ public class RecentJobsModel extends PaneModel {
 
   public void setJobCardWidth(double width) {
     jobCardWidth.set(width - 32);
+  }
+
+  public void showAddNewJob() {
+    Platform.runLater(() -> {
+      try {
+        FXMLLoader loader = App.getLoader("JobsPage", "JobCreatePopup");
+        Parent root = loader.load();
+        App.addPopup(root);
+      } catch (Exception e) {
+        System.out.println("Error loading job create popup: " + e.getMessage());
+      }
+
+    });
   }
 
 }

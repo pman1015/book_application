@@ -253,6 +253,8 @@ public class JobsDetailsPageModel {
     if (selectedEquipment == null)
       return;
     selectedJobParts = DatabaseConnection.inventoryCollection.getSelectParts(selectedEquipment.getParts());
+    partNames.clear();
+    partNumbers.clear();
     for (PartDAO part : selectedJobParts) {
       partNames.add(part.getPartName());
       partNumbers.add(part.getPartNumber());

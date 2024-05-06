@@ -84,7 +84,7 @@ public class CustomerListPageModel {
         .sceneProperty()
         .addListener((observable, oldValue, newValue) -> {
           if (newValue == null) {
-            loadCustomers();
+            loadCustomerDAOs(true);
           }
         });
     } catch (Exception e) {
